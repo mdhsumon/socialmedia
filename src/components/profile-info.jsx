@@ -1,39 +1,38 @@
 import React from 'react';
-import { DataProfile } from '../services/data-profile';
+//import { DataProfile } from '../services/data-profile';
 import profilePhoto from '../resources/users/id-1/profile-photo.jpg';
 import coverPhoto from '../resources/users/id-1/cover-photo.jpg';
 
 export const ProfileInfo = () => {
-    console.log(DataProfile.coverPhoto);
     return (
         <div className="profile-info-section">
             <div className="cover-photo"><img src={ coverPhoto } alt="Cover Photo" /></div>
             <div className="profile-section">
                 <div className="profile-author">
-                    <a href="#" className="profile-photo">
-                        <img src={ profilePhoto } />
+                    <a href="/" className="profile-photo">
+                        <img alt="alter text"  src={ profilePhoto } />
                     </a>
                     <div className="profile-name">
-                        <a className="author-name" href="#"><h4>kuddus boyati</h4></a>
+                        <a className="author-name" href="/"><h4>kuddus boyati</h4></a>
                         <p className="author-nick-name">(<span className="n-name">pagla</span>)</p>
                     </div>
                 </div>
                 <div className="profile-drop-downs">
                     <ul className="drop-downs">
                         <li>
-                            <a href="#">timeline</a>
+                            <a href="/">timeline</a>
                         </li>
                         <li>
-                            <a href="#">about</a>
+                            <a href="/">about</a>
                         </li>
                         <li>
-                            <a href="#">friends</a>
+                            <a href="/">friends</a>
                         </li>
                         <li>
-                            <a href="#">photos</a>
+                            <a href="/">photos</a>
                         </li>
                         <li>
-                            <a href="#">videos</a>
+                            <a href="/">videos</a>
                         </li>
                     </ul>
                 </div>
