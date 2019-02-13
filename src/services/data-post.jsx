@@ -32,6 +32,35 @@ export const DataPost = [
             comments: [
                 {
                     id: 1,
+                    userName: "kuddus-boyati",
+                    displayName: "Pagla Commenter",
+                    message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                    reactions: {
+                        likes: {
+                            count: 5,
+                            users: [1, 2, 3, 4, 5]
+                        },
+                        dislikes: {
+                            count: 2,
+                            users: [8, 6]
+                        },
+                        replies: [
+                            {
+                                userId: 5,
+                                message: "Lorem Ipsum is simply dummy"
+                            },
+                            {
+                                userId: 7,
+                                message: "Lorem Ipsum is simply dummy"
+                            }
+                        ]
+                    }
+                },
+                
+                {
+                    id: 1,
+                    userName: "another-kuddus-boyati",
+                    displayName: "Another Pagla Commenter",
                     message: "Lorem Ipsum is simply dummy",
                     reactions: {
                         likes: {
@@ -87,6 +116,8 @@ export const DataPost = [
             comments: [
                 {
                     id: 1,
+                    userName: "kuddus-boyati",
+                    displayName: "Pagla Commenter",
                     message: "Lorem Ipsum is simply dummy",
                     reactions: {
                         likes: {

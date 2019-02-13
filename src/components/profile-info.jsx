@@ -6,7 +6,7 @@ import coverPhoto from '../resources/users/id-1/cover-photo.jpg';
 export const ProfileInfo = () => {
     return (
         <div className="profile-info-section">
-            <div className="cover-photo"><img src={ coverPhoto } alt="Cover Photo" /></div>
+            <div className="cover-photo"><img src={ coverPhoto } alt="CoverPhoto" /></div>
             <div className="profile-section">
                 <div className="profile-author">
                     <a href="/" className="profile-photo">

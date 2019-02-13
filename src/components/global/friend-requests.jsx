@@ -3,7 +3,7 @@ import React from "react";
 export const FriendRequests = () => {
     return (
         <div className="friend-request-section">
-            <p className="frs-header">friend request</p>
+            <h4 className="block-header">Friend requests</h4>
             <div className="friend-rq-items">
                 <div className="friend-rq-item">
                     <div className="friend-rq-item-thumb">

@@ -618,9 +618,6 @@ body {
   color: #8dd200;
   background: #ededed;
 }
-.material-icons{
-  font-size: 48px;
-}
 .tooltip{
   position: absolute;
   left: 100%;
@@ -942,10 +939,14 @@ body {
   align-items: flex-start;
 }
 /*---------------------------bio start*/
-.bio-header, .frs-header{
+.block-header{
+  background-color: #f9f9f9;
+  border-radius: 5px 5px 0 0;
   color: #666666;
   font-size: 16px;
   font-weight: 600;
+  margin: -15px -10px 0;
+  padding: 10px 10px;
 }
 .bio-section{
   background: #ffffff;
@@ -1131,7 +1132,7 @@ body {
   width: 20px;
   display: inline-block;
   position: absolute;
-  top: 20px;
+  top: 5px;
   right: 10px;
   cursor: pointer;
 
@@ -1147,7 +1148,6 @@ body {
 /*----------------post body start---------*/
 .post .post-body{
   font-size: 15px;
-  color: #666666;
   width: 100%;
   padding: 10px;
   -webkit-box-sizing: border-box;
@@ -1176,7 +1176,7 @@ body {
 }
 /*----------------post body end---------*/
 /*----------------(like comment share)LCS section start---------*/
-.LCS-section{
+.lcs-section{
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
   width: 100%;
@@ -1269,11 +1269,15 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.comment-reply {
+  background-color: #f9f9f9;
+}
 .comment-body{
-  font-size: 14px;
-  color: #333333;
+  font-size: 13px;
+  color: #666666;;
 }
 .author-comment-info .author-name a{
+  font-size: 14px;
   color: #333333;
   text-decoration: none;
 }
