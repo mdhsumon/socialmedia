@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { Header } from './components/header';
-import { MainBody } from './components/main-body';
-//import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route} from "react-router-dom"; 
+import {Login} from "./pages/login";
+import MainApp from "./mainApp";
 
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
-        <Header />
-        <MainBody />
-      </React.Fragment>
+      <Router>
+        <Route path='/login' exact component={Login} />
+        <Route path='/' exact component={MainApp} />
+      </Router>
     )
   }
 }

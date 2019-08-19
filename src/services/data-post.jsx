@@ -21,11 +21,11 @@ export const DataPost = [
         postActivities: {
             reactions: {
                 likes: {
-                    count: 420,
+                    count: 3,
                     users: [1, 2, 3]
                 },
                 dislikes: {
-                    count: 50,
+                    count: 3,
                     users: [8, 6, 66]
                 }
             },
