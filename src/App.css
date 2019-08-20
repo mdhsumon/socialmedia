@@ -9503,14 +9503,14 @@ body {
 .login-form {
   background-color: #fff;
   border-radius: 5px;
-  padding: 30px;
+  padding: 40px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 .login-form input {
-  background-color: #f3f3f3;
+  background-color: #f0f0f0;
   width: 300px;
   padding: 15px 20px;
   box-sizing: border-box;
@@ -9521,12 +9521,22 @@ body {
 .login-form button {
   cursor: pointer;
   border: none;
-  padding: 10px 20px;
+  padding: 15px 20px;
   border-radius: 3px;
   background-color: #8DD200;
   width: 100%;
   font-size: 14px;
   font-weight: bold;
   margin-top: 5px;
+}
+.new-account {
+  position: absolute;
+  bottom: -40px;
+  color: #ccc;
+  font-size: 14px;
+}
+.new-account a {
+  color: #8DD200;
+  text-decoration: none;
 }
 /* End login page style */

@@ -11,8 +11,9 @@ export const Login = () => {
                     <div className="input password">
                         <input type="password" placeholder="Password here" />
                     </div>
-                    <button>Login</button>
+                    <button type="button">Login</button>
                 </form>
+                <div className="new-account">Don't have account? Simply <a href="#">signup</a> here.</div>
             </div>
         </div>
     )
