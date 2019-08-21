@@ -6,14 +6,14 @@ export const Login = () => {
             <div className="login-form">
                 <form action="">
                     <div className="input user">
-                        <input type="text" placeholder="username/email here" />
+                        <input className="input-field" type="text" placeholder="username/email here" />
                     </div>
                     <div className="input password">
-                        <input type="password" placeholder="Password here" />
+                        <input className="input-field" type="password" placeholder="Password here" />
                     </div>
                     <button type="button">Login</button>
                 </form>
-                <div className="new-account">Don't have account? Simply <a href="#">signup</a> here.</div>
+                <div className="new-account">Don't have account? Simply <a href="/signup">signup</a> here.</div>
             </div>
         </div>
     )

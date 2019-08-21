@@ -9509,7 +9509,7 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.login-form input {
+.login-form .input-field {
   background-color: #f0f0f0;
   width: 300px;
   padding: 15px 20px;
