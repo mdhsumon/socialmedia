@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Header } from './components/header';
-import { MainBody } from './components/main-body';
+import React from 'react';
+import { Header } from './components/Header';
+import { MainBody } from './components/MainBody';
 import './App.css';
 
-const MainApp = () => {
+export const MainApp = () => {
   return (
     <React.Fragment>
       <Header />
@@ -11,4 +11,3 @@ const MainApp = () => {
     </React.Fragment>
   )
 }
-export default MainApp;
