@@ -1,7 +1,6 @@
 import React from "react";
 
 export const PostAuthor = props => {
-    console.log(props)
     return (
         <div className="post-author">
             <div className="author-post-detail">

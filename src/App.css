@@ -1111,6 +1111,17 @@ button, .button {
 }
 /*----------------post create end-------*/
 /*----------------post start-------*/
+.loading-post {
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 150px;
+  text-align: center;
+  line-height: 150px;
+  font-size: 24px;
+  color: #ccc;
+}
 .post-section .empty-post {
   border: 1px solid #e3e3e3;
   border-radius: 5px;

@@ -1,9 +1,11 @@
 import React from "react";
 
 export class PostCreate extends React.Component {
-
-    state = {
-        formData: ''
+    constructor(props) {
+        super(props)
+        this.state = {
+            formData: ''
+        }
     }
 
     handleForm = event => {
