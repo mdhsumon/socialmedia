@@ -1,6 +1,6 @@
 import React from "react";
 
-export const PostContent = (pops) => {
+export const PostContent = pops => {
     return (
         <div className="post-body">
             <div className="post-text">

@@ -1,11 +1,30 @@
 /* Common */
 body {
-  font-family: Roboto, "Segoe UI","Helvetica Neue",Arial;
+  font-family: Roboto, "Segoe UI", "Helvetica Neue", Arial;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
 * {
   padding: 0;
   margin: 0;
+}
+
+input, select, textarea {
+  font-family: Roboto, "Segoe UI", "Helvetica Neue", Arial;
+}
+
+button, .button {
+  background-color: #8dd200;
+  border: 1px solid #8dd200;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
 }
 
 .container {
@@ -1056,11 +1075,56 @@ body {
 .friend-request-drop-down{
   background: #ffffff;
 }
-.frnd-rqs{
-
-}
 /*----------------friend request end-------*/
+/*----------------post create start-------*/
+.post-create {
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+.post-create-tab,
+.post-create-actions {
+  background-color: #f9f9f9;
+  display: flex;
+  padding: 10px 15px;
+}
+.post-create-actions {
+  justify-content: flex-end;
+}
+.post-create-actions .post-visibility {
+  color: #ccc;
+  margin-left: 10px;
+}
+.post-create textarea {
+  border: 1px solid transparent;
+  outline: none;
+  min-height: 80px;
+  width: 100%;
+  border: none;
+  padding: 15px;
+  resize: vertical;
+}
+.post-create textarea:focus {
+  border-color: #8dd200;
+}
+/*----------------post create end-------*/
 /*----------------post start-------*/
+.post-section .empty-post {
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  height: 300px;
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #ccc;
+}
+
 .post-section{
   margin-top: 10px;
   -webkit-flex-basis: 50%;
@@ -2411,9 +2475,6 @@ body {
 }
 .friend-request-drop-down{
   background: #ffffff;
-}
-.frnd-rqs{
-
 }
 /*----------------friend request end-------*/
 /*----------------post start-------*/

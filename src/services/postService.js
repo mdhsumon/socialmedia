@@ -1,8 +1,16 @@
 const apiBaseUrl = "http://localhost:2000";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imt1ZGR1c0BtYWlsLmNvbSIsImlhdCI6MTU2Nzg0NDc4NywiZXhwIjoxNTY3ODg3OTg3fQ.jv-8y6y2WroN-wvr8fPN9NAplHjpuPX0srX547YboMI";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhZ2xhQGVtYWlsLmNvbSIsImlhdCI6MTU2NzkxNTcxNywiZXhwIjoxNTY3OTU4OTE3fQ.3yDHZux3PwmTFUOySdGGkZR-aGy1vpYrXG1VcHzBfco";
 
 // Will return all post by username
-export const getUserPosts = (username = "kuddus", callback) => {
+export const createPost = (postData) => {
+    fetch(`${apiBaseUrl}/post/create`, {
+        method: 'POST',
+
+    })
+}
+
+// Will return all post by username
+export const getUserPosts = (username, callback) => {
     fetch(`${apiBaseUrl}/${username}/posts`,{
     method: 'GET',
     headers: {

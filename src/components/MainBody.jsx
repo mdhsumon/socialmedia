@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProfileInfo } from './ProfileInfo';
 import { Bio } from './Bio';
-import Post from './global/post/Post';
+import { Post } from './global/post/Post';
 import { FriendRequests } from './global/FriendRequests';
 export const MainBody = () => {
     return (

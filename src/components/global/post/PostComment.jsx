@@ -1,5 +1,5 @@
 import React from "react";
-export const PostComment = (props) => {
+export const PostComment = props => {
     if(props.postComments.length > 0)
     props.postComments.map((comment, commentKey) => {
         return (
