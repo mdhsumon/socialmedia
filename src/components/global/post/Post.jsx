@@ -20,8 +20,8 @@ export class Post extends React.Component {
     }
 
     renderPost = () => {
-        if(this.state.userPosts.length > 0 || false) {
-            {this.state.userPosts.map(postObject => {
+        if(this.state.userPosts.length > 0) {
+            return this.state.userPosts.map(postObject => {
                 return (
                     <div className="post" key={postObject._id}>
                         <PostAuthor authorInfo={postObject.userInfo} />
@@ -32,7 +32,7 @@ export class Post extends React.Component {
                         </div>
                     </div>
                 )
-            })}
+            })
         }
         else {
             return (
