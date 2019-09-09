@@ -16,7 +16,7 @@ export class Post extends React.Component {
     }
 
     componentDidMount() {
-        getUserPosts('kuddus', data => {
+        getUserPosts('new-user', data => {
             this.setState({
                 loadingPost: false,
                 userPosts: data
@@ -27,7 +27,7 @@ export class Post extends React.Component {
     renderPost = () => {
         if(this.state.loadingPost) {
             return (
-                <div className="loading-post">Loading...</div>
+                <div className="card-loader"></div>
             )
         }
         else {

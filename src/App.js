@@ -1,4 +1,5 @@
 import React from "react";
+import {isLoggedIn} from "./commonActions";
 import {BrowserRouter as Router, Route, Redirect} from "react-router-dom"; 
 import {Signup} from "./pages/Signup";
 import {Login} from "./pages/Login";
@@ -8,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLogin: true
+      isLogin: isLoggedIn()
     }
   }
   

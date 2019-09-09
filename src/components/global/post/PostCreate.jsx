@@ -23,7 +23,7 @@ export class PostCreate extends React.Component {
                         <div className="tab-item video">Video</div>
                     </div>
                     <div className="post-create-body">
-                        <textarea name="" placeholder="Write here what your mind says..."></textarea>
+                        <textarea name="" placeholder="Write here what your mind says..." />
                     </div>
                     <div className="post-create-actions">
                         <button>Post now</button>

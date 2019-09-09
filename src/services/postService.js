@@ -1,5 +1,5 @@
 const apiBaseUrl = "http://localhost:2000";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imt1ZGR1c0BtYWlsLmNvbSIsImlhdCI6MTU2Nzk2MDgwNywiZXhwIjoxNTY4MDA0MDA3fQ.ib9U_fsf-FaCzS0Q49L-PrY05b-OMXqEluh76KFx4Ho";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhZ2xhQGVtYWlsLmNvbSIsImlhdCI6MTU2ODAxMDUxNywiZXhwIjoxNTY4MDUzNzE3fQ.4ITl66yuGszcAAdsIGP-yEaSBMdq0RuOPRL9zvF1t2k";
 
 // Will return all post by username
 export const createPost = (postData) => {
