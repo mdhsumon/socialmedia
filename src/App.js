@@ -14,6 +14,7 @@ class App extends React.Component {
   }
   
   render() {
+    console.log(this.state.isLogin)
     return (
       <Router>
         <Route path='/signup' exact component={Signup} />

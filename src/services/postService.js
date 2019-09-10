@@ -1,5 +1,5 @@
 const apiBaseUrl = "http://localhost:2000";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhZ2xhQGVtYWlsLmNvbSIsImlhdCI6MTU2ODAxMDUxNywiZXhwIjoxNTY4MDUzNzE3fQ.4ITl66yuGszcAAdsIGP-yEaSBMdq0RuOPRL9zvF1t2k";
+const userToken = localStorage.getItem('user-token')
 
 // Will return all post by username
 export const createPost = (postData) => {
@@ -11,10 +11,10 @@ export const createPost = (postData) => {
 
 // Will return all post by username
 export const getUserPosts = (username, callback) => {
-    fetch(`${apiBaseUrl}/${username}/posts`,{
+    fetch(`${apiBaseUrl}/${username}/posts`, {
     method: 'GET',
     headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${userToken}`
     }
 })
 .then(res => res.json())
@@ -26,7 +26,7 @@ export const getPostById = (postId = "kuddus", callback) => {
     fetch(`${apiBaseUrl}/post/${postId}`,{
     method: 'GET',
     headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${userToken}`
     }
 })
 .then(res => res.json())

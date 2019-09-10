@@ -1,5 +1,6 @@
-import React from "react";
-import { getAccessToken } from "../services/userService";
+import React from "react"
+import { Redirect } from "react-router-dom"
+import { getAccessToken } from "../services/userService"
 
 export class Login extends React.Component {
     constructor(props) {
@@ -18,7 +19,8 @@ export class Login extends React.Component {
     handleLoginForm = event => {
         event.preventDefault()
         getAccessToken(this.state, data => {
-            console.log(data)
+            localStorage.setItem('user-token', data.accessToken)
+            return <Redirect to='/' />
         })
     }
     render(){

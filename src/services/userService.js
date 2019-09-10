@@ -1,5 +1,3 @@
-import { callbackify } from "util";
-
 const apiBaseUrl = "http://localhost:2000";
 
 // Will return access token after login
