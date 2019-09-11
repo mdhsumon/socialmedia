@@ -14,12 +14,12 @@ class App extends React.Component {
   }
   
   render() {
-    console.log(this.state.isLogin)
     return (
       <Router>
         <Route path='/signup' exact component={Signup} />
         <Route path='/login' exact component={Login} />
-        {this.state.isLogin ? <Route path='/' exact component={MainApp} /> : <Redirect to='/login' />}
+        <Route path='/' exact component={MainApp} />
+        {this.state.isLogin ? <Redirect to='/' /> : <Redirect to='/login' />}
       </Router>
     )
   }

@@ -2,7 +2,6 @@ const apiBaseUrl = "http://localhost:2000";
 
 // Will return access token after login
 export const getAccessToken = (userLoginData, callback) => {
-    console.log(userLoginData)
     fetch(`${apiBaseUrl}/login`, {
         method: 'POST',
         headers: {
