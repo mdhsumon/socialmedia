@@ -1,8 +1,8 @@
 const apiBaseUrl = "http://localhost:2000";
-const userToken = localStorage.getItem('user-token')
+const userToken = localStorage.getItem('userToken');
 
 // Will return all post by username
-export const createPost = (postData) => {
+export const createPost = postData => {
     fetch(`${apiBaseUrl}/post/create`, {
         method: 'POST',
 

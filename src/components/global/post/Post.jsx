@@ -10,22 +10,23 @@ export class Post extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            loadingPost: true,
+            isLoading: true,
             userPosts: []
         }
     }
 
     componentDidMount() {
-        getUserPosts('new-user', data => {
+        const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : '';
+        getUserPosts(userInfo.username, data => {
             this.setState({
-                loadingPost: false,
+                isLoading: false,
                 userPosts: data
             })
         })
     }
 
     renderPost = () => {
-        if(this.state.loadingPost) {
+        if(this.state.isLoading) {
             return (
                 <div className="card-loader"></div>
             )
