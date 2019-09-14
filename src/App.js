@@ -17,9 +17,8 @@ class App extends React.Component {
     return (
       <Router>
         <Route path='/signup' exact component={Signup} />
-        <Route path='/login' exact component={Login} />
         <Route path='/' exact component={MainApp} />
-        {this.state.isLogin ? <Redirect to='/' /> : <Redirect to='/login' />}
+        {this.state.isLogin ? <Redirect to='/' /> : <Route path='/login' exact component={Login} />}
       </Router>
     )
   }

@@ -9579,6 +9579,29 @@ body {
   border-radius: 3px;
   margin: 5px 0;
 }
+.input {
+  position: relative;
+}
+.input-error,
+.input-success {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  font-size: 12px;
+  border-radius: 3px;
+  color: #fff;
+  padding: 2px 6px;
+}
+.input-success {
+  background: #8dd200;
+}
+.input-error {
+  background: #ff4040;
+}
+.login-form .input .loader-sm {
+  right: 10px;
+  bottom: 15px;
+}
 .login-form input:-webkit-autofill,
 .login-form input:-webkit-autofill:hover,
 .login-form input:-webkit-autofill:focus,
@@ -9618,6 +9641,24 @@ body {
 /* End login page style */
 
 /* Start animations */
+.loader-sm {
+  border: 5px solid #fcfcfc;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  border-top: 5px solid #8dd200;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.user-check-loader {
+  position: absolute;
+}
 .card-loader {
   background-color: #fff;
   border: 1px solid #e3e3e3;
