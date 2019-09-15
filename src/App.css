@@ -9572,6 +9572,7 @@ body {
 }
 .login-form .input-field {
   background-color: #f0f0f0;
+  border: 1px solid transparent;
   width: 300px;
   padding: 15px 20px;
   box-sizing: border-box;
@@ -9597,6 +9598,9 @@ body {
 }
 .input-error {
   background: #ff4040;
+}
+.input-error ~ .input-field {
+  border-color: #ff4040;
 }
 .login-form .input .loader-sm {
   right: 10px;
@@ -9643,8 +9647,8 @@ body {
 /* Start animations */
 .loader-sm {
   border: 5px solid #fcfcfc;
-  -webkit-animation: spin 1s linear infinite;
-  animation: spin 1s linear infinite;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
   border-top: 5px solid #8dd200;
   border-radius: 50%;
   width: 25px;
