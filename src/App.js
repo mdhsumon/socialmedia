@@ -1,9 +1,9 @@
 import React from "react";
-import {isLoggedIn} from "./commonActions";
-import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
-import {Signup} from "./pages/Signup";
-import {Login} from "./pages/Login";
-import {MainApp} from "./MainApp";
+import { isLoggedIn } from "./commonActions";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Signup } from "./pages/Signup";
+import { Login } from "./pages/Login";
+import { MainApp } from "./MainApp";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,8 +17,9 @@ class App extends React.Component {
     return (
       <Router>
         <Route path='/signup' exact component={Signup} />
+        <Route path='/login' exact component={Login} />
         <Route path='/' exact component={MainApp} />
-        {this.state.isLogin ? <Redirect to='/' /> : <Route path='/login' exact component={Login} />}
+        {this.state.isLogin ? <Redirect to='/' /> : <Redirect to='/login' />}
       </Router>
     )
   }

@@ -94,26 +94,19 @@ export class Signup extends React.Component {
                         usernameChecking: true
                     });
                     isUserExist("username", currentValue, userRespose => {
+                        this.setState({ usernameChecking: false });
                         if(userRespose) {
-                            this.setState({usernameChecking: false});
-                            if(userRespose.isExist) {
-                                this.setState({
-                                    usernameMessage: "Username already exist",
-                                    usernameHtmlClass: inputErrorClass
-                                });
-                            }
-                            else {
-                                this.setState({
-                                    usernameMessage: "Username available!",
-                                    usernameHtmlClass: inputSuccessClass,
-                                    username: currentValue
-                                }); 
-                            }
+                            this.setState({
+                                usernameChecking: false,
+                                usernameMessage: "Username already exist",
+                                usernameHtmlClass: inputErrorClass
+                            });
                         }
                         else {
                             this.setState({
-                                usernameMessage: "Network error!",
-                                usernameHtmlClass: inputErrorClass
+                                usernameMessage: "Username available!",
+                                usernameHtmlClass: inputSuccessClass,
+                                username: currentValue
                             }); 
                         }
                     });
@@ -150,26 +143,19 @@ export class Signup extends React.Component {
                             emailChecking: true
                         });
                         isUserExist("email", currentValue, emailRespose => {
-                            if(emailRespose) {
-                                this.setState({emailChecking: false});
-                                if(emailRespose.isExist) {
-                                    this.setState({
-                                        emailMessage: "Email already exist",
-                                        emailHtmlClass: inputErrorClass
-                                    });
-                                }
-                                else {
-                                    this.setState({
-                                        emailMessage: "Email available!",
-                                        emailHtmlClass: inputSuccessClass,
-                                        email: currentValue
-                                    }); 
-                                }
+                            this.setState({ emailChecking: false });
+                            if(emailRespose.isExist) {
+                                this.setState({
+                                    emailChecking: false,
+                                    emailMessage: "Email already exist",
+                                    emailHtmlClass: inputErrorClass
+                                });
                             }
                             else {
                                 this.setState({
-                                    emailMessage: "Network error!",
-                                    emailHtmlClass: inputErrorClass
+                                    emailMessage: "Email available!",
+                                    emailHtmlClass: inputSuccessClass,
+                                    email: currentValue
                                 }); 
                             }
                         });

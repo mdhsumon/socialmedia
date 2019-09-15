@@ -21,7 +21,10 @@ export class Login extends React.Component {
     }
     handleLoginForm = event => {
         event.preventDefault();
-        const formData = {username: this.state.username, pass: this.state.pass}
+        const formData = {
+            username: this.state.username,
+            password: this.state.password
+        }
         getAccessToken(formData, data => {
             if(data.loggedInStatus) {
                 getUserInfo(this.state.username, data.accessToken, userData => {
@@ -35,7 +38,7 @@ export class Login extends React.Component {
             }
         })
     }
-    render(){
+    render() {
         return(
             <div className="login-page">
                 <div className="login-form">

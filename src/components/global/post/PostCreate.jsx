@@ -1,4 +1,5 @@
 import React from "react";
+import { createPost } from "../../../services/postService";
 
 export class PostCreate extends React.Component {
     constructor(props) {
@@ -8,11 +9,18 @@ export class PostCreate extends React.Component {
     }
 
     handleChange = event => {
-        this.setState({[event.target.name]: event.target.value});
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     }
 
     handleForm = event => {
         event.preventDefault();
+        // createPost(this.state, status => {
+        //     if(status) {
+
+        //     }
+        // })
     }
 
     render() {

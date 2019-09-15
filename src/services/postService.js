@@ -1,24 +1,33 @@
 const apiBaseUrl = "http://localhost:2000";
 const userToken = localStorage.getItem('userToken');
 
-// Will return all post by username
-export const createPost = postData => {
+// Will create new post
+export const createPost = (postData, callback) => {
     fetch(`${apiBaseUrl}/post/create`, {
         method: 'POST',
-
+        headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+    })
+    //.then(res.json())
+    .then(data => {
+        callback(data)
     })
 }
 
 // Will return all post by username
 export const getUserPosts = (username, callback) => {
     fetch(`${apiBaseUrl}/${username}/posts`, {
-    method: 'GET',
-    headers: {
-        'Authorization': `Bearer ${userToken}`
-    }
-})
-.then(res => res.json())
-.then(data => callback(data))
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${userToken}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => callback(data))
 }
 
 // Will return signle post by id
