@@ -21,7 +21,7 @@ export class Post extends React.Component {
             this.setState({
                 isLoading: false,
                 userPosts: data
-            })
+            });
         })
     }
 
@@ -55,11 +55,18 @@ export class Post extends React.Component {
             }
         }
     }
+
+    // Passed to PostCreate for updating new post
+    postCreateFlag = () => {
+        this.setState({
+            isLoading: true
+        })
+    }
     
     render() {
         return (
             <div className="post-section">
-                <PostCreate />
+                <PostCreate postCreateFlag={ this.postCreateFlag } />
                 {this.renderPost()}
             </div>
         )

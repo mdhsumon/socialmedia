@@ -25,4 +25,32 @@ class App extends React.Component {
   }
 }
 
+// class ProtectedRoute extends Component {
+//   render() {
+//     const { component: Component, ...props } = this.props
+
+//     return (
+//       <Route 
+//         {...props} 
+//         render={props => (
+//           this.state.authenticated ?
+//             <Component {...props} /> :
+//             <Redirect to='/login' />
+//         )} 
+//       />
+//     )
+//   }
+// }
+
+// class AllRoutes extends Component {
+//   render() {
+//     return (
+//       <Switch>
+//         <Route path='/login' component={Login} />
+//         <ProtectedRoute path='/welcome' component={Welcome} />
+//       </Switch>
+//     )
+//   }
+// }
+
 export default App;

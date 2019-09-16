@@ -50,8 +50,8 @@ export const getUserInfo = (username, accessToken, callback) => {
 }
 
 // Will return true/false if username or email exist
-export const isUserExist = (type, usernOrEmail, callback) => {
-    fetch(`${apiBaseUrl}/check/${type}/${usernOrEmail}`, {
+export const isUserExist = (type, userOrEmail, callback) => {
+    fetch(`${apiBaseUrl}/check/${type}/${userOrEmail}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

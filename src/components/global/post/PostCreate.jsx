@@ -1,9 +1,15 @@
 import React from "react";
 import { createPost } from "../../../services/postService";
+import { MessagePopup } from "../../MessagePopup";
 
 export class PostCreate extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            content: '',
+            visibility: 'public',
+            messagePopup: false
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleForm = this.handleForm.bind(this);
     }
@@ -16,11 +22,29 @@ export class PostCreate extends React.Component {
 
     handleForm = event => {
         event.preventDefault();
-        // createPost(this.state, status => {
-        //     if(status) {
-
-        //     }
-        // })
+        if(true) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            const postData = {
+                userId: userInfo.userId,
+                username: userInfo.username,
+                displayName: userInfo.displayName,
+                content: this.state.content,
+                visibility: this.state.visibility
+            }
+            createPost(postData, status => {
+                if(status) {
+                    this.setState({
+                        messagePopup: true
+                    });
+                    this.props.postCreateFlag();
+                    setTimeout(() => {
+                        this.setState({
+                            messagePopup: false
+                        })
+                    }, 3000);
+                }
+            })
+        }
     }
 
     render() {
@@ -46,6 +70,7 @@ export class PostCreate extends React.Component {
                         </span>
                     </div>
                 </form>
+                {this.state.messagePopup && <MessagePopup status="success" message="Post has been published" />}
             </div>
         )
     }

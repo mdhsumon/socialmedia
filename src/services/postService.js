@@ -12,7 +12,7 @@ export const createPost = (postData, callback) => {
         },
         body: JSON.stringify(postData)
     })
-    //.then(res.json())
+    .then(res => res.json())
     .then(data => {
         callback(data)
     })

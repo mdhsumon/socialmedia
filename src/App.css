@@ -9552,7 +9552,54 @@ body {
 /*----------------post end-------*/
 /*---------------main container end---------*/
 
+.message-popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  color: #fff;
+  transform: translateX(-50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.20);
+  border-radius: 5px;
+  padding: 15px 25px;
+  z-index: 99;
+}
 
+.message-popup.success {
+  background-color: #8DD200;
+}
+
+.message-popup.error {
+  background-color: #ff4040;
+}
+
+.welcome-section {
+  background-color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9;
+}
+
+.welcome-message {
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    line-height: normal;
+    text-align: center;
+}
+.welcome-message span {
+    color: #8dd200;
+    display: block
+}
+.welcome-message .counter {
+    color: #fff;
+}
 
 /* Login page style */
 .login-page {

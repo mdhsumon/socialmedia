@@ -30,7 +30,10 @@ export class Signup extends React.Component {
             confirmPasswordMessage: '',
             confirmPasswordHtmlClass: '',
 
-            formValidation: false
+            formValidation: false,
+
+            isWelcomeScreen: false,
+            counter: 0
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -119,7 +122,7 @@ export class Signup extends React.Component {
                 break;
 
             case "email":
-                    const minEmailLength = 10, maxEmailLength = 40, emailRegex = /^[a-z]/;
+                    const minEmailLength = 10, maxEmailLength = 40, emailRegex = /[\w-]+@([\w-]+\.)+[\w-]+/;
                     if(currentLength > 0 && currentLength < minEmailLength && event.type === 'blur') {
                         this.setState({
                             emailMessage: `Minimum ${minEmailLength} characters required`,
@@ -144,7 +147,7 @@ export class Signup extends React.Component {
                         });
                         isUserExist("email", currentValue, emailRespose => {
                             this.setState({ emailChecking: false });
-                            if(emailRespose.isExist) {
+                            if(emailRespose) {
                                 this.setState({
                                     emailChecking: false,
                                     emailMessage: "Email already exist",
@@ -240,8 +243,14 @@ export class Signup extends React.Component {
         // }
         if(this.formValidation || true) {
             userSignup(formData, response => {
+                //console.log(response)
                 if(response.signupStatus) {
-                    this.props.history.push('/login')
+                    this.setState({ isWelcomeScreen: true });
+                    let count = this.state.counter;
+                    setInterval(() => {
+                        count <= 5 ? this.setState({ counter: count }) : this.props.history.push('/login');
+                        count++;
+                    }, 1000);
                 }
             })
         }
@@ -292,6 +301,14 @@ export class Signup extends React.Component {
                     </form>
                     <div className="new-account">Already have account? <Link to="/login">login</Link> here.</div>
                 </div>
+                {this.state.isWelcomeScreen && 
+                <div class="welcome-section">
+                    <div className="welcome-message">Your registration was sucessfull!
+                        <span>Welcome to social family.</span>
+                        <span className="counter">{this.state.counter}</span>
+                    </div>
+                </div>
+                }
             </div>
         )
     }
