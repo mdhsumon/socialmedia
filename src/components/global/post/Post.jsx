@@ -15,14 +15,20 @@ export class Post extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getPosts = () => {
         const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : '';
-        getUserPosts(userInfo.username, data => {
-            this.setState({
-                isLoading: false,
-                userPosts: data
-            });
-        })
+        if(this.state.isLoading) {
+            getUserPosts(userInfo.username, data => {
+                this.setState({
+                    isLoading: false,
+                    userPosts: data
+                });
+            })
+        }
+    }
+
+    componentDidMount() {
+        this.getPosts();
     }
 
     renderPost = () => {
@@ -61,6 +67,7 @@ export class Post extends React.Component {
         this.setState({
             isLoading: true
         })
+        this.getPosts()
     }
     
     render() {
