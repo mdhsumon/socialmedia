@@ -1,5 +1,6 @@
 const apiBaseUrl = "http://localhost:2000";
-const userToken = localStorage.getItem('userToken');
+const userData = JSON.parse(localStorage.getItem("userData"));
+const userToken = userData !== null ? userData.userToken : "";
 
 // Will create new post
 export const createPost = (postData, callback) => {

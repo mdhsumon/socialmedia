@@ -1,20 +1,13 @@
-import React from 'react';
-import { ProfileInfo } from './ProfileInfo';
-import { Bio } from './Bio';
-import { Post } from './global/post/Post';
-import FriendRequests from './global/FriendRequests';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { NewsFeed } from "../pages/NewsFeed";
+import { Profile } from "../pages/Profile";
 
 export const MainBody = () => {
     return (
-        <div className="body">
-            <div className="container">
-                <ProfileInfo />
-            </div>
-            <div className="container main-sections">
-                 <Bio />
-                 <Post />
-                 <FriendRequests />
-            </div>
-        </div>
+        <React.Fragment>
+            <Route exact path="/feed" component={NewsFeed} />
+            <Route exact path="/profile" component={Profile} />
+        </React.Fragment>
     )
 }

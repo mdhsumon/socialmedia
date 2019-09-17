@@ -23,11 +23,11 @@ export class PostCreate extends React.Component {
     handleForm = event => {
         event.preventDefault();
         if(true) {
-            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            const userData = JSON.parse(localStorage.getItem("userData"));
             const postData = {
-                userId: userInfo.userId,
-                username: userInfo.username,
-                displayName: userInfo.displayName,
+                userId: userData.userInfo.userId,
+                username: userData.userInfo.username,
+                displayName: userData.userInfo.displayName,
                 content: this.state.content,
                 visibility: this.state.visibility
             }
@@ -62,7 +62,7 @@ export class PostCreate extends React.Component {
                         <div className="tab-item video">Video</div>
                     </div>
                     <div className="post-create-body">
-                        <textarea name="content" placeholder="Write here what your mind says..." onChange={this.handleChange} />
+                        <textarea name="content" placeholder="Write something here..." onChange={this.handleChange} />
                     </div>
                     <div className="post-create-actions">
                         <button>Post now</button>

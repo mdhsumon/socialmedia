@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAccessToken, getUserInfo } from "../services/userService";
 
 export default class Login extends React.Component {
@@ -9,7 +9,8 @@ export default class Login extends React.Component {
             username: '',
             password: '',
             loginStatus: false,
-            formValidation: ''
+            formValidation: '',
+            buttonLoading: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleLoginForm = this.handleLoginForm.bind(this);
@@ -25,16 +26,22 @@ export default class Login extends React.Component {
             username: this.state.username,
             password: this.state.password
         }
+        this.setState({buttonLoading: true});
         getAccessToken(formData, data => {
             if(data.loggedInStatus) {
                 getUserInfo(this.state.username, data.accessToken, userData => {
-                    localStorage.setItem('userInfo', JSON.stringify(userData));
+                    localStorage.setItem('userData', JSON.stringify({
+                        userInfo: userData,
+                        userToken: data.accessToken
+                    }));
                 });
-                localStorage.setItem('userToken', data.accessToken);
                 this.props.history.push('/');
             }
             else {
-                this.setState({formValidation: "Login failed!"});
+                this.setState({
+                    buttonLoading: false,
+                    formValidation: "Login failed!"
+                });
             }
         })
     }
@@ -50,7 +57,7 @@ export default class Login extends React.Component {
                         <div className="input password">
                             <input className="input-field" type="password" placeholder="Password here" name="password" onChange={this.handleChange} />
                         </div>
-                        <button>Login</button>
+                        <button className={this.state.buttonLoading ? "button-loading" : ""}>Login</button>
                     </form>
                     <div className="new-account">Don't have account? Simply <Link to="/signup">signup</Link> here.</div>
                 </div>

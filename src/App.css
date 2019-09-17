@@ -33,6 +33,32 @@ button, .button {
   margin-right: auto;
   width: 100%;
 }
+
+.main-body {
+  flex: auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 15px;
+}
+
+.column-section{
+  display: flex;
+  flex: auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.column-section .right-column,
+.column-section .left-column {
+  flex: none;
+}
+
+.column-section .middle-column {
+  flex: auto;
+  min-width: 0;
+  margin-left: 15px;
+  margin-right: 15px;
+}
 /* End Common */
 
 
@@ -66,60 +92,8 @@ button, .button {
   background: #aaaaaa;
 }
 /*---------scrollbar end------*/
-.fixed{
-  position: fixed;
-}
-._1{
-  z-index: 1;
-}
-._2{
-  z-index: 2;
-}
-._3{
-  z-index: 3;
-}
-._4{
-  z-index: 4;
-}
-._5{
-  z-index: 5;
-}
-._6{
-  z-index: 6;
-}
-._7{
-  z-index: 7;
-}
-._8{
-  z-index: 8;
-}
-._9{
-  z-index: 9;
-}
 .n-name,.tooltip,.drop-downs a,.icon-title,.bio-header,.frs-header,.mutual-f,.decline,.post-time,.accept{
   text-transform:capitalize;
-}
-/*-----------------header start--------*/
-.header{
-  background: #333333;
-  height: 60px;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.body{
-  background-color: #e9eeeb;
-  margin: 60px auto 0;
-  padding: 0 60px;
 }
 
 /*--------------------------search start-------*/
@@ -643,15 +617,12 @@ button, .button {
   background: #333333;
   color: #ffffff;
   font-size: 11px;
-  
   opacity: 0;
   visibility: hidden;
-
   padding: 5px 10px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
@@ -668,7 +639,6 @@ button, .button {
   border: 4px solid #333333;
   border-bottom-color: transparent;
   border-right-color: transparent;
-
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
@@ -682,51 +652,7 @@ button, .button {
   -o-animation: tooltip 2s linear;
   animation: tooltip 2s linear;
 }
-@-moz-keyframes tooltip{
-  0%{
-      opacity: 0;
-  }
-  50%{
-      opacity: 0;
-  }
-  100%{
-      opacity: 1;
-  }
-}
 @keyframes tooltip{
-  0%{
-      opacity: 0;
-  }
-  50%{
-      opacity: 0;
-  }
-  100%{
-      opacity: 1;
-  }
-}
-@-webkit-keyframes tooltip{
-  0%{
-      opacity: 0;
-  }
-  50%{
-      opacity: 0;
-  }
-  100%{
-      opacity: 1;
-  }
-}
-@-ms-keyframes tooltip{
-  0%{
-      opacity: 0;
-  }
-  50%{
-      opacity: 0;
-  }
-  100%{
-      opacity: 1;
-  }
-}
-@-o-keyframes tooltip{
   0%{
       opacity: 0;
   }
@@ -755,10 +681,6 @@ button, .button {
   box-sizing: border-box;
 
   overflow: auto;
-}
-.chat{
-}
-.chat-users{
 }
 .chat-users li{
   list-style: none;
@@ -825,7 +747,6 @@ button, .button {
 /*--------------right side bar end-----*/
 /*---------------main container start---------*/
 .main-container, .profile-section{
-  width: 1000px;
 
   display: -moz-flex;
   display: -webkit-flex;
@@ -836,21 +757,17 @@ button, .button {
 }
 /*----------------top header start-------*/
 .cover-photo{
-  /* background-image: url("../img/cover-photo.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
-  width: 1000px;
+  max-width: 100%;
   height: 300px;
   position: relative;
-
   overflow: hidden;
 }
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
-
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -859,7 +776,6 @@ button, .button {
   background: #ffffff;
   position: relative;
   height: 50px;
-
   border-bottom: 1px solid #e3e3e3;
   -webkit-border-radius: 0 0 5px 5px;
   -moz-border-radius: 0 0 5px 5px;
@@ -884,7 +800,6 @@ button, .button {
   height: 50px;
   position: absolute;
   left: 140px;
-
   display: -moz-flex;
   display: -webkit-flex;
   display: flex;
@@ -925,16 +840,13 @@ button, .button {
 .drop-downs li a{
   height: 50px;
   padding: 15px;
-
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
   color: #999999;
-
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
@@ -945,6 +857,9 @@ button, .button {
   color: #333333;
 }
 /*----------------top header end-------*/
+.weather-forcast img {
+  max-width: 100%;
+}
 /*----------------main-sections start------*/
 .main-sections {
   width: 100%;
@@ -969,11 +884,6 @@ button, .button {
 }
 .bio-section{
   background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
-
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -981,7 +891,6 @@ button, .button {
 }
 .bio-section, .friend-request-section{
   padding: 15px 10px;
-  min-height: 400px;
 }
 .bio-section .bio-description{
   font-size: 14px;
@@ -990,18 +899,7 @@ button, .button {
 }
 /*----------------bio end-------*/
 /*----------------friend request start-------*/
-.friend-request-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 .friend-rq-items,.friend-rq-item{
   width: 100%;
   padding-top: 10px;
@@ -1124,13 +1022,6 @@ button, .button {
   font-size: 22px;
   color: #ccc;
 }
-
-.post-section{
-  margin-top: 10px;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  max-width: 500px;
-}
 .post, .post-author{
   width: 100%;
   display: block;
@@ -1418,23 +1309,6 @@ button, .button {
 /*----------------(like comment share)LCS section end---------*/
 /*----------------post end-------*/
 /*---------------main container end---------*/
-/* Common */
-body {
-  font-family: Roboto, "Segoe UI","Helvetica Neue",Arial;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-/* End Common */
 
 
 /*---------scrollbar start------*/
@@ -1500,27 +1374,11 @@ body {
 .n-name,.tooltip,.drop-downs a,.icon-title,.bio-header,.frs-header,.mutual-f,.decline,.post-time,.accept{
   text-transform:capitalize;
 }
-/*-----------------header start--------*/
-.header{
-  background: #333333;
-  height: 60px;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
 .body{
   background-color: #e9eeeb;
-  margin: 60px auto 0;
-  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 /*--------------------------search start-------*/
@@ -2236,18 +2094,7 @@ body {
   flex-wrap: nowrap;
 }
 /*----------------top header start-------*/
-.cover-photo{
-  /* background-image: url("../img/cover-photo.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 
-  width: 1000px;
-  height: 300px;
-  position: relative;
-
-  overflow: hidden;
-}
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
@@ -2368,22 +2215,6 @@ body {
   margin: -15px -10px 0;
   padding: 10px 10px;
 }
-.bio-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
-
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.bio-section, .friend-request-section{
-  padding: 15px 10px;
-  min-height: 400px;
-}
 .bio-section .bio-description{
   font-size: 14px;
   color: #666666;
@@ -2391,18 +2222,7 @@ body {
 }
 /*----------------bio end-------*/
 /*----------------friend request start-------*/
-.friend-request-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 .friend-rq-items,.friend-rq-item{
   width: 100%;
   padding-top: 10px;
@@ -2478,12 +2298,7 @@ body {
 }
 /*----------------friend request end-------*/
 /*----------------post start-------*/
-.post-section{
-  margin-top: 10px;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  max-width: 500px;
-}
+
 .post, .post-author{
   width: 100%;
   display: block;
@@ -2771,23 +2586,6 @@ body {
 /*----------------(like comment share)LCS section end---------*/
 /*----------------post end-------*/
 /*---------------main container end---------*/
-/* Common */
-body {
-  font-family: Roboto, "Segoe UI","Helvetica Neue",Arial;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-/* End Common */
 
 
 /*---------scrollbar start------*/
@@ -2852,28 +2650,6 @@ body {
 }
 .n-name,.tooltip,.drop-downs a,.icon-title,.bio-header,.frs-header,.mutual-f,.decline,.post-time,.accept{
   text-transform:capitalize;
-}
-/*-----------------header start--------*/
-.header{
-  background: #333333;
-  height: 60px;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.body{
-  background-color: #e9eeeb;
-  margin: 60px auto 0;
-  padding: 0 60px;
 }
 
 /*--------------------------search start-------*/
@@ -3589,18 +3365,7 @@ body {
   flex-wrap: nowrap;
 }
 /*----------------top header start-------*/
-.cover-photo{
-  /* background-image: url("../img/cover-photo.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 
-  width: 1000px;
-  height: 300px;
-  position: relative;
-
-  overflow: hidden;
-}
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
@@ -3721,22 +3486,7 @@ body {
   margin: -15px -10px 0;
   padding: 10px 10px;
 }
-.bio-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.bio-section, .friend-request-section{
-  padding: 15px 10px;
-  min-height: 400px;
-}
 .bio-section .bio-description{
   font-size: 14px;
   color: #666666;
@@ -3744,18 +3494,7 @@ body {
 }
 /*----------------bio end-------*/
 /*----------------friend request start-------*/
-.friend-request-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 .friend-rq-items,.friend-rq-item{
   width: 100%;
   padding-top: 10px;
@@ -3834,12 +3573,7 @@ body {
 }
 /*----------------friend request end-------*/
 /*----------------post start-------*/
-.post-section{
-  margin-top: 10px;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  max-width: 500px;
-}
+
 .post, .post-author{
   width: 100%;
   display: block;
@@ -4127,24 +3861,6 @@ body {
 /*----------------(like comment share)LCS section end---------*/
 /*----------------post end-------*/
 /*---------------main container end---------*/
-/* Common */
-body {
-  font-family: Roboto, "Segoe UI","Helvetica Neue",Arial;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-/* End Common */
-
 
 /*---------scrollbar start------*/
 .style-11::-webkit-scrollbar {
@@ -4220,16 +3936,6 @@ body {
   align-items: center;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.body{
-  background-color: #e9eeeb;
-  margin: 60px auto 0;
-  padding: 0 60px;
 }
 
 /*--------------------------search start-------*/
@@ -4945,18 +4651,7 @@ body {
   flex-wrap: nowrap;
 }
 /*----------------top header start-------*/
-.cover-photo{
-  /* background-image: url("../img/cover-photo.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 
-  width: 1000px;
-  height: 300px;
-  position: relative;
-
-  overflow: hidden;
-}
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
@@ -5077,22 +4772,8 @@ body {
   margin: -15px -10px 0;
   padding: 10px 10px;
 }
-.bio-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.bio-section, .friend-request-section{
-  padding: 15px 10px;
-  min-height: 400px;
-}
+
 .bio-section .bio-description{
   font-size: 14px;
   color: #666666;
@@ -5102,11 +4783,6 @@ body {
 /*----------------friend request start-------*/
 .friend-request-section{
   background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
-
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -5185,17 +4861,9 @@ body {
 .friend-request-drop-down{
   background: #ffffff;
 }
-.frnd-rqs{
-
-}
 /*----------------friend request end-------*/
 /*----------------post start-------*/
-.post-section{
-  margin-top: 10px;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  max-width: 500px;
-}
+
 .post, .post-author{
   width: 100%;
   display: block;
@@ -5483,24 +5151,6 @@ body {
 /*----------------(like comment share)LCS section end---------*/
 /*----------------post end-------*/
 /*---------------main container end---------*/
-/* Common */
-body {
-  font-family: Roboto, "Segoe UI","Helvetica Neue",Arial;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-/* End Common */
-
 
 /*---------scrollbar start------*/
 .style-11::-webkit-scrollbar {
@@ -5564,28 +5214,6 @@ body {
 }
 .n-name,.tooltip,.drop-downs a,.icon-title,.bio-header,.frs-header,.mutual-f,.decline,.post-time,.accept{
   text-transform:capitalize;
-}
-/*-----------------header start--------*/
-.header{
-  background: #333333;
-  height: 60px;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.body{
-  background-color: #e9eeeb;
-  margin: 60px auto 0;
-  padding: 0 60px;
 }
 
 /*--------------------------search start-------*/
@@ -6301,18 +5929,7 @@ body {
   flex-wrap: nowrap;
 }
 /*----------------top header start-------*/
-.cover-photo{
-  /* background-image: url("../img/cover-photo.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 
-  width: 1000px;
-  height: 300px;
-  position: relative;
-
-  overflow: hidden;
-}
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
@@ -6433,22 +6050,7 @@ body {
   margin: -15px -10px 0;
   padding: 10px 10px;
 }
-.bio-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.bio-section, .friend-request-section{
-  padding: 15px 10px;
-  min-height: 400px;
-}
 .bio-section .bio-description{
   font-size: 14px;
   color: #666666;
@@ -6456,18 +6058,7 @@ body {
 }
 /*----------------bio end-------*/
 /*----------------friend request start-------*/
-.friend-request-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 .friend-rq-items,.friend-rq-item{
   width: 100%;
   padding-top: 10px;
@@ -6546,12 +6137,6 @@ body {
 }
 /*----------------friend request end-------*/
 /*----------------post start-------*/
-.post-section{
-  margin-top: 10px;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  max-width: 500px;
-}
 .post, .post-author{
   width: 100%;
   display: block;
@@ -6839,24 +6424,6 @@ body {
 /*----------------(like comment share)LCS section end---------*/
 /*----------------post end-------*/
 /*---------------main container end---------*/
-/* Common */
-body {
-  font-family: Roboto, "Segoe UI","Helvetica Neue",Arial;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-/* End Common */
-
 
 /*---------scrollbar start------*/
 .style-11::-webkit-scrollbar {
@@ -6920,28 +6487,6 @@ body {
 }
 .n-name,.tooltip,.drop-downs a,.icon-title,.bio-header,.frs-header,.mutual-f,.decline,.post-time,.accept{
   text-transform:capitalize;
-}
-/*-----------------header start--------*/
-.header{
-  background: #333333;
-  height: 60px;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.body{
-  background-color: #e9eeeb;
-  margin: 60px auto 0;
-  padding: 0 60px;
 }
 
 /*--------------------------search start-------*/
@@ -7657,18 +7202,7 @@ body {
   flex-wrap: nowrap;
 }
 /*----------------top header start-------*/
-.cover-photo{
-  /* background-image: url("../img/cover-photo.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 
-  width: 1000px;
-  height: 300px;
-  position: relative;
-
-  overflow: hidden;
-}
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
@@ -7789,22 +7323,7 @@ body {
   margin: -15px -10px 0;
   padding: 10px 10px;
 }
-.bio-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.bio-section, .friend-request-section{
-  padding: 15px 10px;
-  min-height: 400px;
-}
 .bio-section .bio-description{
   font-size: 14px;
   color: #666666;
@@ -7812,19 +7331,9 @@ body {
 }
 /*----------------bio end-------*/
 /*----------------friend request start-------*/
-.friend-request-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.friend-rq-items,.friend-rq-item{
+.friend-rq-items,
+.friend-rq-item{
   width: 100%;
   padding-top: 10px;
 }
@@ -7902,12 +7411,6 @@ body {
 }
 /*----------------friend request end-------*/
 /*----------------post start-------*/
-.post-section{
-  margin-top: 10px;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  max-width: 500px;
-}
 .post, .post-author{
   width: 100%;
   display: block;
@@ -8195,24 +7698,6 @@ body {
 /*----------------(like comment share)LCS section end---------*/
 /*----------------post end-------*/
 /*---------------main container end---------*/
-/* Common */
-body {
-  font-family: Roboto, "Segoe UI","Helvetica Neue",Arial;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-/* End Common */
-
 
 /*---------scrollbar start------*/
 .style-11::-webkit-scrollbar {
@@ -8276,28 +7761,6 @@ body {
 }
 .n-name,.tooltip,.drop-downs a,.icon-title,.bio-header,.frs-header,.mutual-f,.decline,.post-time,.accept{
   text-transform:capitalize;
-}
-/*-----------------header start--------*/
-.header{
-  background: #333333;
-  height: 60px;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.body{
-  background-color: #e9eeeb;
-  margin: 60px auto 0;
-  padding: 0 60px;
 }
 
 /*--------------------------search start-------*/
@@ -9013,18 +8476,7 @@ body {
   flex-wrap: nowrap;
 }
 /*----------------top header start-------*/
-.cover-photo{
-  /* background-image: url("../img/cover-photo.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 
-  width: 1000px;
-  height: 300px;
-  position: relative;
-
-  overflow: hidden;
-}
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
@@ -9157,10 +8609,7 @@ body {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.bio-section, .friend-request-section{
-  padding: 15px 10px;
-  min-height: 400px;
-}
+
 .bio-section .bio-description{
   font-size: 14px;
   color: #666666;
@@ -9168,18 +8617,7 @@ body {
 }
 /*----------------bio end-------*/
 /*----------------friend request start-------*/
-.friend-request-section{
-  background: #ffffff;
-  -webkit-flex-basis: 22%;
-  flex-basis: 22%;
-  max-width: 220px;
-  margin-top: 10px;
 
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 .friend-rq-items,.friend-rq-item{
   width: 100%;
   padding-top: 10px;
@@ -9258,12 +8696,6 @@ body {
 }
 /*----------------friend request end-------*/
 /*----------------post start-------*/
-.post-section{
-  margin-top: 10px;
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
-  max-width: 500px;
-}
 .post, .post-author{
   width: 100%;
   display: block;
@@ -9595,6 +9027,7 @@ body {
 }
 .welcome-message span {
     color: #8dd200;
+    font-size: 40px;
     display: block
 }
 .welcome-message .counter {
@@ -9602,12 +9035,14 @@ body {
 }
 
 /* Login page style */
+.signup-page,
 .login-page {
   height: 100%;
   background-color: #333;
   position: absolute;
   width: 100%;
 }
+.signup-form,
 .login-form {
   background-color: #fff;
   border-radius: 5px;
@@ -9617,6 +9052,7 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+.signup-form .input-field,
 .login-form .input-field {
   background-color: #f0f0f0;
   border: 1px solid transparent;
@@ -9648,16 +9084,17 @@ body {
 .input-error ~ .input-field {
   border-color: #ff4040;
 }
-.login-form .input .loader-sm {
+.signup-form .input .loader-sm {
   right: 10px;
   bottom: 15px;
 }
-.login-form input:-webkit-autofill,
-.login-form input:-webkit-autofill:hover,
-.login-form input:-webkit-autofill:focus,
-.login-form input:-webkit-autofill:active {
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #f0f0f0 inset !important;
 }
+.signup-form button,
 .login-form button {
   cursor: pointer;
   border: none;
@@ -9743,15 +9180,34 @@ body {
   left: 0;
   animation-duration: 1.25s;
   animation-iteration-count: infinite;
-  animation-name: card-loader;
+  animation-name: shadow-runner;
   animation-timing-function: linear;
   background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0) 81%);
   background: -o-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0) 81%);
   background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 30%, rgba(255,255,255,0) 81%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
 }
+
+.button-loading {
+  position: relative;
+  overflow: hidden
+}
+
+.button-loading:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-duration: 1.25s;
+  animation-iteration-count: infinite;
+  animation-name: shadow-runner;
+  animation-timing-function: linear;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 80%);
+}
  
-@keyframes card-loader {
+@keyframes shadow-runner {
  0%{
     transform: translate3d(-100%, 0, 0);
   }

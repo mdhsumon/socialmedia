@@ -16,9 +16,9 @@ export class Post extends React.Component {
     }
 
     getPosts = () => {
-        const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : '';
+        const userData = localStorage.getItem("userData") !== null ? JSON.parse(localStorage.getItem("userData")) : "";
         if(this.state.isLoading) {
-            getUserPosts(userInfo.username, data => {
+            getUserPosts(userData.userInfo.username, data => {
                 this.setState({
                     isLoading: false,
                     userPosts: data

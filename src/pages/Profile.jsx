@@ -1,18 +1,20 @@
 import React from "react";
 import { Header } from "../components/Header";
+import { ProfileInfo } from "../components/ProfileInfo";
 import { Post } from "../components/global/post/Post";
 import FriendRequests from "../components/global/FriendRequests";
-import { WeatherForcast } from "../components/WeatherForcast";
 import { Bio } from "../components/Bio";
 
-export const NewsFeed = () => {
+export const Profile = () => {
     return(
         <div className="body">
             <Header />
-            <div className="main-body news-feed-secton">
+            <div className="main-body profile-secton">
+                <div className="container">
+                    <ProfileInfo />
+                </div>
                 <div className="container column-section">
                     <div className="left-column">
-                        <WeatherForcast />
                         <Bio />
                     </div>
                     <div className="middle-column">

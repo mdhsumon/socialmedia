@@ -11,6 +11,7 @@ export default class Signup extends React.Component {
             fullNameHtmlClass: '',
 
             gender: '',
+            genderMessage: '',
 
             username: '',
             usernameMessage: '',
@@ -31,6 +32,7 @@ export default class Signup extends React.Component {
             confirmPasswordHtmlClass: '',
 
             formValidation: false,
+            validationMessage: '',
 
             isWelcomeScreen: false,
             counter: 0
@@ -231,19 +233,19 @@ export default class Signup extends React.Component {
            userEmail: this.state.email,
            userPass: this.state.password,
         }
-        // for(const data in formData) {
-        //     if(formData[data] !== "") {
-        //         return;
-        //     }
-        //     else {
-        //         this.setState({
-        //             formValidation: true
-        //         })
-        //     }
-        // }
-        if(this.formValidation || true) {
+        for(let data in formData) {
+            if(formData[data] === "") {
+                this.setState({formValidation: false});
+                break;
+            }
+            else {
+                this.setState({
+                    formValidation: true
+                })
+            }
+        }
+        if(this.formValidation) {
             userSignup(formData, response => {
-                //console.log(response)
                 if(response.signupStatus) {
                     this.setState({ isWelcomeScreen: true });
                     let count = this.state.counter;
@@ -255,21 +257,28 @@ export default class Signup extends React.Component {
             })
         }
         else {
-            console.log("Data error")
+            this.setState({
+                validationMessage: "All fields are required"
+            })
         }
     }
 
     render() {
         return(
-            <div className="login-page">
-                <div className="login-form">
+            <div className="signup-page">
+                <div className="signup-form">
                     <form onSubmit={this.handleSubmit}>
+                        {this.validationMessage && (
+                            <div className="validation-message">{this.state.validationMessage}</div>
+                        )}
                         <div className="input">
-                            {this.state.fullNameMessage !== "" && <div className={this.state.fullNameHtmlClass}>{this.state.fullNameMessage}</div>}
+                            {this.state.fullNameMessage !== "" && (
+                                <div className={this.state.fullNameHtmlClass}>{this.state.fullNameMessage}</div>
+                            )}
                             <input className="input-field" type="text" placeholder="Full name" name="fullName" onChange={this.handleChange} onBlur={this.handleChange} />
                         </div>
                         <div className="input">
-                            <div className="error">{this.state.validationMessage}</div>
+                            <div className="error">{this.state.genderMessage}</div>
                             <div>
                                 <input type="radio" id="male" value="male" name="gender" onChange={this.handleChange} />
                                 &nbsp;<label htmlFor="male">Male</label>
@@ -280,35 +289,43 @@ export default class Signup extends React.Component {
                             </div>
                         </div>
                         <div className="input username">
-                            {this.state.usernameMessage !== "" &&<div className={this.state.usernameHtmlClass}>{this.state.usernameMessage}</div>}
+                            {this.state.usernameMessage !== "" && (
+                                <div className={this.state.usernameHtmlClass}>{this.state.usernameMessage}</div>
+                            )}
                             <input className="input-field" type="text" placeholder="Username" name="username" onChange={this.handleChange} onBlur={this.handleChange} />
                             {this.userLoader()}
                         </div>
                         <div className="input email">
-                            {this.state.emailMessage !== "" && <div className={this.state.emailHtmlClass}>{this.state.emailMessage}</div>}
+                            {this.state.emailMessage !== "" && (
+                                <div className={this.state.emailHtmlClass}>{this.state.emailMessage}</div>
+                            )}
                             <input className="input-field" type="text" placeholder="Email" name="email" onChange={this.handleChange} onBlur={this.handleChange} />
                             {this.emailLoader()}
                         </div>
                         <div className="input">
-                            {this.state.passwordMessage !== "" && <div className={this.state.passwordHtmlClass}>{this.state.passwordMessage}</div>}
+                            {this.state.passwordMessage !== "" && (
+                                <div className={this.state.passwordHtmlClass}>{this.state.passwordMessage}</div>
+                            )}
                             <input className="input-field" type="password" placeholder="Password" name="password" onChange={this.handleChange} onBlur={this.handleChange} />
                         </div>
                         <div className="input">
-                            {this.state.confirmPasswordMessage !== "" && <div className={this.state.confirmPasswordHtmlClass}>{this.state.confirmPasswordMessage}</div>}
+                            {this.state.confirmPasswordMessage !== "" && (
+                                <div className={this.state.confirmPasswordHtmlClass}>{this.state.confirmPasswordMessage}</div>
+                            )}
                             <input className="input-field" type="password" placeholder="Confirm password" name="confirmPassword" onChange={this.handleChange} onBlur={this.handleChange} />
                         </div>
                         <button>Signup</button>
                     </form>
                     <div className="new-account">Already have account? <Link to="/login">login</Link> here.</div>
                 </div>
-                {this.state.isWelcomeScreen && 
-                <div class="welcome-section">
-                    <div className="welcome-message">Your registration was sucessfull!
-                        <span>Welcome to social family.</span>
-                        <span className="counter">{this.state.counter}</span>
+                {this.state.isWelcomeScreen && (
+                    <div class="welcome-section">
+                        <div className="welcome-message">Your registration was sucessfull!
+                            <span>Welcome to social family.</span>
+                            <span className="counter">{this.state.counter}</span>
+                        </div>
                     </div>
-                </div>
-                }
+                )}
             </div>
         )
     }

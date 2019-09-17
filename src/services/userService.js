@@ -1,5 +1,4 @@
 const apiBaseUrl = "http://localhost:2000";
-//const userToken = localStorage.getItem('userToken');
 
 // Create new user
 export const userSignup = (userData, callback) => {
@@ -30,6 +29,9 @@ export const getAccessToken = (userLoginData, callback) => {
     .then(res => res.json())
     .then(data => {
         callback(data)
+    })
+    .catch(err => {
+        callback(false)
     })
 }
 
