@@ -10,17 +10,15 @@ export class Post extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoading: true,
             userPosts: []
         }
     }
 
     getPosts = () => {
         const userData = localStorage.getItem("userData") !== null ? JSON.parse(localStorage.getItem("userData")) : "";
-        if(this.state.isLoading) {
+        if(userData !== "") {
             getUserPosts(userData.userInfo.username, data => {
                 this.setState({
-                    isLoading: false,
                     userPosts: data
                 });
             })
@@ -32,42 +30,35 @@ export class Post extends React.Component {
     }
 
     renderPost = () => {
-        if(this.state.isLoading) {
-            return (
-                <div className="card-loader"></div>
-            )
-        }
-        else {
-            if(this.state.userPosts.length > 0) {
-                return this.state.userPosts.map(postObject => {
-                    return (
-                        <div className="post" key={postObject._id}>
-                            <PostAuthor authorInfo={postObject.userInfo} />
-                            <PostContent postContent={postObject.content} />
-                            <PostReactions reactions={postObject.activities.reactions} />
-                            <div className="comment-reply">
-                                <PostComment postComments={postObject.activities.comments} />
-                            </div>
-                        </div>
-                    )
-                })
-            }
-            else {
+        if(this.state.userPosts.length > 0) {
+            return this.state.userPosts.map(postObject => {
                 return (
-                    <div className="empty-post">
-                        <div className="empty-post-message">No post found</div>
+                    <div className="post" key={postObject._id}>
+                        <PostAuthor authorInfo={postObject.userInfo} />
+                        <PostContent postContent={postObject.content} />
+                        <PostReactions reactions={postObject.activities.reactions} />
+                        <div className="comment-reply">
+                            <PostComment postComments={postObject.activities.comments} />
+                        </div>
                     </div>
                 )
-            }
+            })
+        }
+        else {
+            return (
+                <div className="empty-post">
+                    <div className="empty-post-message">No post found</div>
+                </div>
+            )
         }
     }
 
     // Passed to PostCreate for updating new post
-    postCreateFlag = () => {
-        this.setState({
-            isLoading: true
-        })
-        this.getPosts()
+    postCreateFlag = createdPost => {
+        // this.state.userPosts.unshift(createdPost);
+        // this.setState({
+        //     userPosts: this.state.userPosts
+        // });
     }
     
     render() {

@@ -8,6 +8,7 @@ export class PostCreate extends React.Component {
         this.state = {
             content: '',
             visibility: 'public',
+            isLoading: false,
             messagePopup: false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -31,14 +32,18 @@ export class PostCreate extends React.Component {
                 content: this.state.content,
                 visibility: this.state.visibility
             }
-            createPost(postData, status => {
-                if(status) {
+            this.setState({
+                isLoading: true
+            });
+            createPost(postData, response => {
+                if(response.status) {
                     this.setState({
+                        isLoading: false,
                         messagePopup: true
                     });
 
                     // Updating state from parent component
-                    this.props.postCreateFlag();
+                    this.props.postCreateFlag(response.createdPost);
 
                     setTimeout(() => {
                         this.setState({
@@ -54,29 +59,32 @@ export class PostCreate extends React.Component {
 
     render() {
         return (
-            <div className="post-create">
-                <form className="post-create-form" onSubmit={this.handleForm}>
-                    <div className="post-create-tab">
-                        <div className="tab-item message">Message </div>
-                        <div className="tab-item photo">Photo </div>
-                        <div className="tab-item video">Video</div>
-                    </div>
-                    <div className="post-create-body">
-                        <textarea name="content" placeholder="Write something here..." onChange={this.handleChange} />
-                    </div>
-                    <div className="post-create-actions">
-                        <button>Post now</button>
-                        <span className="post-visibility">
-                            <select name="visibility" onChange={this.handleChange} >
-                                <option value="public">p</option>
-                                <option value="friends">f</option>
-                                <option value="me">m</option>
-                            </select>
-                        </span>
-                    </div>
-                </form>
+            <React.Fragment>
+                <div className="post-create">
+                    <form className="post-create-form" onSubmit={this.handleForm}>
+                        <div className="post-create-tab">
+                            <div className="tab-item message">Message </div>
+                            <div className="tab-item photo">Photo </div>
+                            <div className="tab-item video">Video</div>
+                        </div>
+                        <div className="post-create-body">
+                            <textarea name="content" placeholder="Write something here..." onChange={this.handleChange} />
+                        </div>
+                        <div className="post-create-actions">
+                            <button>Post now</button>
+                            <span className="post-visibility">
+                                <select name="visibility" onChange={this.handleChange} >
+                                    <option value="public">p</option>
+                                    <option value="friends">f</option>
+                                    <option value="me">m</option>
+                                </select>
+                            </span>
+                        </div>
+                    </form>
+                </div>
                 {this.state.messagePopup && <MessagePopup status="success" message="Post has been published" />}
-            </div>
+                {this.state.isLoading && <div className="card-loader"></div>}
+            </React.Fragment>
         )
     }
 }

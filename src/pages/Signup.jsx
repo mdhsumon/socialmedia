@@ -124,26 +124,20 @@ export default class Signup extends React.Component {
                 break;
 
             case "email":
-                    const minEmailLength = 10, maxEmailLength = 40, emailRegex = /[\w-]+@([\w-]+\.)+[\w-]+/;
-                    if(currentLength > 0 && currentLength < minEmailLength && event.type === 'blur') {
+                    const emailRegex = /[\w-]+@([\w-]+\.)+[\w-]+/;
+                    if(currentLength < 1 && event.type === 'blur') {
                         this.setState({
-                            emailMessage: `Minimum ${minEmailLength} characters required`,
+                            emailMessage: "This field is required",
                             emailHtmlClass: inputErrorClass
                         });
                     }
-                    else if(currentLength > 0 && !emailRegex.test(currentValue.charAt(0))) {
+                    else if(currentLength > 0 && !emailRegex.test(currentValue)) {
                         this.setState({
-                            emailMessage: "First and all character must be: a-z",
+                            emailMessage: "Invalid email",
                             emailHtmlClass: inputErrorClass
                         });
                     }
-                    else if(currentLength > maxEmailLength) {
-                        this.setState({
-                            emailMessage: `Maximum ${maxEmailLength} characters allowed`,
-                            emailHtmlClass: inputErrorClass
-                        });
-                    }
-                    else if(currentLength >= minEmailLength && event.type === 'blur') {
+                    else if(emailRegex.test(currentValue) && event.type === 'blur') {
                         this.setState({
                             emailChecking: true
                         });
