@@ -238,8 +238,10 @@ export default class Signup extends React.Component {
                 })
             }
         }
-        if(this.formValidation) {
+        if(this.formValidation || true) {
             userSignup(formData, response => {
+                
+            console.log(response)
                 if(response.signupStatus) {
                     this.setState({ isWelcomeScreen: true });
                     let count = this.state.counter;

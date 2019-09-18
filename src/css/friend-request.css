@@ -1,0 +1,76 @@
+/*----------------friend request start-------*/
+.friend-rq-items,.friend-rq-item{
+  width: 100%;
+  padding-top: 10px;
+}
+.friend-rq-item{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+.friend-rq-item-thumb, .friend-rq-item-thumb img{
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.friend-rq-item-content{
+  padding: 0 15px;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.author-name{
+  text-decoration: none;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 600;
+}
+.mutual-f{
+  font-size: 12px;
+  color: #999999;
+}
+.rq-buttons{
+  padding-top: 5px;
+  padding-right: 20px;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.rq-buttons button{
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 12px;
+  color: #666666;
+  padding: 3px 8px;
+  margin: 0 3px;
+  border: 1px solid #aaaaaa;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.rq-buttons button:hover{
+  background: #ebedf0;
+  column-rule: #333333;
+  cursor: pointer;
+}
+.friend-request-drop-down{
+  background: #ffffff;
+}
+
+/*----------------friend request end-------*/

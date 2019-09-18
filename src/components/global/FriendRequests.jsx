@@ -3,9 +3,9 @@ import React from "react";
 export default class FriendRequests extends React.Component {
     render() {
         return (
-            <div className="friend-request-section">
+            <div className="common-block friend-request-section">
                 <h4 className="block-header">Friend requests</h4>
-                <div className="friend-rq-items">
+                <div className="block-body friend-rq-items">
                     <div className="friend-rq-item">
                         <div className="friend-rq-item-thumb">
                             <img alt="alter text" src="img/profile-photo2.jpg" />

@@ -1,0 +1,91 @@
+/* Login page style */
+.signup-page,
+.login-page {
+  height: 100%;
+  background-color: #333;
+  position: absolute;
+  width: 100%;
+}
+.signup-form,
+.login-form {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.signup-form .input-field,
+.login-form .input-field {
+  background-color: #f0f0f0;
+  border: 1px solid transparent;
+  width: 300px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+.input {
+  position: relative;
+}
+.input-error,
+.input-success {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  font-size: 12px;
+  border-radius: 3px;
+  color: #fff;
+  padding: 2px 6px;
+}
+.input-success {
+  background: #8dd200;
+}
+.input-error {
+  background: #ff4040;
+}
+.input-error ~ .input-field {
+  border-color: #ff4040;
+}
+.signup-form .input .loader-sm {
+  right: 10px;
+  bottom: 15px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #f0f0f0 inset !important;
+}
+.signup-form button,
+.login-form button {
+  cursor: pointer;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 3px;
+  background-color: #8DD200;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.new-account {
+  position: absolute;
+  bottom: -40px;
+  color: #ccc;
+  font-size: 14px;
+}
+.new-account a {
+  color: #8DD200;
+  text-decoration: none;
+}
+.error-message {
+  color: red;
+  padding: 10px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

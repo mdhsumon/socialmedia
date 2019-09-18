@@ -1,0 +1,14 @@
+/*---------------------------bio start*/
+.bio-header, .frs-header{
+  color: #666666;
+  font-size: 16px;
+  font-weight: 600;
+}
+.bio-section{
+
+}
+.bio-section, .friend-request-section{
+  min-height: 400px;
+}
+
+/*----------------bio end-------*/

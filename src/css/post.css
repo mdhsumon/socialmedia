@@ -1,0 +1,325 @@
+/*----------------post create start-------*/
+.post-create {
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+.post-create-tab,
+.post-create-actions {
+  background-color: #f9f9f9;
+  display: flex;
+  padding: 10px 15px;
+}
+.post-create-actions {
+  justify-content: flex-end;
+}
+.post-create-actions .post-visibility {
+  color: #ccc;
+  margin-left: 10px;
+}
+.post-create textarea {
+  border: 1px solid transparent;
+  outline: none;
+  min-height: 80px;
+  width: 100%;
+  border: none;
+  padding: 15px;
+  resize: vertical;
+}
+.post-create textarea:focus {
+  border-color: #8dd200;
+}
+/*----------------post create end-------*/
+
+*----------------post start-------*/
+.post-section{
+    margin-top: 10px;
+    -webkit-flex-basis: 50%;
+    flex-basis: 50%;
+    max-width: 500px;
+}
+.post, .post-author{
+    width: 100%;
+    display: block;
+}
+.post{
+    background: #ffffff;
+    margin-bottom: 10px;
+
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.post-author{
+    position: relative;
+}
+.post-section .author-post-detail{
+    padding: 10px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+}
+.post-author-thumb{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.post-author-thumb img{
+    width: 40px;
+    height: 40px;
+}
+.author-post-info{
+    display: block;
+    padding: 0 10px;
+}
+.author-post-info .post-attribute{
+    font-size: 14px;
+    color: #aaaaaa;
+}
+.author-post-info .post-attribute a{
+    color: #8dd200;
+    text-decoration: none;
+}
+.author-post-info .post-attribute a:hover{
+    text-decoration: underline;
+}
+.author-post-info .post-date_time{
+    font-size: 12px;
+    color: #aaaaaa;
+}
+.post-section .action-button{
+    background: transparent;
+    border: 0;
+    color: #aaaaaa;
+    font-size: 20px;
+    line-height: 20px;
+    width: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.post-section .action-button:hover{
+    color: #666666;
+}
+/*----------------post body start---------*/
+.post .post-body{
+    font-size: 15px;
+    color: #666666;
+    width: 100%;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.post .post-body .post-image, .post-image img{
+    width: 100%;
+    margin-top: 5px;
+    height: auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.post .post-body .post-image{
+    position: relative;
+}
+.post .post-body .post-image:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+/*----------------post body end---------*/
+/*----------------(like comment share)LCS section start---------*/
+.LCS-section{
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    width: 100%;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.lcs-buttons{
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.lcs-buttons .share-button{
+    background: transparent;
+    border: 0;
+}
+.lcs-buttons .material-icons{
+    padding: 5px;
+    font-size: 15px;
+    color: #999999;
+    cursor: pointer;
+
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.lcs-buttons .material-icons:hover{
+    color: #666666;
+}
+.add-comment{
+    cursor: pointer;
+    position: relative;
+    left: -20px;
+}
+.add-comment form input{
+    font-size: 12px;
+    text-indent: 5px;
+    width: 300px;
+    padding: 5px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    border: 1px solid white;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.like-dislike span{
+    color: #999999;
+    font-size: 10px;
+    position: relative;
+    top: -3px;
+}
+.liked button:nth-child(1) .material-icons{
+    color: #8dd200;
+}
+.disliked button:nth-child(3) .material-icons{
+    color: #ff6655;
+}
+.comment{
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+.comment-author-thumb{
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+}
+.comment-author-thumb img{
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.author-comment-info{
+    padding: 10px 10px 10px 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.comment-body{
+    font-size: 14px;
+    color: #333333;
+}
+.author-comment-info .author-name a{
+    color: #333333;
+    text-decoration: none;
+}
+.like-dislike button{
+    background: transparent;
+    border: 1px solid transparent;
+}
+.like-reply .like-dislike .material-icons{
+    color: #aaaaaa;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 15px;
+
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.like-reply .like-dislike .material-icons:hover{
+    color: #666666;
+}
+.like-reply  .liked button:nth-child(1) .material-icons{
+    color: #8dd200;
+}
+.like-reply  .disliked button:nth-child(3) .material-icons{
+    color: #ff6655;
+}
+.reply{
+    padding: 10px 0;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+.reply .reply-author-thumb{
+    width: 30px;
+    height: 30px;
+}
+.reply .reply-author-thumb img{
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.reply form{
+    padding: 0 10px;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+.like-reply .reply input{
+    font-size: 12px;
+    text-indent: 5px;
+    width: 100%;
+    padding: 8px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    border: 1px solid #dddddd;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+/*----------------(like comment share)LCS section end---------*/
+/*----------------post end-------*/

@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import { NewsFeed } from "./pages/NewsFeed";
 import { Profile } from "./pages/Profile";
 
-import "./App.css";
+import "./css/style.css";
 
 class App extends React.Component {
   constructor(props) {

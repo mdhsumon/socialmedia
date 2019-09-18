@@ -55,10 +55,10 @@ export class Post extends React.Component {
 
     // Passed to PostCreate for updating new post
     postCreateFlag = createdPost => {
-        // this.state.userPosts.unshift(createdPost);
-        // this.setState({
-        //     userPosts: this.state.userPosts
-        // });
+        this.state.userPosts.unshift(createdPost);
+        this.setState({
+            userPosts: this.state.userPosts
+        });
     }
     
     render() {
