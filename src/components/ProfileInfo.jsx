@@ -1,16 +1,13 @@
 import React from 'react';
-//import { DataProfile } from '../services/data-profile';
-import profilePhoto from '../resources/users/id-1/profile-photo.jpg';
-import coverPhoto from '../resources/users/id-1/cover-photo.jpg';
 
 export const ProfileInfo = () => {
     return (
         <div className="profile-info-section">
-            <div className="cover-photo"><img src={ coverPhoto } alt="CoverPhoto" /></div>
+            <div className="cover-photo"><img src="" alt="CoverPhoto" /></div>
             <div className="profile-section">
                 <div className="profile-author">
                     <a href="/" className="profile-photo">
-                        <img alt="alter text"  src={ profilePhoto } />
+                        <img alt="alter text"  src="" />
                     </a>
                     <div className="profile-name">
                         <a className="author-name" href="/"><h4>kuddus boyati</h4></a>
