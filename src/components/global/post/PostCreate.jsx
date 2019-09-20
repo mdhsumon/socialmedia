@@ -29,6 +29,7 @@ export class PostCreate extends React.Component {
                 userId: userData.userInfo.userId,
                 username: userData.userInfo.username,
                 displayName: userData.userInfo.displayName,
+                profilePhoto: userData.userInfo.profilePhoto,
                 content: this.state.content,
                 visibility: this.state.visibility
             }
