@@ -54,3 +54,15 @@ export const deletePost = (postId, callback) => {
 .then(res => res.json())
 .then(data => callback(data))
 }
+
+// // Get column data
+export const getColumnData = (column, postId, callback) => {
+    fetch(`${apiBaseUrl}/${column}/${postId}`,{
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${userToken}`
+    }
+})
+.then(res => res.json())
+.then(data => callback(data))
+}

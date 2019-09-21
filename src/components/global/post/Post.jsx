@@ -36,7 +36,7 @@ export class Post extends React.Component {
                     <div className="post" key={postObject._id}>
                         <PostAuthor authorInfo={postObject.userInfo} postInfo={{id: postObject._id, createdAt: postObject.createdAt}} />
                         <PostContent postContent={postObject.content} />
-                        <PostReactions reactions={postObject.activities.reactions} />
+                        <PostReactions reactions={postObject.activities.reactions} postId={postObject._id} />
                         <div className="comment-reply">
                             <PostComment postComments={postObject.activities.comments} />
                         </div>
