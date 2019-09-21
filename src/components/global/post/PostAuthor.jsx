@@ -1,6 +1,15 @@
 import React from "react";
+import { deletePost } from "../../../services/postService";
 
 export const PostAuthor = props => {
+    const removePost = postId => {
+        deletePost(postId, response => {
+            console.log(response)
+            if(response.deletedtatus) {
+                alert('deleted')
+            }
+        })
+    }
     return (
         <div className="post-author">
             <div className="author-post-detail">
@@ -12,10 +21,10 @@ export const PostAuthor = props => {
                         <a href={"/"} className="author-name">{props.authorInfo.displayName}</a>
                         <span className="post-attribute"> shared a <a href="/">link</a></span>
                     </div>
-                    <span className="post-date-time">at {props.authorInfo.username}, {props.authorInfo.username}</span>
+                    <span className="post-date-time">at {props.postInfo.createdAt}</span>
                 </div>
             </div>
-            <button className="action-button"><i className="material-icons">more_horiz</i></button>
+            <button className="action-button" onClick={removePost.bind(this, props.postInfo.id)}><i className="material-icons">more_horiz</i></button>
         </div>
     )
 }

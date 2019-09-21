@@ -34,7 +34,7 @@ export class Post extends React.Component {
             return this.state.userPosts.map(postObject => {
                 return (
                     <div className="post" key={postObject._id}>
-                        <PostAuthor authorInfo={postObject.userInfo} />
+                        <PostAuthor authorInfo={postObject.userInfo} postInfo={{id: postObject._id, createdAt: postObject.createdAt}} />
                         <PostContent postContent={postObject.content} />
                         <PostReactions reactions={postObject.activities.reactions} />
                         <div className="comment-reply">

@@ -51,13 +51,6 @@
   -webkit-align-items: center;
   align-items: center;
 }
-.author-name{
-  white-space: nowrap;
-  text-decoration: none;
-  color: #333333;
-  font-size: 16px;
-  font-weight: 600;
-}
 .author-nick-name{
   white-space: nowrap;
   padding-left: 5px;

@@ -42,3 +42,15 @@ export const getPostById = (postId = "kuddus", callback) => {
 .then(res => res.json())
 .then(data => callback(data))
 }
+
+// Delete post by id
+export const deletePost = (postId, callback) => {
+    fetch(`${apiBaseUrl}/post/${postId}`,{
+    method: 'DELETE',
+    headers: {
+        'Authorization': `Bearer ${userToken}`
+    }
+})
+.then(res => res.json())
+.then(data => callback(data))
+}

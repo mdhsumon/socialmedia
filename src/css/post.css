@@ -51,49 +51,50 @@
     font-size: 22px;
     color: #ccc;
   }
-.post, .post-author{
-    width: 100%;
-    display: block;
-}
 .post{
     background: #ffffff;
     margin-bottom: 10px;
-
     border: 1px solid #e3e3e3;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    overflow: auto;
 }
 .post-author{
     position: relative;
-}
-.post-section .author-post-detail{
     padding: 10px;
     display: -webkit-flex;
     display: -moz-flex;
     display: flex;
-    width: calc(100% - 20px);
-    box-sizing: border-box;
+}
+.author-post-detail{
+    flex: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    min-width: 0;
 }
 .post-author-thumb{
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     overflow: hidden;
 }
 .post-author-thumb img{
-    width: 40px;
-    height: 40px;
+    max-width: 100%;
+    max-height: 100%;
 }
 .author-post-info{
-    display: block;
     padding: 0 10px;
 }
+.author-post_info {
+    line-height: 1.1;
+}
 .author-post-info .post-attribute{
-    font-size: 14px;
+    font-size: 13px;
     color: #aaaaaa;
 }
 .author-post-info .post-attribute a{
@@ -103,41 +104,35 @@
 .author-post-info .post-attribute a:hover{
     text-decoration: underline;
 }
-.author-post-info .post-date_time{
+.author-post-info .post-date-time{
     font-size: 12px;
     color: #aaaaaa;
 }
-.post-section .action-button{
+.post-author .action-button {
     background: transparent;
     border: 0;
     color: #aaaaaa;
     font-size: 20px;
     line-height: 20px;
-    width: 20px;
-    display: inline-block;
-    position: absolute;
-    top: 20px;
-    right: 10px;
+    width: 25px;
+    margin-left: 10px;
+    padding: 0;
     cursor: pointer;
-
+    flex: none;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
     transition: all 0.2s;
 }
-.post-section .action-button:hover{
+.post-author .action-button:hover{
     color: #666666;
 }
 /*----------------post body start---------*/
 .post .post-body{
-    font-size: 15px;
+    font-size: 14px;
     color: #666666;
-    width: 100%;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    padding: 10px 20px 20px;
 }
 .post .post-body .post-image, .post-image img{
     width: 100%;
@@ -161,27 +156,20 @@
 }
 /*----------------post body end---------*/
 /*----------------(like comment share)LCS section start---------*/
-.LCS-section{
-    border-top: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    width: 100%;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.lcs-buttons{
+.lcs-section{
     display: -moz-flex;
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: space-between;
     justify-content: space-between;
+    background-color: #fafafa;
+    padding: 7px 0;
 }
-.lcs-buttons .share-button{
+.lcs-section .share-button{
     background: transparent;
     border: 0;
 }
-.lcs-buttons .material-icons{
+.lcs-section .material-icons{
     padding: 5px;
     font-size: 15px;
     color: #999999;
@@ -193,28 +181,31 @@
     -o-transition: all 0.2s;
     transition: all 0.2s;
 }
-.lcs-buttons .material-icons:hover{
+.lcs-section .material-icons:hover{
     color: #666666;
 }
-.add-comment{
-    cursor: pointer;
-    position: relative;
-    left: -20px;
+.add-comment {
+    flex: auto;
+    min-width: 0;
+    margin-left: 10px;
 }
 .add-comment form input{
     font-size: 12px;
     text-indent: 5px;
-    width: 300px;
-    padding: 5px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
+    width: 100%;
+    padding: 6px;
+    border-radius: 3px;
+    background-color: #F3F3F3;
     border: 1px solid white;
+    outline: none;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
     transition: all 0.2s;
+}
+.add-comment form input:focus{
+    border-color: #8dd200;
 }
 .like-dislike span{
     color: #999999;
@@ -258,13 +249,21 @@
     font-size: 14px;
     color: #333333;
 }
-.author-comment-info .author-name a{
+.author-name{
+    white-space: nowrap;
+    text-decoration: none;
+    color: #333333;
+    font-size: 13px;
+    font-weight: 600;
+  }
+.author-name a{
     color: #333333;
     text-decoration: none;
 }
 .like-dislike button{
     background: transparent;
     border: 1px solid transparent;
+    padding: 1px 8px;
 }
 .like-reply .like-dislike .material-icons{
     color: #aaaaaa;
