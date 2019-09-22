@@ -29,6 +29,14 @@ export class Post extends React.Component {
         this.getPosts();
     }
 
+    // Passed to PostCreate for updating new post
+    postCreateFlag = createdPost => {
+        this.state.userPosts.unshift(createdPost);
+        this.setState({
+            userPosts: this.state.userPosts
+        });
+    }
+
     renderPost = () => {
         if(this.state.userPosts.length > 0) {
             return this.state.userPosts.map(postObject => {
@@ -36,7 +44,11 @@ export class Post extends React.Component {
                     <div className="post" key={postObject._id}>
                         <PostAuthor authorInfo={postObject.userInfo} postInfo={{id: postObject._id, createdAt: postObject.createdAt}} />
                         <PostContent postContent={postObject.content} />
-                        <PostReactions reactions={postObject.activities.reactions} postId={postObject._id} />
+                        <PostReactions
+                            reactions={postObject.activities.reactions}
+                            postInfo={{id: postObject._id, userId: postObject.userInfo.userId}}
+                            likeDislike={this.updateLikeDislike}
+                        />
                         <div className="comment-reply">
                             <PostComment postComments={postObject.activities.comments} />
                         </div>
@@ -53,14 +65,6 @@ export class Post extends React.Component {
         }
     }
 
-    // Passed to PostCreate for updating new post
-    postCreateFlag = createdPost => {
-        this.state.userPosts.unshift(createdPost);
-        this.setState({
-            userPosts: this.state.userPosts
-        });
-    }
-    
     render() {
         return (
             <div className="post-section">

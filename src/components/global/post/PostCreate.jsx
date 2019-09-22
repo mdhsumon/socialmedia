@@ -43,7 +43,7 @@ export class PostCreate extends React.Component {
                         messagePopup: true
                     });
 
-                    // Updating state from parent component
+                    // Updating post from parent component
                     this.props.postCreateFlag(response.createdPost);
 
                     setTimeout(() => {

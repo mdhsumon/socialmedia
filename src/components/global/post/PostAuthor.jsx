@@ -4,7 +4,6 @@ import { deletePost } from "../../../services/postService";
 export const PostAuthor = props => {
     const removePost = postId => {
         deletePost(postId, response => {
-            console.log(response)
             if(response.deletedtatus) {
                 alert('deleted')
             }

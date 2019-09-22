@@ -33,7 +33,7 @@ export const getUserPosts = (username, callback) => {
 
 // Will return signle post by id
 export const getPostById = (postId = "kuddus", callback) => {
-    fetch(`${apiBaseUrl}/post/${postId}`,{
+    fetch(`${apiBaseUrl}/post/${postId}`, {
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${userToken}`
@@ -45,7 +45,7 @@ export const getPostById = (postId = "kuddus", callback) => {
 
 // Delete post by id
 export const deletePost = (postId, callback) => {
-    fetch(`${apiBaseUrl}/post/${postId}`,{
+    fetch(`${apiBaseUrl}/post/${postId}`, {
     method: 'DELETE',
     headers: {
         'Authorization': `Bearer ${userToken}`
@@ -56,12 +56,15 @@ export const deletePost = (postId, callback) => {
 }
 
 // // Get column data
-export const getPostColumn = (column, postId, callback) => {
-    fetch(`${apiBaseUrl}/${column}/${postId}`,{
-    method: 'GET',
+export const updateReaction = (column, postId, userId, callback) => {
+    fetch(`${apiBaseUrl}/${column}/${postId}`, {
+    method: 'PUT',
     headers: {
         'Authorization': `Bearer ${userToken}`
-    }
+    },
+    body: JSON.stringify({
+        
+    })
 })
 .then(res => res.json())
 .then(data => callback(data))

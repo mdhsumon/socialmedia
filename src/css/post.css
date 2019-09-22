@@ -176,6 +176,11 @@
 .lcs-section .share-button:hover .material-icons{
     color: #666;
 }
+.like-dislike button{
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 1px 8px;
+}
 .like-dislike .material-icons{
     padding: 5px;
     font-size: 15px;
@@ -187,9 +192,11 @@
     -o-transition: all 0.2s;
     transition: all 0.2s;
 }
+.like-dislike .liked .material-icons,
 .like-dislike .like:hover .material-icons{
     color: #8dd200;
 }
+.like-dislike .disliked .material-icons,
 .like-dislike .dislike:hover .material-icons{
     color: #ff6655;
 }
@@ -262,32 +269,6 @@
 .author-name a{
     color: #333333;
     text-decoration: none;
-}
-.like-dislike button{
-    background: transparent;
-    border: 1px solid transparent;
-    padding: 1px 8px;
-}
-.like-reply .like-dislike .material-icons{
-    color: #aaaaaa;
-    cursor: pointer;
-    padding: 5px;
-    font-size: 15px;
-
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s;
-}
-.like-reply .like-dislike .material-icons:hover{
-    color: #666666;
-}
-.like-reply  .liked button:nth-child(1) .material-icons{
-    color: #8dd200;
-}
-.like-reply  .disliked button:nth-child(3) .material-icons{
-    color: #ff6655;
 }
 .reply{
     padding: 10px 0;
