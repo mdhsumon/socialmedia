@@ -56,7 +56,7 @@ export const deletePost = (postId, callback) => {
 }
 
 // // Get column data
-export const getColumnData = (column, postId, callback) => {
+export const getPostColumn = (column, postId, callback) => {
     fetch(`${apiBaseUrl}/${column}/${postId}`,{
     method: 'GET',
     headers: {

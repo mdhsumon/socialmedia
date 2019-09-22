@@ -169,20 +169,29 @@
     background: transparent;
     border: 0;
 }
-.lcs-section .material-icons{
+.lcs-section .share-button .material-icons{
+    color: #ccc;
+    font-size: 17px;
+}
+.lcs-section .share-button:hover .material-icons{
+    color: #666;
+}
+.like-dislike .material-icons{
     padding: 5px;
     font-size: 15px;
-    color: #999999;
+    color: #ccc;
     cursor: pointer;
-
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     -ms-transition: all 0.2s;
     -o-transition: all 0.2s;
     transition: all 0.2s;
 }
-.lcs-section .material-icons:hover{
-    color: #666666;
+.like-dislike .like:hover .material-icons{
+    color: #8dd200;
+}
+.like-dislike .dislike:hover .material-icons{
+    color: #ff6655;
 }
 .add-comment {
     flex: auto;
@@ -196,7 +205,7 @@
     padding: 6px;
     border-radius: 3px;
     background-color: #F3F3F3;
-    border: 1px solid white;
+    border: 1px solid transparent;
     outline: none;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
@@ -212,12 +221,6 @@
     font-size: 10px;
     position: relative;
     top: -3px;
-}
-.liked button:nth-child(1) .material-icons{
-    color: #8dd200;
-}
-.disliked button:nth-child(3) .material-icons{
-    color: #ff6655;
 }
 .comment{
     display: -moz-flex;
