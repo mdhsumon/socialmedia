@@ -1,31 +1,27 @@
 /*----------------friend request start-------*/
-.friend-rq-items,.friend-rq-item{
-  width: 100%;
-  padding-top: 10px;
-}
-.friend-rq-item{
-  display: -webkit-flex;
-  display: -moz-flex;
+.friend-rq-item {
   display: flex;
-  -webkit-align-items: flex-start;
-  align-items: flex-start;
-  -webkit-justify-content: flex-start;
-  justify-content: flex-start;
-  -webkit-flex-wrap: nowrap;
-  flex-wrap: nowrap;
 }
-.friend-rq-item-thumb, .friend-rq-item-thumb img{
-  width: 40px;
-  height: 40px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
+.friend-rq-item ~ .friend-rq-item {
+  border-top: 1px dashed #EEEEEE;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+.friend-rq-item-thumb {
+  width: 45px;
+  height: 45px;
   border-radius: 3px;
-  overflow: hidden;
+  flex: none;
 }
-.friend-rq-item-content{
-  padding: 0 15px;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
+.friend-rq-item-thumb img{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 3px;
+}
+.friend-rq-item-content {
+  padding-left: 10px;
+  flex: auto;
+  min-width: 0;
 }
 .mutual-f{
   font-size: 12px;
@@ -33,35 +29,30 @@
 }
 .rq-buttons{
   padding-top: 5px;
-  padding-right: 20px;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
 }
 .rq-buttons button{
-  background: #ffffff;
-  font-weight: 600;
+  background-color: #FAFAFA;
+  font-weight: 400;
   font-size: 12px;
-  color: #666666;
-  padding: 3px 8px;
-  margin: 0 3px;
-  border: 1px solid #aaaaaa;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s;
-}
-.rq-buttons button:hover{
-  background: #ebedf0;
-  column-rule: #333333;
+  color: #999;
   cursor: pointer;
+  padding: 3px 8px;
+  border: 1px solid #E6E6E6;
+  border-radius: 2px;
+  transition: all 0.1s;
+}
+.rq-buttons .accept:hover{
+  background-color: #8dd200;
+  border-color: #8dd200;
+  color: #fff;
+}
+.rq-buttons .decline{
+  margin-left: 10px;
+}
+.rq-buttons .decline:hover{
+  background-color: #ff4040;
+  border-color: #ff4040;
+  color: #fff;
 }
 .friend-request-drop-down{
   background: #ffffff;

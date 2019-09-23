@@ -81,7 +81,7 @@ input:-webkit-autofill:active {
   text-decoration: none;
 }
 .error-message {
-  color: red;
+  color: #ff4040;
   padding: 10px;
   text-align: center;
   position: absolute;

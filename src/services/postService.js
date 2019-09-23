@@ -19,9 +19,21 @@ export const createPost = (postData, callback) => {
     })
 }
 
-// Will return all post by username
+// Will return all user post
 export const getUserPosts = (username, callback) => {
     fetch(`${apiBaseUrl}/${username}/posts`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${userToken}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => callback(data))
+}
+
+// Will return user feed
+export const getUserFeeds = (username, callback) => {
+    fetch(`${apiBaseUrl}/${username}/feeds`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${userToken}`
