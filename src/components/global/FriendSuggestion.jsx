@@ -6,7 +6,7 @@ export default class FriendSuggestion extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleFriendRequest = this.handleFriendRequest.bind(this);
+        //this.handleFriendRequest = this.handleFriendRequest.bind(this);
         //this.removeSuggestion = this.removeSuggestion.bind(this);
 
         this.state = {

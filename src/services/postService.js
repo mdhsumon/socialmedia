@@ -44,7 +44,7 @@ export const getUserFeeds = (username, callback) => {
 }
 
 // Will return signle post by id
-export const getPostById = (postId = "kuddus", callback) => {
+export const getPostById = (postId, callback) => {
     fetch(`${apiBaseUrl}/post/${postId}`, {
     method: 'GET',
     headers: {

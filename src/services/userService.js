@@ -1,4 +1,6 @@
 const apiBaseUrl = "http://localhost:2000";
+const userData = JSON.parse(localStorage.getItem("userData"));
+const userToken = userData !== null ? userData.userToken : "";
 
 // Create new user
 export const userSignup = (userData, callback) => {
@@ -35,14 +37,30 @@ export const getAccessToken = (userLoginData, callback) => {
     })
 }
 
-// Will return user info
-export const getUserInfo = (username, accessToken, callback) => {
-    fetch(`${apiBaseUrl}/user/${username}`, {
+// Will return user summary
+export const getSummeryAtLogin = (userOrId, accessToken, callback) => {
+    fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${accessToken}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+}
+
+// Will return user summary
+export const getUserSummery = (userOrId, callback) => {
+    fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
         }
     })
     .then(res => res.json())
@@ -68,6 +86,21 @@ export const isUserExist = (type, userOrEmail, callback) => {
 
 // Send friend request
 export const sendFriendRequest = (username, userId, callback) => {
+    fetch(`${apiBaseUrl}/${username}/request/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+}
+
+// Accept friend request
+export const acceptFriendRequest = (username, userId, callback) => {
     fetch(`${apiBaseUrl}/${username}/request/${userId}`, {
         method: 'PUT',
         headers: {
