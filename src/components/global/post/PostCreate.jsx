@@ -5,14 +5,14 @@ import { MessagePopup } from "../../MessagePopup";
 export class PostCreate extends React.Component {
     constructor(props) {
         super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleForm = this.handleForm.bind(this);
         this.state = {
             content: '',
             visibility: 'public',
             isLoading: false,
             messagePopup: false
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleForm = this.handleForm.bind(this);
     }
 
     handleChange = event => {

@@ -65,3 +65,18 @@ export const isUserExist = (type, userOrEmail, callback) => {
         callback(data.isExist ? true : false)
     })
 }
+
+// Send friend request
+export const sendFriendRequest = (username, userId, callback) => {
+    fetch(`${apiBaseUrl}/${username}/request/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+}

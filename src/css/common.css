@@ -52,6 +52,7 @@ button, .button {
 .column-section .left-column {
   flex: none;
   width: 22%;
+  min-width: 225px;
 }
 
 .column-section .middle-column {
