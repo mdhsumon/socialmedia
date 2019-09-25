@@ -231,4 +231,15 @@ button, .button {
     transform: translate3d(100%, 0, 0);
   }
 }
+
+.fade-hide {
+  overflow: hidden;
+  height: 100%;
+  transition: all 1s ease;
+}
+
+.fade-hide.sliding {
+  height: 0;
+  opacity: 0;
+}
 /* End loader */

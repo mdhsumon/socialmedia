@@ -19,6 +19,10 @@ export default class FriendSuggestion extends React.Component {
         }
     }
 
+    getFriendSuggestions = () => {
+        
+    }
+
     handleFriendRequest = (userInfo, event) => {
         console.log(userInfo.userId, event)
         const currentList = [...this.state.suggestionList];
@@ -35,14 +39,16 @@ export default class FriendSuggestion extends React.Component {
     }
 
     removeSuggestion = (userInfo, event) => {
-        // const currentList = [...this.state.suggestionList];
-        // const findIndex = currentList.indexOf(userInfo.userId);
-        // if(findIndex !== -1) {
-        //     currentList.splice(findIndex, 1);
-        //     this.setState({
-        //         suggestionList: currentList
-        //     });
-        // }
+        const currentList = [...this.state.suggestionList];
+        const findIndex = currentList.indexOf(userInfo.userId);
+        if(findIndex !== -1) {
+            currentList.splice(findIndex, 1);
+            setTimeout(() => {
+                this.setState({
+                    suggestionList: currentList
+                });
+            }, 1000);
+        }
     }
 
     render() {

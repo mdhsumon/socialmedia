@@ -37,14 +37,14 @@ export const getAccessToken = (userLoginData, callback) => {
     })
 }
 
-// Will return user summary
-export const getSummeryAtLogin = (userOrId, accessToken, callback) => {
-    fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
+// Will return single user summary
+export const getMultipleUserSummary = (userOrIdArray, callback) => {
+    fetch(`${apiBaseUrl}/multiple/user/summary/${userOrIdArray}`, {
         method: 'GET',
         headers: {
+            'Authorization': `Bearer ${userToken}`,
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            'Content-Type': 'application/json'
         }
     })
     .then(res => res.json())
@@ -53,8 +53,8 @@ export const getSummeryAtLogin = (userOrId, accessToken, callback) => {
     })
 }
 
-// Will return user summary
-export const getUserSummery = (userOrId, callback) => {
+// Will return single user summary
+export const getUserSummery = (userOrId, userToken = userToken, callback) => {
     fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
         method: 'GET',
         headers: {
@@ -85,10 +85,27 @@ export const isUserExist = (type, userOrEmail, callback) => {
 }
 
 // Send friend request
+export const getFriendRequests = (username, callback) => {
+    fetch(`${apiBaseUrl}/${username}/request/list`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+}
+
+// Send friend request
 export const sendFriendRequest = (username, userId, callback) => {
     fetch(`${apiBaseUrl}/${username}/request/${userId}`, {
         method: 'PUT',
         headers: {
+            'Authorization': `Bearer ${userToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
@@ -104,6 +121,7 @@ export const acceptFriendRequest = (username, userId, callback) => {
     fetch(`${apiBaseUrl}/${username}/request/${userId}`, {
         method: 'PUT',
         headers: {
+            'Authorization': `Bearer ${userToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
