@@ -1,6 +1,8 @@
-const apiBaseUrl = "http://localhost:2000";
+const apiBaseUrl = "http://localhost:8081";
 const userData = JSON.parse(localStorage.getItem("userData"));
-const userToken = userData !== null ? userData.userToken : "";
+const loggedUserToken = userData !== null ? userData.userToken : "";
+const loggedUsername = userData ? userData.userInfo.username : "";
+const loggedUserId = userData ? userData.userInfo.userId : "";
 
 // Create new user
 export const userSignup = (userData, callback) => {
@@ -42,7 +44,7 @@ export const getMultipleUserSummary = (userOrIdArray, callback) => {
     fetch(`${apiBaseUrl}/multiple/user/summary/${userOrIdArray}`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
@@ -54,13 +56,13 @@ export const getMultipleUserSummary = (userOrIdArray, callback) => {
 }
 
 // Will return single user summary
-export const getUserSummery = (userOrId, userToken = userToken, callback) => {
+export const getUserSummery = (userOrId, loggedUserToken = loggedUserToken, callback) => {
     fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${userToken}`
+            'Authorization': `Bearer ${loggedUserToken}`
         }
     })
     .then(res => res.json())
@@ -85,11 +87,11 @@ export const isUserExist = (type, userOrEmail, callback) => {
 }
 
 // Send friend request
-export const getFriendRequests = (username, callback) => {
-    fetch(`${apiBaseUrl}/${username}/request/list`, {
+export const getFriendRequests = callback => {
+    fetch(`${apiBaseUrl}/${loggedUsername}/request/list`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
@@ -101,14 +103,15 @@ export const getFriendRequests = (username, callback) => {
 }
 
 // Send friend request
-export const sendFriendRequest = (username, userId, callback) => {
-    fetch(`${apiBaseUrl}/${username}/request/${userId}`, {
+export const sendFriendRequest = (username, callback) => {
+    fetch(`${apiBaseUrl}/request/send`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({toUser: username, senderId: loggedUserId})
     })
     .then(res => res.json())
     .then(data => {
@@ -117,14 +120,15 @@ export const sendFriendRequest = (username, userId, callback) => {
 }
 
 // Accept friend request
-export const acceptFriendRequest = (username, userId, callback) => {
-    fetch(`${apiBaseUrl}/${username}/request/${userId}`, {
+export const acceptFriendRequest = (userId, callback) => {
+    fetch(`${apiBaseUrl}/request/accept`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({senderId: userId})
     })
     .then(res => res.json())
     .then(data => {

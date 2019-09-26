@@ -1,4 +1,9 @@
 /*----------------friend request start-------*/
+.no-rq-item {
+  padding: 15px 0;
+  color: #ccc;
+  text-align: center;
+}
 .friend-rq-item {
   display: flex;
 }

@@ -5,16 +5,11 @@ import { Link } from "react-router-dom";
 export default class FriendSuggestion extends React.Component {
     constructor(props) {
         super(props);
-
-        //this.handleFriendRequest = this.handleFriendRequest.bind(this);
-        //this.removeSuggestion = this.removeSuggestion.bind(this);
-
         this.state = {
+            isRemoving: false,
             suggestionList: [
-                {username: 'komola', userId: '5d88ac8eb0010e3b60b5add9'},
-                {username: 'kuddus', userId: '5d88ad3cb0010e3b60b5addb'},
-                {username: 'new-user', userId: '5d7f4ba05178091b34849767'},
-                {username: 'testtest', userId: '5d7f2ffed1d08033fc93f27f'}
+                {username: 'ashik', userId: '5d8ccb7dc8d86f2204fbd568'},
+                {username: 'delower', userId: '5d8ccbe0c8d86f2204fbd56b'}
             ]
         }
     }
@@ -23,31 +18,27 @@ export default class FriendSuggestion extends React.Component {
         
     }
 
-    handleFriendRequest = (userInfo, event) => {
-        console.log(userInfo.userId, event)
-        const currentList = [...this.state.suggestionList];
-        const findIndex = currentList.indexOf(userInfo.userId);
-        // if(findIndex !== -1) {
-        //     currentList.splice(findIndex, 1);
-        //     this.setState({
-        //         suggestionList: currentList
-        //     });
-        // }
-        sendFriendRequest(userInfo.username, userInfo.userId, response => {
-            
+    handleSuggestion = (userInfo, event) => {
+        sendFriendRequest(userInfo.username, response => {
+            const currentList = [...this.state.suggestionList];
+            const findIndex = currentList.indexOf(userInfo.userId);
+            if(response.requestStatus) {
+                currentList.splice(findIndex, 1);
+                this.setState({
+                    suggestionList: currentList
+                });
+            }
         })
     }
 
     removeSuggestion = (userInfo, event) => {
         const currentList = [...this.state.suggestionList];
-        const findIndex = currentList.indexOf(userInfo.userId);
-        if(findIndex !== -1) {
-            currentList.splice(findIndex, 1);
-            setTimeout(() => {
-                this.setState({
-                    suggestionList: currentList
-                });
-            }, 1000);
+        const findItem = currentList.indexOf(userInfo);
+        if(findItem !== -1) {
+            currentList.splice(findItem, 1);
+            this.setState({
+                suggestionList: currentList
+            });
         }
     }
 
@@ -60,13 +51,13 @@ export default class FriendSuggestion extends React.Component {
                         return(
                             <div className="friend-rq-item" key={userInfo.userId}>
                                 <div className="friend-rq-item-thumb">
-                                    <img alt="alter text" src="http://localhost:2000/file/global/image/female.png" />
+                                    <img alt="alter text" src={userInfo.profilePhoto} />
                                 </div>
                                 <div className="friend-rq-item-content">
                                     <Link className="author-name" to={userInfo.username}>{userInfo.username}</Link>
                                     <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
                                     <div className="rq-buttons">
-                                        <button className="accept" onClick={this.handleFriendRequest.bind(this, userInfo)}>Send Request</button>
+                                        <button className="accept" onClick={this.handleSuggestion.bind(this, userInfo)}>Send Request</button>
                                         <button className="decline" onClick={this.removeSuggestion.bind(this, userInfo)}>x</button>
                                     </div>
                                 </div>
