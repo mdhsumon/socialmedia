@@ -1,8 +1,8 @@
 import { loggedUserInfo, apiBaseUrl } from "./commonService";
 
-const loggedUserToken = loggedUserInfo.userToken;
-const loggedUsername = loggedUserInfo.userInfo.username;
-const loggedUserId = loggedUserInfo.userInfo.userId;
+const loggedUserToken = loggedUserInfo ? loggedUserInfo.userToken : "";
+const loggedUsername = loggedUserInfo ? loggedUserInfo.userInfo.username : "";
+const loggedUserId = loggedUserInfo ? loggedUserInfo.userInfo.userId : "";
 
 // Create new user
 export const userSignup = (loggedUserInfo, callback) => {
@@ -138,6 +138,23 @@ export const sendFriendRequest = (username, callback) => {
 // Accept friend request
 export const acceptFriendRequest = (userId, callback) => {
     fetch(`${apiBaseUrl}/request/accept`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({senderId: userId})
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+}
+
+// Accept friend request
+export const declineFriendRequest = (userId, callback) => {
+    fetch(`${apiBaseUrl}/request/decline`, {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,

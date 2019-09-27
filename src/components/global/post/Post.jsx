@@ -1,11 +1,11 @@
 import React from 'react';
+import { loggedUserInfo } from '../../../services/commonService';
+import { getUserPosts } from '../../../services/postService';
 import { PostCreate } from "./PostCreate";
 import { PostAuthor } from "./PostAuthor";
 import { PostContent } from "./PostContent";
 import { PostReactions } from "./PostReactions";
 import { PostComment } from "./PostComment";
-import { getUserPosts } from '../../../services/postService';
-import { loggedUserInfo } from '../../../services/commonService';
 
 export class Post extends React.Component {
     constructor(props) {

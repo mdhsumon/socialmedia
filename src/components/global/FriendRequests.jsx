@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { apiBaseUrl } from "../../services/commonService";
-import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest } from "../../services/userService";
+import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../../services/userService";
 
 export default class FriendRequests extends React.Component {
     constructor(props) {
@@ -28,19 +28,29 @@ export default class FriendRequests extends React.Component {
         })
     }
 
-    handleRequest = (requestItem, event) => {
-        acceptFriendRequest(requestItem.userId, response => {
-            if(response.acceptStatus) {
-                const currentList = [...this.state.friendRequests];
-                currentList.splice(requestItem, 1);
-                this.setState({
-                    friendRequests: currentList
-                });
-            }
-            else {
+    removeRequestItem = requestItem => {
+        const currentList = [...this.state.friendRequests];
+        currentList.splice(requestItem, 1);
+        this.setState({
+            friendRequests: currentList
+        });
+    }
 
-            }
-        })
+    handleRequest = (requestItem, requstType, event) => {
+        if(requstType === 'accept') {
+            acceptFriendRequest(requestItem.userId, response => {
+                if(response.acceptStatus) {
+                    this.removeRequestItem(requestItem)
+                }
+            })
+        }
+        else if(requstType === 'decline') {
+            declineFriendRequest(requestItem.userId, response => {
+                if(response.declineStatus) {
+                    this.removeRequestItem(requestItem)
+                }
+            })
+        }
     }
 
     renderFriednRequst = () => {
@@ -56,8 +66,8 @@ export default class FriendRequests extends React.Component {
                                 <Link className="author-name" to={requestItem.username}>{requestItem.displayName}</Link>
                                 <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
                                 <div className="rq-buttons">
-                                    <button className="accept" onClick={this.handleRequest.bind(this, requestItem)}>Accept</button>
-                                    <button className="decline" onClick={this.handleRequest.bind(this, requestItem)}>Decline</button>
+                                    <button className="accept" onClick={this.handleRequest.bind(this, requestItem, 'accept')}>Accept</button>
+                                    <button className="decline" onClick={this.handleRequest.bind(this, requestItem, 'decline')}>Decline</button>
                                 </div>
                             </div>
                         </div>
