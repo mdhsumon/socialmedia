@@ -1,4 +1,5 @@
 import React from "react";
+import { apiBaseUrl } from "../../../services/commonService";
 import { deletePost } from "../../../services/postService";
 
 export const PostAuthor = props => {
@@ -13,7 +14,7 @@ export const PostAuthor = props => {
         <div className="post-author">
             <div className="author-post-detail">
                 <div className="post-author-thumb">
-                    <img src={props.authorInfo.profilePhoto} alt={props.authorInfo.displayName} />
+                    <img src={apiBaseUrl + props.authorInfo.profilePhoto} alt={props.authorInfo.displayName} />
                 </div>
                 <div className="author-post-info">
                     <div className="author-post_info">

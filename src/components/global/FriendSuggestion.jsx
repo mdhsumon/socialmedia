@@ -1,29 +1,34 @@
 import React from "react";
-import { sendFriendRequest } from "../../services/userService";
 import { Link } from "react-router-dom";
+import { apiBaseUrl } from "../../services/commonService";
+import { getFriendSuggestion, sendFriendRequest } from "../../services/userService";
 
 export default class FriendSuggestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEmpty: false,
             isRemoving: false,
-            suggestionList: [
-                {username: 'ashik', userId: '5d8ccb7dc8d86f2204fbd568'},
-                {username: 'delower', userId: '5d8ccbe0c8d86f2204fbd56b'}
-            ]
+            suggestionList: []
         }
     }
 
-    getFriendSuggestions = () => {
-        
+    componentDidMount() {
+        this.getSuggestions()
     }
 
-    handleSuggestion = (userInfo, event) => {
+    getSuggestions = () => {
+        getFriendSuggestion(response => {
+            this.setState({suggestionList: response})
+        })
+    }
+
+    sendRequest = (userInfo, event) => {
         sendFriendRequest(userInfo.username, response => {
             const currentList = [...this.state.suggestionList];
-            const findIndex = currentList.indexOf(userInfo.userId);
+            const findItem = currentList.indexOf(userInfo);
             if(response.requestStatus) {
-                currentList.splice(findIndex, 1);
+                currentList.splice(findItem, 1);
                 this.setState({
                     suggestionList: currentList
                 });
@@ -42,28 +47,43 @@ export default class FriendSuggestion extends React.Component {
         }
     }
 
+    renderSuggestion = () => {
+        if(this.state.suggestionList.length){
+            return (
+                this.state.suggestionList.map(userInfo => {
+                    return(
+                        <div className="friend-rq-item" key={userInfo.userId}>
+                            <div className="friend-rq-item-thumb">
+                                <img alt={userInfo.displayName} src={apiBaseUrl + userInfo.profilePhoto} />
+                            </div>
+                            <div className="friend-rq-item-content">
+                                <Link className="author-name" to={userInfo.username}>{userInfo.displayName}</Link>
+                                <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
+                                <div className="rq-buttons">
+                                    <button className="accept" onClick={this.sendRequest.bind(this, userInfo)}>Send Request</button>
+                                    <button className="decline" onClick={this.removeSuggestion.bind(this, userInfo)}>x</button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            )
+        }
+        else {
+            return(
+                <div className="no-rq-item">
+                    No suggestion found
+                </div>
+            )
+        }
+    }
+
     render() {
         return (
             <div className="common-block friend-request-section">
                 <h4 className="block-header">People You May Know</h4>
                 <div className="block-body friend-rq-items">
-                    {this.state.suggestionList.map(userInfo => {
-                        return(
-                            <div className="friend-rq-item" key={userInfo.userId}>
-                                <div className="friend-rq-item-thumb">
-                                    <img alt="alter text" src={userInfo.profilePhoto} />
-                                </div>
-                                <div className="friend-rq-item-content">
-                                    <Link className="author-name" to={userInfo.username}>{userInfo.username}</Link>
-                                    <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
-                                    <div className="rq-buttons">
-                                        <button className="accept" onClick={this.handleSuggestion.bind(this, userInfo)}>Send Request</button>
-                                        <button className="decline" onClick={this.removeSuggestion.bind(this, userInfo)}>x</button>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
+                    {this.renderSuggestion()}
                 </div>
             </div>
         )

@@ -15,7 +15,7 @@ export class PostReactions extends React.Component {
             isLiked: true
         })
         // updateReaction('activities', props.postInfo.id, props.postInfo.userId, data => {
-        //     console.log(data)
+       
         // })
     }
     render() {

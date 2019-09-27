@@ -1,6 +1,7 @@
 import React from "react";
-import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest } from "../../services/userService";
 import { Link } from "react-router-dom";
+import { apiBaseUrl } from "../../services/commonService";
+import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest } from "../../services/userService";
 
 export default class FriendRequests extends React.Component {
     constructor(props) {
@@ -49,10 +50,10 @@ export default class FriendRequests extends React.Component {
                     return(
                         <div className="friend-rq-item" key={requestItem.userId}>
                             <div className="friend-rq-item-thumb">
-                                <img alt="alter text" src={requestItem.profilePhoto} />
+                                <img alt="alter text" src={apiBaseUrl + requestItem.profilePhoto} />
                             </div>
                             <div className="friend-rq-item-content">
-                                <Link className="author-name" to={`/${requestItem.username}`}>{requestItem.displayName}</Link>
+                                <Link className="author-name" to={requestItem.username}>{requestItem.displayName}</Link>
                                 <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
                                 <div className="rq-buttons">
                                     <button className="accept" onClick={this.handleRequest.bind(this, requestItem)}>Accept</button>

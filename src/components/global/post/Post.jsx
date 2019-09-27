@@ -5,19 +5,19 @@ import { PostContent } from "./PostContent";
 import { PostReactions } from "./PostReactions";
 import { PostComment } from "./PostComment";
 import { getUserPosts } from '../../../services/postService';
+import { loggedUserInfo } from '../../../services/commonService';
 
 export class Post extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             userPosts: []
         }
     }
 
     getPosts = () => {
-        const userData = localStorage.getItem("userData") !== null ? JSON.parse(localStorage.getItem("userData")) : "";
-        if(userData !== "") {
-            getUserPosts(userData.userInfo.username, data => {
+        if(loggedUserInfo !== "") {
+            getUserPosts(loggedUserInfo.userInfo.username, data => {
                 this.setState({
                     userPosts: data
                 });
@@ -68,6 +68,7 @@ export class Post extends React.Component {
     render() {
         return (
             <div className="post-section">
+                <h1>{loggedUserInfo.userInfo.displayName}</h1>
                 <PostCreate postCreateFlag={ this.postCreateFlag } />
                 {this.renderPost()}
             </div>

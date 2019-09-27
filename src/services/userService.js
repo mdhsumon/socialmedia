@@ -1,18 +1,18 @@
-const apiBaseUrl = "http://localhost:8081";
-const userData = JSON.parse(localStorage.getItem("userData"));
-const loggedUserToken = userData !== null ? userData.userToken : "";
-const loggedUsername = userData ? userData.userInfo.username : "";
-const loggedUserId = userData ? userData.userInfo.userId : "";
+import { loggedUserInfo, apiBaseUrl } from "./commonService";
+
+const loggedUserToken = loggedUserInfo.userToken;
+const loggedUsername = loggedUserInfo.userInfo.username;
+const loggedUserId = loggedUserInfo.userInfo.userId;
 
 // Create new user
-export const userSignup = (userData, callback) => {
+export const userSignup = (loggedUserInfo, callback) => {
     fetch(`${apiBaseUrl}/signup`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(loggedUserInfo)
     })
     .then(res => res.json())
     .then(createResponse => {
@@ -83,6 +83,22 @@ export const isUserExist = (type, userOrEmail, callback) => {
     .then(res => res.json())
     .then(data => {
         callback(data.isExist ? true : false)
+    })
+}
+
+// Get random friend suggestion
+export const getFriendSuggestion = callback => {
+    fetch(`${apiBaseUrl}/friend/suggestion/${loggedUserId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
     })
 }
 

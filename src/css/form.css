@@ -32,7 +32,7 @@
 .input-error,
 .input-success {
   position: absolute;
-  top: -5px;
+  bottom: 45px;
   right: 0;
   font-size: 12px;
   border-radius: 3px;

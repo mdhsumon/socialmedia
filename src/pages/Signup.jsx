@@ -75,16 +75,16 @@ export default class Signup extends React.Component {
                 break;
 
             case "username":
-                const minUserLength = 5, maxUserLength = 15, regex = /^[a-z]/;
+                const minUserLength = 5, maxUserLength = 20, userRegex = /^[a-z](?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$/;
                 if(currentLength > 0 && currentLength < minUserLength && event.type === 'blur') {
                     this.setState({
                         usernameMessage: `Minimum ${minUserLength} characters required`,
                         usernameHtmlClass: inputErrorClass
                     });
                 }
-                else if(currentLength > 0 && !regex.test(currentValue.charAt(0))) {
+                else if(currentLength > 0 && !userRegex.test(currentValue)) {
                     this.setState({
-                        usernameMessage: "First and all character must be: a-z",
+                        usernameMessage: "Invalid username format: No _ or . or 0-9 at the start and end, no _. or ._ or .. or any special character",
                         usernameHtmlClass: inputErrorClass
                     });
                 }
@@ -167,7 +167,7 @@ export default class Signup extends React.Component {
                 break;
 
             case "password":
-                const minPassLength = 8, maxPassLength = 16;
+                const minPassLength = 6, maxPassLength = 20;
                 if(currentLength > 0 && currentLength < minPassLength && event.type === 'blur') {
                     this.setState({
                         passwordMessage: `Minimum ${minPassLength} characters required`,
@@ -240,8 +240,6 @@ export default class Signup extends React.Component {
         }
         if(this.formValidation || true) {
             userSignup(formData, response => {
-                
-            console.log(response)
                 if(response.signupStatus) {
                     this.setState({ isWelcomeScreen: true });
                     let count = this.state.counter;
@@ -275,13 +273,15 @@ export default class Signup extends React.Component {
                         </div>
                         <div className="input">
                             <div className="error">{this.state.genderMessage}</div>
-                            <div>
-                                <input type="radio" id="male" value="male" name="gender" onChange={this.handleChange} />
-                                &nbsp;<label htmlFor="male">Male</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="female" value="female" name="gender" onChange={this.handleChange} />
-                                &nbsp;<label htmlFor="female">Female</label>
+                            <div className="input-box-inline">
+                                <div className="input-box radio">
+                                    <input id="male" type="radio" value="male" name="gender" onChange={this.handleChange} />
+                                    <label htmlFor="male">Male</label>
+                                </div>
+                                <div className="input-box radio">
+                                    <input id="female" type="radio" value="female" name="gender" onChange={this.handleChange} />
+                                    <label htmlFor="female">Female</label>
+                                </div>
                             </div>
                         </div>
                         <div className="input username">
@@ -315,7 +315,7 @@ export default class Signup extends React.Component {
                     <div className="new-account">Already have account? <Link to="/login">login</Link> here.</div>
                 </div>
                 {this.state.isWelcomeScreen && (
-                    <div class="welcome-section">
+                    <div className="welcome-section">
                         <div className="welcome-message">Your registration was sucessfull!
                             <span>Welcome to social family.</span>
                             <span className="counter">{this.state.counter}</span>
