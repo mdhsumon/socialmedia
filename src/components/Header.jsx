@@ -39,10 +39,10 @@ export const Header = () => {
                 </div>
                 <div className="user-bar">
                     <div className="user-photo">
-                        <img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} />
+                        <img src={apiBaseUrl + loggedUserInfo.profilePhoto} alt={loggedUserInfo.displayName} />
                     </div>
                     <div className="user-name">
-                        <div className="name">{loggedUserInfo.userInfo.displayName}</div>
+                        <div className="name">{loggedUserInfo.displayName}</div>
                         <div className="nickname">nickname</div>
                     </div>
                     <div className="user-options">

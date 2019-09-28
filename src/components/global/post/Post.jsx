@@ -8,26 +8,32 @@ import { PostReactions } from "./PostReactions";
 import { PostComment } from "./PostComment";
 
 export class Post extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             isEmpty: true,
+            loggedUser: '',
             userPosts: []
         }
-    }
 
-    getPosts = () => {
-        if(loggedUserInfo !== "") {
-            getUserPosts(loggedUserInfo.userInfo.username, data => {
-                this.setState({
-                    userPosts: data
-                });
+        loggedUserInfo(data => {
+            this.setState({
+                loggedUser: data
             })
-        }
+        })
     }
 
     componentDidMount() {
         this.getPosts();
+    }
+
+    getPosts = () => {
+        getUserPosts(data => {
+            this.setState({
+                userPosts: data
+            });
+        })
     }
 
     // Passed to PostCreate for updating empty block

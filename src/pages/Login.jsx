@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getAccessToken, getUserSummery } from "../services/userService";
+import { getAccessToken } from "../services/commonService";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -29,12 +29,7 @@ export default class Login extends React.Component {
         this.setState({buttonLoading: true});
         getAccessToken(formData, data => {
             if(data.loggedInStatus) {
-                getUserSummery(this.state.username, data.accessToken, userData => {
-                    localStorage.setItem('userData', JSON.stringify({
-                        userInfo: userData,
-                        userToken: data.accessToken
-                    }));
-                });
+                localStorage.setItem('userToken', JSON.stringify({accessToken: data.accessToken}));
                 this.props.history.push('/');
             }
             else {
