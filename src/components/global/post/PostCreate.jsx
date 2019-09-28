@@ -64,9 +64,9 @@ export class PostCreate extends React.Component {
                 <div className="post-create">
                     <form className="post-create-form" onSubmit={this.handleForm}>
                         <div className="post-create-tab">
-                            <div className="tab-item message">Message </div>
-                            <div className="tab-item photo">Photo </div>
-                            <div className="tab-item video">Video</div>
+                            <div className="tab-item message active"><i className="icon-writing"></i></div>
+                            <div className="tab-item photo"><i className="icon-camera"></i></div>
+                            <div className="tab-item video"><i className="icon-movie-open"></i></div>
                         </div>
                         <div className="post-create-body">
                             <textarea name="content" placeholder="Write something here..." onChange={this.handleChange} />

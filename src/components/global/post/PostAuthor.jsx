@@ -18,13 +18,12 @@ export const PostAuthor = props => {
                 </div>
                 <div className="author-post-info">
                     <div className="author-post_info">
-                        <a href={"/"} className="author-name">{props.authorInfo.displayName}</a>
-                        <span className="post-attribute"> shared a <a href="/">link</a></span>
+                        <a href={props.authorInfo.username} className="author-name">{props.authorInfo.displayName}</a>
                     </div>
                     <span className="post-date-time">at {props.postInfo.createdAt}</span>
                 </div>
             </div>
-            <button className="action-button" onClick={removePost.bind(this, props.postInfo.id)}><i className="material-icons">more_horiz</i></button>
+            <button className="action-button" onClick={removePost.bind(this, props.postInfo.id)}><i className="icon-ellips-h"></i></button>
         </div>
     )
 }

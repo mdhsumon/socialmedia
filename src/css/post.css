@@ -12,6 +12,17 @@
   display: flex;
   padding: 10px 15px;
 }
+.post-create-tab .tab-item {
+    font-size: 20px;
+    color: #dddddd;
+    cursor: pointer;
+}
+.post-create-tab .tab-item ~ .tab-item {
+    margin-left: 20px;
+}
+.post-create-tab .tab-item.active {
+    color: #8dd200;
+}
 .post-create-actions {
   justify-content: flex-end;
 }
@@ -63,8 +74,7 @@
 .post-author{
     position: relative;
     padding: 15px;
-    display: -webkit-flex;
-    display: -moz-flex;
+    align-items: flex-start;
     display: flex;
 }
 .author-post-detail{
@@ -165,23 +175,12 @@
     background-color: #fafafa;
     padding: 7px 0;
 }
-.lcs-section .share-button{
-    background: transparent;
-    border: 0;
-}
-.lcs-section .share-button .material-icons{
-    color: #ccc;
-    font-size: 17px;
-}
-.lcs-section .share-button:hover .material-icons{
-    color: #666;
-}
 .like-dislike button{
     background: transparent;
     border: 1px solid transparent;
     padding: 1px 8px;
 }
-.like-dislike .material-icons{
+.like-dislike i {
     padding: 5px;
     font-size: 15px;
     color: #ccc;
@@ -192,13 +191,24 @@
     -o-transition: all 0.2s;
     transition: all 0.2s;
 }
-.like-dislike .liked .material-icons,
-.like-dislike .like:hover .material-icons{
+.like-dislike .liked i,
+.like-dislike .like:hover i {
     color: #8dd200;
 }
-.like-dislike .disliked .material-icons,
-.like-dislike .dislike:hover .material-icons{
+.like-dislike .disliked i,
+.like-dislike .dislike:hover i {
     color: #ff6655;
+}
+.lcs-section .share-button{
+    background: transparent;
+    border: 0;
+}
+.lcs-section .share-button i{
+    color: #ccc;
+    font-size: 17px;
+}
+.lcs-section .share-button:hover i{
+    color: #666;
 }
 .add-comment {
     flex: auto;

@@ -68,7 +68,6 @@ export class Post extends React.Component {
     render() {
         return (
             <div className="post-section">
-                <h1>{loggedUserInfo.userInfo.displayName}</h1>
                 <PostCreate postCreateFlag={ this.postCreateFlag } />
                 {this.renderPost()}
             </div>

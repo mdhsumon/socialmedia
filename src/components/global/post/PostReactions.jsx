@@ -23,11 +23,11 @@ export class PostReactions extends React.Component {
             <div className="lcs-section">
                 <div className="like-dislike">
                     <button className={this.state.isLiked ? 'like liked' : 'like'} onClick={this.manageReaction}>
-                        <i className="material-icons">thumb_up</i>
+                        <i className="icon-like"></i>
                     </button>
                     <span className="like-amount">{this.props.reactions.likes.count}</span>
                     <button className={this.state.isDisLiked ? 'dislike disliked' : 'dislike'} onClick={this.manageReaction}>
-                        <i className="material-icons">thumb_down</i>
+                        <i className="icon-dislike"></i>
                     </button>
                     <span className="dislike-amount">{this.props.reactions.dislikes.count}</span>
                 </div>
@@ -37,7 +37,7 @@ export class PostReactions extends React.Component {
                     </form>
                 </div>
                 <button className="share-button">
-                    <i className="material-icons">share</i>
+                    <i className="icon-share"></i>
                 </button>
             </div>
         )
