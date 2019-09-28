@@ -8,8 +8,6 @@ export class PostCreate extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleForm = this.handleForm.bind(this);
         this.state = {
-            content: '',
-            visibility: 'public',
             isLoading: false,
             messagePopup: false
         }
@@ -36,6 +34,10 @@ export class PostCreate extends React.Component {
             this.setState({
                 isLoading: true
             });
+            
+            // Remove empty form paren
+            this.props.removeEmpty();
+
             createPost(postData, response => {
                 if(response.status) {
                     this.setState({
@@ -45,11 +47,8 @@ export class PostCreate extends React.Component {
 
                     // Updating post from parent component
                     this.props.postCreateFlag(response.createdPost);
-
                     setTimeout(() => {
                         this.setState({
-                            content: '',
-                            visibility: 'public',
                             messagePopup: false
                         })
                     }, 3000);

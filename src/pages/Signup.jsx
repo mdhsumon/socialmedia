@@ -48,7 +48,7 @@ export default class Signup extends React.Component {
         switch(event.target.name){
             case "gender":
                 this.setState({
-                    [event.target.name]: event.target.value
+                    gender: event.target.value
                 });
                 break;
 

@@ -11,6 +11,7 @@ export class Post extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEmpty: true,
             userPosts: []
         }
     }
@@ -27,6 +28,13 @@ export class Post extends React.Component {
 
     componentDidMount() {
         this.getPosts();
+    }
+
+    // Passed to PostCreate for updating empty block
+    removeEmpty = () => {
+        this.setState({
+            isEmpty: false
+        });
     }
 
     // Passed to PostCreate for updating new post
@@ -57,18 +65,20 @@ export class Post extends React.Component {
             })
         }
         else {
-            return (
-                <div className="empty-post">
-                    <div className="empty-post-message">No post found</div>
-                </div>
-            )
+            if(this.state.isEmpty) {
+                return (
+                    <div className="empty-post">
+                        <div className="empty-post-message">No post found</div>
+                    </div>
+                )
+            }
         }
     }
 
     render() {
         return (
             <div className="post-section">
-                <PostCreate postCreateFlag={ this.postCreateFlag } />
+                <PostCreate postCreateFlag={this.postCreateFlag} removeEmpty={this.removeEmpty} />
                 {this.renderPost()}
             </div>
         )

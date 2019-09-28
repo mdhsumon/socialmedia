@@ -18,13 +18,15 @@ export default class FriendRequests extends React.Component {
 
     loadFriendRequests = () => {
         getFriendRequests(response => {
-            let reqSenderId = [];
-            for(let sender in response.friendRequests) {
-                reqSenderId[sender] = response.friendRequests[sender].senderId;
+            if(response.length) {
+                let reqSenderId = [];
+                for(let sender in response.friendRequests) {
+                    reqSenderId[sender] = response.friendRequests[sender].senderId;
+                }
+                getMultipleUserSummary(reqSenderId, response => {
+                    this.setState({friendRequests: response})
+                });
             }
-            getMultipleUserSummary(reqSenderId, response => {
-                this.setState({friendRequests: response})
-            });
         })
     }
 
