@@ -1,6 +1,8 @@
 import React from "react";
 import { loggedUserInfo, apiBaseUrl } from "../services/commonService";
 export const Header = () => {
+    let loggedUser;
+    loggedUserInfo(data => {loggedUser = data});
     return (
         <header className="header">
             <div className="header-container">
@@ -39,10 +41,10 @@ export const Header = () => {
                 </div>
                 <div className="user-bar">
                     <div className="user-photo">
-                        <img src={apiBaseUrl + loggedUserInfo.profilePhoto} alt={loggedUserInfo.displayName} />
+                        {/* <img src={apiBaseUrl + loggedUser.profilePhoto} alt={loggedUser.displayName} /> */}
                     </div>
                     <div className="user-name">
-                        <div className="name">{loggedUserInfo.displayName}</div>
+                        {/* <div className="name">{loggedUser.displayName}</div> */}
                         <div className="nickname">nickname</div>
                     </div>
                     <div className="user-options">

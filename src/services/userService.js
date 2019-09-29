@@ -1,7 +1,6 @@
 import { userToken, loggedUserInfo, apiBaseUrl } from "./commonService";
 
 let loggedUsername, loggedUserId;
-
 loggedUserInfo(data => {
     loggedUsername = data.username;
     loggedUserId = data.userId;
@@ -56,7 +55,7 @@ export const getFriendSuggestion = callback => {
 
 // Send friend request
 export const getFriendRequests = callback => {
-    fetch(`${apiBaseUrl}/${loggedUsername}/request/list`, {
+    fetch(`${apiBaseUrl}/request/list`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${userToken}`,

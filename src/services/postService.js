@@ -26,7 +26,9 @@ export const getUserPosts = callback => {
         }
     })
     .then(res => res.json())
-    .then(data => callback(data))
+    .then(data => {
+        callback(data)
+    })
 }
 
 // Will return user feed

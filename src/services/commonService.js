@@ -3,7 +3,7 @@ export const apiBaseUrl = "http://localhost:8081";
 
 // Logged user info from browser
 export const userToken = localStorage.getItem("userToken") !== null ? JSON.parse(localStorage.getItem("userToken")).accessToken : "";
-const accessToken =JSON.parse(localStorage.getItem("userToken")).accessToken;
+const accessToken = localStorage.getItem("userToken") !== null ? JSON.parse(localStorage.getItem("userToken")).accessToken : "";
 
 // Will return logged user summary
 export const loggedUserInfo = callback => {

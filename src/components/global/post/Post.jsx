@@ -10,7 +10,9 @@ import { PostComment } from "./PostComment";
 export class Post extends React.Component {
 
     constructor(props) {
+        
         super(props);
+
         this.state = {
             isEmpty: true,
             loggedUser: '',
