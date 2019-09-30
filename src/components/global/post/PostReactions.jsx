@@ -1,14 +1,14 @@
-import React from "react";
-import { updateReaction } from "../../../services/postService";
+import React from "react"
+import { updateReaction } from "../../../services/postService"
 
 export class PostReactions extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             isLiked: false,
             isDisliked: false,
         }
-        this.manageReaction = this.manageReaction.bind(this);
+        this.manageReaction = this.manageReaction.bind(this)
     }
     manageReaction = event => {
         this.setState({

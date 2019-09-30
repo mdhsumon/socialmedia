@@ -1,47 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { getAccessToken, getUserSummery } from "../services/userService";
+import React from "react"
+import { Link } from "react-router-dom"
+import { getAccessToken, getUserSummery } from "../../services/userService"
 
 export default class Login extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             username: '',
             password: '',
             loginStatus: false,
             formValidation: '',
             buttonLoading: false
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleLoginForm = this.handleLoginForm.bind(this);
+        }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleLoginForm = this.handleLoginForm.bind(this)
     }
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
-        });
+        })
     }
     handleLoginForm = event => {
-        event.preventDefault();
+        event.preventDefault()
         const formData = {
             username: this.state.username,
             password: this.state.password
         }
-        this.setState({buttonLoading: true});
+        this.setState({buttonLoading: true})
         getAccessToken(formData, data => {
             if(data.loggedInStatus) {
                 getUserSummery(this.state.username, data.accessToken, userData => {
                     localStorage.setItem('userData', JSON.stringify({
                         userInfo: userData,
                         userToken: data.accessToken
-                    }));
-                });
-                this.props.history.push('/feeds');
+                    }))
+                })
+                this.props.history.push('/feeds')
             }
             else {
                 this.setState({
                     buttonLoading: false,
                     formValidation: "Login failed!"
-                });
+                })
             }
         })
     }

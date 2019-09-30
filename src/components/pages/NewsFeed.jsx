@@ -1,10 +1,10 @@
-import React from "react";
-import { Header } from "../components/Header";
-import { Post } from "../components/global/post/Post";
-import FriendRequests from "../components/global/FriendRequests";
-import { WeatherForcast } from "../components/WeatherForcast";
-import { Bio } from "../components/Bio";
-import FriendSuggestion from "../components/global/FriendSuggestion";
+import React from "react"
+import { Header } from "../Header"
+import { Post } from "../global/post/Post"
+import FriendRequests from "../global/FriendRequests"
+import { WeatherForcast } from "../WeatherForcast"
+import { Bio } from "../Bio"
+import FriendSuggestion from "../global/FriendSuggestion"
 
 export const NewsFeed = () => {
     return(

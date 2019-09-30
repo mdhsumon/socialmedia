@@ -1,5 +1,5 @@
-import React from 'react';
-import weatherImg from '../resources/images/weather.png';
+import React from 'react'
+import weatherImg from '../resources/images/weather.png'
 
 export const WeatherForcast = () => {
     return (

@@ -1,9 +1,9 @@
-import React from "react";
-import { Header } from "../components/Header";
-import { ProfileInfo } from "../components/ProfileInfo";
-import { Post } from "../components/global/post/Post";
-import FriendRequests from "../components/global/FriendRequests";
-import { Bio } from "../components/Bio";
+import React from "react"
+import { Header } from "../Header"
+import { ProfileInfo } from "../ProfileInfo"
+import { Post } from "../global/post/Post"
+import FriendRequests from "../global/FriendRequests"
+import { Bio } from "../Bio"
 
 export const Profile = () => {
     return(

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 export const MessagePopup = (props) => {
     return (
         <div className={`message-popup ${props.status}`}>

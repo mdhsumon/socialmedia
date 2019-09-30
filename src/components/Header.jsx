@@ -1,5 +1,5 @@
-import React from "react";
-import { loggedUserInfo, apiBaseUrl } from "../services/commonService";
+import React from "react"
+import { loggedUserInfo, apiBaseUrl } from "../services/commonService"
 export class Header extends React.Component {
     constructor(props) {
     

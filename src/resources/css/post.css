@@ -121,18 +121,14 @@
 .post-author .action-button {
     background: transparent;
     border: 0;
-    color: #aaaaaa;
-    font-size: 20px;
+    color: #CCCCCC;
+    font-size: 16px;
     line-height: 20px;
     width: 25px;
     margin-left: 10px;
     padding: 0;
     cursor: pointer;
     flex: none;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
     transition: all 0.2s;
 }
 .post-author .action-button:hover{

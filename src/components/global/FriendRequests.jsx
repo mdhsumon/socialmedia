@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { apiBaseUrl } from "../../services/commonService";
-import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../../services/userService";
+import React from "react"
+import { Link } from "react-router-dom"
+import { apiBaseUrl } from "../../services/commonService"
+import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../../services/userService"
 
 export default class FriendRequests extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             isEmpty: false,
             friendRequests: []
@@ -13,15 +13,15 @@ export default class FriendRequests extends React.Component {
     }
 
     componentDidMount() {
-        this.loadFriendRequests();
+        this.loadFriendRequests()
     }
 
     loadFriendRequests = () => {
         getFriendRequests(response => {
             if(response.friendRequests) {
-                let reqSenderIds = [];
+                let reqSenderIds = []
                 for(let sender in response.friendRequests) {
-                    reqSenderIds[sender] = response.friendRequests[sender].senderId;
+                    reqSenderIds[sender] = response.friendRequests[sender].senderId
                 }
                 getMultipleUserSummary(reqSenderIds, userSummary => {
                     this.setState({friendRequests: userSummary})
@@ -31,11 +31,11 @@ export default class FriendRequests extends React.Component {
     }
 
     removeRequestItem = requestItem => {
-        const currentList = [...this.state.friendRequests];
-        currentList.splice(requestItem, 1);
+        const currentList = [...this.state.friendRequests]
+        currentList.splice(requestItem, 1)
         this.setState({
             friendRequests: currentList
-        });
+        })
     }
 
     handleRequest = (requestItem, requstType, event) => {

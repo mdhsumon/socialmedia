@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { isUserExist, userSignup } from "../services/userService";
+import React from "react"
+import { Link } from "react-router-dom"
+import { isUserExist, userSignup } from "../../services/userService"
 
 export default class Signup extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             fullName: '',
             fullNameMessage: '',
@@ -36,173 +36,173 @@ export default class Signup extends React.Component {
 
             isWelcomeScreen: false,
             counter: 0
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange = event => {
         const currentValue = event.target.value,
         currentLength = currentValue.length,
         inputSuccessClass = "input-success",
-        inputErrorClass = "input-error";
+        inputErrorClass = "input-error"
         switch(event.target.name){
             case "gender":
                 this.setState({
                     gender: event.target.value
-                });
-                break;
+                })
+                break
 
             case "fullName":
-                const fullNameRegex = /[a-zA-Z]/;
+                const fullNameRegex = /[a-zA-Z]/
                 if(currentLength <= 0 && event.type === 'blur') {
                     this.setState({
                         fullNameMessage: "Name is required",
                         fullNameHtmlClass: inputErrorClass
-                    });
+                    })
                 }
                 else if(currentLength > 0 && !fullNameRegex.test(currentValue)) {
                     this.setState({
                         fullNameMessage: "Name must be in A-Z or a-z",
                         fullNameHtmlClass: inputErrorClass
-                    }); 
+                    }) 
                 }
                 else {
                     this.setState({
                         fullNameMessage: "",
                         [event.target.name]: event.target.value
-                    });
+                    })
                 }
-                break;
+                break
 
             case "username":
-                const minUserLength = 5, maxUserLength = 20, userRegex = /^[a-z](?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+([a-z0-9])$/;
+                const minUserLength = 5, maxUserLength = 20, userRegex = /^[a-z](?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+([a-z0-9])$/
                 if(currentLength > 0 && currentLength < minUserLength && event.type === 'blur') {
                     this.setState({
                         usernameMessage: `Minimum ${minUserLength} characters required`,
                         usernameHtmlClass: inputErrorClass
-                    });
+                    })
                 }
                 else if(currentLength > 0 && !userRegex.test(currentValue)) {
                     this.setState({
                         usernameMessage: "Invalid username format: No _ or . or 0-9 at the start and end, no _. or ._ or .. or any special character",
                         usernameHtmlClass: inputErrorClass
-                    });
+                    })
                 }
                 else if(currentLength > maxUserLength) {
                     this.setState({
                         usernameMessage: `Maximum ${maxUserLength} characters allowed`,
                         usernameHtmlClass: inputErrorClass
-                    });
+                    })
                 }
                 else if(currentLength >= minUserLength && event.type === 'blur') {
                     this.setState({
                         usernameChecking: true
-                    });
+                    })
                     isUserExist("username", currentValue, userRespose => {
-                        this.setState({ usernameChecking: false });
+                        this.setState({ usernameChecking: false })
                         if(userRespose) {
                             this.setState({
                                 usernameChecking: false,
                                 usernameMessage: "Username already exist",
                                 usernameHtmlClass: inputErrorClass
-                            });
+                            })
                         }
                         else {
                             this.setState({
                                 usernameMessage: "Username available!",
                                 usernameHtmlClass: inputSuccessClass,
                                 username: currentValue
-                            }); 
+                            }) 
                         }
-                    });
+                    })
                 }
                 else if(currentLength > 0) {
                     this.setState({
                         usernameMessage: ""
-                    });
+                    })
                 }
-                break;
+                break
 
             case "email":
-                    const emailRegex = /[\w-]+@([\w-]+\.)+[\w-]+/;
+                    const emailRegex = /[\w-]+@([\w-]+\.)+[\w-]+/
                     if(currentLength < 1 && event.type === 'blur') {
                         this.setState({
                             emailMessage: "This field is required",
                             emailHtmlClass: inputErrorClass
-                        });
+                        })
                     }
                     else if(currentLength > 0 && !emailRegex.test(currentValue)) {
                         this.setState({
                             emailMessage: "Invalid email",
                             emailHtmlClass: inputErrorClass
-                        });
+                        })
                     }
                     else if(emailRegex.test(currentValue) && event.type === 'blur') {
                         this.setState({
                             emailChecking: true
-                        });
+                        })
                         isUserExist("email", currentValue, emailRespose => {
-                            this.setState({ emailChecking: false });
+                            this.setState({ emailChecking: false })
                             if(emailRespose) {
                                 this.setState({
                                     emailChecking: false,
                                     emailMessage: "Email already exist",
                                     emailHtmlClass: inputErrorClass
-                                });
+                                })
                             }
                             else {
                                 this.setState({
                                     emailMessage: "Email available!",
                                     emailHtmlClass: inputSuccessClass,
                                     email: currentValue
-                                }); 
+                                }) 
                             }
-                        });
+                        })
                     }
                     else if(currentLength > 0) {
                         this.setState({
                             emailMessage: ""
-                        });
+                        })
                     }
-                break;
+                break
 
             case "password":
-                const minPassLength = 6, maxPassLength = 20;
+                const minPassLength = 6, maxPassLength = 20
                 if(currentLength > 0 && currentLength < minPassLength && event.type === 'blur') {
                     this.setState({
                         passwordMessage: `Minimum ${minPassLength} characters required`,
                         passwordHtmlClass: inputErrorClass
-                    });
+                    })
                 }
                 else if(currentLength > maxPassLength) {
                     this.setState({
                         passwordMessage: `Maximum ${maxPassLength} characters allowed`,
                         passwordHtmlClass: inputErrorClass
-                    });
+                    })
                 }
                 else if(currentLength >= minPassLength) {
                     this.setState({
                         passwordMessage: "",
                         password: currentValue
-                    });
+                    })
                 }
-                break;
+                break
 
             case "confirmPassword":
                 if(this.state.password !== currentValue) {
                     this.setState({
                         confirmPasswordMessage: "Password did't match!",
                         confirmPasswordHtmlClass: inputErrorClass
-                    });
+                    })
                 }
                 else {
                     this.setState({
                         confirmPasswordMessage: "Password matched",
                         confirmPasswordHtmlClass: inputSuccessClass,
                         confirmPassword: currentValue
-                    });
+                    })
                 }
-                break;
+                break
 
             default:
         }
@@ -219,7 +219,7 @@ export default class Signup extends React.Component {
     }
 
     handleSubmit = event => {
-        event.preventDefault();
+        event.preventDefault()
         const formData = {
            displayName: this.state.fullName,
            gender: this.state.gender,
@@ -229,8 +229,8 @@ export default class Signup extends React.Component {
         }
         for(let data in formData) {
             if(formData[data] === "") {
-                this.setState({formValidation: false});
-                break;
+                this.setState({formValidation: false})
+                break
             }
             else {
                 this.setState({
@@ -241,12 +241,12 @@ export default class Signup extends React.Component {
         if(this.formValidation || true) {
             userSignup(formData, response => {
                 if(response.signupStatus) {
-                    this.setState({ isWelcomeScreen: true });
-                    let count = this.state.counter;
+                    this.setState({ isWelcomeScreen: true })
+                    let count = this.state.counter
                     setInterval(() => {
-                        count <= 5 ? this.setState({ counter: count }) : this.props.history.push('/login');
-                        count++;
-                    }, 1000);
+                        count <= 5 ? this.setState({ counter: count }) : this.props.history.push('/login')
+                        count++
+                    }, 1000)
                 }
             })
         }

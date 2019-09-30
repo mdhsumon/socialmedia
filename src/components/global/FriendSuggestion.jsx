@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { apiBaseUrl } from "../../services/commonService";
-import { getFriendSuggestion, sendFriendRequest } from "../../services/userService";
+import React from "react"
+import { Link } from "react-router-dom"
+import { apiBaseUrl } from "../../services/commonService"
+import { getFriendSuggestion, sendFriendRequest } from "../../services/userService"
 
 export default class FriendSuggestion extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             isEmpty: false,
             isRemoving: false,
@@ -25,25 +25,25 @@ export default class FriendSuggestion extends React.Component {
 
     sendRequest = (userInfo, event) => {
         sendFriendRequest(userInfo.username, response => {
-            const currentList = [...this.state.suggestionList];
-            const findItem = currentList.indexOf(userInfo);
+            const currentList = [...this.state.suggestionList]
+            const findItem = currentList.indexOf(userInfo)
             if(response.requestStatus) {
-                currentList.splice(findItem, 1);
+                currentList.splice(findItem, 1)
                 this.setState({
                     suggestionList: currentList
-                });
+                })
             }
         })
     }
 
     removeSuggestion = (userInfo, event) => {
-        const currentList = [...this.state.suggestionList];
-        const findItem = currentList.indexOf(userInfo);
+        const currentList = [...this.state.suggestionList]
+        const findItem = currentList.indexOf(userInfo)
         if(findItem !== -1) {
-            currentList.splice(findItem, 1);
+            currentList.splice(findItem, 1)
             this.setState({
                 suggestionList: currentList
-            });
+            })
         }
     }
 

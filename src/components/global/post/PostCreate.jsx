@@ -1,12 +1,12 @@
-import React from "react";
-import { createPost } from "../../../services/postService";
-import { MessagePopup } from "../../MessagePopup";
+import React from "react"
+import { createPost } from "../../../services/postService"
+import { MessagePopup } from "../../MessagePopup"
 
 export class PostCreate extends React.Component {
     constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleForm = this.handleForm.bind(this);
+        super(props)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleForm = this.handleForm.bind(this)
         this.state = {
             isLoading: false,
             messagePopup: false
@@ -16,13 +16,13 @@ export class PostCreate extends React.Component {
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
-        });
+        })
     }
 
     handleForm = event => {
-        event.preventDefault();
+        event.preventDefault()
         if(true) {
-            const userData = JSON.parse(localStorage.getItem("userData"));
+            const userData = JSON.parse(localStorage.getItem("userData"))
             const postData = {
                 userId: userData.userInfo.userId,
                 username: userData.userInfo.username,
@@ -33,25 +33,25 @@ export class PostCreate extends React.Component {
             }
             this.setState({
                 isLoading: true
-            });
+            })
             
             // Remove empty form paren
-            this.props.removeEmpty();
+            this.props.removeEmpty()
 
             createPost(postData, response => {
                 if(response.status) {
                     this.setState({
                         isLoading: false,
                         messagePopup: true
-                    });
+                    })
 
                     // Updating post from parent component
-                    this.props.postCreateFlag(response.createdPost);
+                    this.props.postCreateFlag(response.createdPost)
                     setTimeout(() => {
                         this.setState({
                             messagePopup: false
                         })
-                    }, 3000);
+                    }, 3000)
                 }
             })
         }
@@ -76,7 +76,7 @@ export class PostCreate extends React.Component {
                                 <select name="visibility" onChange={this.handleChange} >
                                     <option value="public">p</option>
                                     <option value="friends">f</option>
-                                    <option value="me">m</option>
+                                    <option value="private">m</option>
                                 </select>
                             </span>
                         </div>
