@@ -75,7 +75,7 @@ export default class Signup extends React.Component {
                 break;
 
             case "username":
-                const minUserLength = 5, maxUserLength = 20, userRegex = /^[a-z](?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$/;
+                const minUserLength = 5, maxUserLength = 20, userRegex = /^[a-z](?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+([a-z0-9])$/;
                 if(currentLength > 0 && currentLength < minUserLength && event.type === 'blur') {
                     this.setState({
                         usernameMessage: `Minimum ${minUserLength} characters required`,

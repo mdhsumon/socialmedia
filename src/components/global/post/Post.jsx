@@ -1,6 +1,6 @@
 import React from 'react';
 import { loggedUserInfo } from '../../../services/commonService';
-import { getUserPosts } from '../../../services/postService';
+import { getUserFeeds } from '../../../services/postService';
 import { PostCreate } from "./PostCreate";
 import { PostAuthor } from "./PostAuthor";
 import { PostContent } from "./PostContent";
@@ -8,61 +8,53 @@ import { PostReactions } from "./PostReactions";
 import { PostComment } from "./PostComment";
 
 export class Post extends React.Component {
-
     constructor(props) {
-        
-        super(props);
-
+        super(props)
         this.state = {
             isEmpty: true,
-            loggedUser: '',
-            userPosts: []
+            userFeeds: []
         }
-
-        loggedUserInfo(data => {
-            this.setState({
-                loggedUser: data
-            })
-        })
-    }
-
-    componentDidMount() {
-        this.getPosts();
     }
 
     getPosts = () => {
-        getUserPosts(data => {
-            this.setState({
-                userPosts: data
-            });
-        })
+        if(loggedUserInfo !== "") {
+            getUserFeeds(loggedUserInfo.userInfo.username, data => {
+                this.setState({
+                    userFeeds: data
+                })
+            })
+        }
+    }
+
+    componentDidMount() {
+        this.getPosts()
     }
 
     // Passed to PostCreate for updating empty block
     removeEmpty = () => {
         this.setState({
             isEmpty: false
-        });
+        })
     }
 
     // Passed to PostCreate for updating new post
     postCreateFlag = createdPost => {
-        this.state.userPosts.unshift(createdPost);
+        this.state.userFeeds.unshift(createdPost)
         this.setState({
-            userPosts: this.state.userPosts
-        });
+            userFeeds: this.state.userFeeds
+        })
     }
 
     renderPost = () => {
-        if(this.state.userPosts.length > 0) {
-            return this.state.userPosts.map(postObject => {
+        if(this.state.userFeeds.length > 0) {
+            return this.state.userFeeds.map(postObject => {
                 return (
                     <div className="post" key={postObject._id}>
                         <PostAuthor authorInfo={postObject.userInfo} postInfo={{id: postObject._id, createdAt: postObject.createdAt}} />
                         <PostContent postContent={postObject.content} />
                         <PostReactions
                             reactions={postObject.activities.reactions}
-                            postInfo={{id: postObject._id, userId: postObject.userInfo.userId}}
+                            postInfo={{id: postObject._id, userId: postObject.userId}}
                             likeDislike={this.updateLikeDislike}
                         />
                         <div className="comment-reply">

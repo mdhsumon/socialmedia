@@ -1,24 +1,73 @@
-import { userToken, loggedUserInfo, apiBaseUrl } from "./commonService";
+import { loggedUserInfo, apiBaseUrl } from "./commonService";
 
-let loggedUsername, loggedUserId;
-loggedUserInfo(data => {
-    loggedUsername = data.username;
-    loggedUserId = data.userId;
-})
+const loggedUserToken = loggedUserInfo ? loggedUserInfo.userToken : "";
+const loggedUsername = loggedUserInfo ? loggedUserInfo.userInfo.username : "";
+const loggedUserId = loggedUserInfo ? loggedUserInfo.userInfo.userId : "";
 
 // Create new user
-export const userSignup = (userData, callback) => {
+export const userSignup = (loggedUserInfo, callback) => {
     fetch(`${apiBaseUrl}/signup`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(loggedUserInfo)
     })
     .then(res => res.json())
     .then(createResponse => {
         callback(createResponse)
+    })
+}
+
+// Will return access token after login
+export const getAccessToken = (userLoginData, callback) => {
+    fetch(`${apiBaseUrl}/login`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userLoginData)
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+    .catch(err => {
+        callback(false)
+    })
+}
+
+// Will return single user summary
+export const getMultipleUserSummary = (userOrIdArray, callback) => {
+    fetch(`${apiBaseUrl}/multiple/user/summary/${userOrIdArray}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+}
+
+// Will return single user summary
+export const getUserSummery = (userOrId, loggedUserToken = loggedUserToken, callback) => {
+    fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${loggedUserToken}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
     })
 }
 
@@ -42,7 +91,7 @@ export const getFriendSuggestion = callback => {
     fetch(`${apiBaseUrl}/friend/suggestion/${loggedUserId}`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
@@ -55,10 +104,10 @@ export const getFriendSuggestion = callback => {
 
 // Send friend request
 export const getFriendRequests = callback => {
-    fetch(`${apiBaseUrl}/request/list`, {
+    fetch(`${apiBaseUrl}/${loggedUsername}/request/list`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
@@ -74,7 +123,7 @@ export const sendFriendRequest = (username, callback) => {
     fetch(`${apiBaseUrl}/request/send`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
@@ -91,7 +140,7 @@ export const acceptFriendRequest = (userId, callback) => {
     fetch(`${apiBaseUrl}/request/accept`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
@@ -108,7 +157,7 @@ export const declineFriendRequest = (userId, callback) => {
     fetch(`${apiBaseUrl}/request/decline`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${userToken}`,
+            'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },

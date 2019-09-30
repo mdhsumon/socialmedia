@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { apiBaseUrl, getMultipleUserSummary } from "../../services/commonService";
-import { getFriendRequests, acceptFriendRequest, declineFriendRequest } from "../../services/userService";
+import { apiBaseUrl } from "../../services/commonService";
+import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../../services/userService";
 
 export default class FriendRequests extends React.Component {
     constructor(props) {
@@ -18,14 +18,14 @@ export default class FriendRequests extends React.Component {
 
     loadFriendRequests = () => {
         getFriendRequests(response => {
-            if(response.length) {
-                let reqSenderId = [];
+            if(response.friendRequests) {
+                let reqSenderIds = [];
                 for(let sender in response.friendRequests) {
-                    reqSenderId[sender] = response.friendRequests[sender].senderId;
+                    reqSenderIds[sender] = response.friendRequests[sender].senderId;
                 }
-                getMultipleUserSummary(reqSenderId, response => {
-                    this.setState({friendRequests: response})
-                });
+                getMultipleUserSummary(reqSenderIds, userSummary => {
+                    this.setState({friendRequests: userSummary})
+                })
             }
         })
     }
