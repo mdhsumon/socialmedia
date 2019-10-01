@@ -86,6 +86,22 @@ export const isUserExist = (type, userOrEmail, callback) => {
     })
 }
 
+// Get friend lists
+export const getFriendLists = callback => {
+    fetch(`${apiBaseUrl}/${loggedUsername}/friend/list`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        callback(data)
+    })
+}
+
 // Get random friend suggestion
 export const getFriendSuggestion = callback => {
     fetch(`${apiBaseUrl}/friend/suggestion/${loggedUserId}`, {

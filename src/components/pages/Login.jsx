@@ -34,8 +34,9 @@ export default class Login extends React.Component {
                         userInfo: userData,
                         userToken: data.accessToken
                     }))
+                    //this.props.history.push('/feeds')
+                    window.location.href = '/feeds'
                 })
-                this.props.history.push('/feeds')
             }
             else {
                 this.setState({

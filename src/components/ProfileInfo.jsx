@@ -1,17 +1,19 @@
-import React from 'react'
+import React from "react"
+import { Link } from "react-router-dom"
+import { loggedUserInfo, apiBaseUrl } from "../services/commonService"
 
 export const ProfileInfo = () => {
     return (
         <div className="profile-info-section">
-            <div className="cover-photo"><img src="" alt="CoverPhoto" /></div>
+            <div className="cover-photo"><img src={apiBaseUrl + '/file/global/image/cover.png'} alt="CoverPhoto" /></div>
             <div className="profile-section">
                 <div className="profile-author">
-                    <a href="/" className="profile-photo">
-                        <img alt="alter text"  src="" />
-                    </a>
+                    <div className="profile-photo">
+                        <img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} />
+                    </div>
                     <div className="profile-name">
-                        <a className="author-name" href="/"><h4>kuddus boyati</h4></a>
-                        <p className="author-nick-name">(<span className="n-name">pagla</span>)</p>
+                        <Link className="author-name" to={loggedUserInfo.userInfo.username}>{loggedUserInfo.userInfo.displayName}</Link>
+                        <p className="author-nick-name"><span className="n-name">{'(' + loggedUserInfo.userInfo.nickname + ')'}</span></p>
                     </div>
                 </div>
                 <div className="profile-drop-downs">

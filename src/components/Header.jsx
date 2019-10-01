@@ -30,9 +30,13 @@ export class Header extends React.Component {
                         </div>
                     </div>
                     <div className="notification-bar">
-                        <div className="notification-item message">
-                            <div className="notification-button"><i className="icon-text-bubble"></i></div>
+                        <div className="notification-item message active">
+                            <div className="notification-button">
+                                <i className="icon-text-bubble"></i>
+                                <span className="notification-count">3</span>
+                            </div>
                             <div className="message-list">
+
                             </div>
                         </div>
                         <div className="notification-item friend-request">
@@ -50,7 +54,7 @@ export class Header extends React.Component {
                     </div>
                     <div className="user-bar">
                         <div className="user-photo">
-                            <img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} />
+                        <a href="/profile"><img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} /></a>
                         </div>
                         <div className="user-name">
                             <div className="name">{loggedUserInfo.userInfo.displayName}</div>

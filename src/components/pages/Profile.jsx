@@ -1,9 +1,10 @@
 import React from "react"
+import FriendRequests from "../global/FriendRequests"
 import { Header } from "../Header"
 import { ProfileInfo } from "../ProfileInfo"
 import { Post } from "../global/post/Post"
-import FriendRequests from "../global/FriendRequests"
 import { Bio } from "../Bio"
+import FriendLists from "../global/FriendLists"
 
 export const Profile = () => {
     return(
@@ -11,10 +12,11 @@ export const Profile = () => {
             <Header />
             <div className="main-body profile-secton">
                 <div className="container">
-                    <ProfileInfo />
+                    <ProfileInfo /> 
                 </div>
                 <div className="container column-section">
                     <div className="left-column">
+                        <FriendLists />
                         <Bio />
                     </div>
                     <div className="middle-column">

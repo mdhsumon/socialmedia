@@ -1,6 +1,6 @@
 import React from 'react'
 import { loggedUserInfo } from '../../../services/commonService'
-import { getUserFeeds } from '../../../services/postService'
+import { getUserFeeds, getUserPosts } from '../../../services/postService'
 import { PostCreate } from "./PostCreate"
 import { PostAuthor } from "./PostAuthor"
 import { PostContent } from "./PostContent"
@@ -12,18 +12,17 @@ export class Post extends React.Component {
         super(props)
         this.state = {
             isEmpty: true,
-            userFeeds: []
+            postData: []
         }
     }
 
     getPosts = () => {
-        if(loggedUserInfo !== "") {
-            getUserFeeds(loggedUserInfo.userInfo.username, data => {
-                this.setState({
-                    userFeeds: data
-                })
+        const getPost = window.location.pathname == '/feeds' ? getUserFeeds : getUserPosts
+        getPost(loggedUserInfo.userInfo.username, data => {
+            this.setState({
+                postData: data
             })
-        }
+        })
     }
 
     componentDidMount() {
@@ -39,15 +38,15 @@ export class Post extends React.Component {
 
     // Passed to PostCreate for updating new post
     postCreateFlag = createdPost => {
-        this.state.userFeeds.unshift(createdPost)
+        this.state.postData.unshift(createdPost)
         this.setState({
-            userFeeds: this.state.userFeeds
+            postData: this.state.postData
         })
     }
 
     renderPost = () => {
-        if(this.state.userFeeds.length > 0) {
-            return this.state.userFeeds.map(postObject => {
+        if(this.state.postData.length > 0) {
+            return this.state.postData.map(postObject => {
                 return (
                     <div className="post" key={postObject._id}>
                         <PostAuthor authorInfo={postObject.userInfo} postInfo={{id: postObject._id, createdAt: postObject.createdAt}} />
