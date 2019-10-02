@@ -84,7 +84,7 @@ export default class Signup extends React.Component {
                 }
                 else if(currentLength > 0 && !userRegex.test(currentValue)) {
                     this.setState({
-                        usernameMessage: "Invalid username format: No _ or . or 0-9 at the start and end, no _. or ._ or .. or any special character",
+                        usernameMessage: "Invalid username: Only a - z and 0 - 9 are allowed",
                         usernameHtmlClass: inputErrorClass
                     })
                 }
@@ -244,7 +244,7 @@ export default class Signup extends React.Component {
                     this.setState({ isWelcomeScreen: true })
                     let count = this.state.counter
                     setInterval(() => {
-                        count <= 5 ? this.setState({ counter: count }) : this.props.history.push('/login')
+                        count <= 5 ? this.setState({ counter: count }) : window.location.href = '/login'
                         count++
                     }, 1000)
                 }

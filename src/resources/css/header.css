@@ -59,7 +59,7 @@
 .header .notification-item .notification-count {
   position: absolute;
   right: -10px;
-  top: 0;
+  top: -5px;
   color: #fff;
   font-size: 10px;
   background-color: #FF6655;
