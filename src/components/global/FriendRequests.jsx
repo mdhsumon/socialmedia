@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { apiBaseUrl } from "../../services/commonService"
 import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../../services/userService"
+import socketIOclient from "socket.io-client"
 
 export default class FriendRequests extends React.Component {
     constructor(props) {
@@ -11,6 +12,8 @@ export default class FriendRequests extends React.Component {
             friendRequests: []
         }
     }
+
+    socket = socketIOclient('http://localhost:8000')
 
     componentDidMount() {
         this.loadFriendRequests()
@@ -40,11 +43,14 @@ export default class FriendRequests extends React.Component {
 
     handleRequest = (requestItem, requstType, event) => {
         if(requstType === 'accept') {
-            acceptFriendRequest(requestItem.userId, response => {
-                if(response.acceptStatus) {
-                    this.removeRequestItem(requestItem)
-                }
-            })
+            
+            this.socket.emit('frientRequestAccepted', requestItem.userId)
+            // acceptFriendRequest(requestItem.userId, response => {
+            //     if(response.acceptStatus) {
+            //         this.removeRequestItem(requestItem)
+            //         this.socket.emit('frientRequestAccepted', requestItem.userId)
+            //     }
+            // })
         }
         else if(requstType === 'decline') {
             declineFriendRequest(requestItem.userId, response => {

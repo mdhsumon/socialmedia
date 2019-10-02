@@ -1,10 +1,22 @@
 import React from "react"
 import { loggedUserInfo, apiBaseUrl } from "../services/commonService"
+import socketIOclient from "socket.io-client"
+
 export class Header extends React.Component {
     constructor(props) {
-    
         super(props)
-        
+        this.state = {
+            newFriend: false,
+            acceptCount: 0
+        }
+        const socket = socketIOclient('http://localhost:8000')
+        socket.on('frientRequestAccepted', acceptedId => {
+            this.setState({
+                newFriend: true,
+                acceptCount: this.state.acceptCount + 1
+            })
+            console.log(acceptedId)
+        })
     }
 
     componentDidMount() {
@@ -33,14 +45,18 @@ export class Header extends React.Component {
                         <div className="notification-item message active">
                             <div className="notification-button">
                                 <i className="icon-text-bubble"></i>
-                                <span className="notification-count">3</span>
                             </div>
                             <div className="message-list">
 
                             </div>
                         </div>
                         <div className="notification-item friend-request">
-                            <div className="notification-button"><i className="icon-user-add"></i></div>
+                            <div className="notification-button">
+                                <i className="icon-user-add"></i>
+                                {this.state.newFriend && (
+                                    <span className="notification-count">{this.state.acceptCount}</span>
+                                )}
+                            </div>
                             <div className="friend-request-list">
     
                             </div>
