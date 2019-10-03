@@ -27,9 +27,25 @@ export class Header extends React.Component {
         return (
             <header className="header">
                 <div className="header-container">
-                    {/* <div className="logo-bar">
-                        <img src="" alt="Logo"/>
-                    </div> */}
+                    <div className="logo-bar">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Group_39" data-name="Group 39" width="60" height="60" viewBox="0 0 60 60">
+                            <path id="Path_7" data-name="Path 7" d="M0,0H60V60H0Z" fill="#8dd200"/>
+                            <g id="Group_38" data-name="Group 38">
+                                <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(13.846 19.125) rotate(-30)" fill="none" stroke="#fff" stroke-width="2">
+                                <ellipse cx="8.579" cy="17.158" rx="8.579" ry="17.158" stroke="none"/>
+                                <ellipse cx="8.579" cy="17.158" rx="7.579" ry="16.158" fill="none"/>
+                                </g>
+                                <g id="Ellipse_3" data-name="Ellipse 3" transform="translate(31.004 10.546) rotate(30)" fill="none" stroke="#fff" stroke-width="2">
+                                <ellipse cx="8.579" cy="17.158" rx="8.579" ry="17.158" stroke="none"/>
+                                <ellipse cx="8.579" cy="17.158" rx="7.579" ry="16.158" fill="none"/>
+                                </g>
+                                <g id="Ellipse_2" data-name="Ellipse 2" transform="translate(47.012 21.115) rotate(90)" fill="none" stroke="#fff" stroke-width="2">
+                                <ellipse cx="8.579" cy="17.158" rx="8.579" ry="17.158" stroke="none"/>
+                                <ellipse cx="8.579" cy="17.158" rx="7.579" ry="16.158" fill="none"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
                     <div className="search-bar">
                         <div className="search-form">
                             <input className="search" type="search" title="Search" placeholder="Search"/>
@@ -70,7 +86,7 @@ export class Header extends React.Component {
                     </div>
                     <div className="user-bar">
                         <div className="user-photo">
-                        <a href="/profile"><img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} /></a>
+                            <a href="/profile"><img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} /></a>
                         </div>
                         <div className="user-name">
                             <div className="name">{loggedUserInfo.userInfo.displayName}</div>

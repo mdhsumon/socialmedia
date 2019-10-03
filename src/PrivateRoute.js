@@ -2,7 +2,7 @@ import React from "react"
 import { Redirect, Route } from "react-router-dom"
 import { isLoggedIn } from "./commonActions"
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
 
   const loggedStatus = isLoggedIn()
 
@@ -12,5 +12,3 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   )
 }
-
-export default PrivateRoute

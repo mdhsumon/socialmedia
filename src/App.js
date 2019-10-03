@@ -1,15 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Welcome } from "./components/pages/Welcome";
-import Signup from "./components/pages/Signup";
-import Login from "./components/pages/Login";
-import { NewsFeed } from "./components/pages/NewsFeed";
-import { Profile } from "./components/pages/Profile";
-import PrivateRoute from "./PrivateRoute";
+import React from "react"
+import { BrowserRouter as Router } from "react-router-dom"
+import { MainApp } from "./MainApp"
 
 import "./resources/css/style.css";
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   constructor(props) {
     super(props)
@@ -18,14 +13,8 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path='/signup' exact component={Signup} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/" component={Welcome} />
-        <Route exact path='/profile' component={Profile} />
-        <PrivateRoute path="/feeds" component={NewsFeed} />
+        <MainApp />
       </Router>
     )
   }
 }
-
-export default App;

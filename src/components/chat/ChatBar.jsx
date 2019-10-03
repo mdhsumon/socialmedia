@@ -1,52 +1,29 @@
-<div className="sidebar-right fixed _7 style-11">
-    <div className="chat">
-        <ul className="chat-users">
-            <li>
-                <button className="author-thumb active-user">
-                    <img src="img/profile-photo2.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb inactive-user">
-                    <img src="img/profile-photo.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb active-user">
-                    <img src="img/profile-photo3.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb user-away">
-                    <img src="img/profile-photo.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb active-user">
-                    <img src="img/profile-photo2.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb user-away">
-                    <img src="img/profile-photo2.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb user-away">
-                    <img src="img/profile-photo.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb active-user">
-                    <img src="img/profile-photo.jpg" />
-                </button>
-            </li>
-            <li>
-                <button className="author-thumb inactive-user">
-                    <img src="img/profile-photo3.jpg" />
-                </button>
-            </li>
-        </ul>
+import React from "react"
+import { apiBaseUrl } from "../../services/commonService"
 
-    </div>
-</div>
+export class ChatBar extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            chatUsers: [1,2,3,4,5]
+        }
+    }
+
+    render() {
+        return(
+            <div className="chat-bar">
+                <div className="chat-user-container">
+                    {this.state.chatUsers.map(user => {
+                        return(
+                            <div className="chat-user online">
+                                <div className="user-thumb">
+                                    <img src={apiBaseUrl + '/file/global/image/male.png'} />
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        )
+    }
+}

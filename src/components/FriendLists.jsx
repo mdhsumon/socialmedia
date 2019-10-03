@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { apiBaseUrl } from "../../services/commonService"
-import { getFriendLists, getMultipleUserSummary } from "../../services/userService"
+import { apiBaseUrl } from "../services/commonService"
+import { getFriendLists, getMultipleUserSummary } from "../services/userService"
 
 export default class FriendLists extends React.Component {
     constructor(props) {

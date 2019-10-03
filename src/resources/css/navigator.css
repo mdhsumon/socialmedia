@@ -1,0 +1,26 @@
+/* Navigator */
+.navigator {
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  margin-right: 35px;
+  width: 60px;
+  flex: none;
+}
+.nav-item-container {
+  text-align: center;
+  padding-top: 30px;
+}
+.nav-item ~ .nav-item {
+  margin-top: 15px;
+}
+.nav-item a {
+  display: block;
+  padding: 10px;
+  color: #CCCCCC;
+  font-size: 20px;
+  transition: all 0.1s ease;
+}
+.nav-item.active a,
+.nav-item a:hover {
+  color: #8dd200;
+}

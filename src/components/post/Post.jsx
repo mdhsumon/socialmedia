@@ -1,6 +1,6 @@
 import React from 'react'
-import { loggedUserInfo } from '../../../services/commonService'
-import { getUserFeeds, getUserPosts } from '../../../services/postService'
+import { loggedUserInfo } from '../../services/commonService'
+import { getUserFeeds, getUserPosts } from '../../services/postService'
 import { PostCreate } from "./PostCreate"
 import { PostAuthor } from "./PostAuthor"
 import { PostContent } from "./PostContent"

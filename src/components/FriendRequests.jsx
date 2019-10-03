@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { apiBaseUrl } from "../../services/commonService"
-import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../../services/userService"
+import { apiBaseUrl } from "../services/commonService"
+import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../services/userService"
 import socketIOclient from "socket.io-client"
 
 export default class FriendRequests extends React.Component {

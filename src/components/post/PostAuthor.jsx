@@ -1,6 +1,6 @@
 import React from "react"
-import { apiBaseUrl } from "../../../services/commonService"
-import { deletePost } from "../../../services/postService"
+import { apiBaseUrl } from "../../services/commonService"
+import { deletePost } from "../../services/postService"
 
 export const PostAuthor = props => {
     const removePost = postId => {

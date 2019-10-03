@@ -1,6 +1,6 @@
 import React from "react"
-import { createPost } from "../../../services/postService"
-import { MessagePopup } from "../../MessagePopup"
+import { createPost } from "../../services/postService"
+import { MessagePopup } from "../MessagePopup"
 
 export class PostCreate extends React.Component {
     constructor(props) {

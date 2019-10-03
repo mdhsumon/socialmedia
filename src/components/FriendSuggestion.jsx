@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { apiBaseUrl } from "../../services/commonService"
-import { getFriendSuggestion, sendFriendRequest } from "../../services/userService"
+import { apiBaseUrl } from "../services/commonService"
+import { getFriendSuggestion, sendFriendRequest } from "../services/userService"
 
 export default class FriendSuggestion extends React.Component {
     constructor(props) {

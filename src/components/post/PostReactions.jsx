@@ -1,5 +1,5 @@
 import React from "react"
-import { updateReaction } from "../../../services/postService"
+import { updateReaction } from "../../services/postService"
 
 export class PostReactions extends React.Component {
     constructor(props) {
