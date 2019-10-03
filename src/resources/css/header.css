@@ -75,7 +75,7 @@
 }
 .header .notification-button {
   color: #001100;
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
 }
 .header .user-bar {
@@ -104,47 +104,6 @@
   font-style: italic;
   font-size: 12px;
   font-weight: 400;
-}
-/*
---------------------------search start-------
-.search-bar{
-  padding-left: calc(50% - 530px);
-}
-.search-form, .search, .search-bar{
-  height: 30px;
-  width: 300px;
-  position: relative;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.search{
-  padding-right: 30px;
-  text-indent: 10px;
-  color: #727272;
-  border: 1px solid #484848;
-  background: #333333;
-}
-.search-icon{
-  background: transparent;
-  border: 0;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  color: black;
-  text-align: center;
-  cursor: pointer;
-}
-.search-icon .material-icons{
-  line-height: 30px;
-}
-.search:focus{
-  background: #484848;
-  -webkit-border-radius: 5px 5px 0 0;
-  -moz-border-radius: 5px 5px 0 0;
-  border-radius: 5px 5px 0 0;
 }
 /*-----------------------search list-----*/
 .search-header{

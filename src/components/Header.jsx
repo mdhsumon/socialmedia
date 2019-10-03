@@ -10,7 +10,7 @@ export class Header extends React.Component {
             acceptCount: 0
         }
         const socket = socketIOclient('http://localhost:8000')
-        socket.on('frientRequestAccepted', acceptedId => {
+        socket.on('friendAcceptedSocket', acceptedId => {
             this.setState({
                 newFriend: true,
                 acceptCount: this.state.acceptCount + 1
