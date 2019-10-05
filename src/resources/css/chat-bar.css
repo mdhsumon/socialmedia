@@ -1,11 +1,9 @@
 /* start chat bar */
 .chat-bar {
   margin-left: 50px;
-  overflow: auto;
   flex: none;
 }
 .chat-user-container {
-  padding: 10px;
   background-color: #ffffff;
   right: 20px;
   top: 100px;
@@ -13,9 +11,14 @@
   border-radius: 5px;
 }
 .chat-user .user-thumb {
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 45px;
   border-radius: 3px;
+  padding: 8px;
+  background-color: #fff;
+}
+.chat-user:nth-child(2n) .user-thumb {
+  background-color: #f9f9f9;
 }
 .chat-user .user-thumb img{
   max-width: 100%;
@@ -26,9 +29,28 @@
 .chat-user{
   cursor: pointer;
   position: relative;
+  z-index: 1;
 }
-.chat-user ~ .chat-user{
-  margin-top: 20px;
+.chat-user .display-name {
+  position: absolute;
+  top: 50%;
+  margin-top: -12px;
+  background-color: #444;
+  color: #c5c5c5;
+  font-size: 11px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  border-radius: 3px 0 0 3px;
+  line-height: 1.1;
+  right: 100%;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  clip: rect(0, 150px, 20px, 200px);
+}
+.chat-user:hover .display-name {
+  clip: rect(0, 200px, 20px, 0);
 }
 .chat-user:before{
   content: "";
@@ -39,8 +61,8 @@
   box-shadow: 0 0 0 0.5px #f1f1f1;
   border-radius: 50%;
   position: absolute;
-  bottom: -1px;
-  left: -1px;
+  bottom: 7px;
+  left: 7px;
 }
 .chat-user.online:before{
   background-color: #8dd200;
@@ -52,9 +74,10 @@
   background-color: #cccccc;
 }
 .chatting-panel {
-  position: fixed;
+  position: absolute;
+  right: 15px;
   bottom: 15px;
-  width: 1200px;
+  max-width: 1200px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -63,19 +86,124 @@
   background-color: #fff;
   border: 1px solid #e3e3e3;
   border-radius: 5px;
-  width: 220px;
-  height: 220px;
+  width: 250px;
+  height: 280px;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 .chat-box .box-head,
 .chat-box .box-form {
   background-color: #f9f9f9;
-  padding: 10px;
+  padding: 6px 10px;
   flex: none;
+  display: flex;
+  align-items: center;
+}
+.chat-box .user-photo {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 2px;
+  flex: none;
+}
+.chat-box .box-head img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: inherit;
+}
+.chat-box .display-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: auto;
+  min-width: 0;
+}
+.chat-box .box-head .action {
+  flex: none;
+  margin-left: 5px;
+}
+.chat-box .box-head .action .close {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  line-height: 18px;
+  color: #999;
+}
+.chat-box .box-head .action .close:hover {
+  color: #FF6655;
 }
 .chat-box .box-body {
   flex: auto;
   padding: 10px;
   min-height: 0;
+}
+.chat-box .message-cell.self {
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.chat-box .message-cell.other {
+  margin-right: 30px;
+}
+.chat-box .message-cell ~ .message-cell {
+  margin-top: 5px;
+}
+.chat-box .box-body .message {
+  display: inline-block;
+  background-color: #e9e9e9;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+}
+.chat-box .box-body .self .message {
+  background-color: #c6e87f;
+}
+.chat-box .message-cell .action {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 10px;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  margin-left: 2px;
+  cursor: pointer;
+  color: #999;
+}
+.chat-box .message-cell .action:hover {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 10px;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  margin-left: 2px;
+  cursor: pointer;
+  color: #000;
+}
+.chat-box .box-form .emoji {
+  flex: none;
+  margin-right: 5px;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+.chat-box .box-form .message-input {
+  flex: auto;
+  min-width: 0;
+}
+.chat-box .box-form .send {
+  flex: none;
+  margin-left: 5px;
 }

@@ -123,6 +123,7 @@ button, .button {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 
 .content-body {
