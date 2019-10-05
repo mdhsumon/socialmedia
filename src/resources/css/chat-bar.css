@@ -1,8 +1,6 @@
-/*--------------right side bar start-----*/
+/* start chat bar */
 .chat-bar {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-left: 35px;
+  margin-left: 50px;
   overflow: auto;
   flex: none;
 }
@@ -32,7 +30,7 @@
 .chat-user ~ .chat-user{
   margin-top: 20px;
 }
-.chat-user:after{
+.chat-user:before{
   content: "";
   background-color: #eee;
   height: 10px;
@@ -44,13 +42,40 @@
   bottom: -1px;
   left: -1px;
 }
-.chat-user.online:after{
+.chat-user.online:before{
   background-color: #8dd200;
 }
-.chat-user.away:after{
+.chat-user.away:before{
   background-color: #ffbf00;
 }
-.chat-user.offline:after{
+.chat-user.offline:before{
   background-color: #cccccc;
 }
-/*--------------right side bar end-----*/
+.chatting-panel {
+  position: fixed;
+  bottom: 15px;
+  width: 1200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.chat-box {
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.chat-box .box-head,
+.chat-box .box-form {
+  background-color: #f9f9f9;
+  padding: 10px;
+  flex: none;
+}
+.chat-box .box-body {
+  flex: auto;
+  padding: 10px;
+  min-height: 0;
+}

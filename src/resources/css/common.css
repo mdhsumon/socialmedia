@@ -115,8 +115,10 @@ button, .button {
 .main-body {
   overflow: auto;
   height: calc(100vh - 60px);
+  padding: 15px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   max-width: 1200px;
   width: 100%;
   margin-left: auto;
@@ -126,7 +128,6 @@ button, .button {
 .content-body {
   flex: auto;
   min-width: 0;
-  padding: 15px;
 }
 
 .column-section{
@@ -145,7 +146,7 @@ button, .button {
 
 .column-section .middle-column {
   flex: auto;
-  min-width: 0;
+  min-width: 250px;
   margin-left: 15px;
   margin-right: 15px;
 }

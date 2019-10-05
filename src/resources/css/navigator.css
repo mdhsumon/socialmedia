@@ -2,13 +2,15 @@
 .navigator {
   background-color: #fff;
   border: 1px solid #e3e3e3;
-  margin-right: 35px;
-  width: 60px;
+  border-radius: 5px;
+  margin-right: 50px;
+  width: 50px;
   flex: none;
 }
 .nav-item-container {
   text-align: center;
-  padding-top: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .nav-item ~ .nav-item {
   margin-top: 15px;
@@ -19,8 +21,21 @@
   color: #CCCCCC;
   font-size: 20px;
   transition: all 0.1s ease;
+  position: relative;
 }
 .nav-item.active a,
 .nav-item a:hover {
   color: #8dd200;
+}
+.nav-item.active a:before {
+  content: '';
+  position: absolute;
+  border-radius: 0 7px 7px 0;
+  border-right: 1px solid #e3e3e3;
+  width: 7px;
+  height: 14px;
+  background-color: white;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
 }

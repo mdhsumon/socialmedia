@@ -5,11 +5,6 @@ import { MainApp } from "./MainApp"
 import "./resources/css/style.css";
 
 export default class App extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
-  
   render() {
     return (
       <Router>

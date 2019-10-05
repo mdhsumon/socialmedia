@@ -17,7 +17,7 @@ export class Post extends React.Component {
     }
 
     getPosts = () => {
-        const getPost = window.location.pathname == '/feeds' ? getUserFeeds : getUserPosts
+        const getPost = window.location.pathname === '/feeds' ? getUserFeeds : getUserPosts
         getPost(loggedUserInfo.userInfo.username, data => {
             this.setState({
                 postData: data
