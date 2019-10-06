@@ -5,6 +5,7 @@ export class ChatBox extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            inputRow: 1,
             userInput: '',
             messageList: [ { origin: 'other', messageId: '123', message: 'Hello pagla, how are you?' } ]
         }
@@ -18,8 +19,9 @@ export class ChatBox extends React.Component {
                 messageList: this.state.messageList
             })
         }
-        else {
+        else if(event.key === 'Enter' && event.shiftKey) {
             this.setState({
+                inputRow: event.target.scrollHeight / 28,
                 userInput: event.target.value
             })
         }
@@ -36,7 +38,7 @@ export class ChatBox extends React.Component {
         return(
             <div className="chat-box">
                 <div className="box-head">
-                    <div className="user-photo"><img src={apiBaseUrl + '/file/global/image/male.png'} alt="sf"/></div>
+                    <div className="user-photo"><img src={ apiBaseUrl + '/file/global/image/male.png' } alt="sf"/></div>
                     <div className="display-name">Disaplay name</div>
                     <div className="action">
                         <span className="close">x</span>
@@ -45,8 +47,8 @@ export class ChatBox extends React.Component {
                 <div className="box-body">
                     {this.state.messageList.map((data, key) => {
                         return(
-                            <div className={`message-cell ${ data.origin === "self" ? "self" : "other" }`} key={key}>
-                                <span className="message">{data.message}</span>
+                            <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ key }>
+                                <span className="message">{ data.message }</span>
                                 <span className="action"><i className="icon-ellips-v"></i></span>
                             </div>
                         )
@@ -54,8 +56,10 @@ export class ChatBox extends React.Component {
                 </div>
                 <div className="box-form">
                     <div className="emoji">:)</div>
-                    <div className="message-input"><textarea rows="1" onChange={this.handleInput} onKeyDown={this.handleInput} /></div>
-                    <button className="send" onClick={this.sendMessage}>=></button>
+                    <div className="message-input">
+                        <textarea rows={ this.state.inputRow } onChange={ this.handleInput } onKeyDown={ this.handleInput } />
+                    </div>
+                    <button className="send" onClick={ this.sendMessage }>=></button>
                 </div>
             </div>
         )
