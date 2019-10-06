@@ -74,10 +74,14 @@
   background-color: #cccccc;
 }
 .chatting-panel {
-  position: absolute;
-  right: 15px;
+  position: fixed;
+  left: 50%;
+  margin-left: -585px;
   bottom: 15px;
-  max-width: 1200px;
+  max-width: 1170px;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -85,20 +89,31 @@
 .chat-box {
   background-color: #fff;
   border: 1px solid #e3e3e3;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
-  width: 250px;
-  height: 280px;
+  width: 280px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   overflow: auto;
 }
+.chat-box ~ .chat-box {
+  margin-left: 5px;
+}
 .chat-box .box-head,
 .chat-box .box-form {
   background-color: #f9f9f9;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   padding: 6px 10px;
   flex: none;
   display: flex;
   align-items: center;
+}
+.chat-box .box-head {
+  border-bottom: 1px solid #f1f1f1;
+}
+.chat-box .box-form {
+  border-top: 1px solid #f1f1f1;
 }
 .chat-box .user-photo {
   width: 20px;
@@ -142,6 +157,7 @@
   flex: auto;
   padding: 10px;
   min-height: 0;
+  overflow: auto;
 }
 .chat-box .message-cell.self {
     margin-left: 30px;
@@ -161,7 +177,6 @@
   padding: 5px 10px;
   border-radius: 3px;
   font-size: 12px;
-  font-weight: 600;
   color: #444;
 }
 .chat-box .box-body .self .message {
@@ -199,9 +214,25 @@
   font-size: 12px;
   cursor: pointer;
 }
-.chat-box .box-form .message-input {
+.chat-box .message-input {
   flex: auto;
   min-width: 0;
+  position: relative;
+  height: 30px;
+}
+.chat-box .message-input textarea {
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid #f3f3f3;
+  border-radius: 3px;
+  resize: vertical;
+  position: absolute;
+  font-size: 12px;
+  color: #333;
+  bottom: 0;
+  padding: 5px 8px;
+  min-height: 30px;
+  max-height: 120px;
 }
 .chat-box .box-form .send {
   flex: none;

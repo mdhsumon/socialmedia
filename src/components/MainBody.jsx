@@ -1,20 +1,25 @@
 import React from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
-import Signup from "./pages/Signup"
-import Login from "./pages/Login"
-import { Welcome } from "./pages/Welcome"
+import { Header } from "./Header"
+import { Navigator } from "./Navigator"
 import { NewsFeed } from "./pages/NewsFeed"
 import { Profile } from "./pages/Profile"
-import { PrivateRoute } from "../PrivateRoute"
+import { ChatBar } from "./chat/ChatBar"
 
 export const MainBody = () => {
-    return (
-        <Router>
-            <Route path='/signup' exact component={Signup} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/" component={Welcome} />
-            <Route exact path='/profile' component={Profile} />
-            <PrivateRoute path="/feeds" component={NewsFeed} />
-        </Router>
-    )
+  return (
+    <div className="body">
+        <Header />
+        <div className="main-body">
+          <Navigator />
+          <div className="content-body">
+            <Router>
+              <Route exact path='/profile' component={Profile} />
+              <Route exact path="/feeds" component={NewsFeed} />
+            </Router>
+          </div> 
+          <ChatBar />
+        </div>
+    </div>
+  )
 }

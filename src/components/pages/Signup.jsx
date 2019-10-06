@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { isUserExist, userSignup } from "../../services/userService"
 
-export default class Signup extends React.Component {
+export class Signup extends React.Component {
     constructor(props) {
         super(props)
         this.state = {

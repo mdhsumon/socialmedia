@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { getAccessToken, getUserSummery } from "../../services/userService"
 
-export default class Login extends React.Component {
+export class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {

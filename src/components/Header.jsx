@@ -79,13 +79,13 @@ export class Header extends React.Component {
                         </div>
                     </div>
                     <div className="user-bar">
-                        {/* <div className="user-photo">
+                        <div className="user-photo">
                             <img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} />
                         </div>
                         <div className="user-name">
                             <div className="name">{loggedUserInfo.userInfo.displayName}</div>
                             <div className="nickname">{loggedUserInfo.userInfo.nickname}</div>
-                        </div> */}
+                        </div>
                         <div className="user-options">
                         
                         </div>

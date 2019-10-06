@@ -227,7 +227,8 @@
     transition: all 0.2s;
 }
 .add-comment form input:focus{
-    border-color: #8dd200;
+    background-color: #fcfcfc;
+    border-color: #c6e87f;
 }
 .like-dislike span{
     color: #999999;
