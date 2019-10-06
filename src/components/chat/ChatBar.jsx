@@ -30,6 +30,10 @@ export class ChatBar extends React.Component {
 
     }
 
+    openChat = event => {
+        return <ChatBox />
+    }
+
     render() {
         return(
             <div className="chat-bar">
@@ -37,7 +41,7 @@ export class ChatBar extends React.Component {
                     <div className="user-list">
                         {this.state.chatUsers.map(user => {
                             return(
-                                <div className={`chat-user ${this.state.userStatus}`} key={user.userId}>
+                                <div className={`chat-user ${this.state.userStatus}`} key={user.userId} onClick={this.openChat.bind(this)}>
                                     <div className="display-name">{user.displayName}</div>
                                     <div className="user-thumb">
                                         <img src={apiBaseUrl + user.profilePhoto} alt={user.displayName} />
@@ -46,7 +50,9 @@ export class ChatBar extends React.Component {
                             )
                         })}
                     </div>
-                    <ChatBox />
+                    <div className="chatting-panel">
+                        {this.openChat()}
+                    </div>
                 </div>
             </div>
         )
