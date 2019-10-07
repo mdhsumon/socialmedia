@@ -19,7 +19,7 @@ export class ChatBox extends React.Component {
                 messageList: this.state.messageList
             })
         }
-        else if(event.key === 'Enter' && event.shiftKey) {
+        else {
             this.setState({
                 inputRow: event.target.scrollHeight / 28,
                 userInput: event.target.value
@@ -36,12 +36,12 @@ export class ChatBox extends React.Component {
 
     render() {
         return(
-            <div className="chat-box">
+            <div className="chat-box" key={ this.props.userInfo.userId }>
                 <div className="box-head">
-                    <div className="user-photo"><img src={ apiBaseUrl + '/file/global/image/male.png' } alt="sf"/></div>
-                    <div className="display-name">Disaplay name</div>
+                    <div className="user-photo"><img src={ apiBaseUrl + this.props.userInfo.profilePhoto } alt="sf"/></div>
+                    <div className="display-name">{ this.props.userInfo.displayName }</div>
                     <div className="action">
-                        <span className="close">x</span>
+                        <span className="close" onClick={ this.props.closeChatBox.bind(this, this.props.userInfo.userId) }>x</span>
                     </div>
                 </div>
                 <div className="box-body">

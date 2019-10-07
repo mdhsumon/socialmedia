@@ -8,7 +8,8 @@ export class ChatBar extends React.Component {
         super(props)
         this.state = {
             userStatus: 'offline',
-            chatUsers: []
+            chatUsers: [],
+            openedChat: []
         }
     }
 
@@ -30,9 +31,21 @@ export class ChatBar extends React.Component {
 
     }
 
-    openChat = (event, userId) => {
-        console.log(event)
-        return <ChatBox />
+    openChat = (event, user) => {
+        const isOpen = this.state.openedChat.filter(item => item.key == user.userId).length
+        if(!isOpen)
+        this.setState({
+            openedChat: [<ChatBox key={ user.userId } userInfo={ user } closeChatBox={ this.closeChatBox } />, ...this.state.openedChat]
+        })
+    }
+
+    closeChatBox = userId => {
+        const targetBox = this.state.openedChat.filter(item => item.key == userId)
+        const updatedBox = [...this.state.openedChat]
+        updatedBox.splice(updatedBox.indexOf(targetBox), 1)
+        this.setState({
+            openedChat: updatedBox
+        })
     }
 
     render() {
@@ -42,7 +55,7 @@ export class ChatBar extends React.Component {
                     <div className="user-list">
                         {this.state.chatUsers.map(user => {
                             return(
-                                <div className={`chat-user ${this.state.userStatus}`} key={user.userId} onClick={this.openChat(user.userId)}>
+                                <div key={user.userId} className={`chat-user ${this.state.userStatus}`} onClick={ event => { this.openChat(event, user) } }>
                                     <div className="display-name">{user.displayName}</div>
                                     <div className="user-thumb">
                                         <img src={apiBaseUrl + user.profilePhoto} alt={user.displayName} />
@@ -52,7 +65,7 @@ export class ChatBar extends React.Component {
                         })}
                     </div>
                     <div className="chatting-panel">
-                        {this.openChat()}
+                        {this.state.openedChat}
                     </div>
                 </div>
             </div>
