@@ -47,7 +47,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   transition: all 0.2s ease;
-  clip: rect(0, 150px, 20px, 200px);
+  clip: rect(0, 0, 20px, 200px);
 }
 .chat-user:hover .display-name {
   clip: rect(0, 200px, 20px, 0);
