@@ -7,7 +7,7 @@ export class ChatBar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            userStatus: 'offline',
+            userStatus: 'online',
             chatUsers: [],
             openedChat: []
         }
@@ -32,7 +32,7 @@ export class ChatBar extends React.Component {
     }
 
     openChat = (event, user) => {
-        const isOpen = this.state.openedChat.filter(item => item.key == user.userId).length
+        const isOpen = this.state.openedChat.filter(item => item.key === user.userId).length
         if(!isOpen)
         this.setState({
             openedChat: [<ChatBox key={ user.userId } userInfo={ user } closeChatBox={ this.closeChatBox } />, ...this.state.openedChat]
@@ -40,11 +40,11 @@ export class ChatBar extends React.Component {
     }
 
     closeChatBox = userId => {
-        const targetBox = this.state.openedChat.filter(item => item.key == userId)
-        const updatedBox = [...this.state.openedChat]
-        updatedBox.splice(updatedBox.indexOf(targetBox), 1)
+        let currentOpened = [...this.state.openedChat]
+        const targetBox = currentOpened.filter(item => item.key === userId)[0]
+        currentOpened.splice(currentOpened.indexOf(targetBox), 1)
         this.setState({
-            openedChat: updatedBox
+            openedChat: currentOpened
         })
     }
 
