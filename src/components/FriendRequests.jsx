@@ -44,6 +44,7 @@ export default class FriendRequests extends React.Component {
             acceptFriendRequest(requestItem.userId, response => {
                 if(response.acceptStatus) {
                     this.removeRequestItem(requestItem)
+                    // Broadcast acceptance signal
                     socketConnection.emit('friendAccepted', requestItem.userId)
                 }
             })

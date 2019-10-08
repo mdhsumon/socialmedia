@@ -81,4 +81,12 @@
   .icon-triangle-right:before {
     content: "\e912";
   }
-  
+.icon-send:before {
+  content: "\e913";
+}
+.icon-smile:before {
+  content: "\e915";
+}
+.icon-close:before {
+  content: "\e914";
+}

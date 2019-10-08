@@ -20,8 +20,9 @@ export class ChatBox extends React.Component {
             })
         }
         else {
+            let inputHeight = event.target.scrollHeight
             this.setState({
-                inputRow: event.target.scrollHeight / 28,
+                inputRow: inputHeight >= 38 ? inputHeight / 14 : 1,
                 userInput: event.target.value
             })
         }
@@ -41,7 +42,9 @@ export class ChatBox extends React.Component {
                     <div className="user-photo"><img src={ apiBaseUrl + this.props.userInfo.profilePhoto } alt="sf"/></div>
                     <div className="display-name">{ this.props.userInfo.displayName }</div>
                     <div className="action">
-                        <span className="close" onClick={ this.props.closeChatBox.bind(this, this.props.userInfo.userId) }>x</span>
+                        <span className="close" onClick={ this.props.closeChatBox.bind(this, this.props.userInfo.userId) }>
+                            <i className="icon-close"></i>
+                        </span>
                     </div>
                 </div>
                 <div className="box-body">
@@ -55,11 +58,16 @@ export class ChatBox extends React.Component {
                     })}
                 </div>
                 <div className="box-form">
-                    <div className="emoji">:)</div>
+                    <div className="emoji"><i className="icon-smile"></i></div>
                     <div className="message-input">
-                        <textarea rows={ this.state.inputRow } onChange={ this.handleInput } onKeyDown={ this.handleInput } />
+                        <textarea
+                            style={ { minHeight: '30px', maxHeight: '120px', lineHeight: '14px' } }
+                            rows={ this.state.inputRow }
+                            onChange={ this.handleInput }
+                            onKeyDown={ this.handleInput }
+                        />
                     </div>
-                    <button className="send" onClick={ this.sendMessage }>=></button>
+                    <button className="send" onClick={ this.sendMessage }><i className="icon-send"></i></button>
                 </div>
             </div>
         )

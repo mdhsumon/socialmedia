@@ -9,6 +9,7 @@ export class Header extends React.Component {
             newFriend: false,
             acceptCount: 0
         }
+        // Receive acceptance signal
         socketConnection.on('friendAccepted', acceptedId => {
             this.setState({
                 newFriend: true,
