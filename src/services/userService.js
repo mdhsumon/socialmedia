@@ -184,3 +184,20 @@ export const declineFriendRequest = (userId, callback) => {
         callback(data)
     })
 }
+
+// Send message
+export const sendMessage = (messageData, callback) => {
+    fetch(`${apiBaseUrl}/message/send`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(messageData)
+    })
+    .then(res => res.json())
+    .then(sendStatus => {
+        callback(sendStatus)
+    })
+}

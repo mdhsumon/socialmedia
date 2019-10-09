@@ -14,6 +14,12 @@ export class ChatBar extends React.Component {
         }
     }
 
+    updateUsers = users => {
+        this.setState({
+            chatUsers: users
+        })
+    }
+
     componentDidMount() {
         getFriendLists(friendList => {
             let friendIds = []
@@ -31,9 +37,7 @@ export class ChatBar extends React.Component {
                         profilePhoto: users[user].profilePhoto 
                     }
                 }
-                this.setState({
-                    chatUsers: userList
-                })
+                this.updateUsers(userList)
                 
                 // Receive user online status signal
                 socketConnection.on('userOnlineStatus', userStatus => {
@@ -41,9 +45,8 @@ export class ChatBar extends React.Component {
                     const findUser = copyUsers.filter(item => item.userId === userStatus.userId)[0]
                     const userIndex = copyUsers.indexOf(findUser)
                     copyUsers = update(copyUsers[userIndex], { status: { $set: userStatus.status } })
-                    this.setState({
-                        //chatUsers: copyUsers
-                    })
+                    console.log(copyUsers)
+                    //this.updateUsers(copyUsers)
                 })
             })
         })

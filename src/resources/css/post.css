@@ -181,11 +181,11 @@
     font-size: 15px;
     color: #ccc;
     cursor: pointer;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s;
+    display: inline-block;
+    transition: all 0.1s;
+}
+.like-dislike button:hover i {
+    transform: scale(1.5);
 }
 .like-dislike .liked i,
 .like-dislike .like:hover i {

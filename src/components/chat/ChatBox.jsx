@@ -7,7 +7,7 @@ export class ChatBox extends React.Component {
         this.state = {
             inputRow: 1,
             userInput: '',
-            messageList: [ { origin: 'other', messageId: '123', message: 'Hello pagla, how are you?' } ]
+            messageList: []
         }
     }
 
