@@ -1,8 +1,9 @@
 import React from "react"
+import update from "immutability-helper"
 import { apiBaseUrl } from "../../services/commonService"
 import { getFriendLists, getMultipleUserSummary } from "../../services/userService"
 import { ChatBox } from "./ChatBox"
-import { socketConnection } from "../../socket"
+import { socketConnection } from "../../sockets/socket"
 
 export class ChatBar extends React.Component {
     constructor(props) {
@@ -14,16 +15,16 @@ export class ChatBar extends React.Component {
     }
 
     componentDidMount() {
-        getFriendLists(response => {
+        getFriendLists(friendList => {
             let friendIds = []
-            for(let friend in response.friends) {
-                friendIds[friend] = response.friends[friend].friendId
+            for(let friend in friendList.friends) {
+                friendIds[friend] = friendList.friends[friend].friendId
             }
             getMultipleUserSummary(friendIds, users => {
-                const chatUsers = []
+                const userList = []
                 for(let user in users) {
-                    chatUsers[user] = {
-                        state: 'offline',
+                    userList[user] = {
+                        status: 'offline',
                         userId: users[user].userId,
                         username: users[user].username,
                         displayName: users[user].displayName,
@@ -31,20 +32,17 @@ export class ChatBar extends React.Component {
                     }
                 }
                 this.setState({
-                    chatUsers: chatUsers
+                    chatUsers: userList
                 })
-
+                
                 // Receive user online status signal
-                socketConnection.on('frinedOnline', response => {
+                socketConnection.on('userOnlineStatus', userStatus => {
                     let copyUsers = [ ...this.state.chatUsers ]
-                    const foundUser = copyUsers.filter(item => item.userId === response.userId)
-                    const userIndex = copyUsers.indexOf(foundUser)
-                    copyUsers[userIndex] = {
-                        state: response.state
-                    }
-                    console.log(copyUsers)
+                    const findUser = copyUsers.filter(item => item.userId === userStatus.userId)[0]
+                    const userIndex = copyUsers.indexOf(findUser)
+                    copyUsers = update(copyUsers[userIndex], { status: { $set: userStatus.status } })
                     this.setState({
-                        chatUsers: copyUsers
+                        //chatUsers: copyUsers
                     })
                 })
             })
@@ -75,7 +73,7 @@ export class ChatBar extends React.Component {
                     <div className="user-list">
                         {this.state.chatUsers.map(user => {
                             return(
-                                <div key={user.userId} className={`chat-user ${this.state.onlineStatus}`} onClick={ event => { this.openChat(event, user) } }>
+                                <div key={user.userId} className={`chat-user ${user.status}`} onClick={ event => { this.openChat(event, user) } }>
                                     <div className="display-name">{user.displayName}</div>
                                     <div className="user-thumb">
                                         <img src={apiBaseUrl + user.profilePhoto} alt={user.displayName} />

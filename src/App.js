@@ -6,16 +6,16 @@ import { Welcome } from "./components/pages/Welcome"
 import { PrivateRoute } from "./PrivateRoute"
 import { MainBody } from "./components/MainBody"
 
-import "./resources/css/style.css";
+import "./resources/css/style.css"
 
 export default class App extends React.Component {
   render() {
     return (
       <Router>
-          <Route exact path='/signup' component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/" component={Welcome} />
-          <PrivateRoute component={MainBody} />
+          <Route exact path="/signup" component={ Signup } />
+          <Route exact path="/login" component={ Login } />
+          <Route exact path="/" component={ Welcome } />
+          <PrivateRoute exact path="/feeds" component={ MainBody } />
       </Router>
     )
   }

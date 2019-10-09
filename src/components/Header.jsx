@@ -1,6 +1,6 @@
 import React from "react"
 import { loggedUserInfo, apiBaseUrl } from "../services/commonService"
-import { socketConnection } from "../socket"
+import { socketConnection } from "../sockets/socket"
 
 export class Header extends React.Component {
     constructor(props) {

@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { apiBaseUrl } from "../services/commonService"
 import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../services/userService"
-import { socketConnection } from "../socket"
+import { socketConnection } from "../sockets/socket"
 
 export default class FriendRequests extends React.Component {
     constructor(props) {
