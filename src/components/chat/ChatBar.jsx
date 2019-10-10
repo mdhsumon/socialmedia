@@ -45,8 +45,6 @@ export class ChatBar extends React.Component {
                     const findUser = copyUsers.filter(item => item.userId === userStatus.userId)[0]
                     const userIndex = copyUsers.indexOf(findUser)
                     copyUsers = update(copyUsers[userIndex], { status: { $set: userStatus.status } })
-                    console.log(copyUsers)
-                    //this.updateUsers(copyUsers)
                 })
             })
         })

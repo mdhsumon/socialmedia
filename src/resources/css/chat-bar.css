@@ -227,6 +227,17 @@
   cursor: pointer;
   color: #000;
 }
+.chat-box .empty-message {
+  text-align: center;
+  font-size: 16px;
+  color: #ccc;
+  padding: 60px 20px;
+}
+.chat-box .empty-message i {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
 .chat-box .box-form .emoji {
   flex: none;
   margin-right: 8px;
