@@ -185,6 +185,22 @@ export const declineFriendRequest = (userId, callback) => {
     })
 }
 
+// Load messages
+export const getUserMessages = callback => {
+    fetch(`${apiBaseUrl}/messages/${loggedUserId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(messages => {
+        callback(messages)
+    })
+}
+
 // Send message
 export const sendMessage = (messageData, callback) => {
     fetch(`${apiBaseUrl}/message/send`, {

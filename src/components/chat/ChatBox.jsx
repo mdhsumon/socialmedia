@@ -1,5 +1,6 @@
 import React from "react"
 import { apiBaseUrl } from "../../services/commonService"
+import { getUserMessages } from "../../services/userService"
 
 export class ChatBox extends React.Component {
     constructor(props) {
@@ -9,6 +10,14 @@ export class ChatBox extends React.Component {
             userInput: '',
             messageList: []
         }
+    }
+
+    componentDidMount() {
+        getUserMessages(messages => {
+            this.setState({
+                messageList: messages
+            })
+        })
     }
 
     handleInput = event => {
@@ -29,10 +38,10 @@ export class ChatBox extends React.Component {
     }
 
     sendMessage = event => {
-        this.state.messageList.push({ origin: 'self', messageId: '123', message: this.state.userInput })
-        this.setState({
-            messageList: this.state.messageList
-        })
+        // this.state.messageList.push({ origin: 'self', messageId: '123', message: this.state.userInput })
+        // this.setState({
+        //     messageList: this.state.messageList
+        // })
     }
 
     render() {
