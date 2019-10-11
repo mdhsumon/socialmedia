@@ -1,6 +1,7 @@
 import React from "react"
 import { apiBaseUrl } from "../../services/commonService"
 import { getUserMessages, sendUserMessage } from "../../services/userService"
+import { socketConnection } from "../../sockets/socket"
 
 export class ChatBox extends React.Component {
     constructor(props) {
@@ -14,12 +15,18 @@ export class ChatBox extends React.Component {
 
     componentDidMount() {
         this.updateMessages()
+        // Update after getting signal
+        socketConnection.on('sendMessage', () => {
+            this.updateMessages()
+        })
     }
 
     handleInput = event => {
         if(event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault()
-            this.sendMessage(this.state.userInput)
+            if(this.state.userInput.trim().length) {
+                this.sendMessage(this.state.userInput)
+            }
         }
         else {
             let inputHeight = event.target.scrollHeight
@@ -39,10 +46,17 @@ export class ChatBox extends React.Component {
     }
 
     sendMessage = () => {
-        sendUserMessage(this.props.userInfo.userId, this.state.userInput, response => {
-            if(response.sendStatus)
-            this.updateMessages()
-        })
+        if(this.state.userInput.trim().length) {
+            sendUserMessage(this.props.userInfo.userId, this.state.userInput, response => {
+                if(response.sendStatus) {
+                    this.updateMessages()
+                    socketConnection.emit('sendMessage', this.props.userInfo.userId)
+                }
+                this.setState({
+                    userInput: ''
+                })
+            })
+        }
     }
 
     renderMessage = () => {
@@ -56,8 +70,8 @@ export class ChatBox extends React.Component {
                 this.state.messageList.map((data, key) => {
                     return(
                         <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ key }>
+                            {data.origin === "self" && (<span className="action"><i className="icon-ellips-v"></i></span>)}
                             <span className="message">{ data.message }</span>
-                            <span className="action"><i className="icon-ellips-v"></i></span>
                         </div>
                     )
                 })
@@ -88,6 +102,7 @@ export class ChatBox extends React.Component {
                             rows={ this.state.inputRow }
                             onChange={ this.handleInput }
                             onKeyDown={ this.handleInput }
+                            value= { this.state.userInput }
                         />
                     </div>
                     <button className="send" onClick={ this.sendMessage }><i className="icon-send"></i></button>

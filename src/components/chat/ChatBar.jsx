@@ -40,12 +40,12 @@ export class ChatBar extends React.Component {
                 this.updateUsers(userList)
                 
                 // Receive user online status signal
-                socketConnection.on('userOnlineStatus', userStatus => {
-                    let copyUsers = [ ...this.state.chatUsers ]
-                    const findUser = copyUsers.filter(item => item.userId === userStatus.userId)[0]
-                    const userIndex = copyUsers.indexOf(findUser)
-                    copyUsers = update(copyUsers[userIndex], { status: { $set: userStatus.status } })
-                })
+                // socketConnection.on('userOnlineStatus', userStatus => {
+                //     let copyUsers = [ ...this.state.chatUsers ]
+                //     const findUser = copyUsers.filter(item => item.userId === userStatus.userId)[0]
+                //     const userIndex = copyUsers.indexOf(findUser)
+                //     copyUsers = update(copyUsers[userIndex], { status: { $set: userStatus.status } })
+                // })
             })
         })
     }

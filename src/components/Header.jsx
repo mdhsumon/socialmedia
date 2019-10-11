@@ -7,13 +7,22 @@ export class Header extends React.Component {
         super(props)
         this.state = {
             newFriend: false,
-            acceptCount: 0
+            acceptCount: 0,
+            newNoti: false,
+            msgCount: 0,
         }
         // Receive acceptance signal
         socketConnection.on('friendAccepted', acceptedId => {
             this.setState({
                 newFriend: true,
                 acceptCount: this.state.acceptCount + 1
+            })
+        })
+        // Receive message notification
+        socketConnection.on('sendMessage', () => {
+            this.setState({
+                newNoti: true,
+                msgCount: this.state.msgCount + 1
             })
         })
     }
@@ -56,6 +65,9 @@ export class Header extends React.Component {
                         <div className="notification-item message active">
                             <div className="notification-button">
                                 <i className="icon-text-bubble"></i>
+                                {this.state.newNoti && (
+                                    <span className="notification-count">{this.state.msgCount}</span>
+                                )}
                             </div>
                             <div className="message-list">
 
