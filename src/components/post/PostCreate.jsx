@@ -1,4 +1,5 @@
 import React from "react"
+import { loggedUserInfo } from "../../services/commonService"
 import { createPost } from "../../services/postService"
 import { MessagePopup } from "../MessagePopup"
 
@@ -9,38 +10,42 @@ export class PostCreate extends React.Component {
         this.handleForm = this.handleForm.bind(this)
         this.state = {
             isLoading: false,
-            messagePopup: false
+            messagePopup: false,
+            message: '',
+            photos: null,
+            videos: null
         }
     }
 
     handleChange = event => {
         this.setState({
-            [event.target.name]: event.target.value
+            message: event.target.value,
+            photos: event.target.files,
+            videos: event.target.files
         })
     }
 
     handleForm = event => {
         event.preventDefault()
-        if(true) {
-            const userData = JSON.parse(localStorage.getItem("userData"))
+        if(this.state.message.trim().length || true) {
             const postData = {
-                userId: userData.userInfo.userId,
-                username: userData.userInfo.username,
-                displayName: userData.userInfo.displayName,
-                profilePhoto: userData.userInfo.profilePhoto,
-                content: this.state.content,
+                userId: loggedUserInfo.userInfo.userId,
+                username: loggedUserInfo.userInfo.username,
+                message: this.state.message,
+                photos: this.state.photos,
                 visibility: this.state.visibility
             }
             this.setState({
                 isLoading: true
             })
             
-            // Remove empty form paren
+            // Remove empty block form paren
             this.props.removeEmpty()
 
             createPost(postData, response => {
                 if(response.status) {
                     this.setState({
+                        message: '',
                         isLoading: false,
                         messagePopup: true
                     })
@@ -63,12 +68,28 @@ export class PostCreate extends React.Component {
                 <div className="post-create">
                     <form className="post-create-form" onSubmit={this.handleForm}>
                         <div className="post-create-tab">
-                            <div className="tab-item message active"><i className="icon-writing"></i></div>
-                            <div className="tab-item photo"><i className="icon-camera"></i></div>
+                            <div className="tab-item message"><i className="icon-writing"></i></div>
+                            <div className="tab-item photo active"><i className="icon-camera"></i></div>
                             <div className="tab-item video"><i className="icon-movie-open"></i></div>
                         </div>
                         <div className="post-create-body">
-                            <textarea name="content" placeholder="Write something here..." onChange={this.handleChange} />
+                            <div className="message" style={{display: 'none'}}>
+                                <textarea name="message" placeholder="Write something here..." onChange={this.handleChange} value={this.state.message} />
+                            </div>
+                            <div className="photos">
+                                <div className="input-box input-file">
+                                    <input type="file" name="photos" onChange={this.handleChange} />
+                                    <div className="input-file-text"><i className="icon-camera"></i> Upload Photos</div>
+                                </div>
+                                <div className="uploaded-files"></div>
+                            </div>
+                            <div className="videos" style={{display: 'none'}}>
+                                <div className="input-box input-file">
+                                    <input type="file" name="videos" onChange={this.handleChange} />
+                                    <div className="input-file-text"><i className="icon-movie-open"></i> Upload Videos</div>
+                                </div>
+                                <div className="uploaded-files"></div>
+                            </div>
                         </div>
                         <div className="post-create-actions">
                             <button>Post now</button>

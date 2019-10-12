@@ -36,21 +36,30 @@ button, .button {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.input-box-inline .input-box.checkbox, .input-box-inline .input-box.radio, .input-box-inline .input-box.switch {
+.input-box-inline .input-box.checkbox,
+.input-box-inline .input-box.radio,
+.input-box-inline .input-box.switch {
   padding-right: 15px;
 }
-.input-box.checkbox, .input-box.radio, .input-box.switch {
+.input-box.checkbox,
+.input-box.radio,
+.input-box.switch {
   padding-top: 7.5px;
   padding-bottom: 7.5px;
 }
-.input-box-inline .input-box.checkbox input, .input-box-inline .input-box.radio input, .input-box-inline .input-box.switch input {
+.input-box-inline .input-box.checkbox input,
+.input-box-inline .input-box.radio input,
+.input-box-inline .input-box.switch input {
   top: 7.5px;
 }
-.input-box.checkbox input, .input-box.radio input {
+.input-box.checkbox input,
+.input-box.radio input {
   width: 16px;
   height: 16px;
 }
-.input-box.checkbox input, .input-box.radio input, .input-box.switch input {
+.input-box.checkbox input,
+.input-box.radio input,
+.input-box.switch input {
   margin: 0;
   z-index: 1;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -59,11 +68,14 @@ button, .button {
   top: 0;
   left: 0;
 }
-.input-box.checkbox label, .input-box.radio label {
+.input-box.checkbox label,
+.input-box.radio label {
   padding-left: 26px;
   min-width: 16px;
 }
-.input-box.checkbox label, .input-box.radio label, .input-box.switch label {
+.input-box.checkbox label,
+.input-box.radio label,
+.input-box.switch label {
   margin-bottom: 0;
   position: relative;
   color: #777;
@@ -79,20 +91,20 @@ button, .button {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
-.input-box.checkbox label:before, .input-box.radio label:before {
+.input-box.checkbox label:before,
+.input-box.radio label:before {
   background-color: #ffffff;
   border: 1px solid #CBD4DF;
   width: 16px;
   height: 16px;
 }
-.input-box.checkbox label:before, .input-box.radio label:before, .input-box.switch label:before {
+.input-box.checkbox label:before,
+.input-box.radio label:before,
+.input-box.switch label:before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  -o-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 .input-box.checkbox input:not([disabled]) ~ label:not(:empty):hover:before,
@@ -103,7 +115,8 @@ button, .button {
 .input-box.radio input:checked ~ label:before {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
-.input-box.checkbox input:checked ~ label:before, .input-box.radio input:checked ~ label:before {
+.input-box.checkbox input:checked ~ label:before,
+.input-box.radio input:checked ~ label:before {
   background-position: center;
   background-repeat: no-repeat;
   background-color: #8DD200;
@@ -111,6 +124,39 @@ button, .button {
   background-size: 8px;
 }
 /* end Custom radio, check, switch */
+
+/* Custom file uploader */
+.input-box {
+  position: relative;
+}
+.input-box.input-file {
+  background-color: #FBFBFB;
+  position: relative;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 15px;
+  border: 1px dashed #CBD4DF;
+  border-radius: 3px;
+}
+.input-box.input-file input {
+  cursor: pointer;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+.input-box.input-file .input-file-text {
+  display: inline-block;
+}
+.input-box.input-file .input-file-text i {
+  font-size: 25px;
+  display: block;
+  color: #ddd;
+}
+/* end Custom file uploader */
 
 .main-body {
   overflow: auto;
@@ -184,23 +230,25 @@ button, .button {
 /* Welcome and message popup */
 .message-popup {
   position: fixed;
-  top: 20px;
+  top: 35px;
   left: 50%;
-  color: #fff;
+  font-size: 14px;
+  color: #444;
+  border: 1px solid transparent;
   transform: translateX(-50%);
   background-color: #fff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.20);
-  border-radius: 5px;
-  padding: 15px 25px;
+  border-radius: 3px;
+  padding: 12px 20px;
   z-index: 99;
 }
 
 .message-popup.success {
-  background-color: #8DD200;
+  border-color: #8DD200;
 }
 
 .message-popup.error {
-  background-color: #ff4040;
+  border-color: #ff4040;
 }
 
 .welcome-section {

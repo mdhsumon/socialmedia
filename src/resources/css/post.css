@@ -23,6 +23,18 @@
 .post-create-tab .tab-item.active {
     color: #8dd200;
 }
+.post-create-body .input-file {
+    padding: 20px 15px;
+    font-size: 14px;
+}
+.post-create-body .input-file:hover {
+    background-color: rgba(141, 210, 0, 0.05);
+    border-color: #8dd200;
+}
+.post-create-body .videos,
+.post-create-body .photos {
+    padding: 15px;
+}
 .post-create-actions {
   justify-content: flex-end;
 }
@@ -178,7 +190,7 @@
 }
 .like-dislike i {
     padding: 5px;
-    font-size: 15px;
+    font-size: 16px;
     color: #ccc;
     cursor: pointer;
     display: inline-block;
