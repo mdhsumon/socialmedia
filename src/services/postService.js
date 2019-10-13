@@ -9,7 +9,7 @@ export const createPost = (postData, callback) => {
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
-            'content-type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'multipart/form-data'
         },
         body: postData
     })
