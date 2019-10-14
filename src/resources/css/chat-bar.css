@@ -89,13 +89,26 @@
 .chat-box {
   background-color: #fff;
   border: 1px solid #e3e3e3;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   width: 280px;
   height: 300px;
   display: flex;
   flex-direction: column;
   overflow: auto;
+}
+.chat-box.active .box-form {
+  border-color: #8dd200;
+}
+.chat-box.new {
+  border-color: #8dd200;
+}
+.chat-box.new .box-head {
+  animation: new-msg 1s linear 3;
+}
+@keyframes new-msg {
+  from {background-color: #c6e87f}
+  to {background-color: #fff}
 }
 .chat-box ~ .chat-box {
   margin-left: 5px;
