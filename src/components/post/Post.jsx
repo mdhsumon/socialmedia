@@ -18,7 +18,8 @@ export class Post extends React.Component {
 
     getPosts = () => {
         const getPost = window.location.pathname === '/feeds' ? getUserFeeds : getUserPosts
-        getPost(loggedUserInfo.userInfo.username, data => {
+        getPost(loggedUserInfo.userInfo.userId, data => {
+            console.log(data)
             this.setState({
                 postData: data
             })
@@ -46,19 +47,19 @@ export class Post extends React.Component {
 
     renderPost = () => {
         if(this.state.postData.length > 0) {
-            return this.state.postData.map(postObject => {
+            return this.state.postData.map(post => {
                 return (
-                    <div className="post" key={postObject._id}>
-                        {/* <PostAuthor authorInfo={postObject.userInfo} postInfo={{id: postObject._id, createdAt: postObject.createdAt}} />
-                        <PostContent postContent={postObject.content} />
+                    <div className="post" key={post._id}>
+                        <PostAuthor authorInfo={post.userInfo} postInfo={{id: post._id, createdAt: post.createdAt}} />
+                        <PostContent postContent={post.content} />
                         <PostReactions
-                            reactions={postObject.activities.reactions}
-                            postInfo={{id: postObject._id, userId: postObject.userId}}
+                            reactions={post.reactions}
+                            postInfo={{id: post._id, userId: post.userId}}
                             likeDislike={this.updateLikeDislike}
                         />
                         <div className="comment-reply">
-                            <PostComment postComments={postObject.activities.comments} />
-                        </div> */}
+                            <PostComment postComments={post.comments} />
+                        </div>
                     </div>
                 )
             })

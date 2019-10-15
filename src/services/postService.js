@@ -20,8 +20,8 @@ export const createPost = (postData, callback) => {
 }
 
 // Will return all user posts
-export const getUserPosts = (username, callback) => {
-    fetch(`${apiBaseUrl}/${username}/posts`, {
+export const getUserPosts = (userId, callback) => {
+    fetch(`${apiBaseUrl}/posts/${userId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`
@@ -32,8 +32,8 @@ export const getUserPosts = (username, callback) => {
 }
 
 // Will return user feed
-export const getUserFeeds = (username, callback) => {
-    fetch(`${apiBaseUrl}/${username}/feeds`, {
+export const getUserFeeds = (userId, callback) => {
+    fetch(`${apiBaseUrl}/feeds/${userId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`
