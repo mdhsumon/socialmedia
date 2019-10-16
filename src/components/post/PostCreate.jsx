@@ -1,5 +1,4 @@
 import React from "react"
-import { loggedUserInfo } from "../../services/commonService"
 import { createPost } from "../../services/postService"
 import { MessagePopup } from "../MessagePopup"
 
@@ -13,7 +12,8 @@ export class PostCreate extends React.Component {
             messagePopup: false,
             message: '',
             photos: null,
-            videos: null
+            videos: null,
+            visibility: null
         }
     }
 
@@ -21,7 +21,8 @@ export class PostCreate extends React.Component {
         this.setState({
             message: event.target.value,
             photos: event.target.files,
-            videos: event.target.files
+            videos: event.target.files,
+            visibility: event.target.value
         })
     }
 
@@ -29,8 +30,6 @@ export class PostCreate extends React.Component {
         event.preventDefault()
         if(this.state.message.trim().length || true) {
             const postData = {
-                userId: loggedUserInfo.userInfo.userId,
-                username: loggedUserInfo.userInfo.username,
                 message: this.state.message,
                 photos: this.state.photos,
                 visibility: this.state.visibility
@@ -73,10 +72,10 @@ export class PostCreate extends React.Component {
                             <div className="tab-item video"><i className="icon-movie-open"></i></div>
                         </div>
                         <div className="post-create-body">
-                            <div className="message" style={{display: 'none'}}>
+                            <div className="message">
                                 <textarea name="message" placeholder="Write something here..." onChange={this.handleChange} value={this.state.message} />
                             </div>
-                            <div className="photos">
+                            <div className="photos" style={{display: 'none'}}>
                                 <div className="input-box input-file">
                                     <input type="file" name="photos" onChange={this.handleChange} />
                                     <div className="input-file-text"><i className="icon-camera"></i> Upload Photos</div>
@@ -95,9 +94,9 @@ export class PostCreate extends React.Component {
                             <button>Post now</button>
                             <span className="post-visibility">
                                 <select name="visibility" onChange={this.handleChange} >
-                                    <option value="public">p</option>
-                                    <option value="friends">f</option>
-                                    <option value="private">m</option>
+                                    <option value="public">public</option>
+                                    <option value="friends">friends</option>
+                                    <option value="private">private</option>
                                 </select>
                             </span>
                         </div>
