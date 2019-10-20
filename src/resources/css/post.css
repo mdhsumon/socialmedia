@@ -263,6 +263,24 @@
 .comment ~ .comment {
     margin-top: 15px;
 }
+.comment input {
+    font-size: 12px;
+    width: calc(100% - 28px);
+    position: relative;
+    left: 28px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background-color: #f3f3f3;
+    border: 1px solid transparent;
+    outline: none;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+.comment input:hover,
+.comment input:focus {
+    background-color: #fcfcfc;
+    border-color: #c6e87f;
+}
 .comment-section {
     display: flex;
 }
@@ -278,7 +296,7 @@
     max-height: 100%;
     border-radius: inherit;
 }
-.comment-body{
+.comment-body {
     min-width: 0;
     border-radius: 3px;
     padding: 3px 6px;
@@ -288,6 +306,10 @@
     flex: none;
     margin-left: 10px;
     padding: 2px 0;
+    visibility: hidden;
+}
+.comment:hover .action {
+    visibility: visible;
 }
 .comment .action span {
     cursor: pointer;
@@ -296,10 +318,11 @@
 .comment .action span:hover {
     color: #8dd200;
 }
-.comment .reply-section{
+.comment .reply-section {
     padding-top: 10px;
     padding-left: 30px;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
 }
 .reply-section .replyar {
@@ -308,26 +331,14 @@
     height: 15px;
     margin-right: 8px;
 }
-.reply-section .replyar img{
+.reply-section .replyar img {
     max-width: 100%;
     max-height: 100%;
 }
 .reply-section .reply-message {
     background-color: #f3f3f3;
     padding: 2px 6px;
-}
-.reply-section form{
-    flex-grow: 1;
-}
-.reply-section input{
-    font-size: 12px;
-    width: 100%;
-    padding: 4px 8px;
     border-radius: 3px;
-    background-color: #f3f3f3;
-    border: 1px solid transparent;
-    outline: none;
-    transition: all 0.2s;
 }
 /*----------------(like comment share)LCS section end---------*/
 /*----------------post end-------*/

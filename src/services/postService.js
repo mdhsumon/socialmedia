@@ -9,9 +9,9 @@ export const createPost = (postData, callback) => {
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'application/json'
         },
-        body: postData
+        body: JSON.stringify(postData)
     })
     .then(res => res.json())
     .then(data => {
@@ -69,12 +69,12 @@ export const deletePost = (postId, callback) => {
 
 // Get column data
 export const updatePost = (postId, postData, callback) => {
-    console.log(postData)
     fetch(`${apiBaseUrl}/post/${postId}`, {
     method: 'PUT',
     headers: {
         'Authorization': `Bearer ${loggedUserToken}`,
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
     },
     body: JSON.stringify(postData)
 })
