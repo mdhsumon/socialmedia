@@ -230,7 +230,7 @@
     min-width: 0;
     margin-left: 10px;
 }
-.add-comment form input{
+.add-comment input{
     font-size: 12px;
     width: 100%;
     padding: 6px 10px;
@@ -240,7 +240,7 @@
     outline: none;
     transition: all 0.2s;
 }
-.add-comment form input:focus{
+.add-comment input:focus{
     background-color: #fcfcfc;
     border-color: #c6e87f;
 }

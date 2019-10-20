@@ -1,5 +1,5 @@
 import React from "react"
-//import { updateReaction } from "../../services/postService"
+import { updatePost } from "../../services/postService"
 
 export class PostReactions extends React.Component {
     constructor(props) {
@@ -7,16 +7,33 @@ export class PostReactions extends React.Component {
         this.state = {
             isLiked: false,
             isDisliked: false,
+            userComment: ''
         }
-        this.manageReaction = this.manageReaction.bind(this)
     }
     manageReaction = event => {
         this.setState({
             isLiked: true
         })
-        // updateReaction('activities', props.postInfo.id, props.postInfo.userId, data => {
-       
-        // })
+    }
+    handleComment = event => {
+        if (event.key === 'Enter') {
+            if (this.state.userComment.trim().length) {
+                updatePost(
+                    this.props.postInfo.id,
+                    { area: "comment", action: "add", data: this.state.userComment },
+                    comRes => {
+                        if (comRes.updateStatus) {
+                            alert('Your comment has been added on the post')
+                        }
+                    }
+                )
+            }
+        }
+        else {
+            this.setState({
+                userComment: event.target.value
+            })
+        }
     }
     render() {
         return (
@@ -32,9 +49,7 @@ export class PostReactions extends React.Component {
                     <span className="dislike-amount">{this.props.reactions.dislikes.count}</span>
                 </div>
                 <div className="add-comment">
-                    <form className="commment-input">
-                        <input type="text" placeholder="Write a comment..." />
-                    </form>
+                    <input type="text" placeholder="Write a comment..." onChange={this.handleComment} onKeyDown={this.handleComment} />
                 </div>
                 <button className="share-button">
                     <i className="icon-share"></i>

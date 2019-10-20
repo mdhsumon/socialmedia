@@ -48,6 +48,7 @@ export class PostCreate extends React.Component {
 
                     // Updating post from parent component
                     this.props.postCreateFlag(response.createdPost)
+                    
                     setTimeout(() => {
                         this.setState({
                             messagePopup: false

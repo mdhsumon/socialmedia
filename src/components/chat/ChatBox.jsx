@@ -7,10 +7,10 @@ export class ChatBox extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            newMessage: false,
             inputRow: 1,
             userInput: '',
-            messageList: []
+            messageList: [],
+            newMessage: false
         }
     }
 
@@ -18,10 +18,7 @@ export class ChatBox extends React.Component {
         this.updateMessages()
 
         // Update after getting signal
-        socketConnection.on('sendMessage', () => {
-            this.setState({
-                newMessage: true
-            })
+        socketConnection.on('sendMessage', userId => {
             this.updateMessages()
         })
     }
@@ -72,9 +69,9 @@ export class ChatBox extends React.Component {
         }
         else {
             return(
-                this.state.messageList.map((data, key) => {
+                this.state.messageList.map(data => {
                     return(
-                        <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ key }>
+                        <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
                             {data.origin === "self" && (<span className="action"><i className="icon-ellips-v"></i></span>)}
                             <span className="message">{ data.message }</span>
                         </div>

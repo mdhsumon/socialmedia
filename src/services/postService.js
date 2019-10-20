@@ -67,16 +67,16 @@ export const deletePost = (postId, callback) => {
 .then(data => callback(data))
 }
 
-// // Get column data
-export const updateReaction = (column, postId, userId, callback) => {
-    fetch(`${apiBaseUrl}/${column}/${postId}`, {
+// Get column data
+export const updatePost = (postId, postData, callback) => {
+    console.log(postData)
+    fetch(`${apiBaseUrl}/post/${postId}`, {
     method: 'PUT',
     headers: {
-        'Authorization': `Bearer ${loggedUserToken}`
+        'Authorization': `Bearer ${loggedUserToken}`,
+        'Accept': 'application/json'
     },
-    body: JSON.stringify({
-        
-    })
+    body: JSON.stringify(postData)
 })
 .then(res => res.json())
 .then(data => callback(data))

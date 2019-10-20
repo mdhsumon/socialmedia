@@ -3,7 +3,6 @@ export const PostComment = props => {
     const comments = props.postComments
     if (comments.length) {
         return comments.map(comment => {
-            console.log(comments.length)
             return (
                 <div className="comment-reply">
                     <div className="comment" key={comment._id}>
