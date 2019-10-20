@@ -56,9 +56,7 @@ export class Post extends React.Component {
                             postInfo={{id: post._id, userId: post.userId}}
                             likeDislike={this.updateLikeDislike}
                         />
-                        <div className="comment-reply">
-                            <PostComment postComments={post.comments} />
-                        </div>
+                        <PostComment postComments={post.comments} />
                     </div>
                 )
             })

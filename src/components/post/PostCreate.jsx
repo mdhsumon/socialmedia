@@ -19,10 +19,7 @@ export class PostCreate extends React.Component {
 
     handleChange = event => {
         this.setState({
-            message: event.target.value,
-            photos: event.target.files,
-            videos: event.target.files,
-            visibility: event.target.value
+            [event.target.name]: event.target.value
         })
     }
 

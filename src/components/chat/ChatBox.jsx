@@ -7,6 +7,7 @@ export class ChatBox extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            newMessage: false,
             inputRow: 1,
             userInput: '',
             messageList: []
@@ -15,8 +16,12 @@ export class ChatBox extends React.Component {
 
     componentDidMount() {
         this.updateMessages()
+
         // Update after getting signal
         socketConnection.on('sendMessage', () => {
+            this.setState({
+                newMessage: true
+            })
             this.updateMessages()
         })
     }
@@ -81,7 +86,7 @@ export class ChatBox extends React.Component {
 
     render() {
         return(
-            <div className="chat-box" key={ this.props.userInfo.userId }>
+            <div className={`chat-box ${this.state.newMessage ? 'new' : ''}`} key={ this.props.userInfo.userId }>
                 <div className="box-head">
                     <div className="user-photo"><img src={ apiBaseUrl + this.props.userInfo.profilePhoto } alt="sf"/></div>
                     <div className="display-name">{ this.props.userInfo.displayName }</div>
@@ -95,7 +100,7 @@ export class ChatBox extends React.Component {
                     { this.renderMessage() }
                 </div>
                 <div className="box-form">
-                    <div className="emoji"><i className="icon-smile"></i></div>
+                    <div className="emoji" title="Coming soon..."><i className="icon-smile"></i></div>
                     <div className="message-input">
                         <textarea
                             style={ { minHeight: '30px', maxHeight: '120px', lineHeight: '14px' } }

@@ -219,6 +219,12 @@
 .lcs-section .share-button:hover i{
     color: #666;
 }
+.author-name{
+    text-decoration: none;
+    color: #333333;
+    font-size: 13px;
+    font-weight: 600;
+  }
 .add-comment {
     flex: auto;
     min-width: 0;
@@ -226,17 +232,12 @@
 }
 .add-comment form input{
     font-size: 12px;
-    text-indent: 5px;
     width: 100%;
-    padding: 6px;
+    padding: 6px 10px;
     border-radius: 3px;
     background-color: #F3F3F3;
     border: 1px solid transparent;
     outline: none;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
     transition: all 0.2s;
 }
 .add-comment form input:focus{
@@ -249,89 +250,83 @@
     position: relative;
     top: -3px;
 }
+.comment-reply {
+    padding: 15px;
+    background-color: #fdfdfd;
+}
 .comment{
-    display: -moz-flex;
-    display: -webkit-flex;
     display: flex;
-    -webkit-justify-content: flex-start;
-    justify-content: flex-start;
+    flex-direction: column;
+    color: #777;
+    font-size: 12px;
 }
-.comment-author-thumb{
-    padding: 10px;
-    width: 40px;
-    height: 40px;
+.comment ~ .comment {
+    margin-top: 15px;
 }
-.comment-author-thumb img{
-    width: 40px;
-    height: 40px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+.comment-section {
+    display: flex;
+}
+.commentor{
     border-radius: 3px;
-    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    flex: none;
+    margin-right: 8px;
 }
-.author-comment-info{
-    padding: 10px 10px 10px 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+.commentor img{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: inherit;
 }
 .comment-body{
-    font-size: 14px;
-    color: #333333;
+    min-width: 0;
+    border-radius: 3px;
+    padding: 3px 6px;
+    background-color: #f3f3f3;
 }
-.author-name{
-    text-decoration: none;
-    color: #333333;
-    font-size: 13px;
-    font-weight: 600;
-  }
-.author-name a{
-    color: #333333;
-    text-decoration: none;
+.comment .action {
+    flex: none;
+    margin-left: 10px;
+    padding: 2px 0;
 }
-.reply{
-    padding: 10px 0;
-    display: -moz-flex;
-    display: -webkit-flex;
+.comment .action span {
+    cursor: pointer;
+    color: #ccc;
+}
+.comment .action span:hover {
+    color: #8dd200;
+}
+.comment .reply-section{
+    padding-top: 10px;
+    padding-left: 30px;
     display: flex;
-    -webkit-justify-content: flex-start;
-    justify-content: flex-start;
+    width: 100%;
 }
-.reply .reply-author-thumb{
-    width: 30px;
-    height: 30px;
+.reply-section .replyar {
+    border-radius: 2px;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
 }
-.reply .reply-author-thumb img{
-    width: 30px;
-    height: 30px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    overflow: hidden;
+.reply-section .replyar img{
+    max-width: 100%;
+    max-height: 100%;
 }
-.reply form{
-    padding: 0 10px;
-    -webkit-flex-grow: 1;
+.reply-section .reply-message {
+    background-color: #f3f3f3;
+    padding: 2px 6px;
+}
+.reply-section form{
     flex-grow: 1;
 }
-.like-reply .reply input{
+.reply-section input{
     font-size: 12px;
-    text-indent: 5px;
     width: 100%;
-    padding: 8px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
-    border: 1px solid #dddddd;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background-color: #f3f3f3;
+    border: 1px solid transparent;
+    outline: none;
     transition: all 0.2s;
 }
 /*----------------(like comment share)LCS section end---------*/

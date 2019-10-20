@@ -95,6 +95,7 @@
   height: 300px;
   display: flex;
   flex-direction: column;
+  flex: none;
   overflow: auto;
 }
 .chat-box.active .box-form {
