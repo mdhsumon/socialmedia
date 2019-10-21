@@ -23,9 +23,6 @@ export class PostReactions extends React.Component {
                     { area: "comment", action: "add", data: this.state.userComment },
                     comRes => {
                         if (comRes.updateStatus) {
-                            this.setState({
-                                userComment: ''
-                            })
                             alert('Your comment has been added on the post')
                         }
                     }
@@ -39,18 +36,17 @@ export class PostReactions extends React.Component {
         }
     }
     render() {
-        const { likes, dislikes } = { likes: this.props.reactions.likes.count, dislikes: this.props.reactions.dislikes.count }
         return (
             <div className="lcs-section">
                 <div className="like-dislike">
                     <button className={this.state.isLiked ? 'like liked' : 'like'} onClick={this.manageReaction}>
                         <i className="icon-like"></i>
                     </button>
-                    <span className="like-amount">{likes > 0 && likes}</span>
+                    <span className="like-amount">{this.props.reactions.likes.count}</span>
                     <button className={this.state.isDisLiked ? 'dislike disliked' : 'dislike'} onClick={this.manageReaction}>
                         <i className="icon-dislike"></i>
                     </button>
-                    <span className="dislike-amount">{dislikes > 0 && dislikes}</span>
+                    <span className="dislike-amount">{this.props.reactions.dislikes.count}</span>
                 </div>
                 <div className="add-comment">
                     <input type="text" placeholder="Write a comment..." onChange={this.handleComment} onKeyDown={this.handleComment} />

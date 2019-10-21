@@ -45,15 +45,15 @@ export class Post extends React.Component {
     }
 
     renderPost = () => {
-        if(this.state.postData.length > 0) {
+        if (this.state.postData.length > 0) {
             return this.state.postData.map(post => {
                 return (
                     <div className="post" key={post._id}>
-                        <PostAuthor authorInfo={post.userInfo} postInfo={{id: post._id, createdAt: post.createdAt}} />
+                        <PostAuthor authorInfo={post.userInfo} postInfo={{ id: post._id, createdAt: post.createdAt }} />
                         <PostContent postContent={post.content} />
                         <PostReactions
                             reactions={post.reactions}
-                            postInfo={{id: post._id, userId: post.userId}}
+                            postInfo={{ id: post._id, userId: post.userId }}
                             likeDislike={this.updateLikeDislike}
                         />
                         <PostComment postComments={post.comments} />
@@ -62,7 +62,7 @@ export class Post extends React.Component {
             })
         }
         else {
-            if(this.state.isEmpty) {
+            if (this.state.isEmpty) {
                 return (
                     <div className="empty-post">
                         <div className="empty-post-message">No post found</div>
