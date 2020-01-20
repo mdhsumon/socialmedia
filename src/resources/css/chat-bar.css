@@ -170,9 +170,14 @@
 }
 .chat-box .box-body {
   flex: auto;
-  padding: 10px;
+  padding: 10px 10px 0;
   min-height: 0;
   overflow: auto;
+}
+.chat-box .box-body:after {
+  content: '';
+  display: block;
+  height: 10px;
 }
 /* width */
 .chat-box .box-body::-webkit-scrollbar {
