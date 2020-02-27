@@ -15,9 +15,8 @@ export const userSignup = (loggedUserInfo, callback) => {
         body: JSON.stringify(loggedUserInfo)
     })
     .then(res => res.json())
-    .then(createResponse => {
-        callback(createResponse)
-    })
+    .then(createResponse => { callback(createResponse) })
+    .catch(err => callback(false))
 }
 
 // Will return access token after login
@@ -31,12 +30,8 @@ export const getAccessToken = (userLoginData, callback) => {
         body: JSON.stringify(userLoginData)
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
-    .catch(err => {
-        callback(false)
-    })
+    .then(data => { callback(data) })
+    .catch(err => { callback(false) })
 }
 
 // Will return single user summary
@@ -50,9 +45,8 @@ export const getMultipleUserSummary = (userOrIdArray, callback) => {
         }
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Will return single user summary
@@ -66,9 +60,8 @@ export const getUserSummery = (userOrId, loggedUserToken = loggedUserToken, call
         }
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Will return true/false if username or email exist
@@ -81,9 +74,8 @@ export const isUserExist = (type, userOrEmail, callback) => {
         }
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data.isExist ? true : false)
-    })
+    .then(data => { callback(data.isExist ? true : false) })
+    .catch(err => callback(false))
 }
 
 // Get friend lists
@@ -97,9 +89,8 @@ export const getFriendLists = callback => {
         }
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Get random friend suggestion
@@ -113,9 +104,8 @@ export const getFriendSuggestion = callback => {
         }
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Send friend request
@@ -129,9 +119,7 @@ export const getFriendRequests = callback => {
         }
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
 }
 
 // Send friend request
@@ -146,9 +134,8 @@ export const sendFriendRequest = (username, callback) => {
         body: JSON.stringify({toUser: username, senderId: loggedUserId})
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Accept friend request
@@ -163,9 +150,8 @@ export const acceptFriendRequest = (userId, callback) => {
         body: JSON.stringify({senderId: userId})
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Accept friend request
@@ -180,9 +166,8 @@ export const declineFriendRequest = (userId, callback) => {
         body: JSON.stringify({senderId: userId})
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Load messages
@@ -196,9 +181,8 @@ export const getUserMessages = (friendId, callback) => {
         }
     })
     .then(res => res.json())
-    .then(messages => {
-        callback(messages)
-    })
+    .then(messages => { callback(messages) })
+    .catch(err => callback(false))
 }
 
 // Send message
@@ -213,7 +197,6 @@ export const sendUserMessage = (userId, messageData, callback) => {
         body: JSON.stringify({ senderId: loggedUserId, userId: userId, messageData: messageData })
     })
     .then(res => res.json())
-    .then(sendStatus => {
-        callback(sendStatus)
-    })
+    .then(sendStatus => { callback(sendStatus) })
+    .catch(err => callback(false))
 }

@@ -28,21 +28,26 @@ export class Login extends React.Component {
         }
         this.setState({buttonLoading: true})
         getAccessToken(formData, data => {
-            if(data.loggedIn) {
-                getUserSummery(this.state.username, data.accessToken, userData => {
-                    localStorage.setItem('userData', JSON.stringify({
-                        userInfo: userData,
-                        userToken: data.accessToken
-                    }))
-                    //this.props.history.push('/feeds')
-                    window.location.href = '/feeds'
-                })
+            if(data) {
+                if(data.loggedIn) {
+                    getUserSummery(this.state.username, data.accessToken, userData => {
+                        localStorage.setItem('userData', JSON.stringify({
+                            userInfo: userData,
+                            userToken: data.accessToken
+                        }))
+                        //this.props.history.push('/feeds')
+                        window.location.href = '/feeds'
+                    })
+                }
+                else {
+                    this.setState({
+                        buttonLoading: false,
+                        formValidation: "Login failed!"
+                    })
+                }
             }
             else {
-                this.setState({
-                    buttonLoading: false,
-                    formValidation: "Login failed!"
-                })
+                alert("Network error!")
             }
         })
     }

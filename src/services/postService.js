@@ -14,9 +14,8 @@ export const createPost = (postData, callback) => {
         body: JSON.stringify(postData)
     })
     .then(res => res.json())
-    .then(data => {
-        callback(data)
-    })
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
 }
 
 // Will return all user posts
@@ -29,6 +28,7 @@ export const getUserPosts = (userId, callback) => {
     })
     .then(res => res.json())
     .then(data => callback(data))
+    .catch(err => callback(false))
 }
 
 // Will return user feed
@@ -41,18 +41,20 @@ export const getUserFeeds = (userId, callback) => {
     })
     .then(res => res.json())
     .then(data => callback(data))
+    .catch(err => callback(false))
 }
 
 // Will return signle post by id
 export const getPostById = (postId, callback) => {
     fetch(`${apiBaseUrl}/post/${postId}`, {
-    method: 'GET',
-    headers: {
-        'Authorization': `Bearer ${loggedUserToken}`
-    }
-})
-.then(res => res.json())
-.then(data => callback(data))
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => callback(data))
+    .catch(err => callback(false))
 }
 
 // Delete post by id
@@ -65,6 +67,7 @@ export const deletePost = (postId, callback) => {
 })
 .then(res => res.json())
 .then(data => callback(data))
+.catch(err => callback(false))
 }
 
 // Get column data
@@ -80,4 +83,5 @@ export const updatePost = (postId, postData, callback) => {
 })
 .then(res => res.json())
 .then(data => callback(data))
+.catch(err => callback(false))
 }
