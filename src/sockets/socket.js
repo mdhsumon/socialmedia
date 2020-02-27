@@ -11,6 +11,4 @@ const connectSocket = url => {
 }
 
 const connection = connectSocket(`http://localhost:8083?userId=${loggedUserInfo.userInfo.userId}`)
-export const socketConnection = connection.connected || false
-console.log(socketConnection)
-//export default socketConnection
+export const socketConnection = connection.connected ? connection : false
