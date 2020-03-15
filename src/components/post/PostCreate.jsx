@@ -13,24 +13,32 @@ export class PostCreate extends React.Component {
             message: '',
             photos: null,
             videos: null,
-            visibility: null
+            visibility: 'public'
         }
     }
 
     handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+        const value = event.target.type === 'file' ? event.target.files : event.target.value
+        this.setState({ [event.target.name]: value })
     }
 
     handleForm = event => {
         event.preventDefault()
-        if(this.state.message.trim().length || true) {
-            const postData = {
-                message: this.state.message,
-                photos: this.state.photos,
-                visibility: this.state.visibility
+        if(this.state.message.trim().length) {
+
+            let postData = new FormData()
+            postData.append('message', this.state.message)
+            postData.append('visibility', this.state.visibility)
+
+            if(this.state.photos != null) {
+                const fileCount = this.state.photos.length
+                for(let i = 0; i < fileCount; i++) {
+                    postData.append('photos', this.state.photos[i])
+                }
             }
+
+            console.log(this.state.photos)
+            
             this.setState({
                 isLoading: true
             })
@@ -73,9 +81,9 @@ export class PostCreate extends React.Component {
                             <div className="message">
                                 <textarea name="message" placeholder="Write something here..." onChange={this.handleChange} value={this.state.message} />
                             </div>
-                            <div className="photos" style={{display: 'none'}}>
+                            <div className="photos" style={{display: ''}}>
                                 <div className="input-box input-file">
-                                    <input type="file" name="photos" onChange={this.handleChange} />
+                                    <input type="file" name="photos" multiple onChange={this.handleChange} />
                                     <div className="input-file-text"><i className="icon-camera"></i> Upload Photos</div>
                                 </div>
                                 <div className="uploaded-files"></div>
@@ -92,7 +100,7 @@ export class PostCreate extends React.Component {
                             <button>Post now</button>
                             <span className="post-visibility">
                                 <select name="visibility" onChange={this.handleChange} >
-                                    <option value="public">public</option>
+                                    <option value="public" selected>public</option>
                                     <option value="friends">friends</option>
                                     <option value="private">private</option>
                                 </select>

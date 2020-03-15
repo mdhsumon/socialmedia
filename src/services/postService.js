@@ -9,9 +9,9 @@ export const createPost = (postData, callback) => {
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            //'Content-Type': 'multipart/form-data'
         },
-        body: JSON.stringify(postData)
+        body: postData
     })
     .then(res => res.json())
     .then(data => { callback(data) })
