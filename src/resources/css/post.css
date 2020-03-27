@@ -16,12 +16,19 @@
     font-size: 20px;
     color: #dddddd;
     cursor: pointer;
+    list-style: none;
 }
 .post-create-tab .tab-item ~ .tab-item {
     margin-left: 20px;
 }
 .post-create-tab .tab-item.active {
     color: #8dd200;
+}
+.post-create-form .tab-content {
+    display: none;
+}
+.post-create-form .tab-content.active {
+    display: block;
 }
 .post-create-body .input-file {
     padding: 20px 15px;
@@ -153,25 +160,21 @@
     color: #666666;
     padding: 0 15px 15px;
 }
-.post .post-body .post-image, .post-image img{
-    width: 100%;
-    margin-top: 5px;
-    height: auto;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    overflow: hidden;
+.post-body .post-atachment {
+    display: flex;
+    margin-top: 20px;
+    flex-wrap: wrap;
 }
-.post .post-body .post-image{
-    position: relative;
+.post-atachment .post-image {
+    flex: auto;
+    padding: 1px;
 }
-.post .post-body .post-image:after{
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+.post-atachment.multiple .post-image {
+    max-width: 50%;
+}
+.post-image img {
+    max-width: 100%;
+    vertical-align: middle;
 }
 /*----------------post body end---------*/
 /*----------------(like comment share)LCS section start---------*/

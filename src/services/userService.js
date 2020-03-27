@@ -50,13 +50,13 @@ export const getMultipleUserSummary = (userOrIdArray, callback) => {
 }
 
 // Will return single user summary
-export const getUserSummery = (userOrId, loggedUserToken = loggedUserToken, callback) => {
+export const getUserSummery = (userOrId, userToken = loggedUserToken, callback) => {
     fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${loggedUserToken}`
+            'Authorization': `Bearer ${userToken}`
         }
     })
     .then(res => res.json())

@@ -1,6 +1,7 @@
 import React from "react"
 import { createPost } from "../../services/postService"
 import { MessagePopup } from "../MessagePopup"
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 export class PostCreate extends React.Component {
     constructor(props) {
@@ -36,8 +37,6 @@ export class PostCreate extends React.Component {
                     postData.append('photos', this.state.photos[i])
                 }
             }
-
-            console.log(this.state.photos)
             
             this.setState({
                 isLoading: true
@@ -72,40 +71,42 @@ export class PostCreate extends React.Component {
             <React.Fragment>
                 <div className="post-create">
                     <form className="post-create-form" onSubmit={this.handleForm}>
-                        <div className="post-create-tab">
-                            <div className="tab-item message"><i className="icon-writing"></i></div>
-                            <div className="tab-item photo active"><i className="icon-camera"></i></div>
-                            <div className="tab-item video"><i className="icon-movie-open"></i></div>
-                        </div>
-                        <div className="post-create-body">
-                            <div className="message">
-                                <textarea name="message" placeholder="Write something here..." onChange={this.handleChange} value={this.state.message} />
+                        <Tabs selectedTabClassName="active" selectedTabPanelClassName="active">
+                            <TabList className="post-create-tab">
+                                <Tab className="tab-item message"><i className="icon-writing"></i></Tab>
+                                <Tab className="tab-item photo"><i className="icon-camera"></i></Tab>
+                                <Tab className="tab-item video"><i className="icon-movie-open"></i></Tab>
+                            </TabList>
+                            <div className="post-create-body">
+                                <TabPanel className="tab-content message">
+                                    <textarea name="message" placeholder="Write something here..." onChange={this.handleChange} value={this.state.message} />
+                                </TabPanel>
+                                <TabPanel className="tab-content photos">
+                                    <div className="input-box input-file">
+                                        <input type="file" name="photos" multiple onChange={this.handleChange} />
+                                        <div className="input-file-text"><i className="icon-camera"></i> Upload Photos</div>
+                                    </div>
+                                    <div className="uploaded-files"></div>
+                                </TabPanel>
+                                <TabPanel className="tab-content videos">
+                                    <div className="input-box input-file">
+                                        <input type="file" name="videos" onChange={this.handleChange} />
+                                        <div className="input-file-text"><i className="icon-movie-open"></i> Upload Videos</div>
+                                    </div>
+                                    <div className="uploaded-files"></div>
+                                </TabPanel>
                             </div>
-                            <div className="photos" style={{display: ''}}>
-                                <div className="input-box input-file">
-                                    <input type="file" name="photos" multiple onChange={this.handleChange} />
-                                    <div className="input-file-text"><i className="icon-camera"></i> Upload Photos</div>
-                                </div>
-                                <div className="uploaded-files"></div>
+                            <div className="post-create-actions">
+                                <button>Post now</button>
+                                <span className="post-visibility">
+                                    <select name="visibility" onChange={this.handleChange} >
+                                        <option value="public" selected>public</option>
+                                        <option value="friends">friends</option>
+                                        <option value="private">private</option>
+                                    </select>
+                                </span>
                             </div>
-                            <div className="videos" style={{display: 'none'}}>
-                                <div className="input-box input-file">
-                                    <input type="file" name="videos" onChange={this.handleChange} />
-                                    <div className="input-file-text"><i className="icon-movie-open"></i> Upload Videos</div>
-                                </div>
-                                <div className="uploaded-files"></div>
-                            </div>
-                        </div>
-                        <div className="post-create-actions">
-                            <button>Post now</button>
-                            <span className="post-visibility">
-                                <select name="visibility" onChange={this.handleChange} >
-                                    <option value="public" selected>public</option>
-                                    <option value="friends">friends</option>
-                                    <option value="private">private</option>
-                                </select>
-                            </span>
-                        </div>
+                        </Tabs>
                     </form>
                 </div>
                 {this.state.messagePopup && <MessagePopup status="success" message="Post has been published" />}

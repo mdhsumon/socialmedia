@@ -1,9 +1,9 @@
 import React from "react"
-import update from "immutability-helper"
+//import update from "immutability-helper"
 import { apiBaseUrl } from "../../services/commonService"
 import { getFriendLists, getMultipleUserSummary } from "../../services/userService"
 import { ChatBox } from "./ChatBox"
-import { socketConnection } from "../../sockets/socket"
+//import { socketConnection } from "../../sockets/socket"
 
 export class ChatBar extends React.Component {
     constructor(props) {

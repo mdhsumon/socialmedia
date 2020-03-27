@@ -155,6 +155,7 @@ button, .button {
   font-size: 25px;
   display: block;
   color: #ddd;
+  margin-bottom: 5px;
 }
 /* end Custom file uploader */
 
