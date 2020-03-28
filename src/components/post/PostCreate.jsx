@@ -12,8 +12,6 @@ export class PostCreate extends React.Component {
             isLoading: false,
             messagePopup: false,
             message: '',
-            photos: null,
-            videos: null,
             visibility: 'public'
         }
     }
@@ -31,10 +29,16 @@ export class PostCreate extends React.Component {
             postData.append('message', this.state.message)
             postData.append('visibility', this.state.visibility)
 
-            if(this.state.photos != null) {
+            if(this.state.photos) {
                 const fileCount = this.state.photos.length
                 for(let i = 0; i < fileCount; i++) {
                     postData.append('photos', this.state.photos[i])
+                }
+            }
+            else if(this.state.videos) {
+                const fileCount = this.state.videos.length
+                for(let i = 0; i < fileCount; i++) {
+                    postData.append('videos', this.state.videos[i])
                 }
             }
             
@@ -90,7 +94,7 @@ export class PostCreate extends React.Component {
                                 </TabPanel>
                                 <TabPanel className="tab-content videos">
                                     <div className="input-box input-file">
-                                        <input type="file" name="videos" onChange={this.handleChange} />
+                                        <input type="file" name="videos" multiple onChange={this.handleChange} />
                                         <div className="input-file-text"><i className="icon-movie-open"></i> Upload Videos</div>
                                     </div>
                                     <div className="uploaded-files"></div>

@@ -213,7 +213,7 @@ button, .button {
 }
 
 .common-block .block-header{
-  background-color: #f9f9f9;
+  background-color: #f8f8f8;
   border-radius: 5px 5px 0 0;
   color: #666666;
   font-size: 14px;
@@ -320,8 +320,8 @@ button, .button {
   content: '';
   height: 80px;
   display: block;
-  background-color: #f9f9f9;
-  box-shadow: -35px -85px 0 -35px #f9f9f9, -33px -60px 0 -33px #f9f9f9;
+  background-color: #f8f8f8;
+  box-shadow: -35px -85px 0 -35px #f8f8f8, -33px -60px 0 -33px #f8f8f8;
   margin-top: 50px;
 }
 
