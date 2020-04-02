@@ -10,6 +10,7 @@ export class Header extends React.Component {
             acceptCount: 0,
             newNoti: false,
             msgCount: 0,
+            profileMenu: 'hide'
         }
         // Receive acceptance signal
         socketConnection.on('friendAccepted', acceptedId => {
@@ -25,6 +26,12 @@ export class Header extends React.Component {
                 msgCount: this.state.msgCount + 1
             })
         })
+    }
+
+    // Toggle profile menu
+    toggleProfileMenu = event => {
+        const menuClass = this.state.profileMenu == 'hide' ? 'show' : 'hide'
+        this.setState({profileMenu: menuClass})
     }
 
     render() {
@@ -91,16 +98,18 @@ export class Header extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="user-bar">
-                        <div className="user-photo">
+                    <div className={`user-bar ${this.state.profileMenu}`}>
+                        <div className="user-photo" onClick={(eve) => {this.toggleProfileMenu(eve)}}>
                             <img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} />
                         </div>
-                        <div className="user-name">
+                        {/* <div className="user-name">
                             <div className="name">{loggedUserInfo.userInfo.displayName}</div>
                             <div className="nickname">{loggedUserInfo.userInfo.nickname}</div>
-                        </div>
+                        </div> */}
                         <div className="user-options">
-                        
+                            <div className="option">Profile Settings</div>
+                            <div className="option">Settings</div>
+                            <div className="option">Logout</div>
                         </div>
                     </div>
                 </div>

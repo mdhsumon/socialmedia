@@ -94,13 +94,31 @@ header.header{
   display: flex;
   align-items: center;
   margin-left: 50px;
+  position: relative;
 }
 .header .user-bar .user-photo {
   border-radius: 2.5px;
   flex: none;
   width: 35px;
   height: 35px;
-  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+}
+.header .user-bar .user-photo:after {
+  content: '';
+  border-style: solid;
+  border-width: 6px 6px 0;
+  border-color: #fff transparent transparent;
+  position: absolute;
+  left: 12px;
+  bottom: 0;
+  z-index: -1;
+  transition: all 0.15s ease;
+}
+.header .user-bar.show .user-photo:after,
+.header .user-bar .user-photo:hover:after {
+  bottom: -6px;
 }
 .header .user-bar .user-photo img {
   border-radius: inherit;
@@ -111,11 +129,37 @@ header.header{
   color: #a2a2a2;
   font-size: 13px;
   font-weight: 600;
+  margin-left: 10px;
 }
 .header .user-bar .nickname {
   font-style: italic;
   font-size: 12px;
   font-weight: 400;
+}
+.header .user-options {
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  width: 150px;
+  z-index: 15;
+}
+.header  .user-bar.show .user-options {
+  display: block;
+}
+.header .user-options .option {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+.header .user-options .option:hover {
+  background-color: #f8f8f8;
 }
 /*-----------------------search list-----*/
 .search-header{
