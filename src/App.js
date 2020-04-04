@@ -15,7 +15,7 @@ export default class App extends React.Component {
           <Route exact path="/signup" component={ Signup } />
           <Route exact path="/login" component={ Login } />
           <Route exact path="/" component={ Welcome } />
-          <PrivateRoute exact path="/feeds" component={ MainBody } />
+          <PrivateRoute exact component={ MainBody } />
       </Router>
     )
   }

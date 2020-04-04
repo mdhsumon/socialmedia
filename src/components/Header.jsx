@@ -30,7 +30,7 @@ export class Header extends React.Component {
 
     // Toggle profile menu
     toggleProfileMenu = event => {
-        const menuClass = this.state.profileMenu == 'hide' ? 'show' : 'hide'
+        const menuClass = this.state.profileMenu === 'hide' ? 'show' : 'hide'
         this.setState({profileMenu: menuClass})
     }
 

@@ -14,7 +14,7 @@ export const MainBody = () => {
           <Navigator />
           <div className="content-body">
             <Router>
-              <Route exact path='/profile' component={Profile} />
+              <Route exact path="/profile" component={Profile} />
               <Route exact path="/feeds" component={NewsFeed} />
             </Router>
           </div> 

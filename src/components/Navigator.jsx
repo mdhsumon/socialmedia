@@ -12,7 +12,7 @@ export const Navigator = () => {
                     <a href="/profile"><i className="icon-profile"></i></a>
                 </div>
                 <div className="nav-item">
-                    <Link to="/profile"><i className="icon-peoples"></i></Link>
+                    <Link to="/groups"><i className="icon-peoples"></i></Link>
                 </div>
                 <div className="nav-item">
                     <Link to="/photos"><i className="icon-camera"></i></Link>

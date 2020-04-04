@@ -4,11 +4,10 @@ import { isLoggedIn } from "./commonActions"
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
-    //{...rest} render={props => console.log(props)}
-    {...rest}
-    render = { props => {
-      return isLoggedIn() ? (<Component {...props} />) : (<Redirect to={{ pathname: '/login', state: { from: props.location } }} />)
-    }}
+      {...rest}
+      render = { props => {
+        return isLoggedIn() ? <Component {...props} /> : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+      }}
     />
   )
 }

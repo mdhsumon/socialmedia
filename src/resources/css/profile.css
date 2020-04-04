@@ -1,11 +1,51 @@
 /*----------------profile start-------*/
+.change-photo {
+  position: absolute;
+  right: 15px;
+  bottom: 5px;
+  font-size: 24px;
+  color: #9c9c9c;
+  display: none;
+}
+.change-photo:hover {
+  color: #333333;
+}
+.cover-photo:hover .change-photo,
+.profile-photo:hover .change-photo {
+  display: block;
+}
+.cover-photo .change-photo {
+  top: 10px;
+  bottom: auto;
+}
+.change-photo:before {
+  font-family: Social;
+  content: "\E90A";
+}
+.change-photo input {
+  cursor: pointer;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
 .profile-info-section {
   margin-bottom: 15px;
 }
 .cover-photo{
+  border-width: 1px 1px 0;
+  border-style: solid;
+  border-color: #e3e3e3;
+  border-radius: 5px 5px 0 0;
   height: 300px;
   position: relative;
   overflow: hidden;
+}
+.cover-photo img {
+  max-width: 100%;
 }
 .profile-section{
   border: 1px solid #e3e3e3;
@@ -19,21 +59,21 @@
   background: #ffffff;
   position: relative;
   height: 50px;
-
   border-bottom: 1px solid #e3e3e3;
-  -webkit-border-radius: 0 0 5px 5px;
-  -moz-border-radius: 0 0 5px 5px;
   border-radius: 0 0 5px 5px;
+  display: flex;
+}
+.profile-author {
+  flex: none;
 }
 .profile-photo{
-  border: 1px solid #fefefe;
-  border: 4px solid #fff;
+  border: 3px solid #fff;
+  border-radius: 5px;
   position: absolute;
-  bottom: 20px;
+  bottom: 15px;
   left: 15px;
   width: 120px;
   height: 120px;
-  border-radius: 5px;
   overflow: hidden;
 }
 .profile-photo img{
@@ -42,15 +82,9 @@
 }
 .profile-name{
   height: 50px;
-  position: absolute;
-  left: 140px;
-
+  margin-left: 150px;
   display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
-  -webkit-align-content: flex-start;
-  align-content: flex-start;
-  -webkit-align-items: center;
   align-items: center;
 }
 .author-nick-name{
@@ -71,6 +105,7 @@
   justify-content: center;
   -webkit-align-items: center;
   align-items: center;
+  justify-content: flex-end;
 }
 .drop-downs li{
   list-style: none;
@@ -94,6 +129,7 @@
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
+.drop-downs li.active a,
 .drop-downs li a:hover{
   color: #333333;
 }
