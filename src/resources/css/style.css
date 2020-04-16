@@ -4,6 +4,9 @@
 @import "./header.css";
 @import "./bio.css";
 @import "./post.css";
+@import "./welcome.css";
+@import "./message-popup.css";
+@import "./popup.css";
 @import "./friend-lists.css";
 @import "./friend-request.css";
 @import "./profile.css";

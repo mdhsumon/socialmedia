@@ -1,0 +1,28 @@
+.welcome-section {
+    background-color: #333;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+  }
+  
+  .welcome-message {
+      color: #fff;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      line-height: normal;
+      text-align: center;
+  }
+  .welcome-message span {
+      color: #8dd200;
+      font-size: 40px;
+      display: block
+  }
+  .welcome-message .counter {
+      color: #fff;
+  }

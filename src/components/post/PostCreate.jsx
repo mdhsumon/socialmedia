@@ -1,6 +1,7 @@
 import React from "react"
 import { createPost } from "../../services/postService"
-import { MessagePopup } from "../MessagePopup"
+import { MessagePopup } from "../common/MessagePopup"
+import Popup from "../common/Popup"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 export class PostCreate extends React.Component {
@@ -115,6 +116,7 @@ export class PostCreate extends React.Component {
                 </div>
                 {this.state.messagePopup && <MessagePopup status="success" message="Post has been published" />}
                 {this.state.isLoading && <div className="card-loader"></div>}
+                <Popup popTitle="Popup Title" popContent="Content goes here..." />
             </React.Fragment>
         )
     }

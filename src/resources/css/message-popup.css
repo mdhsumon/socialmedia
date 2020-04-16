@@ -1,0 +1,22 @@
+.message-popup {
+    position: fixed;
+    top: 35px;
+    left: 50%;
+    font-size: 14px;
+    color: #444;
+    border: 1px solid transparent;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.20);
+    border-radius: 3px;
+    padding: 12px 20px;
+    z-index: 99;
+  }
+  
+  .message-popup.success {
+    border-color: #8DD200;
+  }
+  
+  .message-popup.error {
+    border-color: #ff4040;
+  }

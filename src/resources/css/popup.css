@@ -1,0 +1,86 @@
+.popup {
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.popup-block {
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+}
+
+.popup-body,
+.popup-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-header,
+.popup-action {
+    background-color: #efefef;
+    flex: none;
+    padding: 7.5px 15px;
+}
+
+.popup-header {
+    border-radius:4px 4px 0 0 ;
+    position: relative;
+}
+
+.popup-header .popup-title {
+    color: #666666;
+    font-size: 14px;
+    font-weight: 600;
+    padding-right: 25px;
+}
+
+.popup-header .popup-close {
+    background-color: coral;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 22px;
+    width: 22px;
+    text-align: center;
+    line-height: 1;
+}
+
+.popup-content,
+.popup-body {
+    flex: auto;
+    min-height: 0;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 15px;
+}
+
+.popup-action {
+    border-radius: 0 0 4px 4px;
+    text-align: right;
+}
+
+.popup-action .button ~ .button,
+.popup-action button ~ button {
+    margin-left: 10px;
+}
+
+.popup.popup-medium .popup-block {
+    max-width: 700px;
+}
+
+.popup.popup-large .popup-block {
+    max-width: 1000px;
+}
