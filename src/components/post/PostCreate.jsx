@@ -116,7 +116,6 @@ export class PostCreate extends React.Component {
                 </div>
                 {this.state.messagePopup && <MessagePopup status="success" message="Post has been published" />}
                 {this.state.isLoading && <div className="card-loader"></div>}
-                <Popup popTitle="Popup Title" popContent="Content goes here..." />
             </React.Fragment>
         )
     }

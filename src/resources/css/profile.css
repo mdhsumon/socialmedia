@@ -1,10 +1,15 @@
 /*----------------profile start-------*/
+.popup.popup-cover-photo .popup-content,
+.popup.popup-profile-photo .popup-content {
+  min-height: 240px;
+}
 .change-photo {
   position: absolute;
   right: 15px;
-  bottom: 5px;
+  bottom: 10px;
   font-size: 24px;
   color: #9c9c9c;
+  cursor: pointer;
   display: none;
 }
 .change-photo:hover {
@@ -21,16 +26,6 @@
 .change-photo:before {
   font-family: Social;
   content: "\E90A";
-}
-.change-photo input {
-  cursor: pointer;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
 }
 .profile-info-section {
   margin-bottom: 15px;
@@ -86,6 +81,18 @@
   display: -moz-flex;
   display: flex;
   align-items: center;
+}
+.profile-name .update-info {
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 15px;
+  visibility: hidden;
+}
+.profile-name .update-info:hover {
+  color: #8dd200;
+}
+.profile-info-section:hover .profile-name .update-info {
+  visibility: visible;
 }
 .author-nick-name{
   white-space: nowrap;

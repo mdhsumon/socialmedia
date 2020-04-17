@@ -1,6 +1,6 @@
 import React from "react"
 import FriendRequests from "../FriendRequests"
-import { ProfileInfo } from "../ProfileInfo"
+import ProfileInfo from "../ProfileInfo"
 import { Post } from "../post/Post"
 import { Bio } from "../Bio"
 import FriendLists from "../FriendLists"
