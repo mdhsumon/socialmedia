@@ -139,9 +139,15 @@ button, .button {
   position: relative;
   text-align: center;
   color: #ccc;
+  font-size: 14px;
   padding: 10px 15px;
   border: 1px dashed #CBD4DF;
   border-radius: 3px;
+}
+.input-file.file-selected,
+.input-file:hover {
+  background-color: rgba(141, 210, 0, 0.05);
+  border-color: #8dd200;
 }
 .input-box.input-file input {
   cursor: pointer;

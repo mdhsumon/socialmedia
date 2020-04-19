@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 
 export default class Popup extends React.Component {
     constructor(props) {
-        console.log(props)
         super()
         this.state = {
             isOpen: false
@@ -11,12 +10,14 @@ export default class Popup extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ isOpen: true })
+        this.openPopup()
     }
 
     closePopup = event => {
         this.setState({ isOpen: false })
-
+        if(this.props.onClose) {
+            this.props.onClose();
+        }
     }
 
     openPopup = () => {
@@ -33,7 +34,7 @@ export default class Popup extends React.Component {
                     </div>
                     <div className="popup-body">
                         <div className="popup-content">
-                            { this.props.popContent }
+                            { this.props.popContent() }
                         </div>
                         <div className="popup-action">
                             <button className="button-cancel" onClick={ this.closePopup }>Cancel</button>

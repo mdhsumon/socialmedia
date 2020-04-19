@@ -1,7 +1,7 @@
 /*----------------profile start-------*/
 .popup.popup-cover-photo .popup-content,
 .popup.popup-profile-photo .popup-content {
-  min-height: 240px;
+  min-height: 330px;
 }
 .change-photo {
   position: absolute;
@@ -72,6 +72,14 @@
   overflow: hidden;
 }
 .profile-photo img{
+  max-height: 100%;
+  max-width: 100%;
+}
+.popup .preview-photo {
+  margin-top: 20px;
+  text-align: center;
+}
+.popup .preview-photo img {
   max-height: 100%;
   max-width: 100%;
 }
