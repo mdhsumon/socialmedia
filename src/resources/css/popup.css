@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
+    z-index: 10;
 }
 
 .popup-block {
@@ -44,19 +45,22 @@
 }
 
 .popup-header .popup-close {
-    background-color: coral;
     border-radius: 3px;
-    color: #fff;
+    color: #a5a5a5;
     cursor: pointer;
     position: absolute;
-    right: 7px;
-    top: 7px;
+    right: 8px;
+    top: 8px;
     height: 24px;
     width: 24px;
     text-align: center;
     line-height: 1;
-    font-size: 10px;
-    padding: 7px 0;
+    font-size: 14px;
+    padding: 5px 0;
+}
+
+.popup-header .popup-close:hover {
+    color: #FF6655;
 }
 
 .popup-content,

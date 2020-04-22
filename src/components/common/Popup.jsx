@@ -13,15 +13,22 @@ export default class Popup extends React.Component {
         this.openPopup()
     }
 
+    openPopup = () => {
+        this.setState({ isOpen: true })
+    }
+
     closePopup = event => {
         this.setState({ isOpen: false })
         if(this.props.onClose) {
-            this.props.onClose();
+            this.props.onClose()
         }
     }
 
-    openPopup = () => {
-        this.setState({ isOpen: true })
+    submitPopup = () => {
+        this.setState({ isOpen: false })
+        if(this.props.onSubmit) {
+            this.props.onSubmit()
+        }
     }
 
     render() {
@@ -38,7 +45,7 @@ export default class Popup extends React.Component {
                         </div>
                         <div className="popup-action">
                             <button className="button-cancel" onClick={ this.closePopup }>Cancel</button>
-                            <button>Save</button>
+                            <button onClick={ this.submitPopup }>Save</button>
                         </div>
                     </div>
                 </div>

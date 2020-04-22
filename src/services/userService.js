@@ -5,14 +5,14 @@ const loggedUsername = loggedUserInfo ? loggedUserInfo.userInfo.username : "";
 const loggedUserId = loggedUserInfo ? loggedUserInfo.userInfo.userId : "";
 
 // Create new user
-export const userSignup = (loggedUserInfo, callback) => {
+export const userSignup = (signupData, callback) => {
     fetch(`${apiBaseUrl}/signup`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(loggedUserInfo)
+        body: JSON.stringify(signupData)
     })
     .then(res => res.json())
     .then(createResponse => { callback(createResponse) })
@@ -58,6 +58,37 @@ export const getUserSummery = (userOrId, userToken = loggedUserToken, callback) 
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${userToken}`
         }
+    })
+    .then(res => res.json())
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
+}
+
+// Will return single user full information
+export const getUserProfile = callback => {
+    fetch(`${apiBaseUrl}/${loggedUsername}/profile`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${loggedUserToken}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => { callback(data) })
+    .catch(err => callback(false))
+}
+
+// Update profile information
+export const updateUserProfile = (profileData, callback) => {
+    fetch(`${apiBaseUrl}/${loggedUsername}/profile`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${loggedUserToken}`
+        },
+        body: JSON.stringify(profileData)
     })
     .then(res => res.json())
     .then(data => { callback(data) })

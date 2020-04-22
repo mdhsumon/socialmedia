@@ -1,7 +1,6 @@
 import React from "react"
 import { createPost } from "../../services/postService"
 import { MessagePopup } from "../common/MessagePopup"
-import Popup from "../common/Popup"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 export class PostCreate extends React.Component {
