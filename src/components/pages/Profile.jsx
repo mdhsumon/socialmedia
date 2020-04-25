@@ -5,24 +5,39 @@ import { Post } from "../post/Post"
 import { Bio } from "../Bio"
 import FriendLists from "../FriendLists"
 
-export const Profile = () => {
-    return(
-        <div className="profile-secton">
-            <div className="container">
-                <ProfileInfo /> 
+export default class Profile extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            bioData: ''
+        }
+    }
+
+    updateBio = newData => {
+        this.setState({
+            bioData: newData
+        })
+    }
+
+    render() {
+        return(
+            <div className="profile-secton">
+                <div className="container">
+                    <ProfileInfo updateBio={ this.updateBio } /> 
+                </div>
+                <div className="container column-section">
+                    <div className="left-column">
+                        <Bio bioData={ this.state.bioData } />
+                    </div>
+                    <div className="middle-column">
+                        <Post />
+                    </div>
+                    <div className="right-column">
+                        <FriendLists />
+                        <FriendRequests />
+                    </div>
+                </div>
             </div>
-            <div className="container column-section">
-                <div className="left-column">
-                    <FriendLists />
-                    <Bio />
-                </div>
-                <div className="middle-column">
-                    <Post />
-                </div>
-                <div className="right-column">
-                    <FriendRequests />
-                </div>
-            </div>
-        </div>
-    )
+        )
+    }
 }

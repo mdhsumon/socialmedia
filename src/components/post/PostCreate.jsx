@@ -23,8 +23,7 @@ export class PostCreate extends React.Component {
 
     handleForm = event => {
         event.preventDefault()
-        if(this.state.message.trim().length) {
-
+        if(this.state.message.trim().length || this.state.photos || this.state.videos) {
             let postData = new FormData()
             postData.append('message', this.state.message)
             postData.append('visibility', this.state.visibility)
@@ -50,6 +49,7 @@ export class PostCreate extends React.Component {
             this.props.removeEmpty()
 
             createPost(postData, response => {
+                console.log(response)
                 if(response.createStatus) {
                     this.setState({
                         message: '',
@@ -103,10 +103,10 @@ export class PostCreate extends React.Component {
                             <div className="post-create-actions">
                                 <button>Post now</button>
                                 <span className="post-visibility">
-                                    <select name="visibility" onChange={this.handleChange} >
-                                        <option value="public" selected>public</option>
-                                        <option value="friends">friends</option>
-                                        <option value="private">private</option>
+                                    <select name="visibility" defaultValue="public" onChange={this.handleChange} title="Post visibility">
+                                        <option value="public">Public</option>
+                                        <option value="friends">Friends</option>
+                                        <option value="private">Only me</option>
                                     </select>
                                 </span>
                             </div>

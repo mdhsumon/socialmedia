@@ -84,11 +84,10 @@ export const updateUserProfile = (profileData, callback) => {
     fetch(`${apiBaseUrl}/${loggedUsername}/profile`, {
         method: 'PUT',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${loggedUserToken}`
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json'
         },
-        body: JSON.stringify(profileData)
+        body: profileData
     })
     .then(res => res.json())
     .then(data => { callback(data) })

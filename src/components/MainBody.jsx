@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import { Header } from "./Header"
 import { Navigator } from "./Navigator"
 import { NewsFeed } from "./pages/NewsFeed"
-import { Profile } from "./pages/Profile"
+import Profile from "./pages/Profile"
 import { ChatBar } from "./chat/ChatBar"
 
 export const MainBody = () => {

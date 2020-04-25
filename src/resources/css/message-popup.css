@@ -3,6 +3,7 @@
     top: 35px;
     left: 50%;
     font-size: 14px;
+    font-weight: 600;
     color: #444;
     border: 1px solid transparent;
     transform: translateX(-50%);

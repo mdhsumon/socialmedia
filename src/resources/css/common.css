@@ -19,7 +19,7 @@ textarea {
   font-family: Roboto, "Segoe UI", "Helvetica Neue", Arial;
   outline: 0;
   background-color: #fff;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #ddd;
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
@@ -34,6 +34,22 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: #8dd200;
+}
+
+::-webkit-input-placeholder {
+  color: #ddd;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: #ddd;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  color: #ddd;
+}
+
+:-ms-input-placeholder {  
+  color: #ddd;
 }
 
 button, .button {

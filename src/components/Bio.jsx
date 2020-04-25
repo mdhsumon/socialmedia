@@ -1,14 +1,11 @@
 import React from 'react'
-export const Bio = () => {
+export const Bio = props => {
     return (
         <div className="common-block bio-section">
-            <h4 className="block-header">Bio</h4>
-            <div className="block-body bio-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-              of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
-              into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-               Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus 
-               PageMaker including versions of Lorem Ipsum.</div>
+            <h4 className="block-header">About Yourself</h4>
+            <div className="block-body bio-description">
+                { props.bioData ? props.bioData : <div className="no-rq-item">About yourself...</div>}
+            </div>
         </div>
     )
 }

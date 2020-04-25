@@ -8,8 +8,7 @@ export const createPost = (postData, callback) => {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            //'Content-Type': 'multipart/form-data'
+            'Accept': 'application/json'
         },
         body: postData
     })
