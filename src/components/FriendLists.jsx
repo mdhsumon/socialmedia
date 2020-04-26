@@ -10,9 +10,6 @@ export default class FriendLists extends React.Component {
             isEmpty: false,
             friendLists: []
         }
-    }
-
-    componentDidMount() {
         this.loadFriendLists()
     }
 

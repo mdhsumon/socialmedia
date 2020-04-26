@@ -30,7 +30,7 @@ export class Login extends React.Component {
         getAccessToken(formData, data => {
             if(data) {
                 if(data.loggedIn) {
-                    getUserSummery(this.state.username, data.accessToken, userData => {
+                    getUserSummery(this.state.username, userData => {
                         localStorage.setItem('userData', JSON.stringify({
                             userInfo: userData,
                             userToken: data.accessToken

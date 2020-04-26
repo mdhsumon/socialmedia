@@ -2,7 +2,7 @@ import React from 'react'
 import { loggedUserInfo } from '../../services/commonService'
 import { getUserFeeds, getUserPosts } from '../../services/postService'
 import { PostCreate } from "./PostCreate"
-import { PostAuthor } from "./PostAuthor"
+import PostAuthor from "./PostAuthor"
 import { PostContent } from "./PostContent"
 import { PostReactions } from "./PostReactions"
 import { PostComment } from "./PostComment"
@@ -14,19 +14,17 @@ export class Post extends React.Component {
             isEmpty: true,
             postData: []
         }
+        
+        this.loadPosts()
     }
 
-    getPosts = () => {
+    loadPosts = () => {
         const getPost = window.location.pathname === '/feeds' ? getUserFeeds : getUserPosts
         getPost(loggedUserInfo.userInfo.userId, data => {
             this.setState({
                 postData: data
             })
         })
-    }
-
-    componentDidMount() {
-        this.getPosts()
     }
 
     // Passed to PostCreate for updating empty block
@@ -44,6 +42,14 @@ export class Post extends React.Component {
         })
     }
 
+    // Passed to PostAuthor to delete post
+    deletePostFlag = postId => {
+        const postList = this.state.postData.filter(post => post._id !== postId)
+        this.setState({
+            postData: postList
+        })
+    }
+
     renderPost = () => {
         const postData = this.state.postData
         if(postData) {
@@ -51,7 +57,7 @@ export class Post extends React.Component {
                 return this.state.postData.map(post => {
                     return (
                         <div className="post" key={post._id}>
-                            <PostAuthor authorInfo={post.userInfo} postInfo={{ id: post._id, createdAt: post.createdAt }} />
+                            <PostAuthor authorInfo={post.userInfo} postInfo={{ id: post._id, createdAt: post.createdAt }} deletePostFlag={this.deletePostFlag} />
                             <PostContent postContent={post.content} />
                             <PostReactions
                                 reactions={post.reactions}

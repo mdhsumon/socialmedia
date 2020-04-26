@@ -11,15 +11,12 @@ export default class ProfileInfo extends React.Component {
             isPopup: false,
             isMessagePopup: false
         }
+        this.loadProfileData()
     }
 
     popupClass = null
     popupTitle = null
     popupContent = null
-
-    componentDidMount() {
-        this.loadProfileData()
-    }
 
     loadProfileData = () => {
         getUserProfile(data => {

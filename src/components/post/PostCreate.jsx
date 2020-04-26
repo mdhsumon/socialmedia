@@ -49,7 +49,6 @@ export class PostCreate extends React.Component {
             this.props.removeEmpty()
 
             createPost(postData, response => {
-                console.log(response)
                 if(response.createStatus) {
                     this.setState({
                         message: '',

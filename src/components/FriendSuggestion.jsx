@@ -11,9 +11,6 @@ export default class FriendSuggestion extends React.Component {
             isRemoving: false,
             suggestionList: []
         }
-    }
-
-    componentDidMount() {
         this.getSuggestions()
     }
 

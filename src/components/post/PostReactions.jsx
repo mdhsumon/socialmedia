@@ -44,7 +44,7 @@ export class PostReactions extends React.Component {
                     </button>
                     <span className="like-amount">{this.props.reactions.likes.count}</span>
                     <button className={this.state.isDisLiked ? 'dislike disliked' : 'dislike'} onClick={this.manageReaction}>
-                        <i className="icon-dislike"></i>
+                        <i className="icon-smile"></i>
                     </button>
                     <span className="dislike-amount">{this.props.reactions.dislikes.count}</span>
                 </div>

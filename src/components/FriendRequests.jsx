@@ -11,9 +11,6 @@ export default class FriendRequests extends React.Component {
             isEmpty: false,
             friendRequests: []
         }
-    }
-
-    componentDidMount() {
         this.loadFriendRequests()
     }
 

@@ -1,5 +1,5 @@
 .message-popup {
-    position: fixed;
+    position: absolute;
     top: 35px;
     left: 50%;
     font-size: 14px;

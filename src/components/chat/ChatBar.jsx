@@ -12,15 +12,10 @@ export class ChatBar extends React.Component {
             chatUsers: [],
             openedChat: []
         }
+        this.loadFriendLists()
     }
 
-    updateUsers = users => {
-        this.setState({
-            chatUsers: users
-        })
-    }
-
-    componentDidMount() {
+    loadFriendLists = () => {
         getFriendLists(friendList => {
             let friendIds = []
             for(let friend in friendList.friends) {
@@ -51,6 +46,12 @@ export class ChatBar extends React.Component {
         //         chatUsers: copyUsers
         //     })
         // })
+    }
+
+    updateUsers = users => {
+        this.setState({
+            chatUsers: users
+        })
     }
 
     openChat = (event, user) => {
