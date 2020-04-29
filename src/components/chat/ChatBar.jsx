@@ -1,7 +1,7 @@
 import React from "react"
 //import update from "immutability-helper"
 import { apiBaseUrl } from "../../services/commonService"
-import { getFriendLists, getMultipleUserSummary } from "../../services/userService"
+import { getFriendLists, getUserSummary } from "../../services/userService"
 import { ChatBox } from "./ChatBox"
 //import { socketConnection } from "../../sockets/socket"
 
@@ -17,23 +17,23 @@ export class ChatBar extends React.Component {
 
     loadFriendLists = () => {
         getFriendLists(friendList => {
-            let friendIds = []
-            for(let friend in friendList.friends) {
-                friendIds[friend] = friendList.friends[friend].friendId
-            }
-            getMultipleUserSummary(friendIds, users => {
-                const userList = []
-                for(let user in users) {
-                    userList[user] = {
-                        status: 'offline',
-                        userId: users[user].userId,
-                        username: users[user].username,
-                        displayName: users[user].displayName,
-                        profilePhoto: users[user].profilePhoto 
+            if(friendList.status) {
+                const friendIds = friendList.friends.map(friend => friend.friendId)
+                getUserSummary(friendIds, data => {
+                    if(data.status) {
+                        const userList = data.users.map(user => (
+                            {
+                                status: 'offline',
+                                userId: user._id,
+                                username: user.username,
+                                displayName: user.displayName,
+                                profilePhoto: user.profilePhoto 
+                            }
+                        ))
+                        this.updateUsers(userList)
                     }
-                }
-                this.updateUsers(userList)
-            })
+                })
+            }
         })
 
         // Receive user online status signal

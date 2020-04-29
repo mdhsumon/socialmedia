@@ -50,7 +50,7 @@ export class ChatBox extends React.Component {
     sendMessage = () => {
         if(this.state.userInput.trim().length) {
             sendUserMessage(this.props.userInfo.userId, this.state.userInput, response => {
-                if(response.sendStatus) {
+                if(response.status) {
                     this.updateMessages()
                     socketConnection.emit('sendMessage', this.props.userInfo.userId)
                 }

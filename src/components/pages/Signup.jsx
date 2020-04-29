@@ -240,7 +240,7 @@ export class Signup extends React.Component {
         }
         if(this.formValidation || true) {
             userSignup(formData, response => {
-                if(response.signupStatus) {
+                if(response.status) {
                     this.setState({ isWelcomeScreen: true })
                     let count = this.state.counter
                     setInterval(() => {

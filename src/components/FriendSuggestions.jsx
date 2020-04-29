@@ -1,55 +1,55 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { apiBaseUrl } from "../services/commonService"
-import { getFriendSuggestion, sendFriendRequest } from "../services/userService"
+import { getFriendSuggestions, sendFriendRequest } from "../services/userService"
 
-export default class FriendSuggestion extends React.Component {
+export default class FriendSuggestions extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             isEmpty: false,
             isRemoving: false,
-            suggestionList: []
+            suggestions: []
         }
         this.getSuggestions()
     }
 
     getSuggestions = () => {
-        getFriendSuggestion(response => {
-            this.setState({suggestionList: response})
+        getFriendSuggestions(response => {
+            response.status && this.setState({suggestions: response.suggestions})
         })
     }
 
     sendRequest = (userInfo, event) => {
         sendFriendRequest(userInfo.username, response => {
-            const currentList = [...this.state.suggestionList]
+            const currentList = [...this.state.suggestions]
             const findItem = currentList.indexOf(userInfo)
             if(response.requestStatus) {
                 currentList.splice(findItem, 1)
                 this.setState({
-                    suggestionList: currentList
+                    suggestions: currentList
                 })
             }
         })
     }
 
     removeSuggestion = (userInfo, event) => {
-        const currentList = [...this.state.suggestionList]
+        const currentList = [...this.state.suggestions]
         const findItem = currentList.indexOf(userInfo)
         if(findItem !== -1) {
             currentList.splice(findItem, 1)
             this.setState({
-                suggestionList: currentList
+                suggestions: currentList
             })
         }
     }
 
     renderSuggestion = () => {
-        if(this.state.suggestionList.length){
+        if(this.state.suggestions.length){
             return (
-                this.state.suggestionList.map(userInfo => {
+                this.state.suggestions.map(userInfo => {
                     return(
-                        <div className="friend-rq-item" key={userInfo.userId}>
+                        <div className="friend-rq-item" key={userInfo._id}>
                             <div className="friend-rq-item-thumb">
                                 <img alt={userInfo.displayName} src={apiBaseUrl + userInfo.profilePhoto} />
                             </div>

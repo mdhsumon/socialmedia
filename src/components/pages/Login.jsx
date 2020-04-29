@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { getAccessToken, getUserSummery } from "../../services/userService"
+import { getAccessToken } from "../../services/userService"
 
 export class Login extends React.Component {
     constructor(props) {
@@ -12,8 +12,6 @@ export class Login extends React.Component {
             formValidation: '',
             buttonLoading: false
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleLoginForm = this.handleLoginForm.bind(this)
     }
     handleChange = event => {
         this.setState({
@@ -27,17 +25,13 @@ export class Login extends React.Component {
             password: this.state.password
         }
         this.setState({buttonLoading: true})
-        getAccessToken(formData, data => {
-            if(data) {
-                if(data.loggedIn) {
-                    getUserSummery(this.state.username, userData => {
-                        localStorage.setItem('userData', JSON.stringify({
-                            userInfo: userData,
-                            userToken: data.accessToken
-                        }))
-                        //this.props.history.push('/feeds')
-                        window.location.href = '/feeds'
-                    })
+        getAccessToken(formData, token => {
+            if(token) {
+                if(token.status) {
+                    // Set local storage data
+                    localStorage.setItem('data', JSON.stringify({ id: token._id, accessToken: token.accessToken }))
+                     //this.props.history.push('/feeds')
+                    window.location.href = '/feeds'
                 }
                 else {
                     this.setState({

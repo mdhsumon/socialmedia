@@ -1,6 +1,7 @@
-import { loggedUserInfo, apiBaseUrl } from "./commonService";
+import { loggedUserInfo, apiBaseUrl } from "./commonService"
 
-const loggedUserToken = loggedUserInfo.userToken;
+const loggedUserToken = loggedUserInfo.accessToken
+const loggedUserId = loggedUserInfo.id
 
 // Will create new post
 export const createPost = (postData, callback) => {
@@ -14,33 +15,33 @@ export const createPost = (postData, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Will return all user posts
-export const getUserPosts = (userId, callback) => {
-    fetch(`${apiBaseUrl}/posts/${userId}`, {
+export const getUserPosts = callback => {
+    fetch(`${apiBaseUrl}/${loggedUserId}/posts`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`
         }
     })
     .then(res => res.json())
-    .then(data => callback(data))
-    .catch(err => callback(false))
+    .then(data => { callback(data) })
+    .catch(err => { callback(false) })
 }
 
 // Will return user feed
-export const getUserFeeds = (userId, callback) => {
-    fetch(`${apiBaseUrl}/feeds/${userId}`, {
+export const getUserFeeds = callback => {
+    fetch(`${apiBaseUrl}/${loggedUserId}/feeds`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`
         }
     })
     .then(res => res.json())
-    .then(data => callback(data))
-    .catch(err => callback(false))
+    .then(data => { callback(data) })
+    .catch(err => { callback(false) })
 }
 
 // Will return signle post by id
@@ -52,8 +53,8 @@ export const getPostById = (postId, callback) => {
         }
     })
     .then(res => res.json())
-    .then(data => callback(data))
-    .catch(err => callback(false))
+    .then(data => { callback(data) })
+    .catch(err => {})
 }
 
 // Delete post by id
@@ -65,8 +66,8 @@ export const deletePost = (postId, callback) => {
     }
 })
 .then(res => res.json())
-.then(data => callback(data))
-.catch(err => callback(false))
+.then(data => { callback(data) })
+.catch(err => { callback(false) })
 }
 
 // Get column data
@@ -81,6 +82,6 @@ export const updatePost = (postId, postData, callback) => {
     body: JSON.stringify(postData)
 })
 .then(res => res.json())
-.then(data => callback(data))
-.catch(err => callback(false))
+.then(data => { callback(data) })
+.catch(err => { callback(false) })
 }

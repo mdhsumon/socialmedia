@@ -149,7 +149,7 @@ header.header{
   width: 150px;
   z-index: 15;
 }
-.header  .user-bar.show .user-options {
+.header .user-bar.show .user-options {
   display: block;
 }
 .header .user-options .option {
@@ -159,7 +159,7 @@ header.header{
   cursor: pointer;
 }
 .header .user-options .option:hover {
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
 }
 /*-----------------------search list-----*/
 .search-header{

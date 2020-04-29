@@ -2,7 +2,9 @@
 .no-rq-item {
   padding: 15px 0;
   color: #ccc;
+  font-size: 14px;
   text-align: center;
+  width: 100%;
 }
 .friend-rq-item {
   display: flex;

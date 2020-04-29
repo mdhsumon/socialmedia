@@ -10,4 +10,4 @@ const connectSocket = url => {
     )
 }
 
-export const socketConnection = loggedUserInfo ? connectSocket(`http://localhost:8083?userId=${loggedUserInfo.userInfo.userId}`) : false
+export const socketConnection = loggedUserInfo ? connectSocket(`http://localhost:8083?userId=${loggedUserInfo.id}`) : false

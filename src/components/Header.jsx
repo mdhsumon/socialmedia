@@ -1,8 +1,9 @@
 import React from "react"
 import { loggedUserInfo, apiBaseUrl } from "../services/commonService"
 import { socketConnection } from "../sockets/socket"
+import { getUserSummary, userLogout } from "../services/userService"
 
-export class Header extends React.Component {
+export default class Header extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -12,6 +13,15 @@ export class Header extends React.Component {
             msgCount: 0,
             profileMenu: 'hide'
         }
+        getUserSummary(loggedUserInfo.id, summary => {
+            const user = summary.users[0]
+            if(summary.status)
+            this.setState({
+                displayName: user.displayName,
+                username: user.displayName,
+                profilePhoto: user.profilePhoto
+            })
+        })
         // Receive acceptance signal
         socketConnection.on('friendAccepted', acceptedId => {
             this.setState({
@@ -32,6 +42,15 @@ export class Header extends React.Component {
     toggleProfileMenu = event => {
         const menuClass = this.state.profileMenu === 'hide' ? 'show' : 'hide'
         this.setState({profileMenu: menuClass})
+    }
+
+    logout = () => {
+        userLogout(response => {
+            if(response.status) {
+                localStorage.removeItem('data')
+                window.location.href = '/'
+            }
+        })
     }
 
     render() {
@@ -72,9 +91,7 @@ export class Header extends React.Component {
                         <div className="notification-item message active">
                             <div className="notification-button">
                                 <i className="icon-text-bubble"></i>
-                                {this.state.newNoti && (
-                                    <span className="notification-count">{this.state.msgCount}</span>
-                                )}
+                                {this.state.newNoti && <span className="notification-count">{this.state.msgCount}</span>}
                             </div>
                             <div className="message-list">
 
@@ -99,8 +116,8 @@ export class Header extends React.Component {
                         </div>
                     </div>
                     <div className={`user-bar ${this.state.profileMenu}`}>
-                        <div className="user-photo" onClick={(eve) => {this.toggleProfileMenu(eve)}}>
-                            <img src={apiBaseUrl + loggedUserInfo.userInfo.profilePhoto} alt={loggedUserInfo.userInfo.displayName} />
+                        <div className="user-photo" onClick={eve => this.toggleProfileMenu(eve)}>
+                            <img src={apiBaseUrl + this.state.profilePhoto} alt={this.state.displayName} />
                         </div>
                         {/* <div className="user-name">
                             <div className="name">{loggedUserInfo.userInfo.displayName}</div>
@@ -109,7 +126,7 @@ export class Header extends React.Component {
                         <div className="user-options">
                             <div className="option">Profile Settings</div>
                             <div className="option">Settings</div>
-                            <div className="option">Logout</div>
+                            <div className="option" onClick={() => this.logout()}>Logout</div>
                         </div>
                     </div>
                 </div>

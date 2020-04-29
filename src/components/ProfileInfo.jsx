@@ -1,7 +1,7 @@
 import React from "react"
 import { apiBaseUrl } from "../services/commonService"
 import Popup from "./common/Popup"
-import { getUserProfile, updateUserProfile } from "../services/userService"
+import { getUser, updateUser } from "../services/userService"
 import { MessagePopup } from "./common/MessagePopup"
 
 export default class ProfileInfo extends React.Component {
@@ -19,20 +19,20 @@ export default class ProfileInfo extends React.Component {
     popupContent = null
 
     loadProfileData = () => {
-        getUserProfile(data => {
-            if(data) {
+        getUser(data => {
+            if(data.status) {
                 this.setState({
-                    displayName: data.displayName,
-                    nickName: data.nickName,
-                    userEmail: data.userEmail,
-                    userPhone: data.userPhone,
-                    birthDate: data.birthDate,
-                    location: data.location,
-                    about: data.about,
-                    profilePhoto: data.profilePhoto,
-                    coverPhoto: data.coverPhoto
+                    displayName: data.user.displayName,
+                    nickName: data.user.nickName,
+                    userEmail: data.user.userEmail,
+                    userPhone: data.user.userPhone,
+                    birthDate: data.user.birthDate,
+                    location: data.user.location,
+                    about: data.user.about,
+                    profilePhoto: data.user.profilePhoto,
+                    coverPhoto: data.user.coverPhoto
                 })
-                // Update bio from paren
+                // Update bio from parent
                 this.props.updateBio(this.state.about)
             }
         })
@@ -66,8 +66,9 @@ export default class ProfileInfo extends React.Component {
         this.state.about && newData.append('about', this.state.about)
         this.state.newProfile && newData.append('newProfile', this.state.newProfile[0])
         this.state.newCover && newData.append('newCover', this.state.newCover[0])
-        updateUserProfile(newData, status => {
-            if(status) {
+        updateUser(newData, response => {
+            console.log(response)
+            if(response.status) {
                 this.setState({ isPopup: false })
                 this.loadProfileData()
                 this.setState({
@@ -165,8 +166,6 @@ export default class ProfileInfo extends React.Component {
     render() {
         return (
             <React.Fragment>
-                { this.state.isMessagePopup && <MessagePopup message={ this.state.messagePopupText } status="success" /> }
-                { this.state.isPopup && <Popup onClose={ this.onClosePopup } onSubmit={ this.onSubmitPopup } popTitle={ this.popupTitle } popContent={ () => this.popupContent() } popClass={ this.popupClass } /> }
                 <div className="profile-info-section">
                     <div className="cover-photo">
                         <img src={apiBaseUrl + this.state.coverPhoto} alt="Cover" />
@@ -194,6 +193,8 @@ export default class ProfileInfo extends React.Component {
                         </div> */}
                     </div>
                 </div>
+                { this.state.isMessagePopup && <MessagePopup message={ this.state.messagePopupText } status="success" /> }
+                { this.state.isPopup && <Popup onClose={ this.onClosePopup } onSubmit={ this.onSubmitPopup } popTitle={ this.popupTitle } popContent={ () => this.popupContent() } popClass={ this.popupClass } /> }
             </React.Fragment>
         )
     }

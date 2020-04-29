@@ -1,45 +1,43 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { apiBaseUrl } from "../services/commonService"
-import { getFriendRequests, getMultipleUserSummary, acceptFriendRequest, declineFriendRequest } from "../services/userService"
+import { getFriendRequests, acceptFriendRequest, declineFriendRequest, getUserSummary } from "../services/userService"
 import { socketConnection } from "../sockets/socket"
 
-export default class FriendRequests extends React.Component {
+export default class requests extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             isEmpty: false,
-            friendRequests: []
+            requests: []
         }
-        this.loadFriendRequests()
+        this.loadrequests()
     }
 
-    loadFriendRequests = () => {
+    loadrequests = () => {
         getFriendRequests(response => {
-            if(response.friendRequests) {
-                let reqSenderIds = []
-                for(let sender in response.friendRequests) {
-                    reqSenderIds[sender] = response.friendRequests[sender].senderId
-                }
-                getMultipleUserSummary(reqSenderIds, userSummary => {
-                    this.setState({friendRequests: userSummary})
+            if(response.status) {
+                const reqSenderIds = response.requests.map(sender => sender.senderId)
+                getUserSummary(reqSenderIds, userSummary => {
+                    if(userSummary.status)
+                    this.setState({requests: userSummary.users})
                 })
             }
         })
     }
 
     removeRequestItem = requestItem => {
-        const currentList = [...this.state.friendRequests]
+        const currentList = [...this.state.requests]
         currentList.splice(requestItem, 1)
         this.setState({
-            friendRequests: currentList
+            requests: currentList
         })
     }
 
     handleRequest = (requestItem, requstType, event) => {
         if(requstType === 'accept') {
-            acceptFriendRequest(requestItem.userId, response => {
-                if(response.acceptStatus) {
+            acceptFriendRequest(requestItem._id, response => {
+                if(response.status) {
                     this.removeRequestItem(requestItem)
                     // Broadcast acceptance signal
                     socketConnection.emit('friendAccepted', requestItem.userId)
@@ -47,8 +45,8 @@ export default class FriendRequests extends React.Component {
             })
         }
         else if(requstType === 'decline') {
-            declineFriendRequest(requestItem.userId, response => {
-                if(response.declineStatus) {
+            declineFriendRequest(requestItem._id, response => {
+                if(response.status) {
                     this.removeRequestItem(requestItem)
                 }
             })
@@ -56,11 +54,11 @@ export default class FriendRequests extends React.Component {
     }
 
     renderFriednRequst = () => {
-        if(this.state.friendRequests.length) {
+        if(this.state.requests.length) {
             return (
-                this.state.friendRequests.map(requestItem => {
+                this.state.requests.map(requestItem => {
                     return(
-                        <div className="friend-rq-item" key={requestItem.userId}>
+                        <div className="friend-rq-item" key={requestItem._id}>
                             <div className="friend-rq-item-thumb">
                                 <img alt="alter text" src={apiBaseUrl + requestItem.profilePhoto} />
                             </div>
@@ -91,7 +89,7 @@ export default class FriendRequests extends React.Component {
             <div className="common-block friend-request-section">
                 <h4 className="block-header">Friend requests</h4>
                 <div className="block-body friend-rq-items">
-                    {this.renderFriednRequst()}
+                    { this.renderFriednRequst() }
                 </div>
             </div>
         )

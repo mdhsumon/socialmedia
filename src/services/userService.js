@@ -1,8 +1,7 @@
-import { loggedUserInfo, apiBaseUrl } from "./commonService";
+import { loggedUserInfo, apiBaseUrl } from "./commonService"
 
-const loggedUserToken = loggedUserInfo ? loggedUserInfo.userToken : "";
-const loggedUsername = loggedUserInfo ? loggedUserInfo.userInfo.username : "";
-const loggedUserId = loggedUserInfo ? loggedUserInfo.userInfo.userId : "";
+const loggedUserToken = loggedUserInfo.accessToken
+const loggedUserId = loggedUserInfo.id
 
 // Create new user
 export const userSignup = (signupData, callback) => {
@@ -16,28 +15,28 @@ export const userSignup = (signupData, callback) => {
     })
     .then(res => res.json())
     .then(createResponse => { callback(createResponse) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Will return access token after login
-export const getAccessToken = (userLoginData, callback) => {
+export const getAccessToken = (loginData, callback) => {
     fetch(`${apiBaseUrl}/login`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userLoginData)
+        body: JSON.stringify(loginData)
     })
     .then(res => res.json())
     .then(data => { callback(data) })
     .catch(err => { callback(false) })
 }
 
-// Will return single user summary
-export const getMultipleUserSummary = (userOrIdArray, callback) => {
-    fetch(`${apiBaseUrl}/multiple/user/summary/${userOrIdArray}`, {
-        method: 'GET',
+// Logout and destroy token
+export const userLogout = callback => {
+    fetch(`${apiBaseUrl}/logout`, {
+        method: 'POST',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
             'Accept': 'application/json',
@@ -46,11 +45,11 @@ export const getMultipleUserSummary = (userOrIdArray, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Will return single user summary
-export const getUserSummery = (userOrId, callback) => {
+export const getUserSummary = (userOrId, callback) => {
     fetch(`${apiBaseUrl}/user/summary/${userOrId}`, {
         method: 'GET',
         headers: {
@@ -60,13 +59,13 @@ export const getUserSummery = (userOrId, callback) => {
         }
     })
     .then(res => res.json())
-    .then(data => { callback(data) })
-    .catch(err => {callback(false)})
+    .then(user => { callback(user) })
+    .catch(err => { callback(false) })
 }
 
 // Will return single user full information
-export const getUserProfile = callback => {
-    fetch(`${apiBaseUrl}/${loggedUsername}/profile`, {
+export const getUser = callback => {
+    fetch(`${apiBaseUrl}/user/${loggedUserId}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -76,12 +75,12 @@ export const getUserProfile = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Update profile information
-export const updateUserProfile = (profileData, callback) => {
-    fetch(`${apiBaseUrl}/${loggedUsername}/profile`, {
+export const updateUser = (profileData, callback) => {
+    fetch(`${apiBaseUrl}/user/${loggedUserId}`, {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
@@ -91,7 +90,7 @@ export const updateUserProfile = (profileData, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Will return true/false if username or email exist
@@ -105,12 +104,12 @@ export const isUserExist = (type, userOrEmail, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data.isExist ? true : false) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Get friend lists
 export const getFriendLists = callback => {
-    fetch(`${apiBaseUrl}/${loggedUsername}/friend/list`, {
+    fetch(`${apiBaseUrl}/${loggedUserId}/friends`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
@@ -120,27 +119,12 @@ export const getFriendLists = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
-}
-
-// Get random friend suggestion
-export const getFriendSuggestion = callback => {
-    fetch(`${apiBaseUrl}/friend/suggestion/${loggedUserId}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(res => res.json())
-    .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Send friend request
 export const getFriendRequests = callback => {
-    fetch(`${apiBaseUrl}/${loggedUsername}/request/list`, {
+    fetch(`${apiBaseUrl}/${loggedUserId}/requests`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
@@ -150,6 +134,21 @@ export const getFriendRequests = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
+}
+
+// Get random friend suggestion
+export const getFriendSuggestions = callback => {
+    fetch(`${apiBaseUrl}/friend/suggestions`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => { callback(data) })
+    .catch(err => { callback(false) })
 }
 
 // Send friend request
@@ -165,7 +164,7 @@ export const sendFriendRequest = (username, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Accept friend request
@@ -181,7 +180,7 @@ export const acceptFriendRequest = (userId, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Accept friend request
@@ -197,7 +196,7 @@ export const declineFriendRequest = (userId, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Load messages
@@ -212,7 +211,7 @@ export const getUserMessages = (friendId, callback) => {
     })
     .then(res => res.json())
     .then(messages => { callback(messages) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }
 
 // Send message
@@ -228,5 +227,5 @@ export const sendUserMessage = (userId, messageData, callback) => {
     })
     .then(res => res.json())
     .then(sendStatus => { callback(sendStatus) })
-    .catch(err => callback(false))
+    .catch(err => { callback(false) })
 }

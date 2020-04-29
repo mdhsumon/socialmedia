@@ -22,7 +22,7 @@ export class PostReactions extends React.Component {
                     this.props.postInfo.id,
                     { area: "comment", action: "add", data: this.state.userComment },
                     comRes => {
-                        if (comRes.updateStatus) {
+                        if (comRes.status) {
                             alert('Your comment has been added on the post')
                         }
                     }

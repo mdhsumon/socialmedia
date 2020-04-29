@@ -1,7 +1,7 @@
 import React from "react"
 import { apiBaseUrl } from "../../services/commonService"
 import { deletePost } from "../../services/postService"
-import { getUserSummery } from "../../services/userService"
+import { getUserSummary } from "../../services/userService"
 import { MessagePopup } from "../common/MessagePopup"
 
 export default class PostAuthor extends React.Component {
@@ -13,18 +13,18 @@ export default class PostAuthor extends React.Component {
             profilePhoto: null,
             messagePopup: false
         }
-        getUserSummery(this.props.authorInfo.userId, data => {
-            this.setState({
-                username: data.username,
-                displayName: data.displayName,
-                profilePhoto: data.profilePhoto
+        getUserSummary(this.props.authorInfo.userId, data => {
+            data.status && this.setState({
+                username: data.user.username,
+                displayName: data.user.displayName,
+                profilePhoto: data.user.profilePhoto
             })
         })
     }
     
     removePost = postId => {
         deletePost(postId, response => {
-            if(response.deleteStatus) {
+            if(response.status) {
                 this.setState({ messagePopup: true })
                 this.props.deletePostFlag(postId)
                 setTimeout(() => {

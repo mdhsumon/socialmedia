@@ -1,4 +1,5 @@
+import { loggedUserInfo } from "./services/commonService";
+
 export const isLoggedIn = () => {
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    return userData !== null && userData.userToken ? true : false;
+    return loggedUserInfo !== null && loggedUserInfo.accessToken ? true : false
 }
