@@ -7,16 +7,19 @@ export class ChatBox extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            isActive: false,
+            sendButton: false,
+            newMessage: false,
             inputRow: 1,
             userInput: '',
-            messageList: [],
-            newMessage: false
+            messageList: []
         }
     }
 
+    scrollToTarget = target => { target.scrollIntoView({ behavior: "smooth" }) }
+
     componentDidMount() {
         this.updateMessages()
-
         // Update after getting signal
         socketConnection.on('sendMessage', userId => {
             this.updateMessages()
@@ -25,30 +28,39 @@ export class ChatBox extends React.Component {
 
     handleInput = event => {
         if(event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault()
-            if(this.state.userInput.trim().length) {
-                this.sendMessage(this.state.userInput)
-            }
+            this.sendMessage()
         }
         else {
             let inputHeight = event.target.scrollHeight
+            const sendBtn = this.state.userInput.length ? true : false
             this.setState({
-                inputRow: inputHeight >= 38 ? inputHeight / 14 : 1,
-                userInput: event.target.value
+                inputRow: Math.floor(inputHeight >= 38 ? inputHeight / 14 : 1),
+                userInput: event.target.value,
+                sendButton: sendBtn
             })
         }
+    }
+
+    handleFocus = () => {
+        this.setState({ 
+            isActive: true,
+            newMessage: false
+        })
+    }
+
+    handleBlur = () => {
+        this.setState({ isActive: false })
     }
 
     updateMessages = () => {
         getUserMessages(this.props.userInfo.userId, messages => {
-            this.setState({
-                messageList: messages
-            })
+            this.setState({ messageList: messages })
+            this.scrollToTarget(this.bottomFlag)
         })
     }
 
     sendMessage = () => {
-        if(this.state.userInput.trim().length) {
+         if(this.state.userInput.trim().length) {
             sendUserMessage(this.props.userInfo.userId, this.state.userInput, response => {
                 if(response.status) {
                     this.updateMessages()
@@ -62,28 +74,18 @@ export class ChatBox extends React.Component {
     }
 
     renderMessage = () => {
-        if(this.state.messageList.length <= 0) {
-            return(
-                <div className="empty-message"><i className="icon-smile"></i> Message box is empty</div>
-            )
-        }
-        else {
-            return(
-                this.state.messageList.map(data => {
-                    return(
-                        <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
-                            {data.origin === "self" && (<span className="action"><i className="icon-ellips-v"></i></span>)}
-                            <span className="message">{ data.message }</span>
-                        </div>
-                    )
-                })
-            )
-        }
+        return (
+            this.state.messageList.length >= 1 ? this.state.messageList.map(data => (
+            <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
+                {data.origin === "self" && (<span className="action"><i className="icon-ellips-v"></i></span>)}
+                <span className="message">{ data.message }</span>
+            </div>)) : (<div className="empty-message"><i className="icon-smile"></i> Message box is empty</div>)
+        )
     }
 
     render() {
         return(
-            <div className={`chat-box ${this.state.newMessage ? 'new' : ''}`} key={ this.props.userInfo.userId }>
+            <div className={`chat-box${this.state.isActive ? ' active' : this.state.newMessage ? ' new' : '' }`} key={ this.props.userInfo.userId }>
                 <div className="box-head">
                     <div className="user-photo"><img src={ apiBaseUrl + this.props.userInfo.profilePhoto } alt="sf"/></div>
                     <div className="display-name">{ this.props.userInfo.displayName }</div>
@@ -95,6 +97,7 @@ export class ChatBox extends React.Component {
                 </div>
                 <div className="box-body">
                     { this.renderMessage() }
+                    <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
                 </div>
                 <div className="box-form">
                     <div className="emoji" title="Coming soon..."><i className="icon-smile"></i></div>
@@ -104,10 +107,12 @@ export class ChatBox extends React.Component {
                             rows={ this.state.inputRow }
                             onChange={ this.handleInput }
                             onKeyDown={ this.handleInput }
-                            value= { this.state.userInput }
+                            onFocus={ this.handleFocus }
+                            onBlur={ this.handleBlur }
+                            value={ this.state.userInput }
                         />
                     </div>
-                    <button className="send" onClick={ this.sendMessage }><i className="icon-send"></i></button>
+                    <button className="send" onClick={ this.sendMessage } disabled={ !this.state.sendButton }><i className="icon-send"></i></button>
                 </div>
             </div>
         )

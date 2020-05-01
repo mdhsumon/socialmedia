@@ -57,6 +57,12 @@
   border-bottom: 1px solid #e3e3e3;
   border-radius: 0 0 5px 5px;
   display: flex;
+  align-items: center;
+}
+.public-user-action {
+  flex: auto;
+  text-align: right;
+  padding: 10px 15px;
 }
 .profile-author {
   flex: none;

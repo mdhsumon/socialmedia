@@ -136,31 +136,6 @@ header.header{
   font-size: 12px;
   font-weight: 400;
 }
-.header .user-options {
-  background-color: #fff;
-  border: 1px solid #e3e3e3;
-  border-radius: 3px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  margin-top: 8px;
-  width: 150px;
-  z-index: 15;
-}
-.header .user-bar.show .user-options {
-  display: block;
-}
-.header .user-options .option {
-  padding: 5px 10px;
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-}
-.header .user-options .option:hover {
-  background-color: #f0f0f0;
-}
 /*-----------------------search list-----*/
 .search-header{
   height: 35px;

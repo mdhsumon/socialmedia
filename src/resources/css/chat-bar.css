@@ -36,7 +36,7 @@
   top: 50%;
   margin-top: -12px;
   background-color: #444;
-  color: #c5c5c5;
+  color: #ccc;
   font-size: 11px;
   padding: 4px 8px;
   white-space: nowrap;
@@ -98,11 +98,12 @@
   flex: none;
   overflow: auto;
 }
-.chat-box.active .box-form {
-  border-color: #8dd200;
+.chat-box.active .box-head {
+  background-color: #f2fae3;
 }
 .chat-box.new {
   border-color: #8dd200;
+  box-shadow: 0 0 10px 0 rgba(141, 210, 0, 0.5);
 }
 .chat-box.new .box-head {
   animation: new-msg 1s linear 3;
@@ -174,9 +175,7 @@
   min-height: 0;
   overflow: auto;
 }
-.chat-box .box-body:after {
-  content: '';
-  display: block;
+.chat-box .box-body .bottom-flag {
   height: 10px;
 }
 /* width */
@@ -280,14 +279,18 @@
 .chat-box .message-input textarea {
   background-color: #fff;
   width: 100%;
-  border: 1px solid #f3f3f3;
+  border-color: #f3f3f3;
   border-radius: 3px;
   resize: vertical;
   position: absolute;
   font-size: 12px;
   color: #333;
   bottom: 0;
-  padding: 5px 8px;
+  padding: 6px 8px;
+  margin: 0;
+}
+.chat-box .message-input textarea:focus {
+  border-color: #c6e87f;
 }
 .chat-box .box-form .send {
   flex: none;

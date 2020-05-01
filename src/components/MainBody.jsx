@@ -2,8 +2,9 @@ import React from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import Header from "./Header"
 import { Navigator } from "./Navigator"
-import { NewsFeed } from "./pages/NewsFeed"
+import { PostFeed } from "./pages/PostFeed"
 import Profile from "./pages/Profile"
+import PublicProfile from "./pages/PublicProfile"
 import { ChatBar } from "./chat/ChatBar"
 
 export const MainBody = () => {
@@ -14,8 +15,9 @@ export const MainBody = () => {
           <Navigator />
           <div className="content-body">
             <Router>
+              <Route exact path="/user/:username" component={PublicProfile} />
               <Route exact path="/profile" component={Profile} />
-              <Route exact path="/feeds" component={NewsFeed} />
+              <Route exact path="/feeds" component={PostFeed} />
             </Router>
           </div> 
           <ChatBar />

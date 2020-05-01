@@ -1,5 +1,5 @@
 import React from "react"
-import { apiBaseUrl } from "../services/commonService"
+import { apiBaseUrl, loggedUserInfo } from "../services/commonService"
 import Popup from "./common/Popup"
 import { getUser, updateUser } from "../services/userService"
 import { MessagePopup } from "./common/MessagePopup"
@@ -19,7 +19,7 @@ export default class ProfileInfo extends React.Component {
     popupContent = null
 
     loadProfileData = () => {
-        getUser(data => {
+        getUser(loggedUserInfo.id, data => {
             if(data.status) {
                 this.setState({
                     displayName: data.user.displayName,
@@ -67,7 +67,6 @@ export default class ProfileInfo extends React.Component {
         this.state.newProfile && newData.append('newProfile', this.state.newProfile[0])
         this.state.newCover && newData.append('newCover', this.state.newCover[0])
         updateUser(newData, response => {
-            console.log(response)
             if(response.status) {
                 this.setState({ isPopup: false })
                 this.loadProfileData()

@@ -21,6 +21,14 @@
 .login-form {
   max-width: 380px;
 }
+.signup-form input,
+.login-form input {
+  font-weight: 400;
+}
+.signup-form input::placeholder,
+.login-form input::placeholder {
+  color: #666;
+}
 .signup-form .input-field,
 .login-form .input-field {
   background-color: #f0f0f0;

@@ -4,6 +4,7 @@ import ProfileInfo from "../ProfileInfo"
 import { Post } from "../post/Post"
 import { Bio } from "../Bio"
 import FriendLists from "../FriendLists"
+import { loggedUserInfo } from "../../services/commonService"
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -23,17 +24,17 @@ export default class Profile extends React.Component {
         return(
             <div className="profile-secton">
                 <div className="container">
-                    <ProfileInfo updateBio={ this.updateBio } /> 
+                    <ProfileInfo userId={loggedUserInfo.id} updateBio={ this.updateBio } /> 
                 </div>
                 <div className="container column-section">
                     <div className="left-column">
                         <Bio bioData={ this.state.bioData } />
                     </div>
                     <div className="middle-column">
-                        <Post />
+                        <Post userId={loggedUserInfo.id} />
                     </div>
                     <div className="right-column">
-                        <FriendLists />
+                        <FriendLists userId={loggedUserInfo.id} />
                         <FriendRequests />
                     </div>
                 </div>

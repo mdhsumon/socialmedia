@@ -19,8 +19,8 @@ export const createPost = (postData, callback) => {
 }
 
 // Will return all user posts
-export const getUserPosts = callback => {
-    fetch(`${apiBaseUrl}/${loggedUserId}/posts`, {
+export const getUserPosts = (userId, callback) => {
+    fetch(`${apiBaseUrl}/${userId}/posts`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`
@@ -28,12 +28,12 @@ export const getUserPosts = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { })
 }
 
 // Will return user feed
-export const getUserFeeds = callback => {
-    fetch(`${apiBaseUrl}/${loggedUserId}/feeds`, {
+export const getUserFeeds = (userOrId, callback) => {
+    fetch(`${apiBaseUrl}/${userOrId}/feeds`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`
@@ -41,7 +41,7 @@ export const getUserFeeds = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => {})
 }
 
 // Will return signle post by id

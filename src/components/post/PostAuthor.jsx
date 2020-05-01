@@ -15,9 +15,9 @@ export default class PostAuthor extends React.Component {
         }
         getUserSummary(this.props.authorInfo.userId, data => {
             data.status && this.setState({
-                username: data.user.username,
-                displayName: data.user.displayName,
-                profilePhoto: data.user.profilePhoto
+                username: data.users[0].username,
+                displayName: data.users[0].displayName,
+                profilePhoto: data.users[0].profilePhoto
             })
         })
     }

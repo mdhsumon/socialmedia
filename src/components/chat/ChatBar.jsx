@@ -1,6 +1,6 @@
 import React from "react"
 //import update from "immutability-helper"
-import { apiBaseUrl } from "../../services/commonService"
+import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
 import { getFriendLists, getUserSummary } from "../../services/userService"
 import { ChatBox } from "./ChatBox"
 //import { socketConnection } from "../../sockets/socket"
@@ -16,9 +16,9 @@ export class ChatBar extends React.Component {
     }
 
     loadFriendLists = () => {
-        getFriendLists(friendList => {
-            if(friendList.status) {
-                const friendIds = friendList.friends.map(friend => friend.friendId)
+        getFriendLists(loggedUserInfo.id, data => {
+            if(data.status) {
+                const friendIds = data.friends.map(friend => friend.friendId)
                 getUserSummary(friendIds, data => {
                     if(data.status) {
                         const userList = data.users.map(user => (
@@ -58,7 +58,12 @@ export class ChatBar extends React.Component {
         const isOpen = this.state.openedChat.filter(item => item.key === user.userId).length
         if(!isOpen)
         this.setState({
-            openedChat: [<ChatBox key={ user.userId } userInfo={ user } closeChatBox={ this.closeChatBox } />, ...this.state.openedChat]
+            openedChat: [<ChatBox
+                key={ user.userId }
+                userInfo={ user }
+                closeChatBox={ this.closeChatBox }
+                />, ...this.state.openedChat
+            ]
         })
     }
 

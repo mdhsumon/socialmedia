@@ -5,6 +5,7 @@ import PostAuthor from "./PostAuthor"
 import { PostContent } from "./PostContent"
 import { PostReactions } from "./PostReactions"
 import { PostComment } from "./PostComment"
+import { isUrl } from '../../commonActions'
 
 export class Post extends React.Component {
     constructor(props) {
@@ -13,13 +14,14 @@ export class Post extends React.Component {
             isEmpty: true,
             postData: []
         }
-        
         this.loadPosts()
     }
 
     loadPosts = () => {
-        const getPost = window.location.pathname === '/feeds' ? getUserFeeds : getUserPosts
-        getPost(data => { data.status && this.setState({ postData: data.posts }) })
+        const getPost = isUrl('/feeds') ? getUserFeeds : getUserPosts
+        getPost(this.props.userId, data => {
+            data.status && this.setState({ postData: data.posts })
+        })
     }
 
     // Passed to PostCreate for updating empty block
@@ -71,7 +73,7 @@ export class Post extends React.Component {
     render() {
         return (
             <div className="post-section">
-                <PostCreate postCreateFlag={this.postCreateFlag} removeEmpty={this.removeEmpty} />
+                {isUrl(['/feeds', '/profile']) && <PostCreate postCreateFlag={this.postCreateFlag} removeEmpty={this.removeEmpty} />}
                 {this.renderPost()}
             </div>
         )

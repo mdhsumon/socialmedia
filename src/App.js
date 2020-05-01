@@ -12,10 +12,10 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-          <Route exact path="/signup" component={ Signup } />
+          <Route match exact path="/signup" component={ Signup } />
           <Route exact path="/login" component={ Login } />
           <Route exact path="/" component={ Welcome } />
-          <PrivateRoute exact component={ MainBody } />
+          <PrivateRoute match exact component={ MainBody } />
       </Router>
     )
   }

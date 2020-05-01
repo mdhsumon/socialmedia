@@ -14,9 +14,9 @@ export default class FriendLists extends React.Component {
     }
 
     loadFriendLists = () => {
-        getFriendLists(friendList => {
-            if(friendList.status) {
-                const friendIds = friendList.friends.map(friend => friend.friendId)
+        getFriendLists(this.props.userId, data => {
+            if(data.status) {
+                const friendIds = data.friends.map(friend => friend.friendId)
                 getUserSummary(friendIds, data => {
                     if(data.status) {
                         this.setState({friendLists: data.users})
@@ -31,9 +31,11 @@ export default class FriendLists extends React.Component {
             return (
                 this.state.friendLists.map(requestItem => {
                     return(
-                        <div className="friend-list-item" key={requestItem.userId}>
+                        <div className="friend-list-item" key={requestItem._id}>
                             <div className="friend-list-thumb">
-                                <Link className="author-name" to={requestItem.username}><img alt="alter text" src={apiBaseUrl + requestItem.profilePhoto} title={requestItem.displayName} /></Link>
+                                <Link className="author-name" to={requestItem.username}>
+                                    <img alt="alter text" src={apiBaseUrl + requestItem.profilePhoto} title={requestItem.displayName} />
+                                </Link>
                             </div>
                         </div>
                     )

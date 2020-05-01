@@ -11,6 +11,9 @@ export default class Header extends React.Component {
             acceptCount: 0,
             newNoti: false,
             msgCount: 0,
+            messageMenu: 'hide',
+            friendMenu: 'hide',
+            notificationMenu: 'hide',
             profileMenu: 'hide'
         }
         getUserSummary(loggedUserInfo.id, summary => {
@@ -39,9 +42,23 @@ export default class Header extends React.Component {
     }
 
     // Toggle profile menu
-    toggleProfileMenu = event => {
-        const menuClass = this.state.profileMenu === 'hide' ? 'show' : 'hide'
-        this.setState({profileMenu: menuClass})
+    toggleMenu = target => {
+        this.setState({newNoti: false})
+        switch(target) {
+            case 'message':
+                this.setState({messageMenu: this.state.messageMenu === 'hide' ? 'show' : 'hide'})
+                break
+            case 'friend':
+                this.setState({friendMenu: this.state.friendMenu === 'hide' ? 'show' : 'hide'})
+                break
+            case 'notification':
+                this.setState({notificationMenu: this.state.notificationMenu === 'hide' ? 'show' : 'hide'})
+                break
+            case 'profile':
+                this.setState({profileMenu: this.state.profileMenu === 'hide' ? 'show' : 'hide'})
+                break
+            default:
+        }
     }
 
     logout = () => {
@@ -88,13 +105,13 @@ export default class Header extends React.Component {
                         </div>
                     </div>
                     <div className="notification-bar">
-                        <div className="notification-item message active">
-                            <div className="notification-button">
+                        <div className={`custom-dropdown notification-item message active ${this.state.messageMenu}`}>
+                            <div className="notification-button" onClick={() => this.toggleMenu('message')}>
                                 <i className="icon-text-bubble"></i>
                                 {this.state.newNoti && <span className="notification-count">{this.state.msgCount}</span>}
                             </div>
-                            <div className="message-list">
-
+                            <div className="dropdown-options">
+                                <div className="empty-option">No message</div>
                             </div>
                         </div>
                         <div className="notification-item friend-request">
@@ -115,15 +132,15 @@ export default class Header extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className={`user-bar ${this.state.profileMenu}`}>
-                        <div className="user-photo" onClick={eve => this.toggleProfileMenu(eve)}>
+                    <div className={`custom-dropdown user-bar ${this.state.profileMenu}`}>
+                        <div className="user-photo" onClick={() => this.toggleMenu('profile')}>
                             <img src={apiBaseUrl + this.state.profilePhoto} alt={this.state.displayName} />
                         </div>
                         {/* <div className="user-name">
                             <div className="name">{loggedUserInfo.userInfo.displayName}</div>
                             <div className="nickname">{loggedUserInfo.userInfo.nickname}</div>
                         </div> */}
-                        <div className="user-options">
+                        <div className="dropdown-options">
                             <div className="option">Profile Settings</div>
                             <div className="option">Settings</div>
                             <div className="option" onClick={() => this.logout()}>Logout</div>

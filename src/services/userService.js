@@ -64,8 +64,8 @@ export const getUserSummary = (userOrId, callback) => {
 }
 
 // Will return single user full information
-export const getUser = callback => {
-    fetch(`${apiBaseUrl}/user/${loggedUserId}`, {
+export const getUser = (userOrId, callback) => {
+    fetch(`${apiBaseUrl}/user/${userOrId}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -75,7 +75,7 @@ export const getUser = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => {  })
 }
 
 // Update profile information
@@ -108,8 +108,8 @@ export const isUserExist = (type, userOrEmail, callback) => {
 }
 
 // Get friend lists
-export const getFriendLists = callback => {
-    fetch(`${apiBaseUrl}/${loggedUserId}/friends`, {
+export const getFriendLists = (userOrId, callback) => {
+    fetch(`${apiBaseUrl}/${userOrId}/friends`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${loggedUserToken}`,
@@ -119,7 +119,7 @@ export const getFriendLists = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => {  })
 }
 
 // Send friend request
