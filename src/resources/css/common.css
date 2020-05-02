@@ -251,6 +251,11 @@ button:disabled,
   font-size: 14px;
   color: #333;
   cursor: pointer;
+  text-decoration: none;
+}
+.dropdown-options .option a {
+  color: inherit;
+  text-decoration: none;
 }
 .dropdown-options .option:hover {
   background-color: #f0f0f0;
@@ -262,19 +267,18 @@ button:disabled,
   text-align: center;
 }
 /* end Custom dropdown */
-
-.main-body {
-  overflow: auto;
+.body {
   height: calc(100vh - 60px);
+  margin-top: 60px;
+  overflow: auto;
+}
+.main-body {
   padding: 15px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   max-width: 1200px;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
 }
 
 .content-body {

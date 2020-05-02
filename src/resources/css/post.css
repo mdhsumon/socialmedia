@@ -177,6 +177,7 @@
 .post-image img {
     max-width: 100%;
     vertical-align: middle;
+    cursor: pointer;
 }
 /*----------------post body end---------*/
 /*----------------(like comment share)LCS section start---------*/

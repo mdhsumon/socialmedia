@@ -18,7 +18,6 @@ export default class PublicProfile extends React.Component {
                 window.location.href = '/profile'
             }
             else {
-                console.log(data)
                 if(data.status){
                     this.setState({
                         userId: data.user._id,

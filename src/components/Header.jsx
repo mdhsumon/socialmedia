@@ -8,8 +8,8 @@ export default class Header extends React.Component {
         super(props)
         this.state = {
             newFriend: false,
-            acceptCount: 0,
             newNoti: false,
+            requestCount: 0,
             msgCount: 0,
             messageMenu: 'hide',
             friendMenu: 'hide',
@@ -22,6 +22,7 @@ export default class Header extends React.Component {
             this.setState({
                 displayName: user.displayName,
                 username: user.displayName,
+                nickName: user.nickName,
                 profilePhoto: user.profilePhoto
             })
         })
@@ -110,25 +111,27 @@ export default class Header extends React.Component {
                                 <i className="icon-text-bubble"></i>
                                 {this.state.newNoti && <span className="notification-count">{this.state.msgCount}</span>}
                             </div>
-                            <div className="dropdown-options">
+                            <div className="dropdown-options message-list">
                                 <div className="empty-option">No message</div>
                             </div>
                         </div>
-                        <div className="notification-item friend-request">
-                            <div className="notification-button">
+                        <div className={`custom-dropdown notification-item friend-request ${this.state.friendMenu}`}>
+                            <div className="notification-button" onClick={() => this.toggleMenu('friend')}>
                                 <i className="icon-user-add"></i>
                                 {this.state.newFriend && (
-                                    <span className="notification-count">{this.state.acceptCount}</span>
+                                    <span className="notification-count">{this.state.requestCount}</span>
                                 )}
                             </div>
-                            <div className="friend-request-list">
-    
+                            <div className="dropdown-options request-list">
+                                <div className="empty-option">No friend request</div>
                             </div>
                         </div>
-                        <div className="notification-item notification">
-                            <div className="notification-button"><i className="icon-bell"></i></div>
-                            <div className="notification-list">
-    
+                        <div className={`custom-dropdown notification-item notification  ${this.state.notificationMenu}`}>
+                            <div className="notification-button" onClick={() => this.toggleMenu('notification')}>
+                                <i className="icon-bell"></i>
+                            </div>
+                            <div className="dropdown-options notification-list">
+                                <div className="empty-option">No notification</div>
                             </div>
                         </div>
                     </div>
@@ -136,12 +139,12 @@ export default class Header extends React.Component {
                         <div className="user-photo" onClick={() => this.toggleMenu('profile')}>
                             <img src={apiBaseUrl + this.state.profilePhoto} alt={this.state.displayName} />
                         </div>
-                        {/* <div className="user-name">
-                            <div className="name">{loggedUserInfo.userInfo.displayName}</div>
-                            <div className="nickname">{loggedUserInfo.userInfo.nickname}</div>
-                        </div> */}
+                        <div className="user-name">
+                            <div className="name">{this.state.displayName}</div>
+                            <div className="nickname">{this.state.nickName}</div>
+                        </div>
                         <div className="dropdown-options">
-                            <div className="option">Profile Settings</div>
+                            <div className="option"><a href="/profile">Profile Settings</a></div>
                             <div className="option">Settings</div>
                             <div className="option" onClick={() => this.logout()}>Logout</div>
                         </div>

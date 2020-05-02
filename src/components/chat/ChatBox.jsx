@@ -2,6 +2,7 @@ import React from "react"
 import { apiBaseUrl } from "../../services/commonService"
 import { getUserMessages, sendUserMessage } from "../../services/userService"
 import { socketConnection } from "../../sockets/socket"
+import { convertTime } from "../../commonActions"
 
 export class ChatBox extends React.Component {
     constructor(props) {
@@ -28,6 +29,7 @@ export class ChatBox extends React.Component {
 
     handleInput = event => {
         if(event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault()
             this.sendMessage()
         }
         else {
@@ -73,18 +75,21 @@ export class ChatBox extends React.Component {
         }
     }
 
-    renderMessage = () => {
-        return (
-            this.state.messageList.length >= 1 ? this.state.messageList.map(data => (
-            <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
+    renderMessage = () => (
+        this.state.messageList.length >= 1 ? this.state.messageList.map(data => (
+        <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
+            <div className="message-item">
+                {data.origin === "self" && (<span className="time" title={ convertTime(data.time, "h:m 12") }><i className="icon-text-bubble"></i></span>)}
                 {data.origin === "self" && (<span className="action"><i className="icon-ellips-v"></i></span>)}
                 <span className="message">{ data.message }</span>
-            </div>)) : (<div className="empty-message"><i className="icon-smile"></i> Message box is empty</div>)
-        )
-    }
+                {data.origin === "other" && (<span className="action"><i className="icon-smile"></i></span>)}
+                {data.origin === "other" && (<span className="time" title={ convertTime(data.time, "h:m 12") }><i className="icon-text-bubble"></i></span>)}
+            </div>
+        </div>)) : (<div className="empty-message"><i className="icon-smile"></i> Message box is empty</div>)
+    )
 
     render() {
-        return(
+        return (
             <div className={`chat-box${this.state.isActive ? ' active' : this.state.newMessage ? ' new' : '' }`} key={ this.props.userInfo.userId }>
                 <div className="box-head">
                     <div className="user-photo"><img src={ apiBaseUrl + this.props.userInfo.profilePhoto } alt="sf"/></div>

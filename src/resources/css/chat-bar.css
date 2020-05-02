@@ -192,22 +192,29 @@
 .chat-box .box-body::-webkit-scrollbar-thumb:hover {
   background: #ccc; 
 }
-.chat-box .message-cell.self {
-    margin-left: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+.chat-box .message-cell .message-item {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
 }
-.chat-box .message-cell.other {
-  margin-right: 30px;
+.chat-box .message-cell.self {
+    text-align: right;
+}
+.chat-box .message-cell.self .message-item {
+    padding-left: 40px;
+}
+.chat-box .message-cell.other .message-item {
+    padding-right: 40px;
 }
 .chat-box .message-cell ~ .message-cell {
   margin-top: 5px;
 }
+.chat-box .message-cell .time,
 .chat-box .message-cell .action {
   visibility: hidden;
 }
-.chat-box .message-cell:hover .action {
+.chat-box .message-item:hover .time,
+.chat-box .message-item:hover .action {
   visibility: visible;
 }
 .chat-box .box-body .message {
@@ -216,33 +223,44 @@
   padding: 4px 8px;
   border-radius: 3px;
   font-size: 12px;
+  text-align: left;
   color: #444;
-  min-width: 0;
   word-wrap: break-word;
+  max-width: 100%;
 }
 .chat-box .box-body .self .message {
   background-color: #c6e87f;
 }
+.chat-box .message-cell .time,
 .chat-box .message-cell .action {
   display: inline-block;
   vertical-align: middle;
-  font-size: 10px;
+  font-size: 12px;
   width: 15px;
-  height: 15px;
+  height: 18px;
   text-align: center;
-  margin-left: 2px;
+  position: absolute;
+  top: 4px;
   cursor: pointer;
-  color: #999;
+  color: #ccc;
+  transition: all 0.1s ease;
+}
+.chat-box .message-cell.self .action {
+  left: 20px;
+}
+.chat-box .message-cell.self .time {
+  left: 0;
+}
+.chat-box .message-cell.other .action {
+  right: 20px;
+}
+.chat-box .message-cell.other .time {
+  right: 0;
+}
+.chat-box .message-cell .time {
+  cursor: default;
 }
 .chat-box .message-cell .action:hover {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 10px;
-  width: 15px;
-  height: 15px;
-  text-align: center;
-  margin-left: 2px;
-  cursor: pointer;
   color: #000;
 }
 .chat-box .empty-message {
@@ -303,4 +321,7 @@
 }
 .chat-box .box-form .send:hover {
   color: #8dd200;
+}
+.chat-box .box-form .send:disabled {
+  color: #e9e9e9;
 }
