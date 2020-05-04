@@ -54,7 +54,7 @@ export default class FriendLists extends React.Component {
     render() {
         return (
             <div className="common-block friend-request-section">
-                <h4 className="block-header">Your Friends</h4>
+                <h4 className="block-header">Friends</h4>
                 <div className="friend-list-box">
                     {this.renderFriednLists()}
                 </div>

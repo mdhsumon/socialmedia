@@ -2,7 +2,7 @@ import React from "react"
 import { apiBaseUrl } from "../../services/commonService"
 import { getUserMessages, sendUserMessage } from "../../services/userService"
 import { socketConnection } from "../../sockets/socket"
-import { convertTime } from "../../commonActions"
+import { getTime } from "../../commonActions"
 
 export class ChatBox extends React.Component {
     constructor(props) {
@@ -79,23 +79,22 @@ export class ChatBox extends React.Component {
         this.state.messageList.length >= 1 ? this.state.messageList.map(data => (
         <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
             <div className="message-item">
-                {data.origin === "self" && (<span className="time" title={ convertTime(data.time, "h:m 12") }><i className="icon-text-bubble"></i></span>)}
-                {data.origin === "self" && (<span className="action"><i className="icon-ellips-v"></i></span>)}
                 <span className="message">{ data.message }</span>
-                {data.origin === "other" && (<span className="action"><i className="icon-smile"></i></span>)}
-                {data.origin === "other" && (<span className="time" title={ convertTime(data.time, "h:m 12") }><i className="icon-text-bubble"></i></span>)}
+                <span className="time" title={ getTime(data.time, "auto") }><i className="icon-time"></i></span>
+                <span className="action">{data.origin === "self" ? <i className="icon-ellips-v"></i> : <i className="icon-smile-line"></i>}</span>
             </div>
-        </div>)) : (<div className="empty-message"><i className="icon-smile"></i> Message box is empty</div>)
+        </div>)) : (<div className="empty-message"><i className="icon-smile-line"></i> Message box is empty</div>)
     )
 
     render() {
+        const [userInfo] = [this.props.userInfo]
         return (
-            <div className={`chat-box${this.state.isActive ? ' active' : this.state.newMessage ? ' new' : '' }`} key={ this.props.userInfo.userId }>
+            <div className={`chat-box${this.state.isActive ? ' active' : this.state.newMessage ? ' new' : '' }`} key={ userInfo.userId }>
                 <div className="box-head">
-                    <div className="user-photo"><img src={ apiBaseUrl + this.props.userInfo.profilePhoto } alt="sf"/></div>
-                    <div className="display-name">{ this.props.userInfo.displayName }</div>
+                    <div className="user-photo"><img src={ apiBaseUrl + userInfo.profilePhoto } alt={ userInfo.displayName } /></div>
+                    <div className="display-name"><a href={ apiBaseUrl + '/user/' + userInfo.username }>{ userInfo.displayName }</a></div>
                     <div className="action">
-                        <span className="close" onClick={ this.props.closeChatBox.bind(this, this.props.userInfo.userId) }>
+                        <span className="close" onClick={ this.props.closeChatBox.bind(this, userInfo.userId) }>
                             <i className="icon-close"></i>
                         </span>
                     </div>
@@ -105,7 +104,10 @@ export class ChatBox extends React.Component {
                     <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
                 </div>
                 <div className="box-form">
-                    <div className="emoji" title="Coming soon..."><i className="icon-smile"></i></div>
+                    <div className="attach">
+                        <div className="emoji"><i className="icon-smile-line"></i></div>
+                        <div className="file"><i className="icon-attachment"></i></div>
+                    </div>
                     <div className="message-input">
                         <textarea
                             style={ { minHeight: '30px', maxHeight: '120px', lineHeight: '14px' } }

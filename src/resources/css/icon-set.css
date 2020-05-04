@@ -90,3 +90,27 @@
 .icon-close:before {
   content: "\e914";
 }
+.icon-friends:before {
+  content: "\e916";
+}
+.icon-lock:before {
+  content: "\e917";
+}
+.icon-smile-line:before {
+  content: "\e918";
+}
+.icon-eye:before {
+  content: "\e919";
+}
+.icon-time:before {
+  content: "\e91a";
+}
+.icon-pencil:before {
+  content: "\e91b";
+}
+.icon-attachment:before {
+  content: "\e91c";
+}
+.icon-remove:before {
+  content: "\e91d";
+}

@@ -10,8 +10,32 @@ export const isUrl = path => (
     Array.isArray(path) ? (path.indexOf(window.location.pathname) + 1 ? true : false) : (window.location.pathname === path ? true : false)
 )
 
+// Find time difference at current time by timestamp
+export const compareTime = (timestamp, unit) => {
+    const timeStamp = new Date(parseInt(timestamp))
+    const givenDays = timeStamp / (1000 * 60 * 60 * 24)
+    const currentDays = Date.now() / (1000 * 60 * 60 * 24)
+    switch(unit) {
+        case "minute":
+            return (currentDays - givenDays).toFixed(2)
+
+        case "hour":
+            return currentDays - givenDays
+
+        case "day":
+            return (currentDays - givenDays).toFixed(2)
+
+        case "month":
+
+        case "year":
+            
+        default:
+            return "Invalid format"
+    }
+}
+
 // Covert timestamp into different time format
-export const convertTime = (timestamp, timeFormat) => {
+export const getTime = (timestamp, timeFormat) => {
     const timeObj = new Date(parseInt(timestamp))
     switch(timeFormat) {
         case "h:m 12":
@@ -23,7 +47,19 @@ export const convertTime = (timestamp, timeFormat) => {
                 (h < 12 ? ' AM' : ' PM')
             )
 
+        case "h:m:s 12":
+            return timeObj.toLocaleTimeString()
+
+        case "date-time":
+            return timeObj.toDateString() + ' - ' + timeObj.toLocaleTimeString()
+
+        case "auto":
+            return compareTime(timestamp, 'day') >= 1 ? timeObj.toDateString() + ' - ' + timeObj.toLocaleTimeString() : timeObj.toLocaleTimeString()
+
+        case "GMT":
+            return timeObj.toUTCString()
+            
         default:
-            return timeObj.getTime()
+            return "Invalid format"
     }
 }

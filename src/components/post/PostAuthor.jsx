@@ -1,5 +1,6 @@
 import React from "react"
 import { apiBaseUrl } from "../../services/commonService"
+import { getTime } from "../../commonActions"
 import { deletePost } from "../../services/postService"
 import { getUserSummary } from "../../services/userService"
 import { MessagePopup } from "../common/MessagePopup"
@@ -45,9 +46,9 @@ export default class PostAuthor extends React.Component {
                     </div>
                     <div className="author-post-info">
                         <div className="author-post_info">
-                            <a href={this.state.username} className="author-name">{this.state.displayName}</a>
+                            <a href={`/user/${this.state.username}`} className="author-name">{this.state.displayName}</a>
                         </div>
-                        <span className="post-date-time">at {this.props.postInfo.createdAt}</span>
+                        <span className="post-date-time"><i className="icon-time"></i> { getTime(this.props.postInfo.createdAt, 'auto') }</span>
                     </div>
                 </div>
                 <button className="action-button" onClick={ e => this.removePost(this.props.postInfo.id) }><i className="icon-ellips-h"></i></button>

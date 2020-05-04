@@ -139,6 +139,9 @@
     font-size: 12px;
     color: #aaaaaa;
 }
+.author-post-info .post-date-time i {
+    font-size: 9px;
+}
 .post-author .action-button {
     background: transparent;
     border: 0;
@@ -225,12 +228,15 @@
 .lcs-section .share-button:hover i{
     color: #666;
 }
-.author-name{
+.author-post-info .author-name{
     text-decoration: none;
     color: #333333;
     font-size: 13px;
     font-weight: 600;
-  }
+}
+.author-post-info .author-name:hover{
+    color: #000;
+}
 .add-comment {
     flex: auto;
     min-width: 0;
