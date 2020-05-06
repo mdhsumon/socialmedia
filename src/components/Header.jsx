@@ -11,6 +11,7 @@ export default class Header extends React.Component {
             newNoti: false,
             requestCount: 0,
             msgCount: 0,
+            notiCount: 0,
             messageMenu: 'hide',
             friendMenu: 'hide',
             notificationMenu: 'hide',
@@ -34,7 +35,7 @@ export default class Header extends React.Component {
             })
         })
         // Receive message notification
-        socketConnection.on('sendMessage', () => {
+        socketConnection.on('receiveMessage', () => {
             this.setState({
                 newNoti: true,
                 msgCount: this.state.msgCount + 1
@@ -70,6 +71,14 @@ export default class Header extends React.Component {
             }
         })
     }
+
+    notificationCount = count => (
+        count && (
+            <span className="notification-count">
+                {count > 99 ? '99+' : count}
+            </span>
+        )
+    )
 
     render() {
         return (
@@ -109,7 +118,7 @@ export default class Header extends React.Component {
                         <div className={`custom-dropdown notification-item message active ${this.state.messageMenu}`}>
                             <div className="notification-button" onClick={() => this.toggleMenu('message')}>
                                 <i className="icon-text-bubble"></i>
-                                {this.state.newNoti && <span className="notification-count">{this.state.msgCount}</span>}
+                                {this.state.newNoti && this.notificationCount(this.state.msgCount)}
                             </div>
                             <div className="dropdown-options message-list">
                                 <div className="empty-option">No message</div>
@@ -118,17 +127,16 @@ export default class Header extends React.Component {
                         <div className={`custom-dropdown notification-item friend-request ${this.state.friendMenu}`}>
                             <div className="notification-button" onClick={() => this.toggleMenu('friend')}>
                                 <i className="icon-user-add"></i>
-                                {this.state.newFriend && (
-                                    <span className="notification-count">{this.state.requestCount}</span>
-                                )}
+                                {this.state.newFriend && this.notificationCount(this.state.requestCount)}
                             </div>
                             <div className="dropdown-options request-list">
                                 <div className="empty-option">No friend request</div>
                             </div>
                         </div>
-                        <div className={`custom-dropdown notification-item notification  ${this.state.notificationMenu}`}>
+                        <div className={`custom-dropdown notification-item notification ${this.state.notificationMenu}`}>
                             <div className="notification-button" onClick={() => this.toggleMenu('notification')}>
                                 <i className="icon-bell"></i>
+                                {this.state.newFriend && this.notificationCount(this.state.notiCount)}
                             </div>
                             <div className="dropdown-options notification-list">
                                 <div className="empty-option">No notification</div>

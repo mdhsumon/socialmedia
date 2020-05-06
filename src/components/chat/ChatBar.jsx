@@ -1,9 +1,8 @@
 import React from "react"
-//import update from "immutability-helper"
 import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
 import { getFriendLists, getUserSummary } from "../../services/userService"
 import { ChatBox } from "./ChatBox"
-//import { socketConnection } from "../../sockets/socket"
+import { socketConnection } from "../../sockets/socket"
 
 export class ChatBar extends React.Component {
     constructor(props) {
@@ -12,10 +11,35 @@ export class ChatBar extends React.Component {
             chatUsers: [],
             openedChat: []
         }
-        this.loadFriendLists()
     }
 
-    loadFriendLists = () => {
+    componentDidMount() {
+        this.loadFriendLists(() => {
+            // Receive user online status
+            socketConnection.on('userOnlineStatus', userId => {
+                this.updateUserStatus(userId, 'online')
+            })
+            // Receive user offline status
+            socketConnection.on('userOfflineStatus', userId => {
+                this.updateUserStatus(userId, 'offline')
+            })
+        })
+    }
+
+    updateUserStatus = (userId, status) => {
+        const newChatUsers = this.state.chatUsers.map(user => (
+            user.userId === userId ?
+            {status: status,
+            userId: user.userId,
+            username: user.username,
+            displayName: user.displayName,
+            profilePhoto: user.profilePhoto} :
+            user
+        ))
+        this.updateUsers(newChatUsers)
+    }
+
+    loadFriendLists = callback => {
         getFriendLists(loggedUserInfo.id, data => {
             if(data.status) {
                 const friendIds = data.friends.map(friend => friend.friendId)
@@ -31,21 +55,11 @@ export class ChatBar extends React.Component {
                             }
                         ))
                         this.updateUsers(userList)
+                        callback()
                     }
                 })
             }
         })
-
-        // Receive user online status signal
-        // socketConnection.on('userOnlineStatus', userStatus => {
-        //     let copyUsers = [ ...this.state.chatUsers ]
-        //     const findUser = copyUsers.filter(item => item.userId === userStatus.userId)[0]
-        //     const userIndex = copyUsers.indexOf(findUser)
-        //     copyUsers = update(copyUsers[userIndex], { status: { $set: userStatus.status } })
-        //     this.setState({
-        //         chatUsers: copyUsers
-        //     })
-        // })
     }
 
     updateUsers = users => {
@@ -81,7 +95,7 @@ export class ChatBar extends React.Component {
             <div className="chat-bar">
                 <div className="chat-user-container">
                     <div className="user-list">
-                        {this.state.chatUsers.map(user => {
+                        {this.state.chatUsers.map((user, index) => {
                             return(
                                 <div key={user.userId} className={`chat-user ${user.status}`} onClick={ event => { this.openChat(event, user) } }>
                                     <div className="display-name">{user.displayName}</div>

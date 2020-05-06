@@ -15,7 +15,7 @@ export const userSignup = (signupData, callback) => {
     })
     .then(res => res.json())
     .then(createResponse => { callback(createResponse) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Will return access token after login
@@ -30,7 +30,7 @@ export const getAccessToken = (loginData, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Logout and destroy token
@@ -45,7 +45,7 @@ export const userLogout = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Will return single user summary
@@ -60,7 +60,7 @@ export const getUserSummary = (userOrId, callback) => {
     })
     .then(res => res.json())
     .then(user => { callback(user) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Will return single user full information
@@ -90,7 +90,7 @@ export const updateUser = (profileData, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Will return true/false if username or email exist
@@ -104,7 +104,7 @@ export const isUserExist = (type, userOrEmail, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data.isExist ? true : false) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Get friend lists
@@ -148,7 +148,7 @@ export const getFriendSuggestions = callback => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Send friend request
@@ -164,7 +164,7 @@ export const sendFriendRequest = (username, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Accept friend request
@@ -180,7 +180,7 @@ export const acceptFriendRequest = (userId, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Accept friend request
@@ -196,7 +196,7 @@ export const declineFriendRequest = (userId, callback) => {
     })
     .then(res => res.json())
     .then(data => { callback(data) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Load messages
@@ -211,11 +211,11 @@ export const getUserMessages = (friendId, callback) => {
     })
     .then(res => res.json())
     .then(messages => { callback(messages) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
 }
 
 // Send message
-export const sendUserMessage = (userId, messageData, callback) => {
+export const sendUserMessage = (friendId, messageData, callback) => {
     fetch(`${apiBaseUrl}/message/send`, {
         method: 'POST',
         headers: {
@@ -223,9 +223,25 @@ export const sendUserMessage = (userId, messageData, callback) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ senderId: loggedUserId, userId: userId, messageData: messageData })
+        body: JSON.stringify({ senderId: loggedUserId, friendId: friendId, messageData: messageData })
     })
     .then(res => res.json())
     .then(sendStatus => { callback(sendStatus) })
-    .catch(err => { callback(false) })
+    .catch(err => { } )
+}
+
+// Send message
+export const deleteUserMessage = (friendId, messageId, callback) => {
+    fetch(`${apiBaseUrl}/message/delete`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${loggedUserToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ friendId: friendId, messageId: messageId })
+    })
+    .then(res => res.json())
+    .then(deleteStatus => { callback(deleteStatus) })
+    .catch(err => { })
 }

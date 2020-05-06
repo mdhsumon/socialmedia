@@ -3,8 +3,7 @@
     top: 35px;
     left: 50%;
     font-size: 14px;
-    font-weight: 600;
-    color: #444;
+    color: #fff;
     border: 1px solid transparent;
     transform: translateX(-50%);
     background-color: #fff;
@@ -15,9 +14,9 @@
   }
   
   .message-popup.success {
-    border-color: #8DD200;
+    background-color: #4CAF50;
   }
   
   .message-popup.error {
-    border-color: #ff4040;
+    background-color: #FF6655;
   }

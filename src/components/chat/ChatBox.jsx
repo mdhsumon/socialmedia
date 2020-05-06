@@ -1,6 +1,6 @@
 import React from "react"
-import { apiBaseUrl } from "../../services/commonService"
-import { getUserMessages, sendUserMessage } from "../../services/userService"
+import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
+import { getUserMessages, sendUserMessage, deleteUserMessage } from "../../services/userService"
 import { socketConnection } from "../../sockets/socket"
 import { getTime } from "../../commonActions"
 
@@ -10,10 +10,10 @@ export class ChatBox extends React.Component {
         this.state = {
             isActive: false,
             sendButton: false,
-            newMessage: false,
             inputRow: 1,
             userInput: '',
-            messageList: []
+            messageList: [],
+            newMessage: false
         }
     }
 
@@ -22,9 +22,17 @@ export class ChatBox extends React.Component {
     componentDidMount() {
         this.updateMessages()
         // Update after getting signal
-        socketConnection.on('sendMessage', userId => {
-            this.updateMessages()
+        socketConnection.on('receiveMessage', senderId => {
+            this.updateMessages(() => {
+                this.setState({senderId: senderId})
+                this.state.isActive ? this.scrollToTarget(this.bottomFlag) : this.setState({newMessage: true})
+            })
         })
+    }
+
+    newMessage = () => {
+        this.scrollToTarget(this.bottomFlag)
+        this.setState({newMessage: false})
     }
 
     handleInput = event => {
@@ -43,21 +51,18 @@ export class ChatBox extends React.Component {
         }
     }
 
-    handleFocus = () => {
-        this.setState({ 
-            isActive: true,
-            newMessage: false
-        })
+    handleFocus = event => {
+        this.setState({ isActive: true, senderId: '' })
     }
 
-    handleBlur = () => {
+    handleBlur = event => {
         this.setState({ isActive: false })
     }
 
-    updateMessages = () => {
+    updateMessages = callback => {
         getUserMessages(this.props.userInfo.userId, messages => {
-            this.setState({ messageList: messages })
-            this.scrollToTarget(this.bottomFlag)
+            this.setState({ messageList: messages.messageList })
+            callback && callback()
         })
     }
 
@@ -66,22 +71,54 @@ export class ChatBox extends React.Component {
             sendUserMessage(this.props.userInfo.userId, this.state.userInput, response => {
                 if(response.status) {
                     this.updateMessages()
-                    socketConnection.emit('sendMessage', this.props.userInfo.userId)
+                    socketConnection.emit('sendMessage', loggedUserInfo.id, this.props.userInfo.userId)
                 }
-                this.setState({
-                    userInput: ''
-                })
+                this.setState({ userInput: '' })
             })
         }
     }
 
+    managePopMenu = index => {
+        this.setState({
+            activeIndex: index
+        })
+    }
+
+    deleteMessage = (friendId, messageId) => {
+        deleteUserMessage(friendId, messageId, response => {
+            if(response.status) {
+                this.updateMessages()
+            }
+        })
+    }
+
     renderMessage = () => (
-        this.state.messageList.length >= 1 ? this.state.messageList.map(data => (
+        this.state.messageList.length ? this.state.messageList.map((data, index) => (
         <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
             <div className="message-item">
                 <span className="message">{ data.message }</span>
                 <span className="time" title={ getTime(data.time, "auto") }><i className="icon-time"></i></span>
-                <span className="action">{data.origin === "self" ? <i className="icon-ellips-v"></i> : <i className="icon-smile-line"></i>}</span>
+                <span className={`action${this.state.activeIndex === index ? ' active' : ''}`}>
+                    {data.origin === "self" ? (
+                        <React.Fragment>
+                            <i className="icon-ellips-v" onClick={() => this.managePopMenu(index)}></i>
+                            {this.state.activeIndex === index && (
+                                <span className="pop-menu">
+                                    <i className="icon-pencil" onClick={() => this.editMessage()}></i>
+                                    <i className="icon-remove" onClick={() => this.deleteMessage(this.props.userInfo.userId, data._id)}></i>
+                                </span>
+                            )}
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <i className="icon-smile-line"></i>
+                            {/* <span className="pop-menu">
+                                <i className="icon-pencil"></i>
+                                <i className="icon-remove"></i>
+                            </span> */}
+                        </React.Fragment>
+                    )}
+                </span>
             </div>
         </div>)) : (<div className="empty-message"><i className="icon-smile-line"></i> Message box is empty</div>)
     )
@@ -89,7 +126,7 @@ export class ChatBox extends React.Component {
     render() {
         const [userInfo] = [this.props.userInfo]
         return (
-            <div className={`chat-box${this.state.isActive ? ' active' : this.state.newMessage ? ' new' : '' }`} key={ userInfo.userId }>
+            <div className={`chat-box${this.state.isActive ? ' active' : this.state.senderId === userInfo.userId ? ' new' : '' }`} key={ userInfo.userId }>
                 <div className="box-head">
                     <div className="user-photo"><img src={ apiBaseUrl + userInfo.profilePhoto } alt={ userInfo.displayName } /></div>
                     <div className="display-name"><a href={ apiBaseUrl + '/user/' + userInfo.username }>{ userInfo.displayName }</a></div>
@@ -102,6 +139,9 @@ export class ChatBox extends React.Component {
                 <div className="box-body">
                     { this.renderMessage() }
                     <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
+                    {this.state.newMessage && this.state.senderId === userInfo.userId && (
+                        <span className="new-message" onClick={this.newMessage}>New Message &darr;</span>
+                    )}
                 </div>
                 <div className="box-form">
                     <div className="attach">
@@ -117,6 +157,7 @@ export class ChatBox extends React.Component {
                             onFocus={ this.handleFocus }
                             onBlur={ this.handleBlur }
                             value={ this.state.userInput }
+                            placeholder="Write message..."
                         />
                     </div>
                     <button className="send" onClick={ this.sendMessage } disabled={ !this.state.sendButton }><i className="icon-send"></i></button>
