@@ -84,6 +84,10 @@ export class ChatBox extends React.Component {
         })
     }
 
+    editMessage = (message, messageId) => {
+        this.setState({ userInput: message })
+    }
+
     deleteMessage = (friendId, messageId) => {
         deleteUserMessage(friendId, messageId, response => {
             if(response.status) {
@@ -98,20 +102,20 @@ export class ChatBox extends React.Component {
             <div className="message-item">
                 <span className="message">{ data.message }</span>
                 <span className="time" title={ getTime(data.time, "auto") }><i className="icon-time"></i></span>
-                <span className={`action${this.state.activeIndex === index ? ' active' : ''}`}>
+                <span className={`action${this.state.activeIndex === index ? ' active' : ''}`} onClick={() => this.managePopMenu(index)}>
                     {data.origin === "self" ? (
                         <React.Fragment>
-                            <i className="icon-ellips-v" onClick={() => this.managePopMenu(index)}></i>
+                            <i className="icon-ellips-v"></i>
                             {this.state.activeIndex === index && (
                                 <span className="pop-menu">
-                                    <i className="icon-pencil" onClick={() => this.editMessage()}></i>
-                                    <i className="icon-remove" onClick={() => this.deleteMessage(this.props.userInfo.userId, data._id)}></i>
+                                    <i className="edit icon-pencil" onClick={() => this.editMessage(data.message, data._id)}></i>
+                                    <i className="remove icon-bin-fill" onClick={() => this.deleteMessage(this.props.userInfo.userId, data._id)}></i>
                                 </span>
                             )}
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <i className="icon-smile-line"></i>
+                            <i className="icon-smile-o"></i>
                             {/* <span className="pop-menu">
                                 <i className="icon-pencil"></i>
                                 <i className="icon-remove"></i>
@@ -120,7 +124,7 @@ export class ChatBox extends React.Component {
                     )}
                 </span>
             </div>
-        </div>)) : (<div className="empty-message"><i className="icon-smile-line"></i> Message box is empty</div>)
+        </div>)) : (<div className="empty-message"><i className="icon-heart-broken"></i> Message box is empty</div>)
     )
 
     render() {
@@ -145,7 +149,7 @@ export class ChatBox extends React.Component {
                 </div>
                 <div className="box-form">
                     <div className="attach">
-                        <div className="emoji"><i className="icon-smile-line"></i></div>
+                        <div className="emoji"><i className="icon-smile-o"></i></div>
                         <div className="file"><i className="icon-attachment"></i></div>
                     </div>
                     <div className="message-input">

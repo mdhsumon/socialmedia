@@ -12,10 +12,10 @@ export const Navigator = () => {
                     <a href="/profile"><i className="icon-profile"></i></a>
                 </div>
                 <div className="nav-item">
-                    <Link to="/photos"><i className="icon-camera"></i></Link>
+                    <Link to="/photos"><i className="icon-images"></i></Link>
                 </div>
                 <div className="nav-item">
-                    <Link to="/videos"><i className="icon-movie-open"></i></Link>
+                    <Link to="/videos"><i className="icon-film"></i></Link>
                 </div>
             </div>
         </nav>

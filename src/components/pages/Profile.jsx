@@ -1,5 +1,6 @@
 import React from "react"
 import FriendRequests from "../FriendRequests"
+import SentRequests from "../SentRequests"
 import ProfileInfo from "../ProfileInfo"
 import { Post } from "../post/Post"
 import { Bio } from "../Bio"
@@ -29,13 +30,14 @@ export default class Profile extends React.Component {
                 <div className="container column-section">
                     <div className="left-column">
                         <Bio bioData={ this.state.bioData } />
+                        <FriendLists userId={loggedUserInfo.id} />
                     </div>
                     <div className="middle-column">
                         <Post userId={loggedUserInfo.id} />
                     </div>
                     <div className="right-column">
-                        <FriendLists userId={loggedUserInfo.id} />
                         <FriendRequests />
+                        <SentRequests />
                     </div>
                 </div>
             </div>

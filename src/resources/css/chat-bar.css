@@ -102,6 +102,9 @@
 .chat-box.active .box-head {
   background-color: #f2fae3;
 }
+.chat-box.active .box-form {
+  overflow: visible;
+}
 .chat-box.new {
   border-color: #8dd200;
   box-shadow: 0 0 10px 0 rgba(141, 210, 0, 0.5);
@@ -130,6 +133,7 @@
 }
 .chat-box .box-form {
   border-top: 1px solid #f1f1f1;
+  overflow: hidden;
 }
 .chat-box .user-photo {
   width: 23px;
@@ -264,10 +268,8 @@
   position: absolute;
   top: 4px;
   color: #ccc;
-  transition: all 0.1s ease;
-}
-.chat-box .message-cell .action i {
   cursor: pointer;
+  transition: all 0.1s ease;
 }
 .chat-box .message-cell.self .action {
   left: 20px;
@@ -288,6 +290,7 @@
 .message-cell .action .pop-menu {
   background-color: rgba(0,0,0,0.8);
   border-radius: 3px;
+  cursor: default;
   position: absolute;
   left: -20px;
   top: -30px;
@@ -301,10 +304,10 @@
   padding: 7px;
   display: inline-block;
 }
-.message-cell .action .pop-menu .icon-pencil:hover {
+.message-cell .action .pop-menu .edit:hover {
   color: #8dd200;
 }
-.message-cell .action .pop-menu .icon-remove:hover {
+.message-cell .action .pop-menu .remove:hover {
   color: #FF6655;
 }
 .chat-box .empty-message {

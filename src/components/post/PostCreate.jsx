@@ -77,8 +77,8 @@ export class PostCreate extends React.Component {
                         <Tabs selectedTabClassName="active" selectedTabPanelClassName="active">
                             <TabList className="post-create-tab">
                                 <Tab className="tab-item message"><i className="icon-writing"></i></Tab>
-                                <Tab className="tab-item photo"><i className="icon-camera"></i></Tab>
-                                <Tab className="tab-item video"><i className="icon-movie-open"></i></Tab>
+                                <Tab className="tab-item photo"><i className="icon-images"></i></Tab>
+                                <Tab className="tab-item video"><i className="icon-film"></i></Tab>
                             </TabList>
                             <div className="post-create-body">
                                 <TabPanel className="tab-content message">
@@ -87,14 +87,14 @@ export class PostCreate extends React.Component {
                                 <TabPanel className="tab-content photos">
                                     <div className="input-box input-file">
                                         <input type="file" name="photos" multiple onChange={this.handleChange} />
-                                        <div className="input-file-text"><i className="icon-camera"></i> Upload Photos</div>
+                                        <div className="input-file-text"><i className="icon-images"></i> Upload Photos</div>
                                     </div>
                                     <div className="uploaded-files"></div>
                                 </TabPanel>
                                 <TabPanel className="tab-content videos">
                                     <div className="input-box input-file">
                                         <input type="file" name="videos" multiple onChange={this.handleChange} />
-                                        <div className="input-file-text"><i className="icon-movie-open"></i> Upload Videos</div>
+                                        <div className="input-file-text"><i className="icon-film"></i> Upload Videos</div>
                                     </div>
                                     <div className="uploaded-files"></div>
                                 </TabPanel>

@@ -42,11 +42,10 @@ export class PostReactions extends React.Component {
                     <button className={this.state.isLiked ? 'like liked' : 'like'} onClick={this.manageReaction}>
                         <i className="icon-like"></i>
                     </button>
-                    <span className="like-amount">{this.props.reactions.likes.count}</span>
                     <button className={this.state.isDisLiked ? 'dislike disliked' : 'dislike'} onClick={this.manageReaction}>
-                        <i className="icon-smile"></i>
+                        <i className="icon-smile-fill"></i>
                     </button>
-                    <span className="dislike-amount">{this.props.reactions.dislikes.count}</span>
+                    <span className="reaction-count">0</span>
                 </div>
                 <div className="add-comment">
                     <input type="text" placeholder="Write a comment..." onChange={this.handleComment} onKeyDown={this.handleComment} />

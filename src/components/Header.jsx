@@ -152,9 +152,9 @@ export default class Header extends React.Component {
                             <div className="nickname">{this.state.nickName}</div>
                         </div>
                         <div className="dropdown-options">
-                            <div className="option"><a href="/profile">Profile Settings</a></div>
-                            <div className="option">Settings</div>
-                            <div className="option" onClick={() => this.logout()}>Logout</div>
+                            <div className="option"><a href="/profile"><i className="icon-profile"></i> Profile Settings</a></div>
+                            <div className="option"><i className="icon-cog"></i> Settings</div>
+                            <div className="option" onClick={() => this.logout()}><i className="icon-switch"></i> Logout</div>
                         </div>
                     </div>
                 </div>

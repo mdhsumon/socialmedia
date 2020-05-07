@@ -4,16 +4,18 @@
   min-height: 330px;
 }
 .change-photo {
+  text-shadow: 0 0 15px #fff;
   position: absolute;
   right: 15px;
   bottom: 10px;
   font-size: 24px;
-  color: #9c9c9c;
+  color: #000;
   cursor: pointer;
   display: none;
 }
 .change-photo:hover {
-  color: #333333;
+  color: #8dd200;
+  text-shadow: none;
 }
 .cover-photo:hover .change-photo,
 .profile-photo:hover .change-photo {
@@ -25,7 +27,7 @@
 }
 .change-photo:before {
   font-family: Social;
-  content: "\E90A";
+  content: "\e90f";
 }
 .profile-info-section {
   margin-bottom: 15px;

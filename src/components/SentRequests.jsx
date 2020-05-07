@@ -4,7 +4,7 @@ import { apiBaseUrl } from "../services/commonService"
 import { getFriendRequests, acceptFriendRequest, declineFriendRequest, getUserSummary } from "../services/userService"
 import { socketConnection } from "../sockets/socket"
 
-export default class FriendRquests extends React.Component {
+export default class SentRequests extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -78,7 +78,7 @@ export default class FriendRquests extends React.Component {
         else {
             return(
                 <div className="no-rq-item">
-                    No friend request found
+                    No sent request found
                 </div>
             )
         }
@@ -87,7 +87,7 @@ export default class FriendRquests extends React.Component {
     render() {
         return (
             <div className="common-block friend-request-section">
-                <h4 className="block-header">Friend requests</h4>
+                <h4 className="block-header">Sent friend requests</h4>
                 <div className="block-body friend-rq-items">
                     { this.renderFriednRequst() }
                 </div>
