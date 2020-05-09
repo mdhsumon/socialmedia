@@ -22,7 +22,6 @@ textarea {
   border: 1px solid #ddd;
   width: 100%;
   padding: 10px;
-  box-sizing: border-box;
   border-radius: 2.5px;
   margin: 5px 0;
   color: #000;
@@ -284,6 +283,8 @@ button:disabled,
   align-items: flex-start;
   max-width: 1200px;
   width: 100%;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .content-body {
@@ -302,14 +303,20 @@ button:disabled,
 .column-section .left-column {
   flex: none;
   width: 22%;
-  min-width: 225px;
+  min-width: 250px;
+}
+
+.column-section .left-column {
+  margin-right: 15px;
+}
+
+.column-section .right-column {
+  margin-left: 15px;
 }
 
 .column-section .middle-column {
   flex: auto;
   min-width: 250px;
-  margin-left: 15px;
-  margin-right: 15px;
 }
 
 .common-block {
@@ -338,6 +345,17 @@ button:disabled,
   font-size: 14px;
   color: #666666;
   padding: 15px;
+}
+
+.common-block .author-name {
+  text-decoration: none;
+  color: #333333;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.common-block a:hover {
+  color: #000;
 }
 /* End Common */
 

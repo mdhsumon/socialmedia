@@ -103,7 +103,7 @@ export const isUserExist = (type, userOrEmail, callback) => {
         }
     })
     .then(res => res.json())
-    .then(data => { callback(data.isExist ? true : false) })
+    .then(data => { callback(data.status ? true : false) })
     .catch(err => { } )
 }
 

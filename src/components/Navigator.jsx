@@ -1,22 +1,21 @@
 import React from "react"
-import { Link } from "react-router-dom"
 
 export const Navigator = () => {
+    console.log(typeof window.location.pathname)
+    const pages = [
+        {url: '/feeds', icon: <i className="icon-feeds"></i>},
+        {url: '/profile', icon: <i className="icon-profile"></i>},
+        {url: '/photos', icon: <i className="icon-images"></i>},
+        {url: '/videos', icon: <i className="icon-film"></i>}
+    ]
     return (
         <nav className="navigator">
             <div className="nav-item-container">
-                <div className="nav-item active">
-                    <a href="/feeds"><i className="icon-feeds"></i></a>
-                </div>
-                <div className="nav-item">
-                    <a href="/profile"><i className="icon-profile"></i></a>
-                </div>
-                <div className="nav-item">
-                    <Link to="/photos"><i className="icon-images"></i></Link>
-                </div>
-                <div className="nav-item">
-                    <Link to="/videos"><i className="icon-film"></i></Link>
-                </div>
+                {pages.map(page => (
+                    <a href={page.url} className={`nav-item${window.location.pathname === page.url ? ' active' : ''}`}>
+                        {page.icon}
+                    </a>
+                ))}
             </div>
         </nav>
     )

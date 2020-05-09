@@ -59,12 +59,12 @@ export default class PublicProfile extends React.Component {
                 <div className="container column-section">
                     <div className="left-column">
                         {this.state.userId && <Bio bioData={ this.state.about } />}
+                        {this.state.userId && <FriendLists userId={this.state.userId} />}
                     </div>
                     <div className="middle-column">
                         {this.state.userId && <Post userId={this.state.userId} />}
                     </div>
                     <div className="right-column">
-                        {this.state.userId && <FriendLists userId={this.state.userId} />}
                     </div>
                 </div>
             </div>

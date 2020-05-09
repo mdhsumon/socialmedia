@@ -4,18 +4,20 @@ import { Signup } from "./components/pages/Signup"
 import { Login } from "./components/pages/Login"
 import { Welcome } from "./components/pages/Welcome"
 import { PrivateRoute } from "./PrivateRoute"
-import { MainBody } from "./components/MainBody"
+import { MainApp } from "./components/MainApp"
 
 import "./resources/css/style.css"
+import { ErrorPage } from "./components/pages/ErrorPage"
 
 export default class App extends React.Component {
   render() {
     return (
       <Router>
-          <Route match exact path="/signup" component={ Signup } />
+          <Route exact path="/signup" component={ Signup } />
           <Route exact path="/login" component={ Login } />
           <Route exact path="/" component={ Welcome } />
-          <PrivateRoute match exact component={ MainBody } />
+          <PrivateRoute path={["/feeds", "/profile", "/user/:username"]} component={ MainApp } />
+          {/* <Route path="*" component={ ErrorPage } /> */}
       </Router>
     )
   }

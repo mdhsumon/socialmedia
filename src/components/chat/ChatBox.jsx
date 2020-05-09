@@ -143,10 +143,10 @@ export class ChatBox extends React.Component {
                 <div className="box-body">
                     { this.renderMessage() }
                     <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
-                    {this.state.newMessage && this.state.senderId === userInfo.userId && (
-                        <span className="new-message" onClick={this.newMessage}>New Message &darr;</span>
-                    )}
                 </div>
+                {this.state.newMessage && this.state.senderId === userInfo.userId && (
+                    <span className="new-message" onClick={this.newMessage}>New Message &darr;</span>
+                )}
                 <div className="box-form">
                     <div className="attach">
                         <div className="emoji"><i className="icon-smile-o"></i></div>

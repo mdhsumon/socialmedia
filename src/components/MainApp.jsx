@@ -7,7 +7,7 @@ import Profile from "./pages/Profile"
 import PublicProfile from "./pages/PublicProfile"
 import { ChatBar } from "./chat/ChatBar"
 
-export const MainBody = () => {
+export const MainApp = () => {
 
   const bodyMargin = () => {
     const contentWith = 1200 // document.getElementsByClassName("main-body")[0].offsetWidth
@@ -25,9 +25,9 @@ export const MainBody = () => {
           <Navigator />
           <div className="content-body">
             <Router>
-              <Route exact path="/user/:username" component={PublicProfile} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/feeds" component={PostFeed} />
+              <Route path="/user/:username" component={PublicProfile} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/feeds" component={PostFeed} />
             </Router>
           </div> 
           <ChatBar />

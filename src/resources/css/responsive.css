@@ -1,0 +1,75 @@
+@media screen and (max-width: 1199px) {
+
+}
+@media screen and (max-width: 1023px) {
+    .column-section .right-column,
+    .column-section .left-column {
+        min-width: 180px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .main-body {
+        padding: 10px;
+    }
+    .column-section .right-column,
+    .column-section .left-column {
+        position: absolute;
+        visibility: hidden;
+    }
+    .profile-info-section {
+        margin-bottom: 10px;
+    }
+    .chatting-panel {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .header-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .header .notification-item .notification-count {
+        font-size: 10px;
+        min-width: 16px;
+        height: 16px;
+        line-height: 16px;
+    }
+}
+@media screen and (max-width: 479px) {
+    .signup-form form, .login-form form {
+        max-width: 380px;
+        padding: 25px;
+    }
+    .main-body {
+        padding: 5px;
+    }
+    .chatting-panel {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .header-container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .header .logo-bar {
+        margin-right: 20px;
+    }
+    .header .search-bar {
+        margin-right: 20px;
+    }
+    .header .user-bar {
+        margin-left: 20px;
+    }
+    .header .notification-item ~ .notification-item {
+        margin-left: 15px;
+    }
+    .profile-photo {
+        bottom: 30px;
+    }
+    .profile-name {
+        margin-left: 15px;
+        padding-top: 15px;
+    }
+    .post{
+        margin-bottom: 5px;
+    }
+}

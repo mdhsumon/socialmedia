@@ -3,19 +3,17 @@
   background-color: #fff;
   border: 1px solid #e3e3e3;
   border-radius: 5px;
-  margin-right: 50px;
   width: 50px;
-  flex: none;
+  position: fixed;
+  left: 15px;
+  z-index: 1;
 }
 .nav-item-container {
   text-align: center;
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.nav-item ~ .nav-item {
-  margin-top: 15px;
-}
-.nav-item a {
+.nav-item {
   display: block;
   padding: 10px;
   color: #CCCCCC;
@@ -23,11 +21,14 @@
   transition: all 0.1s ease;
   position: relative;
 }
-.nav-item.active a,
-.nav-item a:hover {
+.nav-item ~ .nav-item {
+  margin-top: 15px;
+}
+.nav-item.active,
+.nav-item:hover {
   color: #8dd200;
 }
-.nav-item.active a:before {
+.nav-item.active:before {
   content: '';
   position: absolute;
   border-radius: 0 7px 7px 0;

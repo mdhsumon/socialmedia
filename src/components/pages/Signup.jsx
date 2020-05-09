@@ -312,7 +312,7 @@ export class Signup extends React.Component {
                         </div>
                         <button>Signup</button>
                     </form>
-                    <div className="new-account">Already have account? <Link to="/login">login</Link> here.</div>
+                    <div className="new-account">Already have an account? <Link to="/login">login</Link> here.</div>
                 </div>
                 {this.state.isWelcomeScreen && (
                     <div className="welcome-section">

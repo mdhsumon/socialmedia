@@ -2,6 +2,7 @@ import React from "react"
 import { loggedUserInfo, apiBaseUrl } from "../services/commonService"
 import { socketConnection } from "../sockets/socket"
 import { getUserSummary, userLogout } from "../services/userService"
+import { screentSize } from "../commonActions"
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export default class Header extends React.Component {
         this.state = {
             newFriend: false,
             newNoti: false,
+            searchMenu: false,
             requestCount: 0,
             msgCount: 0,
             notiCount: 0,
@@ -103,8 +105,11 @@ export default class Header extends React.Component {
                             </g>
                         </svg>
                     </div>
-                    <div className="search-bar">
-                        <div className="search-form">
+                    <div className={`search-bar${screentSize('width') < 520 ? ' has-search-menu' : ''}`}>
+                        {screentSize('width') < 520 && <span className="search-menu" onClick={()=> {this.setState({searchMenu: !this.state.searchMenu})}}>
+                            <i className="icon-search"></i>
+                        </span>}
+                        <div className="search-form" style={screentSize('width') < 520 && !this.state.searchMenu ? {display: 'none'} : {}}>
                             <input className="search" type="search" title="Search" placeholder="Search"/>
                             <button className="search-button">
                                 <i className="icon-search"></i>
@@ -147,10 +152,10 @@ export default class Header extends React.Component {
                         <div className="user-photo" onClick={() => this.toggleMenu('profile')}>
                             <img src={apiBaseUrl + this.state.profilePhoto} alt={this.state.displayName} />
                         </div>
-                        <div className="user-name">
+                        {screentSize('width') > 767 && <div className="user-name">
                             <div className="name">{this.state.displayName}</div>
                             <div className="nickname">{this.state.nickName}</div>
-                        </div>
+                        </div>}
                         <div className="dropdown-options">
                             <div className="option"><a href="/profile"><i className="icon-profile"></i> Profile Settings</a></div>
                             <div className="option"><i className="icon-cog"></i> Settings</div>

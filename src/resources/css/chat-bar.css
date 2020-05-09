@@ -1,7 +1,8 @@
 /* start chat bar */
 .chat-bar {
-  margin-left: 50px;
-  flex: none;
+  position: fixed;
+  right: 15px;
+  z-index: 1;
 }
 .chat-user-container {
   background-color: #ffffff;
@@ -76,9 +77,9 @@
 .chatting-panel {
   position: fixed;
   left: 50%;
-  margin-left: -585px;
-  bottom: 15px;
-  max-width: 1170px;
+  transform: translateX(-50%);
+  bottom: 5px;
+  max-width: 1200px;
   width: 100%;
   height: 0;
   padding-left: 15px;
@@ -98,6 +99,7 @@
   flex-direction: column;
   flex: none;
   overflow: auto;
+  position: relative;
 }
 .chat-box.active .box-head {
   background-color: #f2fae3;
@@ -186,16 +188,15 @@
   padding: 10px 10px 0;
   min-height: 0;
   overflow: auto;
-  position: relative;
 }
 .chat-box .box-body .bottom-flag {
   height: 10px;
 }
-.chat-box .box-body .new-message {
+.chat-box .new-message {
   background-color: #8dd200;
   border-radius: 3px;
   position: absolute;
-  bottom: 2px;
+  bottom: 45px;
   left: 50%;
   transform: translateX(-50%);
   color: #fff;

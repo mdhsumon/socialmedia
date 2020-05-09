@@ -8,14 +8,19 @@
 }
 .signup-form,
 .login-form {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 40px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: calc(100% - 40px);
+}
+.signup-form form,
+.login-form form {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 40px;
+  max-height: 100vh;
+  overflow: auto;
 }
 .signup-form,
 .login-form {
@@ -34,7 +39,6 @@
   background-color: #f0f0f0;
   border: 1px solid transparent;
   padding: 15px 20px;
-  box-sizing: border-box;
   border-radius: 3px;
   margin: 5px 0;
 }
@@ -83,10 +87,10 @@ input:-webkit-autofill:active {
   margin-top: 5px;
 }
 .new-account {
-  position: absolute;
-  bottom: -40px;
   color: #ccc;
   font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
 }
 .new-account a {
   color: #8DD200;

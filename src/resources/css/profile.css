@@ -47,10 +47,6 @@
 .profile-section{
   border: 1px solid #e3e3e3;
   border-top: 0;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 }
 .profile-author, .profile-section{
   background: #ffffff;
@@ -141,10 +137,6 @@
   font-weight: 600;
   font-size: 14px;
   color: #999999;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;

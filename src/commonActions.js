@@ -63,3 +63,25 @@ export const getTime = (timestamp, timeFormat) => {
             return "Invalid format"
     }
 }
+
+// Current viewport width or height or {width, height}
+export const screentSize = size => {
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const screenSize = { width, height }
+    const getSize = size => {
+        if(size && size === 'width') {
+            return width
+        }
+        else if(size && size === 'height') {
+            return height
+        }
+        else {
+            return screenSize
+        }
+    }
+    // window.onresize = () => {
+    //     getSize(size)
+    // }
+    return getSize(size)
+}
