@@ -49,8 +49,8 @@
   transition: all 0.1s;
 }
 .rq-buttons .accept:hover{
-  background-color: #8dd200;
-  border-color: #8dd200;
+  background-color: #6ebd52;
+  border-color: #6ebd52;
   color: #fff;
 }
 .rq-buttons .decline{

@@ -14,7 +14,7 @@
   display: none;
 }
 .change-photo:hover {
-  color: #8dd200;
+  color: #6ebd52;
   text-shadow: none;
 }
 .cover-photo:hover .change-photo,
@@ -101,7 +101,7 @@
   visibility: hidden;
 }
 .profile-name .update-info:hover {
-  color: #8dd200;
+  color: #6ebd52;
 }
 .profile-info-section:hover .profile-name .update-info {
   visibility: visible;

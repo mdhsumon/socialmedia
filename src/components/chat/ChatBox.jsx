@@ -154,7 +154,7 @@ export class ChatBox extends React.Component {
                     </div>
                     <div className="message-input">
                         <textarea
-                            style={ { minHeight: '30px', maxHeight: '120px', lineHeight: '14px' } }
+                            style={ { minHeight: '33px', maxHeight: '120px', lineHeight: '14px' } }
                             rows={ this.state.inputRow }
                             onChange={ this.handleInput }
                             onKeyDown={ this.handleInput }

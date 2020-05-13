@@ -22,7 +22,7 @@
     margin-left: 20px;
 }
 .post-create-tab .tab-item.active {
-    color: #8dd200;
+    color: #6ebd52;
 }
 .post-create-form .tab-content {
     display: none;
@@ -61,7 +61,7 @@
   font-weight: 400;
 }
 .post-create textarea:focus {
-  border-color: #8dd200;
+  border-color: #6ebd52;
 }
 /*----------------post create end-------*/
 
@@ -129,7 +129,7 @@
     color: #aaaaaa;
 }
 .author-post-info .post-attribute a{
-    color: #8dd200;
+    color: #6ebd52;
     text-decoration: none;
 }
 .author-post-info .post-attribute a:hover{
@@ -208,7 +208,7 @@
 }
 .like-dislike .liked i,
 .like-dislike .like:hover i {
-    color: #8dd200;
+    color: #6ebd52;
 }
 .like-dislike .disliked i,
 .like-dislike .dislike:hover i {
@@ -326,7 +326,7 @@
     color: #ccc;
 }
 .comment .action span:hover {
-    color: #8dd200;
+    color: #6ebd52;
 }
 .comment .reply-section {
     padding-top: 10px;

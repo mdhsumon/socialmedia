@@ -1,6 +1,3 @@
-@media screen and (max-width: 1199px) {
-
-}
 @media screen and (max-width: 1023px) {
     .column-section .right-column,
     .column-section .left-column {
@@ -8,6 +5,23 @@
     }
 }
 @media screen and (max-width: 767px) {
+    header.header {
+        height: 50px;
+    }
+    .header .search-bar.has-search-menu .search-form {
+      background-color: #292929;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      position: absolute;
+      max-width: 100%;
+      padding: 10px;
+      left: 0;
+      top: 50px;
+      width: 100%;
+    }
+    .header .search-bar.has-search-menu .search-button {
+      right: 10px;
+      top: 10px;
+    }
     .main-body {
         padding: 10px;
     }

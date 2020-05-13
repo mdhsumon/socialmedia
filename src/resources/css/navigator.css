@@ -26,7 +26,7 @@
 }
 .nav-item.active,
 .nav-item:hover {
-  color: #8dd200;
+  color: #6ebd52;
 }
 .nav-item.active:before {
   content: '';
