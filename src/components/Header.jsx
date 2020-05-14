@@ -90,12 +90,6 @@ export default class Header extends React.Component {
                     <svg xmlns="http://www.w3.org/2000/svg" id="connect" data-name="connect" viewBox="0 0 512 456.81" width="40" height="40" fill="#6ebd52">
                         <path d="M462,179.21h0a50.12,50.12,0,0,0-47.73,35H381a126,126,0,0,0-49.53-85.71l16.65-28.84a50.12,50.12,0,1,0-26-15l-16.64,28.82a125.88,125.88,0,0,0-99,0L189.85,84.67a50,50,0,1,0-26,15l16.66,28.84A125.93,125.93,0,0,0,131,214.24H97.76a50,50,0,1,0,0,30H131A125.94,125.94,0,0,0,180.53,330l-16.65,28.84a50.12,50.12,0,1,0,26,15L206.49,345a125.83,125.83,0,0,0,99,0l16.64,28.82a50,50,0,1,0,26-15L331.46,330A125.91,125.91,0,0,0,381,244.24h33.24a50,50,0,1,0,47.73-65ZM286.36,168.79a22.5,22.5,0,1,1-22.5,22.5A22.5,22.5,0,0,1,286.36,168.79Zm-66.11,0a22.5,22.5,0,1,1-22.5,22.5A22.5,22.5,0,0,1,220.25,168.79Zm96.37,89.55A81.7,81.7,0,0,1,307,272.83c-13.15,15.71-30.79,24-51,24s-38-8.24-51.88-23.84a86.82,86.82,0,0,1-10.37-14.51A8.72,8.72,0,0,1,198.26,246h0a8.71,8.71,0,0,1,10.62,3.87,70.1,70.1,0,0,0,8.63,12C228,273.52,241,279.43,256,279.43s27.45-5.84,37.27-17.35a63.5,63.5,0,0,0,7.9-11.75A8.74,8.74,0,0,1,311.59,246h0A8.71,8.71,0,0,1,316.62,258.34Z" transform="translate(0 -0.84)"/>
                     </svg>
-                    {/* <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 512 456.81" width="60" height="60" fill="#6ebd52">
-                        <path d="M462,179.21h0a50.12,50.12,0,0,0-47.73,35H381a126,126,0,0,0-49.53-85.71l16.65-28.84a50.12,50.12,0,1,0-26-15l-16.64,28.82a125.88,125.88,0,0,0-99,0L189.85,84.67a50,50,0,1,0-26,15l16.66,28.84A125.93,125.93,0,0,0,131,214.24H97.76a50,50,0,1,0,0,30H131A125.94,125.94,0,0,0,180.53,330l-16.65,28.84a50.12,50.12,0,1,0,26,15L206.49,345a125.83,125.83,0,0,0,99,0l16.64,28.82a50,50,0,1,0,26-15L331.46,330A125.91,125.91,0,0,0,381,244.24h33.24a50,50,0,1,0,47.73-65Zm-137.7,117.3-27.82,19.67a95.79,95.79,0,0,1-80.9,0l-27.82-19.67a95.9,95.9,0,1,1,136.54,0Z" transform="translate(0 -0.84)"/>
-                        <circle cx="222.25" cy="198.45" r="17.5"/>
-                        <circle cx="284.36" cy="198.45" r="17.5"/>
-                        <path xmlns="http://www.w3.org/2000/svg" d="M311.59,246h0a8.74,8.74,0,0,0-10.44,4.29,63.5,63.5,0,0,1-7.9,11.75c-9.82,11.51-22.36,17.35-37.27,17.35s-28-5.91-38.47-17.55a70.1,70.1,0,0,1-8.63-12A8.71,8.71,0,0,0,198.26,246h0a8.72,8.72,0,0,0-4.53,12.47A86.82,86.82,0,0,0,204.1,273c13.83,15.6,31.77,23.84,51.88,23.84s37.85-8.31,51-24a81.7,81.7,0,0,0,9.64-14.49A8.71,8.71,0,0,0,311.59,246Z" transform="translate(0 -0.84)"/>
-                    </svg> */}
                     </div>
                     <div className={`search-bar${screentSize('width') < 520 ? ' has-search-menu' : ''}`}>
                         {screentSize('width') < 520 && <span className="search-menu" onClick={()=> {this.setState({searchMenu: !this.state.searchMenu})}}>
@@ -149,7 +143,10 @@ export default class Header extends React.Component {
                             <div className="nickname">{this.state.nickName}</div>
                         </div>}
                         <div className="dropdown-options">
-                            <div className="option"><a href="/profile"><i className="icon-profile"></i> Profile Settings</a></div>
+                            <div className="option"><a href="/feeds"><i className="icon-feeds"></i> Post Feeds</a></div>
+                            <div className="option"><a href="/profile"><i className="icon-profile"></i> Profile</a></div>
+                            <div className="option"><a href="/photos"><i className="icon-images"></i> Photos</a></div>
+                            <div className="option"><a href="/videos"><i className="icon-film"></i> Videos</a></div>
                             <div className="option"><i className="icon-cog"></i> Settings</div>
                             <div className="option" onClick={() => this.logout()}><i className="icon-switch"></i> Logout</div>
                         </div>
