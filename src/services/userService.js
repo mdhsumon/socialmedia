@@ -36,12 +36,7 @@ export const getAccessToken = (loginData, callback) => {
 // Logout and destroy token
 export const userLogout = callback => {
     fetch(`${apiBaseUrl}/logout`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+        method: 'GET'
     })
     .then(res => res.json())
     .then(data => { callback(data) })
@@ -197,51 +192,4 @@ export const declineFriendRequest = (userId, callback) => {
     .then(res => res.json())
     .then(data => { callback(data) })
     .catch(err => { } )
-}
-
-// Load messages
-export const getUserMessages = (friendId, callback) => {
-    fetch(`${apiBaseUrl}/messages/${friendId}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(res => res.json())
-    .then(messages => { callback(messages) })
-    .catch(err => { } )
-}
-
-// Send message
-export const sendUserMessage = (friendId, messageData, callback) => {
-    fetch(`${apiBaseUrl}/message/send`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ senderId: loggedUserId, friendId: friendId, messageData: messageData })
-    })
-    .then(res => res.json())
-    .then(sendStatus => { callback(sendStatus) })
-    .catch(err => { } )
-}
-
-// Send message
-export const deleteUserMessage = (friendId, messageId, callback) => {
-    fetch(`${apiBaseUrl}/message/delete`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ friendId: friendId, messageId: messageId })
-    })
-    .then(res => res.json())
-    .then(deleteStatus => { callback(deleteStatus) })
-    .catch(err => { })
 }

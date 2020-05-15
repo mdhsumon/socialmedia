@@ -169,6 +169,7 @@
     margin-top: 20px;
     flex-wrap: wrap;
 }
+.post-atachment .post-video,
 .post-atachment .post-image {
     flex: auto;
     padding: 1px;
@@ -181,6 +182,9 @@
     max-width: 100%;
     vertical-align: middle;
     cursor: pointer;
+}
+.post-video video {
+    vertical-align: middle;
 }
 /*----------------post body end---------*/
 /*----------------(like comment share)LCS section start---------*/

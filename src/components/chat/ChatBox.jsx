@@ -1,6 +1,6 @@
 import React from "react"
 import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
-import { getUserMessages, sendUserMessage, deleteUserMessage } from "../../services/userService"
+import { getUserMessages, sendUserMessage, deleteUserMessage } from "../../services/chatService"
 import { socketConnection } from "../../sockets/socket"
 import { getTime } from "../../commonActions"
 
@@ -13,7 +13,7 @@ export class ChatBox extends React.Component {
             inputRow: 1,
             userInput: '',
             messageList: [],
-            newMessage: false
+            //newMessage: false
         }
     }
 
@@ -144,9 +144,9 @@ export class ChatBox extends React.Component {
                     { this.renderMessage() }
                     <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
                 </div>
-                {this.state.newMessage && this.state.senderId === userInfo.userId && (
+                {/* {this.state.newMessage && this.state.senderId === userInfo.userId && (
                     <span className="new-message" onClick={this.newMessage}>New Message &darr;</span>
-                )}
+                )} */}
                 <div className="box-form">
                     <div className="attach">
                         <div className="emoji"><i className="icon-smile-o"></i></div>

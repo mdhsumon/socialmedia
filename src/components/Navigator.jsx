@@ -2,7 +2,6 @@ import React from "react"
 import { screentSize } from "../commonActions"
 
 export const Navigator = () => {
-    console.log(typeof window.location.pathname)
     const pages = [
         {url: '/feeds', icon: <i className="icon-feeds"></i>},
         {url: '/profile', icon: <i className="icon-profile"></i>},

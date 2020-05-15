@@ -65,8 +65,7 @@
 .profile-author {
   flex: none;
 }
-.profile-photo{
-  border: 3px solid #f8f8f8;
+.profile-photo {
   border-radius: 5px;
   position: absolute;
   bottom: 15px;
@@ -117,12 +116,8 @@
   width: 100%;
 }
 .profile-drop-downs .drop-downs{
-  display: -webkit-flex;
   display: -moz-flex;
   display: flex;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
   align-items: center;
   justify-content: flex-end;
 }
@@ -132,16 +127,10 @@
 .drop-downs li a{
   height: 50px;
   padding: 15px;
-
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
   color: #999999;
-
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
   transition: all 0.2s;
 }
 .drop-downs li.active a,
