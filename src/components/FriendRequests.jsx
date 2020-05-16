@@ -34,13 +34,13 @@ export default class FriendRquests extends React.Component {
         })
     }
 
-    handleRequest = (requestItem, requstType, event) => {
+    handleRequest = (requestItem, requstType) => {
         if(requstType === 'accept') {
             acceptFriendRequest(requestItem._id, response => {
                 if(response.status) {
                     this.removeRequestItem(requestItem)
                     // Broadcast acceptance signal
-                    socketConnection.emit('friendAccepted', requestItem.userId)
+                    socketConnection.emit('acceptFriend', requestItem._id)
                 }
             })
         }
@@ -66,8 +66,8 @@ export default class FriendRquests extends React.Component {
                                 <Link className="author-name" to={requestItem.username}>{requestItem.displayName}</Link>
                                 <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
                                 <div className="rq-buttons">
-                                    <button className="accept" onClick={this.handleRequest.bind(this, requestItem, 'accept')}>Accept</button>
-                                    <button className="decline" onClick={this.handleRequest.bind(this, requestItem, 'decline')}>Decline</button>
+                                    <span className="accept" onClick={() => this.handleRequest(requestItem, 'accept')}>Accept</span>
+                                    <span className="decline" onClick={() => this.handleRequest(requestItem, 'decline')}>Decline</span>
                                 </div>
                             </div>
                         </div>

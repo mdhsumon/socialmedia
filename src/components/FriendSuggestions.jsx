@@ -1,7 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { apiBaseUrl } from "../services/commonService"
+import { apiBaseUrl, loggedUserInfo } from "../services/commonService"
 import { getFriendSuggestions, sendFriendRequest } from "../services/userService"
+import { socketConnection } from "../sockets/socket"
 
 export default class FriendSuggestions extends React.Component {
     constructor(props) {
@@ -20,15 +21,17 @@ export default class FriendSuggestions extends React.Component {
         })
     }
 
-    sendRequest = (userInfo, event) => {
+    sendRequest = userInfo => {
         sendFriendRequest(userInfo.username, response => {
             const currentList = [...this.state.suggestions]
             const findItem = currentList.indexOf(userInfo)
-            if(response.requestStatus) {
+            if(response.status) {
                 currentList.splice(findItem, 1)
                 this.setState({
                     suggestions: currentList
                 })
+                // Broadcast request message
+                socketConnection.emit('sendFriendRequest', loggedUserInfo.id, userInfo._id)
             }
         })
     }
@@ -57,8 +60,8 @@ export default class FriendSuggestions extends React.Component {
                                 <Link className="author-name" to={userInfo.username}>{userInfo.displayName}</Link>
                                 <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
                                 <div className="rq-buttons">
-                                    <button className="accept" onClick={this.sendRequest.bind(this, userInfo)}>Send Request</button>
-                                    <button className="decline" onClick={this.removeSuggestion.bind(this, userInfo)}>x</button>
+                                    <span className="accept" onClick={() => this.sendRequest(userInfo)}>Send Request</span>
+                                    <span className="decline" onClick={() => this.removeSuggestion(userInfo)}>x</span>
                                 </div>
                             </div>
                         </div>

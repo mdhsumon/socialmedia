@@ -13,7 +13,7 @@ export const Navigator = () => {
         <nav className="navigator">
             <div className="nav-item-container">
                 {pages.map(page => (
-                    <a href={page.url} className={`nav-item${window.location.pathname === page.url ? ' active' : ''}`}>
+                    <a href={page.url} className={`nav-item${window.location.pathname === page.url ? ' active' : ''}`} key={page.url}>
                         {page.icon}
                     </a>
                 ))}

@@ -8,12 +8,13 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            newMsg: false,
             newFriend: false,
             newNoti: false,
             searchMenu: false,
-            requestCount: 0,
             msgCount: 0,
             notiCount: 0,
+            friendCount: 0,
             messageMenu: 'hide',
             friendMenu: 'hide',
             notificationMenu: 'hide',
@@ -29,11 +30,18 @@ export default class Header extends React.Component {
                 profilePhoto: user.profilePhoto
             })
         })
-        // Receive acceptance signal
-        socketConnection.on('friendAccepted', acceptedId => {
+        // Receive request signal
+        socketConnection.on('getFriendRequest', fromUser => {
             this.setState({
                 newFriend: true,
-                acceptCount: this.state.acceptCount + 1
+                friendCount: this.state.friendCount + 1
+            })
+        })
+        // Receive request accepted signal
+        socketConnection.on('friendAccepted', userId => {
+            this.setState({
+                newFriend: true,
+                friendCount: this.state.friendCount + 1
             })
         })
         // Receive message notification
@@ -109,7 +117,7 @@ export default class Header extends React.Component {
                         <div className={`custom-dropdown notification-item message active ${this.state.messageMenu}`}>
                             <div className="notification-button" onClick={() => this.toggleMenu('message')}>
                                 <i className="icon-text-bubble"></i>
-                                {this.state.newNoti && this.notificationCount(this.state.msgCount)}
+                                {this.state.newMsg && this.notificationCount(this.state.msgCount)}
                             </div>
                             <div className="dropdown-options message-list">
                                 <div className="empty-option">No message</div>
@@ -118,7 +126,7 @@ export default class Header extends React.Component {
                         <div className={`custom-dropdown notification-item friend-request ${this.state.friendMenu}`}>
                             <div className="notification-button" onClick={() => this.toggleMenu('friend')}>
                                 <i className="icon-user-add"></i>
-                                {this.state.newFriend && this.notificationCount(this.state.requestCount)}
+                                {this.state.newFriend && this.notificationCount(this.state.friendCount)}
                             </div>
                             <div className="dropdown-options request-list">
                                 <div className="empty-option">No friend request</div>
@@ -127,7 +135,7 @@ export default class Header extends React.Component {
                         <div className={`custom-dropdown notification-item notification ${this.state.notificationMenu}`}>
                             <div className="notification-button" onClick={() => this.toggleMenu('notification')}>
                                 <i className="icon-bell"></i>
-                                {this.state.newFriend && this.notificationCount(this.state.notiCount)}
+                                {this.state.newNoti && this.notificationCount(this.state.notiCount)}
                             </div>
                             <div className="dropdown-options notification-list">
                                 <div className="empty-option">No notification</div>

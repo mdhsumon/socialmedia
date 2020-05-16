@@ -37,7 +37,7 @@
 .rq-buttons{
   padding-top: 5px;
 }
-.rq-buttons button{
+.rq-buttons span {
   background-color: #f8f8f8;
   font-weight: 400;
   font-size: 12px;
@@ -48,7 +48,7 @@
   border-radius: 2px;
   transition: all 0.1s;
 }
-.rq-buttons .accept:hover{
+.rq-buttons .accept:hover {
   background-color: #6ebd52;
   border-color: #6ebd52;
   color: #fff;
@@ -56,13 +56,10 @@
 .rq-buttons .decline{
   margin-left: 10px;
 }
-.rq-buttons .decline:hover{
+.rq-buttons .decline:hover {
   background-color: #ff4040;
   border-color: #ff4040;
   color: #fff;
-}
-.friend-request-drop-down{
-  background: #ffffff;
 }
 
 /*----------------friend request end-------*/
