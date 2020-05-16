@@ -47,7 +47,7 @@ export default class Header extends React.Component {
         // Receive message notification
         socketConnection.on('receiveMessage', () => {
             this.setState({
-                newNoti: true,
+                newMsg: true,
                 msgCount: this.state.msgCount + 1
             })
         })
