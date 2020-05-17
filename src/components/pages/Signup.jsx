@@ -84,7 +84,7 @@ export class Signup extends React.Component {
                 }
                 else if(currentLength > 0 && !userRegex.test(currentValue)) {
                     this.setState({
-                        usernameMessage: "Invalid username: Only a-z, 0-9, -, and . are allowed",
+                        usernameMessage: "Invalid username: Only a-z, 0-9, _, and . are allowed",
                         usernameHtmlClass: inputErrorClass
                     })
                 }

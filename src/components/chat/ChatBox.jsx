@@ -10,9 +10,11 @@ export class ChatBox extends React.Component {
         this.state = {
             isActive: false,
             sendButton: false,
+            isGroupChat: false,
             inputRow: 1,
             userInput: '',
             messageList: [],
+            userTyping: []
             //newMessage: false
         }
     }
@@ -24,9 +26,27 @@ export class ChatBox extends React.Component {
         // Update after getting signal
         socketConnection.on('receiveMessage', senderId => {
             this.updateMessages(() => {
-                this.setState({senderId: senderId})
+                this.setState({
+                    senderId: senderId,
+                    userTyping: []
+                })
                 this.state.isActive ? this.scrollToTarget(this.bottomFlag) : this.setState({newMessage: true})
             })
+        })
+        // Get user typing status
+        socketConnection.on('getTyping', userId => {
+            const typerList = [...this.state.userTyping]
+            typerList.push(userId)
+            if(this.state.isActive) {
+                this.setState({userTyping: typerList})
+                this.scrollToTarget(this.bottomFlag)
+            }
+        })
+        // Get user stop typing status
+        socketConnection.on('getStopTyping', userId => {
+            let typerList = [...this.state.userTyping]
+            typerList = typerList.filter(typer => typer !== userId)
+            this.setState({userTyping: typerList})
         })
     }
 
@@ -48,6 +68,10 @@ export class ChatBox extends React.Component {
                 userInput: event.target.value,
                 sendButton: sendBtn
             })
+            // Send typing status
+            sendBtn ?
+            socketConnection.emit('sendTyping', loggedUserInfo.id, this.props.userInfo.userId) :
+            socketConnection.emit('stopTyping', loggedUserInfo.id, this.props.userInfo.userId)
         }
     }
 
@@ -71,6 +95,7 @@ export class ChatBox extends React.Component {
             sendUserMessage(this.props.userInfo.userId, this.state.userInput, response => {
                 if(response.status) {
                     this.updateMessages()
+                    // Send message notification
                     socketConnection.emit('sendMessage', loggedUserInfo.id, this.props.userInfo.userId)
                 }
                 this.setState({ userInput: '' })
@@ -129,6 +154,7 @@ export class ChatBox extends React.Component {
 
     render() {
         const [userInfo] = [this.props.userInfo]
+        const [typerCount, typerList] = [this.state.userTyping.length, this.state.userTyping]
         return (
             <div className={`chat-box${this.state.isActive ? ' active' : this.state.senderId === userInfo.userId ? ' new' : '' }`} key={ userInfo.userId }>
                 <div className="box-head">
@@ -142,6 +168,15 @@ export class ChatBox extends React.Component {
                 </div>
                 <div className="box-body">
                     { this.renderMessage() }
+                    { typerCount > 0 && (this.state.isGroupChat ?
+                        <div className="user-typing">
+                            {typerList.map(user =>
+                            <span className="typer">
+                                <img src={user.profilePhoto} title={user.displayName}/>
+                            </span>)}
+                        </div> :
+                        <span className="typing">•••</span>
+                    )}
                     <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
                 </div>
                 {/* {this.state.newMessage && this.state.senderId === userInfo.userId && (
@@ -164,7 +199,9 @@ export class ChatBox extends React.Component {
                             placeholder="Write message..."
                         />
                     </div>
-                    <button className="send" onClick={ this.sendMessage } disabled={ !this.state.sendButton }><i className="icon-send"></i></button>
+                    <span className={`send${!this.state.sendButton ? ' disabled' : ''}`} onClick={ this.sendMessage }>
+                        <i className="icon-send"></i>
+                    </span>
                 </div>
             </div>
         )

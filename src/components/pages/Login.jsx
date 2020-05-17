@@ -30,13 +30,12 @@ export class Login extends React.Component {
                 if(token.status) {
                     // Set local storage data
                     localStorage.setItem('data', JSON.stringify({ id: token._id, accessToken: token.accessToken }))
-                     //this.props.history.push('/feeds')
                     window.location.href = '/feeds'
                 }
                 else {
                     this.setState({
                         buttonLoading: false,
-                        formValidation: "Login failed!"
+                        formValidation: "Username or password"
                     })
                 }
             }

@@ -247,6 +247,14 @@
 .chat-box .message-item:hover .action {
   visibility: visible;
 }
+.chat-box .box-body .typing {
+  display: inline-block;
+  font-size: 20px;
+  color: #999;
+  margin-top: 5px;
+  line-height: 1;
+  animation: light-dim 1.5s ease-in-out infinite;
+}
 .chat-box .box-body .message {
   display: inline-block;
   background-color: #e9e9e9;
@@ -378,11 +386,13 @@
   background-color: transparent;
   border: none;
   color: #aaa;
+  cursor: pointer;
   font-size: 18px;
 }
 .chat-box .box-form .send:hover {
   color: #6ebd52;
 }
-.chat-box .box-form .send:disabled {
+.chat-box .box-form .send.disabled {
   color: #e9e9e9;
+  cursor: default;
 }
