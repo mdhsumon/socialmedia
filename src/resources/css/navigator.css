@@ -5,7 +5,8 @@
   border-radius: 5px;
   width: 50px;
   position: fixed;
-  left: 15px;
+  left: 50%;
+  margin-left: -590px;
   z-index: 1;
 }
 .nav-item-container {

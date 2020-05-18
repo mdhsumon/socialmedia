@@ -1,5 +1,5 @@
 import React from "react"
-import { screentSize } from "../commonActions"
+import { screenSize } from "../commonActions"
 
 export const Navigator = () => {
     const pages = [
@@ -9,7 +9,7 @@ export const Navigator = () => {
         {url: '/videos', icon: <i className="icon-film"></i>}
     ]
     return (
-        screentSize('width') > 767 &&
+        screenSize('width') > 767 &&
         <nav className="navigator">
             <div className="nav-item-container">
                 {pages.map(page => (

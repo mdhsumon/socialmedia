@@ -4,6 +4,7 @@ import { WeatherForcast } from "../WeatherForcast"
 import FriendRequests from "../FriendRequests"
 import FriendSuggestion from "../FriendSuggestions"
 import { loggedUserInfo } from "../../services/commonService"
+import { screenSize } from "../../commonActions"
 
 export const PostFeed = () => {
     return(
@@ -15,10 +16,12 @@ export const PostFeed = () => {
                 <div className="middle-column">
                     <Post userId={loggedUserInfo.id} />
                 </div>
-                <div className="right-column">
-                    <FriendRequests />
-                    <FriendSuggestion />
-                </div>
+                {screenSize('width') > 900 && (
+                    <div className="right-column">
+                        <FriendRequests />
+                        <FriendSuggestion />
+                    </div>
+                )}
             </div>
         </div>
     )

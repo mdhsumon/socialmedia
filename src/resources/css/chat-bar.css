@@ -1,25 +1,25 @@
 /* start chat bar */
 .chat-bar {
   position: fixed;
-  right: 15px;
+  right: 50%;
+  margin-right: -590px;
+  padding-bottom: 80px;
+  height: 100%;
+  width: 130px;
   z-index: 1;
 }
-.chat-user-container {
-  background-color: #ffffff;
-  right: 20px;
-  top: 100px;
+.chat-bar .user-list {
+  background-color: #e9eeeb;
   border: 1px solid #e3e3e3;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
+  height: 100%;
+  overflow: auto;
 }
 .chat-user .user-thumb {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 3px;
   padding: 6px;
-  background-color: #fff;
-}
-.chat-user:nth-child(2n) .user-thumb {
-  background-color: #f8f8f8;
 }
 .chat-user .user-thumb img{
   max-width: 100%;
@@ -27,28 +27,25 @@
   border-radius: inherit;
   vertical-align: middle;
 }
-.chat-user{
+.user-list .chat-user {
   cursor: pointer;
   position: relative;
+  display: flex;
+  align-items: center;
   z-index: 1;
 }
 .chat-user .display-name {
-  position: absolute;
-  top: 50%;
-  margin-top: -12px;
-  background-color: #444;
-  color: #ccc;
-  font-size: 11px;
-  padding: 4px 8px;
+  color: #333;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
   white-space: nowrap;
   border-radius: 3px 0 0 3px;
   line-height: 1.1;
-  right: 100%;
   max-width: 200px;
   text-overflow: ellipsis;
   overflow: hidden;
   transition: all 0.2s ease;
-  clip: rect(0, 0, 20px, 200px);
 }
 .chat-user:hover .display-name {
   clip: rect(0, 200px, 20px, 0);
@@ -56,14 +53,14 @@
 .chat-user:before{
   content: "";
   background-color: #eee;
-  height: 11px;
-  width: 11px;
+  height: 10px;
+  width: 10px;
   border: 1px solid #fff;
   box-shadow: 0 0 0 1px #fff;
   border-radius: 50%;
   position: absolute;
-  bottom: 5px;
-  left: 5px;
+  bottom: 6px;
+  left: 6px;
 }
 .chat-user.online:before{
   background-color: #4CAF50;

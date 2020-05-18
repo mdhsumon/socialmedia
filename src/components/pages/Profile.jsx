@@ -6,6 +6,7 @@ import { Post } from "../post/Post"
 import { Bio } from "../Bio"
 import FriendLists from "../FriendLists"
 import { loggedUserInfo } from "../../services/commonService"
+import { screenSize } from "../../commonActions"
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -35,10 +36,12 @@ export default class Profile extends React.Component {
                     <div className="middle-column">
                         <Post userId={loggedUserInfo.id} />
                     </div>
-                    <div className="right-column">
-                        <FriendRequests />
-                        <SentRequests />
-                    </div>
+                    {screenSize('width') > 900 && (
+                        <div className="right-column">
+                            <FriendRequests />
+                            <SentRequests />
+                        </div>
+                    )}
                 </div>
             </div>
         )

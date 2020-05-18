@@ -3,11 +3,13 @@ import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
 import { getFriendLists, getUserSummary } from "../../services/userService"
 import { ChatBox } from "./ChatBox"
 import { socketConnection } from "../../sockets/socket"
+import { screenSize } from "../../commonActions"
 
 export class ChatBar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            chatList: false,
             chatUsers: [],
             openedChat: []
         }
@@ -81,6 +83,10 @@ export class ChatBar extends React.Component {
         })
     }
 
+    chatMenu = () => {
+        this.setState({chatList: !this.state.chatList})
+    }
+
     closeChatBox = userId => {
         let currentOpened = [...this.state.openedChat]
         const targetBox = currentOpened.filter(item => item.key === userId)[0]
@@ -92,24 +98,25 @@ export class ChatBar extends React.Component {
 
     render() {
         return(
-            <div className="chat-bar">
-                <div className="chat-user-container">
-                    <div className="user-list">
-                        {this.state.chatUsers.map((user, index) => {
-                            return(
-                                <div key={user.userId} className={`chat-user ${user.status}`} onClick={ event => { this.openChat(event, user) } }>
-                                    <div className="display-name">{user.displayName}</div>
-                                    <div className="user-thumb">
-                                        <img src={apiBaseUrl + user.profilePhoto} alt={user.displayName} />
-                                    </div>
+            <div className={`chat-bar${this.state.openedChat.length ? ' active-chat' : ''}${this.state.chatList ? ' show' : ''}`}>
+                <div className="user-list">
+                    {this.state.chatUsers.map(user => {
+                        return(
+                            <div key={user.userId} className={`chat-user ${user.status}`} onClick={ event => { this.openChat(event, user) } }>
+                                <div className="user-thumb">
+                                    <img src={apiBaseUrl + user.profilePhoto} alt={user.displayName} />
                                 </div>
-                            )
-                        })}
-                    </div>
-                    <div className="chatting-panel">
-                        {this.state.openedChat}
-                    </div>
+                                <div className="display-name">{user.displayName}</div>
+                            </div>
+                        )
+                    })}
                 </div>
+                <div className="chatting-panel">
+                    {this.state.openedChat}
+                </div>
+                {screenSize('width') < 560 && (
+                    <span className="chat-menu" onClick={() => this.chatMenu()}><i class="icon-bubbles"></i></span>
+                )}
             </div>
         )
     }

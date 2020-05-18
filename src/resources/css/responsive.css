@@ -1,9 +1,37 @@
+@media screen and (max-width: 1199px) {
+    .navigator {
+        left: 10px;
+        margin-left: 0;
+    }
+    .chat-bar {
+        right: 10px;
+        margin-right: 0;
+      }
+}
+
 @media screen and (max-width: 1023px) {
     .column-section .right-column,
     .column-section .left-column {
         min-width: 180px;
     }
 }
+
+@media screen and (max-width: 899px) {
+    .main-body {
+        padding-right: 70px;
+    }
+    .column-section .right-column,
+    .column-section .left-column {
+        min-width: 155px;
+    }
+    .common-block .block-header {
+        font-size: 13px;
+    }
+    .chat-bar {
+        right: -70px;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .body {
         height: calc(100vh - 50px);
@@ -27,16 +55,17 @@
       top: 10px;
     }
     .main-body {
-        padding: 10px;
+        padding: 10px 70px 10px 10px;
     }
-    .column-section .right-column,
     .column-section .left-column {
-        position: absolute;
-        visibility: hidden;
+        min-width: 130px;
     }
     .profile-info-section {
         margin-bottom: 10px;
     }
+    .chat-bar {
+        padding-bottom: 70px;
+      }
     .chatting-panel {
         padding-left: 10px;
         padding-right: 10px;
@@ -49,11 +78,63 @@
         font-size: 10px;
         min-width: 16px;
         height: 16px;
-        line-height: 16px;
+        padding: 3px;
     }
 }
+@media screen and (max-width: 559px) {
+    .main-body {
+        padding: 10px;
+    }
+    .column-section .left-column {
+        position: absolute;
+        visibility: hidden;
+    }
+    .profile-photo {
+        width: 80px;
+        height: 80px;
+    }
+    .profile-name {
+        margin-left: 110px;
+    }
+    .chat-bar {
+        right: -130px;
+        transition: all 0.2s ease;
+    }
+    .chat-bar.show {
+        right: 0;
+    }
+    .chat-bar.show .user-list {
+        box-shadow: -5px 0 10px rgba(0,0,0,0.10);
+    }
+    .chat-bar.show .chatting-panel {
+        z-index: -1;
+    }
+    .chat-bar .chat-menu {
+        background: #6ebd52;
+        box-shadow: 0 0 10px rgba(0,0,0,0.25);
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 18px;
+        padding: 10px;
+        line-height: 1;
+        position: absolute;
+        left: -50px;
+        bottom: 70px;
+        width: 40px;
+        height: 40px;
+        transition: all 0.2s ease;
+        z-index: 9;
+    }
+    .chat-bar.active-chat .chat-menu {
+        bottom: 370px;
+    }
+}
+
 @media screen and (max-width: 479px) {
-    .signup-form form, .login-form form {
+    .signup-form form,
+    .login-form form {
         max-width: 380px;
         padding: 25px;
     }
@@ -80,17 +161,21 @@
     .header .notification-item ~ .notification-item {
         margin-left: 15px;
     }
-    .profile-photo {
-        bottom: 30px;
-    }
-    .profile-name {
-        margin-left: 15px;
-        padding-top: 15px;
-    }
     .post-create {
         margin-bottom: 5px;
     }
     .post{
         margin-bottom: 5px;
+    }
+    .chat-bar {
+        padding-bottom: 60px;
+    }
+    .chat-bar .chat-menu {
+        bottom: 60px;
+        left: -45px;
+    }
+    
+    .chat-bar.active-chat .chat-menu {
+        bottom: 360px;
     }
 }

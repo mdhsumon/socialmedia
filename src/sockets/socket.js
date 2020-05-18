@@ -5,7 +5,9 @@ const connectSocket = url => {
     return io(
         url,
         {
-            forceNew: false
+            forceNew: false,
+            transports: ['websocket'],
+            upgrade: false
         }
     )
 }

@@ -30,19 +30,21 @@
   content: "\e90f";
 }
 .profile-info-section {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .cover-photo{
   border-width: 1px 1px 0;
   border-style: solid;
   border-color: #e3e3e3;
   border-radius: 5px 5px 0 0;
-  height: 300px;
+  height: 100%;
+  max-height: 300px;
   position: relative;
   overflow: hidden;
 }
 .cover-photo img {
   max-width: 100%;
+  vertical-align: middle;
 }
 .profile-section{
   border: 1px solid #e3e3e3;

@@ -65,7 +65,7 @@ export const getTime = (timestamp, timeFormat) => {
 }
 
 // Current viewport width or height or {width, height}
-export const screentSize = size => {
+export const screenSize = size => {
     const width = window.innerWidth
     const height = window.innerHeight
     const screenSize = { width, height }

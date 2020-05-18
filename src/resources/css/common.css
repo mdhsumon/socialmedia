@@ -236,7 +236,7 @@ button:disabled,
   background-color: #fff;
   border: 1px solid #e3e3e3;
   border-radius: 3px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   display: none;
   position: absolute;
   right: 0;
@@ -246,9 +246,10 @@ button:disabled,
   z-index: 15;
 }
 .dropdown-options .option {
-  padding: 6px 12px;
-  font-size: 14px;
-  color: #333;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
   cursor: pointer;
   text-decoration: none;
   line-height: 1.2;
@@ -258,7 +259,8 @@ button:disabled,
   text-decoration: none;
 }
 .dropdown-options .option i {
-  color: #999;
+  color: #ccc;
+  font-weight: 400;
   margin-right: 5px;
 }
 .dropdown-options .option:hover {
@@ -277,7 +279,7 @@ button:disabled,
   overflow: auto;
 }
 .main-body {
-  padding: 15px;
+  padding: 10px 145px 10px 70px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -302,16 +304,16 @@ button:disabled,
 .column-section .right-column,
 .column-section .left-column {
   flex: none;
-  width: 22%;
+  width: 20%;
   min-width: 250px;
 }
 
 .column-section .left-column {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .column-section .right-column {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .column-section .middle-column {

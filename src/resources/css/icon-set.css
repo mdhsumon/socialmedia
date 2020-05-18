@@ -23,7 +23,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .icon-profile:before {
   content: "\e901";
 }
@@ -45,9 +44,6 @@
 .icon-bell:before {
   content: "\e909";
 }
-.icon-text-bubble:before {
-  content: "\e90b";
-}
 .icon-feeds:before {
   content: "\e90c";
 }
@@ -56,9 +52,6 @@
 }
 .icon-writing:before {
   content: "\e91d";
-}
-.icon-search1:before {
-  content: "\e94d";
 }
 .icon-ellips-h:before {
   content: "\e94f";
@@ -140,6 +133,9 @@
 }
 .icon-film:before {
   content: "\e913";
+}
+.icon-films:before {
+  content: "\e90b";
 }
 .icon-video-camera:before {
   content: "\e914";
@@ -486,8 +482,11 @@
 .icon-attachment:before {
   content: "\e9cd";
 }
-.icon-eye:before {
+.icon-eye-closed:before {
   content: "\e9ce";
+}
+.icon-eye:before {
+  content: "\e9cf";
 }
 .icon-eye-blocked:before {
   content: "\e9d1";
