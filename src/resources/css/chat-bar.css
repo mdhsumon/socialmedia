@@ -37,7 +37,7 @@
 .chat-user .display-name {
   color: #333;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 4px;
   white-space: nowrap;
   border-radius: 3px 0 0 3px;
@@ -151,7 +151,7 @@
 }
 .chat-box .display-name {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   color: #666;
   white-space: nowrap;
   text-overflow: ellipsis;

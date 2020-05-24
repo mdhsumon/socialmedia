@@ -30,13 +30,14 @@
   top: 18px;
   right: 0;
   min-width: 80px;
+  user-select: none;
 }
 
 .menu-items .menu-item {
   padding: 5px 10px;
   font-size: 12px;
-  font-weight: 600;
-  color: #666;
+  font-weight: 400;
+  color: #444;
   cursor: pointer;
   line-height: 1.2;
   white-space: nowrap;

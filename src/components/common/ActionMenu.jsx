@@ -15,10 +15,12 @@ export class ActionMenu extends React.Component {
         defaultClass: "menu-item"
     }
 
-    menuDomRef
+    componentDidMount() {
+        
+    }
 
-    componentWillMount() {
-        document.addEventListener('click', this.closeMenu, false)
+    componentWillUnmount() {
+
     }
 
     toggleMenu = event => {
@@ -26,17 +28,18 @@ export class ActionMenu extends React.Component {
     }
 
     closeMenu = event => {
-        if(this.menuDomRef.contains(event.target))
-        this.setState({ isOpen: false })
+        if(!this.menuDomRef.contains(event.target)) {
+            this.setState({ isOpen: false })
+        }
     }
 
     menuHtml = () => {
-        console.log(this.menuDomRef)
+        this.state.isOpen ? document.addEventListener('click', this.closeMenu, false) : document.removeEventListener('click', this.closeMenu, false)
         return(
             this.state.isOpen && <div className={`menu-items${this.props.itemsClass ? ' ' + this.props.itemsClass : ''}`} ref={r => {this.menuDomRef = r}}>
                 {this.props.children.map((menu, key) => (
                     <Menu
-                        onClose={this.closeMenu}
+                        onClose={this}
                         key={key}
                         setClass={
                             (this.props.itemClass ? this.props.itemClass : this.props.defaultClass) +
@@ -69,7 +72,7 @@ export class Menu extends React.Component {
     }
 
     menuClose = () => {
-        this.props.onClose && this.props.onClose()
+        this.props.onClose && this.props.onClose.setState({isOpen: false})
         this.props.onAction && this.props.onAction()
     }
 

@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 /* Common */
 body {
   background-color: #e9eeeb;
-  font-family: Roboto, "Segoe UI", "Helvetica Neue", Arial;
+  font-family: 'Roboto', sans-serif;
 }
 
 *, *:before, *:after {
@@ -16,7 +17,7 @@ body {
 input,
 select,
 textarea {
-  font-family: Roboto, "Segoe UI", "Helvetica Neue", Arial;
+  font-family: 'Roboto', sans-serif;
   outline: 0;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -26,7 +27,7 @@ textarea {
   margin: 5px 0;
   color: #000;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 input:focus,
@@ -248,7 +249,7 @@ button:disabled,
 .dropdown-options .option {
   padding: 7px 12px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: #666;
   cursor: pointer;
   text-decoration: none;
@@ -361,7 +362,7 @@ img:after {
   border-radius: 5px 5px 0 0;
   color: #666666;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 10px 15px;
 }
 
@@ -375,7 +376,7 @@ img:after {
   text-decoration: none;
   color: #333333;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .common-block a:hover {

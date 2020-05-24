@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 export default class Popup extends React.Component {
     constructor(props) {
-        super()
+        super(props)
         this.state = {
             isOpen: false
         }
@@ -16,7 +16,7 @@ export default class Popup extends React.Component {
     }
 
     componentDidMount() {
-        //this.openPopup()
+        this.openPopup()
     }
 
     openPopup = () => {
@@ -47,7 +47,7 @@ export default class Popup extends React.Component {
                     </div>
                     <div className="popup-body">
                         <div className="popup-content">
-                            { this.props.popContent() }
+                            { this.props.popContent }
                         </div>
                         <div className="popup-action">
                             <button className="button-cancel" onClick={ this.closePopup }>Cancel</button>

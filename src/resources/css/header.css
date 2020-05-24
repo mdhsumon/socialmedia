@@ -85,7 +85,7 @@ header.header{
   top: -5px;
   color: #fff;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   background-color: #f65;
   padding: 3.5px 3px;
   border-radius: 50%;
@@ -140,7 +140,7 @@ header.header{
 .header .user-bar .user-name {
   color: #a2a2a2;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   margin-left: 10px;
   max-width: 250px;
 }
@@ -201,7 +201,7 @@ header.header{
   padding-left: 25px;
 
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   color: #666666;
   font-size: 12px;
   line-height: 30px;
@@ -315,7 +315,7 @@ header.header{
   display: block;
   padding: 20px 5px;
   width: 100%;
-  font-weight: 600;
+  font-weight: 500;
   color: #333333;
 }
 .profile .item a:hover{
@@ -379,7 +379,7 @@ header.header{
   text-decoration: underline;
 }
 .drop-down-header a:nth-child(1){
-  font-weight: 600;
+  font-weight: 500;
 }
 .drop-down-header a:nth-child(1):hover{
   text-decoration: none;

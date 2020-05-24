@@ -14,7 +14,8 @@ export default class PostAuthor extends React.Component {
             username: null,
             displayName: null,
             profilePhoto: null,
-            messagePopup: false
+            messagePopup: false,
+            popup: false,
         }
         getUserSummary(this.props.authorInfo.userId, data => {
             data.status && this.setState({
@@ -26,6 +27,7 @@ export default class PostAuthor extends React.Component {
     }
     
     removePost = postId => {
+        this.setState({popup: true})
         // deletePost(postId, response => {
         //     if(response.status) {
         //         this.setState({ messagePopup: true })
@@ -68,7 +70,7 @@ export default class PostAuthor extends React.Component {
                     </Menu>
                 </ActionMenu>
                 {this.state.messagePopup && <MessagePopup status="success" message="Post has been Deleted" />}
-                <Popup />
+                {this.state.popup && <Popup popTitle="Confirm delete" popContent="Are you sure?" />}
             </div>
         )
     }
