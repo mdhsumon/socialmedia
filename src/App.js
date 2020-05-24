@@ -5,9 +5,8 @@ import { Login } from "./components/pages/Login"
 import { Welcome } from "./components/pages/Welcome"
 import { PrivateRoute } from "./PrivateRoute"
 import { MainApp } from "./components/MainApp"
-
+//import { ErrorPage } from "./components/pages/ErrorPage"
 import "./resources/css/style.css"
-import { ErrorPage } from "./components/pages/ErrorPage"
 
 export default class App extends React.Component {
   render() {

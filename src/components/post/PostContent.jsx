@@ -14,7 +14,7 @@ export class PostContent extends React.Component {
 
     openMedia = event => {
         this.setState({isPopup: true})
-        this.popupContent = <img src={event.target.src} />
+        this.popupContent = <img src={event.target.src} alt={event.target.alt} />
     }
 
     render() {
@@ -30,7 +30,7 @@ export class PostContent extends React.Component {
                         {attachment.photos.map( photo => {
                             return(
                                 <div className="post-image" key={ photo._id }>
-                                    <img src={apiBaseUrl + photo.path} alt="PostImage" onClick={(e) => this.openMedia(e)} />
+                                    <img src={apiBaseUrl + photo.path} alt="Post Avatar" onClick={(e) => this.openMedia(e)} />
                                 </div>
                             )
                         })}

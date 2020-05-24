@@ -89,8 +89,7 @@ export class ChatBar extends React.Component {
 
     closeChatBox = userId => {
         let currentOpened = [...this.state.openedChat]
-        const targetBox = currentOpened.filter(item => item.key === userId)[0]
-        currentOpened.splice(currentOpened.indexOf(targetBox), 1)
+        currentOpened = currentOpened.filter(item => item.key !== userId)
         this.setState({
             openedChat: currentOpened
         })

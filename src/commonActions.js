@@ -26,8 +26,10 @@ export const compareTime = (timestamp, unit) => {
             return (currentDays - givenDays).toFixed(2)
 
         case "month":
+            return (currentDays - givenDays).toFixed(2)
 
         case "year":
+            return (currentDays - givenDays).toFixed(2)
             
         default:
             return "Invalid format"
@@ -41,10 +43,7 @@ export const getTime = (timestamp, timeFormat) => {
         case "h:m 12":
             const h = timeObj.getHours()
             return (
-                (h > 12 ? h % 12 : h) +
-                ':' +
-                timeObj.getMinutes() +
-                (h < 12 ? ' AM' : ' PM')
+                (h > 12 ? h % 12 : h) + ':' + timeObj.getMinutes() + (h < 12 ? ' am' : ' pm')
             )
 
         case "h:m:s 12":
@@ -54,7 +53,14 @@ export const getTime = (timestamp, timeFormat) => {
             return timeObj.toDateString() + ' - ' + timeObj.toLocaleTimeString()
 
         case "auto":
-            return compareTime(timestamp, 'day') >= 1 ? timeObj.toDateString() + ' - ' + timeObj.toLocaleTimeString() : timeObj.toLocaleTimeString()
+            const year = timeObj.getFullYear()
+            const month = timeObj.getMonth()
+            const day = timeObj.getDay()
+            const hour = timeObj.getHours()
+            const minute = timeObj.getMinutes()
+            const time = (hour > 12 ? hour % 12 : hour) + ':' + minute + (hour < 12 ? ' am' : ' pm')
+            const date = day + ' ' + new Intl.DateTimeFormat('en-US', {month: 'short'}).format(month) + ' ' + year
+            return compareTime(timestamp, 'day') >= 1 ? date + ' - ' + time : time
 
         case "GMT":
             return timeObj.toUTCString()

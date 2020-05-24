@@ -1,7 +1,5 @@
 import { loggedUserInfo, apiBaseUrl } from "./commonService"
-
 const loggedUserToken = loggedUserInfo.accessToken
-const loggedUserId = loggedUserInfo.id
 
 // Will create new post
 export const createPost = (postData, callback) => {

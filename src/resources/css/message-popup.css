@@ -17,6 +17,10 @@
     background-color: #4CAF50;
   }
   
+  .message-popup.warning {
+    background-color: #ffc355;
+  }
+  
   .message-popup.error {
     background-color: #FF6655;
   }

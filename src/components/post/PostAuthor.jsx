@@ -4,6 +4,8 @@ import { getTime } from "../../commonActions"
 import { deletePost } from "../../services/postService"
 import { getUserSummary } from "../../services/userService"
 import { MessagePopup } from "../common/MessagePopup"
+import Popup from "../common/Popup"
+import { ActionMenu, Menu } from "../common/ActionMenu"
 
 export default class PostAuthor extends React.Component {
     constructor(props) {
@@ -24,17 +26,17 @@ export default class PostAuthor extends React.Component {
     }
     
     removePost = postId => {
-        deletePost(postId, response => {
-            if(response.status) {
-                this.setState({ messagePopup: true })
-                this.props.deletePostFlag(postId)
-                setTimeout(() => {
-                    this.setState({
-                        messagePopup: false
-                    })
-                }, 4000)
-            }
-        })
+        // deletePost(postId, response => {
+        //     if(response.status) {
+        //         this.setState({ messagePopup: true })
+        //         this.props.deletePostFlag(postId)
+        //         setTimeout(() => {
+        //             this.setState({
+        //                 messagePopup: false
+        //             })
+        //         }, 4000)
+        //     }
+        // })
     }
 
     render() {
@@ -48,11 +50,25 @@ export default class PostAuthor extends React.Component {
                         <div className="author-post_info">
                             <a href={`/user/${this.state.username}`} className="author-name">{this.state.displayName}</a>
                         </div>
-                        <span className="post-date-time"><i className="icon-time"></i> { getTime(this.props.postInfo.createdAt, 'auto') }</span>
+                        <span className="post-date-time"><i className="icon-time"></i> {getTime(this.props.postInfo.createdAt, 'auto')}</span>
                     </div>
                 </div>
-                <button className="action-button" onClick={ e => this.removePost(this.props.postInfo.id) }><i className="icon-ellips-h"></i></button>
+                <ActionMenu menuClass="post-menu" floating={false}>
+                    <Menu>
+                        <i className="icon-pencil-line"></i>
+                        <span className="menu-text">Edit</span>
+                    </Menu>
+                    <Menu>
+                        <i className="icon-eye-blocked"></i>
+                        <span className="menu-text">Hide</span>
+                    </Menu>
+                    <Menu onAction={() => this.removePost(this.props.postInfo.id)}>
+                        <i className="icon-remove"></i>
+                        <span className="menu-text">Delete</span>
+                    </Menu>
+                </ActionMenu>
                 {this.state.messagePopup && <MessagePopup status="success" message="Post has been Deleted" />}
+                <Popup />
             </div>
         )
     }

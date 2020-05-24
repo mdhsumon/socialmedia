@@ -21,6 +21,7 @@
   font-size: 20px;
   transition: all 0.1s ease;
   position: relative;
+  text-decoration: none;
 }
 .nav-item ~ .nav-item {
   margin-top: 15px;

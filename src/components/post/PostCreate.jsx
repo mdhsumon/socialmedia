@@ -11,6 +11,7 @@ export class PostCreate extends React.Component {
         this.state = {
             isLoading: false,
             messagePopup: false,
+            postButton: false,
             message: '',
             visibility: 'public'
         }
@@ -18,7 +19,11 @@ export class PostCreate extends React.Component {
 
     handleChange = event => {
         const value = event.target.type === 'file' ? event.target.files : event.target.value
-        this.setState({ [event.target.name]: value })
+        this.setState({ [event.target.name]: value }, () => {
+            this.setState({
+                postButton: this.state.message.trim().length || this.state.photos || this.state.videos ? true : false
+            })
+        })
     }
 
     handleForm = event => {
@@ -27,43 +32,47 @@ export class PostCreate extends React.Component {
             let postData = new FormData()
             postData.append('message', this.state.message)
             postData.append('visibility', this.state.visibility)
-
             if(this.state.photos) {
-                const fileCount = this.state.photos.length
-                for(let i = 0; i < fileCount; i++) {
+                const photoCount = this.state.photos.length
+                for(let i = 0; i < photoCount; i++) {
                     postData.append('photos', this.state.photos[i])
                 }
             }
-            else if(this.state.videos) {
-                const fileCount = this.state.videos.length
-                for(let i = 0; i < fileCount; i++) {
+            if(this.state.videos) {
+                const videoCount = this.state.videos.length
+                for(let i = 0; i < videoCount; i++) {
                     postData.append('videos', this.state.videos[i])
                 }
             }
-            
             this.setState({
                 isLoading: true
             })
-            
             // Remove empty block form paren
             this.props.removeEmpty()
-
             createPost(postData, response => {
+                console.log(response)
                 if(response.status) {
                     this.setState({
                         message: '',
                         isLoading: false,
-                        messagePopup: true
+                        postButton: false,
+                        messagePopup: true,
+                        messagePopupType: "success",
+                        messagePopupText: "Post has been published",
+                        photos: '',
+                        videos: ''
                     })
-
                     // Updating post from parent component
                     this.props.postCreateFlag(response.createdPost)
-                    
-                    setTimeout(() => {
-                        this.setState({
-                            messagePopup: false
-                        })
-                    }, 3000)
+                }
+                else {
+                    this.setState({
+                        isLoading: false,
+                        postButton: false,
+                        messagePopup: true,
+                        messagePopupType: 'error',
+                        messagePopupText: "Unsupported file(s)",
+                    })
                 }
             })
         }
@@ -100,19 +109,19 @@ export class PostCreate extends React.Component {
                                 </TabPanel>
                             </div>
                             <div className="post-create-actions">
-                                <button>Post now</button>
+                                <button disabled={!this.state.postButton && true}>Post now</button>
                                 <span className="post-visibility">
-                                    <select name="visibility" defaultValue="public" onChange={this.handleChange} title="Post visibility">
+                                    <select name="visibility" defaultValue="public" onChange={this.handleChange} title="Post visibility" disabled={!this.state.postButton && 'disabled'}>
                                         <option value="public">Public</option>
-                                        <option value="friends">Friends</option>
-                                        <option value="private">Only me</option>
+                                        <option value="friends">For Friends</option>
+                                        <option value="private">Private</option>
                                     </select>
                                 </span>
                             </div>
                         </Tabs>
                     </form>
                 </div>
-                {this.state.messagePopup && <MessagePopup status="success" message="Post has been published" />}
+                {this.state.messagePopup && <MessagePopup status={this.state.messagePopupType} message={this.state.messagePopupText} />}
                 {this.state.isLoading && <div className="card-loader"></div>}
             </React.Fragment>
         )

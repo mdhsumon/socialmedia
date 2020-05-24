@@ -3,7 +3,7 @@ import { screenSize } from "../commonActions"
 
 export const Navigator = () => {
     const pages = [
-        {url: '/feeds', icon: <i className="icon-feeds"></i>},
+        {url: '/feeds', icon: <i className="icon-newspaper"></i>},
         {url: '/profile', icon: <i className="icon-profile"></i>},
         {url: '/photos', icon: <i className="icon-images"></i>},
         {url: '/videos', icon: <i className="icon-film"></i>}

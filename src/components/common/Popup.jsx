@@ -9,8 +9,14 @@ export default class Popup extends React.Component {
         }
     }
 
+    static defaultProps = {
+        floating: true,
+        popTitle: "Popup Title",
+        popContent: () => "Popup content here..."
+    }
+
     componentDidMount() {
-        this.openPopup()
+        //this.openPopup()
     }
 
     openPopup = () => {
@@ -31,9 +37,9 @@ export default class Popup extends React.Component {
         }
     }
 
-    render() {
-        return ReactDOM.createPortal (
-            <div className={`popup${this.props.popClass ? ' ' + this.props.popClass : ''}`} style={ this.state.isOpen ? {} : { display: 'none' }}>
+    popupHtml = () => {
+        return(
+            this.state.isOpen && <div className={`popup${this.props.popClass ? ' ' + this.props.popClass : ''}`} style={ this.state.isOpen ? {} : { display: 'none' }}>
                 <div className="popup-block">
                     <div className="popup-header">
                         <div className="popup-title">{ this.props.popTitle }</div>
@@ -49,8 +55,13 @@ export default class Popup extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>,
-            document.body
+            </div>
+        )
+    }
+
+    render() {
+        return(
+            this.props.floating ? ReactDOM.createPortal(this.popupHtml(), document.body) : this.popupHtml()
         )
     }
 }

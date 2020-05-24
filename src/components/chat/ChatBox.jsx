@@ -35,7 +35,7 @@ export class ChatBox extends React.Component {
         })
         // Get user typing status
         socketConnection.on('getTyping', userId => {
-            const typerList = [...this.state.userTyping]
+            let typerList = [...this.state.userTyping]
             typerList.push(userId)
             if(this.state.isActive) {
                 this.setState({userTyping: typerList})
@@ -62,24 +62,26 @@ export class ChatBox extends React.Component {
         }
         else {
             let inputHeight = event.target.scrollHeight
-            const sendBtn = this.state.userInput.length ? true : false
             this.setState({
                 inputRow: Math.floor(inputHeight >= 38 ? inputHeight / 14 : 1),
-                userInput: event.target.value,
-                sendButton: sendBtn
+                userInput: event.target.value
+            }, () => {
+                const sendBtn = this.state.userInput.trim().length ? true : false
+                this.setState({ sendButton: sendBtn }, () => {
+                    // Send typing status
+                    sendBtn ?
+                    socketConnection.emit('sendTyping', loggedUserInfo.id, this.props.userInfo.userId) :
+                    socketConnection.emit('stopTyping', loggedUserInfo.id, this.props.userInfo.userId)
+                })
             })
-            // Send typing status
-            sendBtn ?
-            socketConnection.emit('sendTyping', loggedUserInfo.id, this.props.userInfo.userId) :
-            socketConnection.emit('stopTyping', loggedUserInfo.id, this.props.userInfo.userId)
         }
     }
 
-    handleFocus = event => {
+    handleFocus = () => {
         this.setState({ isActive: true, senderId: '' })
     }
 
-    handleBlur = event => {
+    handleBlur = () => {
         this.setState({ isActive: false })
     }
 
@@ -98,7 +100,10 @@ export class ChatBox extends React.Component {
                     // Send message notification
                     socketConnection.emit('sendMessage', loggedUserInfo.id, this.props.userInfo.userId)
                 }
-                this.setState({ userInput: '' })
+                this.setState({
+                    userInput: '',
+                    sendButton: false
+                })
             })
         }
     }
@@ -152,6 +157,12 @@ export class ChatBox extends React.Component {
         </div>)) : (<div className="empty-message"><i className="icon-heart-broken"></i> Message box is empty</div>)
     )
 
+    onCloseChat = userId => {
+        this.props.closeChatBox(userId)
+        // Send typing status
+        socketConnection.emit('stopTyping', loggedUserInfo.id, userId)
+    }
+
     render() {
         const [userInfo] = [this.props.userInfo]
         const [typerCount, typerList] = [this.state.userTyping.length, this.state.userTyping]
@@ -161,7 +172,7 @@ export class ChatBox extends React.Component {
                     <div className="user-photo"><img src={ apiBaseUrl + userInfo.profilePhoto } alt={ userInfo.displayName } /></div>
                     <div className="display-name"><a href={ apiBaseUrl + '/user/' + userInfo.username }>{ userInfo.displayName }</a></div>
                     <div className="action">
-                        <span className="close" onClick={ this.props.closeChatBox.bind(this, userInfo.userId) }>
+                        <span className="close" onClick={ () => this.onCloseChat(userInfo.userId) }>
                             <i className="icon-close"></i>
                         </span>
                     </div>
@@ -172,10 +183,11 @@ export class ChatBox extends React.Component {
                         <div className="user-typing">
                             {typerList.map(user =>
                             <span className="typer">
-                                <img src={user.profilePhoto} title={user.displayName}/>
+                                <img src={user.profilePhoto} title={user.displayName} alt={user.displayName} />
+                                <span className="typing"></span>
                             </span>)}
                         </div> :
-                        <span className="typing">•••</span>
+                        <span className="typing"></span>
                     )}
                     <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
                 </div>

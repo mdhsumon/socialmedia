@@ -41,6 +41,10 @@
 .post-create-actions {
   justify-content: flex-end;
 }
+.post-create-actions select:disabled,
+.post-create-actions button:disabled {
+    opacity: 0.5;
+}
 .post-create-actions .post-visibility {
   color: #ccc;
   margin-left: 10px;
@@ -78,10 +82,16 @@
     padding: 10px;
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 18px;
     color: #ccc;
+}
+
+.empty-post i {
+    margin-bottom: 10px;
+    font-size: 40px;
 }
 .post{
     background: #ffffff;

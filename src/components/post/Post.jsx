@@ -63,6 +63,7 @@ export class Post extends React.Component {
             if (this.state.isEmpty) {
                 return (
                     <div className="empty-post">
+                        <i className="icon-newspaper"></i> 
                         <div className="empty-post-message">No post found</div>
                     </div>
                 )

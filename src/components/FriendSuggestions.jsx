@@ -81,7 +81,7 @@ export default class FriendSuggestions extends React.Component {
     render() {
         return (
             <div className="common-block friend-request-section">
-                <h4 className="block-header">People You May Know</h4>
+                <h4 className="block-header">People you may know</h4>
                 <div className="block-body friend-rq-items">
                     {this.renderSuggestion()}
                 </div>
