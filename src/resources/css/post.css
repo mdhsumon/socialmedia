@@ -204,11 +204,14 @@
 }
 /*----------------post body end---------*/
 /*----------------(like comment share)LCS section start---------*/
-.lcs-section{
+.lcs-section {
     display: flex;
     align-items: center;
     background-color: #f8f8f8;
     padding: 7px;
+}
+.like-dislike {
+    user-select: none;
 }
 .like-dislike .react {
     background: transparent;
@@ -221,7 +224,7 @@
     transition: all 0.1s;
 }
 .like-dislike .emoji {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .like-dislike .react:hover {
     transform: scale(1.25);
@@ -277,7 +280,9 @@
     font-size: 12px;
     position: relative;
     top: -3px;
-    padding: 3px;
+    display: inline-block;
+    min-width: 25px;
+    text-align: center;
 }
 .comment-reply {
     padding: 15px;

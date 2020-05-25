@@ -17,9 +17,12 @@ export class PostReactions extends React.Component {
             action: "like"
         }
         updatePost(this.props.postInfo.id, reactData, response => {
-            console.log(response)
+            console.log(response.count)
             if(response.status) {
-                this.setState({isLiked: true})
+                this.setState({
+                    isLiked: true,
+                    reactCount: response.count
+                })
             }
         })
     }
