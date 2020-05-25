@@ -84,7 +84,13 @@ export class ChatBar extends React.Component {
     }
 
     chatMenu = () => {
-        this.setState({chatList: !this.state.chatList})
+        this.setState({chatList: !this.state.chatList}, () => {
+            if(this.state.chatList){
+                document.addEventListener('click', e => {
+                    !this.userListRef.contains(e.target) && !this.chatMenuRef.contains(e.target) && this.setState({chatList: false})
+                })
+            }
+        })
     }
 
     closeChatBox = userId => {
@@ -92,13 +98,13 @@ export class ChatBar extends React.Component {
         currentOpened = currentOpened.filter(item => item.key !== userId)
         this.setState({
             openedChat: currentOpened
-        })
+        }) 
     }
 
     render() {
         return(
             <div className={`chat-bar${this.state.openedChat.length ? ' active-chat' : ''}${this.state.chatList ? ' show' : ''}`}>
-                <div className="user-list">
+                <div className="user-list" ref={r => this.userListRef = r}>
                     {this.state.chatUsers.map(user => {
                         return(
                             <div key={user.userId} className={`chat-user ${user.status}`} onClick={ event => { this.openChat(event, user) } }>
@@ -114,7 +120,7 @@ export class ChatBar extends React.Component {
                     {this.state.openedChat}
                 </div>
                 {screenSize('width') < 560 && (
-                    <span className="chat-menu" onClick={() => this.chatMenu()}><i class="icon-bubbles"></i></span>
+                    <span className="chat-menu" onClick={() => this.chatMenu()} ref={r => this.chatMenuRef = r}><i className="icon-bubbles"></i></span>
                 )}
             </div>
         )

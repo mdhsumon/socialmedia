@@ -68,7 +68,7 @@ export const deletePost = (postId, callback) => {
 .catch(err => { callback(false) })
 }
 
-// Get column data
+// Update post data
 export const updatePost = (postId, postData, callback) => {
     fetch(`${apiBaseUrl}/post/${postId}`, {
     method: 'PUT',

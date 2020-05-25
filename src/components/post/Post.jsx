@@ -46,14 +46,16 @@ export class Post extends React.Component {
         if (postData.length > 0) {
             return this.state.postData.map(post => {
                 return (
-                    <div className="post" key={post._id}>
+                    <div className={`post ${post.visibility}`} key={post._id}>
                         <PostAuthor authorInfo={post.userInfo} postInfo={{ id: post._id, createdAt: post.createdAt }} deletePostFlag={this.deletePostFlag} />
                         <PostContent postContent={post.content} />
-                        <PostReactions
-                            reactions={post.reactions}
-                            postInfo={{ id: post._id, userId: post.userId }}
-                            likeDislike={this.updateLikeDislike}
-                        />
+                        {post.visibility !== 'private' &&
+                            <PostReactions
+                                reactions={post.reactions}
+                                postInfo={{ id: post._id, userId: post.userId }}
+                                likeDislike={this.updateLikeDislike}
+                            />
+                        }
                         <PostComment postComments={post.comments} />
                     </div>
                 )

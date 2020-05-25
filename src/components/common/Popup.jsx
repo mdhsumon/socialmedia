@@ -12,7 +12,8 @@ export default class Popup extends React.Component {
     static defaultProps = {
         floating: true,
         popTitle: "Popup Title",
-        popContent: () => "Popup content here..."
+        popContent: () => "Popup content here...",
+        defaultButton: {cancel: 'Cancel', submit: 'Save'}
     }
 
     componentDidMount() {
@@ -38,6 +39,7 @@ export default class Popup extends React.Component {
     }
 
     popupHtml = () => {
+        const popBtn = {...this.props.defaultButton, ...this.props.popButton}
         return(
             this.state.isOpen && <div className={`popup${this.props.popClass ? ' ' + this.props.popClass : ''}`} style={ this.state.isOpen ? {} : { display: 'none' }}>
                 <div className="popup-block">
@@ -47,11 +49,11 @@ export default class Popup extends React.Component {
                     </div>
                     <div className="popup-body">
                         <div className="popup-content">
-                            { this.props.popContent }
+                            { this.props.popContent() }
                         </div>
                         <div className="popup-action">
-                            <button className="button-cancel" onClick={ this.closePopup }>Cancel</button>
-                            <button onClick={ this.submitPopup }>Save</button>
+                            <button className="button-cancel" onClick={ this.closePopup }>{popBtn.cancel}</button>
+                            <button className="button-submit" onClick={ this.submitPopup }>{popBtn.submit}</button>
                         </div>
                     </div>
                 </div>

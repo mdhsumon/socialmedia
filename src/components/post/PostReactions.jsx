@@ -7,12 +7,20 @@ export class PostReactions extends React.Component {
         this.state = {
             isLiked: false,
             isDisliked: false,
+            reactCount: this.props.reactions.count,
             userComment: ''
         }
     }
-    manageReaction = event => {
-        this.setState({
-            isLiked: true
+    manageReaction = type => {
+        const reactData = {
+            area: "react",
+            action: "like"
+        }
+        updatePost(this.props.postInfo.id, reactData, response => {
+            console.log(response)
+            if(response.status) {
+                this.setState({isLiked: true})
+            }
         })
     }
     handleComment = event => {
@@ -39,20 +47,20 @@ export class PostReactions extends React.Component {
         return (
             <div className="lcs-section">
                 <div className="like-dislike">
-                    <button className={this.state.isLiked ? 'like liked' : 'like'} onClick={this.manageReaction}>
+                    <span className={`react like${this.state.isLiked ? ' done' : ''}`} onClick={() => this.manageReaction('like')}>
                         <i className="icon-like"></i>
-                    </button>
-                    <button className={this.state.isDisLiked ? 'dislike disliked' : 'dislike'} onClick={this.manageReaction}>
+                    </span>
+                    <span className={`react emoji${this.state.isDisLiked ? ' done' : ''}`} onClick={() => this.manageReaction('emoji')}>
                         <i className="icon-smile-fill"></i>
-                    </button>
-                    <span className="reaction-count">0</span>
+                    </span>
+                    {this.state.reactCount > 0 && <span className="reaction-count">{this.state.reactCount}</span>}
                 </div>
                 <div className="add-comment">
                     <input type="text" placeholder="Write a comment..." onChange={this.handleComment} onKeyDown={this.handleComment} />
                 </div>
-                <button className="share-button">
+                <span className="share-button" title="Share">
                     <i className="icon-share"></i>
-                </button>
+                </span>
             </div>
         )
     }

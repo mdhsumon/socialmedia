@@ -95,7 +95,7 @@
     background-color: #fff;
     padding: 20px;
     min-height: 80px;
-    max-height: calc(100vh - 100px);
+    max-height: 100%;
     overflow: auto;
 }
 
@@ -109,6 +109,15 @@
 .popup-action .button ~ .button,
 .popup-action button ~ button {
     margin-left: 10px;
+}
+
+.confirm-popup .popup-content {
+    text-align: center;
+}
+
+.confirm-popup .popup-action .button-submit {
+    background-color: #FF6655;
+    border-color: #FF6655;
 }
 
 .popup.popup-medium .popup-block {

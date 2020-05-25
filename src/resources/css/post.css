@@ -93,14 +93,20 @@
     margin-bottom: 10px;
     font-size: 40px;
 }
-.post{
-    background: #ffffff;
+.post {
+    background-color: #ffffff;
     margin-bottom: 10px;
     border: 1px solid #e3e3e3;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
     border-radius: 5px;
-    overflow: auto;
+}
+.post.private .action-menu:before {
+    content: '\E9D1';
+    font-family: 'Social';
+    margin-right: 10px;
+    color: #666;
+    font-size: 14px;
+    position: relative;
+    top: -2px;
 }
 .post-author{
     position: relative;
@@ -204,39 +210,39 @@
     background-color: #f8f8f8;
     padding: 7px;
 }
-.like-dislike button{
+.like-dislike .react {
     background: transparent;
     border: 1px solid transparent;
-    padding: 3px;
-}
-.like-dislike i {
+    cursor: pointer;
     padding: 5px;
     font-size: 16px;
     color: #ccc;
-    cursor: pointer;
     display: inline-block;
     transition: all 0.1s;
 }
-.like-dislike button:hover i {
-    transform: scale(1.5);
+.like-dislike .emoji {
+    margin-left: 5px;
 }
-.like-dislike .liked i,
-.like-dislike .like:hover i {
+.like-dislike .react:hover {
+    transform: scale(1.25);
+}
+.like-dislike .like.done,
+.like-dislike .like:hover {
     color: #6ebd52;
 }
-.like-dislike .disliked i,
-.like-dislike .dislike:hover i {
+.like-dislike .emoji.done,
+.like-dislike .emoji:hover {
     color: #ff6655;
 }
-.lcs-section .share-button{
-    background: transparent;
+.lcs-section .share-button {
     border: 0;
-}
-.lcs-section .share-button i{
     color: #ccc;
+    cursor: pointer;
     font-size: 17px;
+    padding: 5px;
+    margin-left: 10px;
 }
-.lcs-section .share-button:hover i{
+.lcs-section .share-button:hover {
     color: #666;
 }
 .author-post-info .author-name{
@@ -258,13 +264,12 @@
     width: 100%;
     padding: 6px 10px;
     border-radius: 3px;
-    background-color: #F3F3F3;
+    background-color: #fff;
     border: 1px solid transparent;
     outline: none;
     transition: all 0.2s;
 }
 .add-comment input:focus{
-    background-color: #fcfcfc;
     border-color: #c6e87f;
 }
 .like-dislike .reaction-count {

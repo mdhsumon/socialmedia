@@ -1,5 +1,5 @@
 import React from "react"
-import { apiBaseUrl } from "../../services/commonService"
+import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
 import { getTime } from "../../commonActions"
 import { deletePost } from "../../services/postService"
 import { getUserSummary } from "../../services/userService"
@@ -26,19 +26,22 @@ export default class PostAuthor extends React.Component {
         })
     }
     
-    removePost = postId => {
+    openPopup = postId => {
         this.setState({popup: true})
-        // deletePost(postId, response => {
-        //     if(response.status) {
-        //         this.setState({ messagePopup: true })
-        //         this.props.deletePostFlag(postId)
-        //         setTimeout(() => {
-        //             this.setState({
-        //                 messagePopup: false
-        //             })
-        //         }, 4000)
-        //     }
-        // })
+    }
+    
+    removePost = postId => {
+        deletePost(postId, response => {
+            console.log(response)
+            if(response.status) {
+                // Update parent
+                this.props.deletePostFlag(postId)
+            }
+        })
+    }
+
+    closePopup = () => {
+        this.setState({popup: false})
     }
 
     render() {
@@ -55,6 +58,7 @@ export default class PostAuthor extends React.Component {
                         <span className="post-date-time"><i className="icon-time"></i> {getTime(this.props.postInfo.createdAt, 'auto')}</span>
                     </div>
                 </div>
+                {loggedUserInfo.id === this.props.authorInfo.userId &&
                 <ActionMenu menuClass="post-menu" floating={false}>
                     <Menu>
                         <i className="icon-pencil-line"></i>
@@ -64,13 +68,21 @@ export default class PostAuthor extends React.Component {
                         <i className="icon-eye-blocked"></i>
                         <span className="menu-text">Hide</span>
                     </Menu>
-                    <Menu onAction={() => this.removePost(this.props.postInfo.id)}>
+                    <Menu onAction={() => this.openPopup(this.props.postInfo.id)}>
                         <i className="icon-remove"></i>
                         <span className="menu-text">Delete</span>
                     </Menu>
-                </ActionMenu>
-                {this.state.messagePopup && <MessagePopup status="success" message="Post has been Deleted" />}
-                {this.state.popup && <Popup popTitle="Confirm delete" popContent="Are you sure?" />}
+                </ActionMenu>}
+                {this.state.messagePopup && <MessagePopup status="success" message="Post has been deleted" />}
+                {this.state.popup &&
+                <Popup
+                    onSubmit={() => this.removePost(this.props.postInfo.id)}
+                    onClose={this.closePopup}
+                    popClass="confirm-popup"
+                    popButton={{submit: 'Yes'}}
+                    popTitle="Confirm delete"
+                    popContent={() => "Are you sure? It will be deleted permanently! You can hide the post for now."}
+                />}
             </div>
         )
     }
