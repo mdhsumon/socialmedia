@@ -1,15 +1,24 @@
 import React from "react"
 import { updatePost } from "../../services/postService"
+import { loggedUserInfo } from "../../services/commonService"
 
 export class PostReactions extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             isLiked: false,
-            isDisliked: false,
+            isEmojify: false,
             reactCount: this.props.reactions.count,
+            reactedUsers: [...this.props.reactions.likes, ...this.props.reactions.emojis],
             userComment: ''
         }
+    }
+    componentDidMount() {
+        this.reactionStatus()
+    }
+    reactionStatus = () => {
+        const isReacted = this.state.reactedUsers.filter(user => user.userId === loggedUserInfo.id)[0]
+        isReacted && (isReacted.data === "like" ? this.setState({isLiked: true}) : this.setState({isEmojify: true}))
     }
     manageReaction = type => {
         const reactData = {
@@ -17,10 +26,9 @@ export class PostReactions extends React.Component {
             action: "like"
         }
         updatePost(this.props.postInfo.id, reactData, response => {
-            console.log(response.count)
             if(response.status) {
                 this.setState({
-                    isLiked: true,
+                    isLiked: !this.state.isLiked,
                     reactCount: response.count
                 })
             }
@@ -53,7 +61,7 @@ export class PostReactions extends React.Component {
                     <span className={`react like${this.state.isLiked ? ' done' : ''}`} onClick={() => this.manageReaction('like')}>
                         <i className="icon-like"></i>
                     </span>
-                    <span className={`react emoji${this.state.isDisLiked ? ' done' : ''}`} onClick={() => this.manageReaction('emoji')}>
+                    <span className={`react emoji${this.state.isEmojify ? ' done' : ''}`} onClick={() => this.manageReaction('emoji')}>
                         <i className="icon-smile-fill"></i>
                     </span>
                     {this.state.reactCount > 0 && <span className="reaction-count">{this.state.reactCount}</span>}
