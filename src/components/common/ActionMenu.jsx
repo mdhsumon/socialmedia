@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// Available attributes: menuClass="abc", itemsClass="menu-items", itemClass="menu-item", onClose="()=>{}" floating={ false }
+// Available attributes: menuIcon=<i></i>, menuClass="abc", itemsClass="menu-items", itemClass="menu-item", onClose="()=>{}" floating={ false }
 export class ActionMenu extends React.Component {
     constructor(props) {
         super(props)
@@ -13,14 +13,6 @@ export class ActionMenu extends React.Component {
     static defaultProps = {
         floating: false,
         defaultClass: "menu-item"
-    }
-
-    componentDidMount() {
-        
-    }
-
-    componentWillUnmount() {
-
     }
 
     toggleMenu = event => {
@@ -57,7 +49,9 @@ export class ActionMenu extends React.Component {
     render() {
         return(
             <div className={`action-menu${this.props.menuClass ? ' ' + this.props.menuClass : ''}${this.state.isOpen ? ' active' : ''}`}>
-                <span className="menu-button" onClick={this.toggleMenu}><i className="icon-ellips-h"></i></span>
+                <span className="menu-button" onClick={this.toggleMenu}>
+                    {this.props.menuIcon ? this.props.menuIcon : <i className="icon-ellips-h"></i>}
+                </span>
                 {this.props.floating ? ReactDOM.createPortal(this.menuHtml(), document.body) : this.menuHtml()}
             </div>
         )
