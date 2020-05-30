@@ -47,7 +47,7 @@ export class Post extends React.Component {
             return this.state.postData.map(post => {
                 return (
                     <div className={`post ${post.visibility}`} key={post._id}>
-                        <PostAuthor authorInfo={post.userInfo} postInfo={{ id: post._id, createdAt: post.createdAt }} deletePostFlag={this.deletePostFlag} />
+                        <PostAuthor postInfo={{ id: post._id, author: post.userInfo, createdAt: post.createdAt }} deletePostFlag={this.deletePostFlag} />
                         <PostContent postContent={post.content} />
                         {post.visibility !== 'private' &&
                             <PostReactions

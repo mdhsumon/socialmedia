@@ -11,7 +11,7 @@
   line-height: 1;
 }
 
-.action-menu.active .menu-button,
+.action-menu.opened .menu-button,
 .action-menu .menu-button:hover {
   color: #666;
 }

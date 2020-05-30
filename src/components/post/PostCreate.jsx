@@ -17,9 +17,20 @@ export class PostCreate extends React.Component {
         }
     }
 
+    manageSelected = target => {
+        const selectedList = this.state.selectedphotos.filter(file => file.key !== target)
+        const photoList = Object.values(this.state.photos).filter((file, k) => k !== target)
+        this.setState({selectedphotos: selectedList, photos: photoList})
+    }
+
     handleChange = event => {
         const value = event.target.type === 'file' ? event.target.files : event.target.value
-        this.setState({ [event.target.name]: value }, () => {
+        const filePaths = event.target.type === 'file' ? Object.values(value).map((file, k) => ({key: k, value: URL.createObjectURL(file)})) : false
+        this.setState({
+            [event.target.name]: value,
+            ['selected' + event.target.name]: filePaths
+        },
+        () => {
             this.setState({
                 postButton: this.state.message.trim().length || this.state.photos || this.state.videos ? true : false
             })
@@ -50,7 +61,6 @@ export class PostCreate extends React.Component {
             // Remove empty block form paren
             this.props.removeEmpty()
             createPost(postData, response => {
-                console.log(response)
                 if(response.status) {
                     this.setState({
                         message: '',
@@ -59,8 +69,10 @@ export class PostCreate extends React.Component {
                         messagePopup: true,
                         messagePopupType: "success",
                         messagePopupText: "Post has been published",
-                        photos: '',
-                        videos: ''
+                        selectedphotos: null,
+                        selectedvideos: null,
+                        photos: null,
+                        videos: null
                     })
                     // Updating post from parent component
                     this.props.postCreateFlag(response.createdPost)
@@ -98,14 +110,38 @@ export class PostCreate extends React.Component {
                                         <input type="file" name="photos" multiple onChange={this.handleChange} />
                                         <div className="input-file-text"><i className="icon-images"></i> Upload Photos</div>
                                     </div>
-                                    <div className="uploaded-files"></div>
+                                    {this.state.selectedphotos &&
+                                        <div className="selected-files">
+                                            {this.state.selectedphotos.map((file, k) => (
+                                                <div className="file" key={k}>
+                                                    <img src={file.value} alt="Selected Photo" />
+                                                    <span className="remove" onClick={() => this.manageSelected(file.key)}>
+                                                        <i className="icon-close"></i>
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    }
                                 </TabPanel>
                                 <TabPanel className="tab-content videos">
                                     <div className="input-box input-file">
                                         <input type="file" name="videos" multiple onChange={this.handleChange} />
                                         <div className="input-file-text"><i className="icon-films"></i> Upload Videos</div>
                                     </div>
-                                    <div className="uploaded-files"></div>
+                                    {this.state.selectedvideos &&
+                                        <div className="selected-files">
+                                            {this.state.selectedvideos.map((file, k) => (
+                                                <div className="file" key={k}>
+                                                    <video width="100%">
+                                                        <source src={file.value} />
+                                                    </video>
+                                                    <span className="remove" onClick={() => this.manageSelected(file.key)}>
+                                                        <i className="icon-close"></i>
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    }
                                 </TabPanel>
                             </div>
                             <div className="post-create-actions">

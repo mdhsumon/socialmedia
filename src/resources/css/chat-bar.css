@@ -99,7 +99,7 @@
   position: relative;
 }
 .chat-box.active .box-head {
-  background-color: #f2fae3;
+  background-color: rgba(110, 189, 82, 0.20);
 }
 .chat-box.active .box-form {
   overflow: visible;

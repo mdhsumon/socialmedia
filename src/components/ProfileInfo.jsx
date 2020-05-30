@@ -52,7 +52,10 @@ export default class ProfileInfo extends React.Component {
     }
 
     onClosePopup = () => {
-        this.setState({ isPopup: false })
+        this.setState({
+            isPopup: false,
+            photo: false
+        })
     }
 
     onSubmitPopup = () => {

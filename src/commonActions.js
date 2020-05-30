@@ -37,7 +37,7 @@ export const compareTime = (timestamp, unit) => {
 }
 
 // Covert timestamp into different time format
-export const getTime = (timestamp, timeFormat) => {
+export const showTime = (timestamp, timeFormat) => {
     const timeObj = new Date(parseInt(timestamp))
     switch(timeFormat) {
         case "h:m 12":

@@ -48,7 +48,7 @@ export class ActionMenu extends React.Component {
 
     render() {
         return(
-            <div className={`action-menu${this.props.menuClass ? ' ' + this.props.menuClass : ''}${this.state.isOpen ? ' active' : ''}`}>
+            <div className={`action-menu${this.props.menuClass ? ' ' + this.props.menuClass : ''}${this.state.isOpen ? ' opened' : ''}`}>
                 <span className="menu-button" onClick={this.toggleMenu}>
                     {this.props.menuIcon ? this.props.menuIcon : <i className="icon-ellips-h"></i>}
                 </span>

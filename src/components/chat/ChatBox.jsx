@@ -2,7 +2,7 @@ import React from "react"
 import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
 import { getUserMessages, sendUserMessage, deleteUserMessage } from "../../services/chatService"
 import { socketConnection } from "../../sockets/socket"
-import { getTime } from "../../commonActions"
+import { showTime } from "../../commonActions"
 
 export class ChatBox extends React.Component {
     constructor(props) {
@@ -131,7 +131,7 @@ export class ChatBox extends React.Component {
         <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
             <div className="message-item">
                 <span className="message">{ data.message }</span>
-                <span className="time" title={ getTime(data.time, "auto") }><i className="icon-time"></i></span>
+                <span className="time" title={ showTime(data.time, "auto") }><i className="icon-time"></i></span>
                 <span className={`action${this.state.activeIndex === index ? ' active' : ''}`} onClick={() => this.managePopMenu(index)}>
                     {data.origin === "self" ? (
                         <React.Fragment>

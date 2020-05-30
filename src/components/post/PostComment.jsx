@@ -1,19 +1,33 @@
 import React from "react"
+import { apiBaseUrl } from "../../services/commonService"
+import { getUserSummary } from "../../services/userService"
 export class PostComment extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             comments: this.props.postComments,
             replyMsg: '',
-            display: 'none'
+            isReply: false
         }
+        // getUserSummary(this.props.postInfo.author.userId, data => {
+        //     data.status && this.setState({
+        //         commenter: {
+        //             userId: data.users[0]._id,
+        //             username: data.users[0].username,
+        //             displayName: data.users[0].displayName,
+        //             profilePhoto: data.users[0].profilePhoto,
+        //             coverPhoto: data.users[0].coverPhoto
+        //         }
+        //     })
+        // })
     }
 
-    toggleReply = event => {
-        this.state.display === 'none' ? this.setState({ display: 'block' }) : this.setState({ display: 'none' })
+    toggleReply = () => {
+        this.setState({isReply: !this.state.isReply})
     }
 
     render() {
+        console.log(this.state.comments)
         if (this.state.comments.length) {
             return (
                 <div className="comment-reply">
@@ -22,7 +36,7 @@ export class PostComment extends React.Component {
                             <div className="comment" key={comment._id}>
                                 <div className="comment-section">
                                     <div className="commentor">
-                                        <img alt='' src="http://localhost:8081/file/global/image/male.png" />
+                                        {/* <img src={apiBaseUrl + comment.userInfo.profilePhoto} alt={comment.userInfo.displayName} /> */}
                                     </div>
                                     <div className="comment-body">{comment.message}</div>
                                     <div className="action">
@@ -37,7 +51,7 @@ export class PostComment extends React.Component {
                                         <div className="reply-message">Reply message</div>
                                     </div>
                                 )}
-                                <input style={{ display: this.state.display }} type="text" placeholder="Reply..." />
+                                {this.state.isReply && <input type="text" placeholder="Reply..." />}
                             </div>
                         )
                     })}
