@@ -6,8 +6,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 export class PostCreate extends React.Component {
     constructor(props) {
         super(props)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleForm = this.handleForm.bind(this)
         this.state = {
             isLoading: false,
             messagePopup: false,

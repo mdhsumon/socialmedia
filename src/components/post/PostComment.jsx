@@ -36,7 +36,7 @@ export class PostComment extends React.Component {
                             <div className="comment" key={comment._id}>
                                 <div className="comment-section">
                                     <div className="commentor">
-                                        {/* <img src={apiBaseUrl + comment.userInfo.profilePhoto} alt={comment.userInfo.displayName} /> */}
+                                        <img src="{apiBaseUrl + comment.userInfo.profilePhoto}" alt="{comment.userInfo.displayName}" />
                                     </div>
                                     <div className="comment-body">{comment.message}</div>
                                     <div className="action">
@@ -51,7 +51,12 @@ export class PostComment extends React.Component {
                                         <div className="reply-message">Reply message</div>
                                     </div>
                                 )}
-                                {this.state.isReply && <input type="text" placeholder="Reply..." />}
+                                {this.state.isReply && (
+                                    <div className="reply-form">
+                                        <img src="dsf" alt="sdf"/>
+                                        <input type="text" placeholder="Reply..." />
+                                    </div>
+                                )}
                             </div>
                         )
                     })}

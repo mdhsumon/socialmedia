@@ -18,13 +18,12 @@ export class PostContent extends React.Component {
     }
 
     render() {
-        let message, attachment
-        [message, attachment] = [this.props.postContent.message, this.props.postContent.attachment]
+        let [message, attachment] = [this.props.postContent.message, this.props.postContent.attachment]
         return (
             <div className="post-body">
-                <div className="post-text">
-                    <p>{message}</p>
-                </div>
+                {message.length > 0 && <div className="post-text">
+                    {message}
+                </div>}
                 {(attachment.photos.length || attachment.videos.length) > 0 &&
                     <div className={`post-atachment ${(attachment.photos.length || attachment.videos.length) > 1 ? 'multiple': 'single'}`}>
                         {attachment.photos.map( photo => {

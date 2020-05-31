@@ -233,7 +233,11 @@
     padding-right: 40px;
 }
 .chat-box .message-cell ~ .message-cell {
-  margin-top: 5px;
+  margin-top: 10px;
+}
+.chat-box .message-cell.other + .message-cell.other,
+.chat-box .message-cell.self + .message-cell.self {
+  margin-top: 2px;
 }
 .chat-box .message-cell .time,
 .chat-box .message-cell .action {

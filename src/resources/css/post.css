@@ -36,6 +36,7 @@
 }
 .post-create-body .selected-files {
     display: flex;
+    align-items: flex-start;
     flex-wrap: wrap;
     margin: 15px -5px 0;
 }
@@ -195,6 +196,7 @@
 }
 .author-post-info .post-date-time i {
     font-size: 9px;
+    margin-right: 3px;
 }
 .post-author .action-button {
     background: transparent;
@@ -220,8 +222,10 @@
 }
 .post-body .post-atachment {
     display: flex;
-    margin-top: 20px;
     flex-wrap: wrap;
+}
+.post-body .post-text + .post-atachment {
+    margin-top: 20px;
 }
 .post-atachment .post-video,
 .post-atachment .post-image {
@@ -353,31 +357,41 @@
 }
 .comment input {
     font-size: 12px;
-    width: calc(100% - 28px);
     position: relative;
-    left: 28px;
     padding: 4px 8px;
     border-radius: 3px;
     background-color: #f3f3f3;
     border: 1px solid transparent;
     outline: none;
     transition: all 0.2s;
-    margin-top: 10px;
 }
 .comment input:hover,
 .comment input:focus {
     background-color: #fcfcfc;
     border-color: #c6e87f;
 }
+.reply-form,
 .comment-section {
     display: flex;
+    align-items: center;
+}
+.reply-form {
+    margin-left: 30px;
+    margin-top: 10px;
+}
+.reply-form img {
+    border-radius: 2px;
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
 }
 .commentor{
     border-radius: 3px;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     flex: none;
-    margin-right: 8px;
+    margin-right: 5px;
 }
 .commentor img{
     max-width: 100%;
