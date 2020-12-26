@@ -112,7 +112,7 @@ export class PostCreate extends React.Component {
                                         <div className="selected-files">
                                             {this.state.selectedphotos.map((file, k) => (
                                                 <div className="file" key={k}>
-                                                    <img src={file.value} alt="Selected Photo" />
+                                                    <img src={file.value} alt="Selected Avatar" />
                                                     <span className="remove" onClick={() => this.manageSelected(file.key)}>
                                                         <i className="icon-close"></i>
                                                     </span>

@@ -3,7 +3,8 @@ import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
 import { getFriendLists, getUserSummary } from "../../services/userService"
 import { ChatBox } from "./ChatBox"
 import { socketConnection } from "../../sockets/socket"
-import { screenSize } from "../../commonActions"
+import { getMediaStream, screenSize } from "../../commonActions"
+import CallPopup from "../common/CallPopup"
 
 export class ChatBar extends React.Component {
     constructor(props) {
@@ -11,7 +12,8 @@ export class ChatBar extends React.Component {
         this.state = {
             chatList: false,
             chatUsers: [],
-            openedChat: []
+            openedChat: [],
+            callPop: false
         }
     }
 
@@ -24,6 +26,48 @@ export class ChatBar extends React.Component {
             // Receive user offline status
             socketConnection.on('userOfflineStatus', userId => {
                 this.updateUserStatus(userId, 'offline')
+            })
+            // Get user call
+            socketConnection.on("receiveCall", async (callerId, res) => {
+                this.setState({userId: callerId})
+                const stunCon = {"iceServers": [{"urls": "stun:stun.l.google.com:19302"}]}
+                const peerCon = new RTCPeerConnection(stunCon)
+                if(res.offer) {
+                    this.openCallPop()
+                    getMediaStream("camera", async response => {
+                        if(response.status) {
+                            peerCon.addStream(response.data)
+                            // response.media.getTracks().forEach(track => {
+                            //     peerCon.addTrack(track, response.data)
+                            // })
+                            const remoteDesc = new RTCSessionDescription(res.offer)
+                            await peerCon.setRemoteDescription(remoteDesc)
+                            const answerOffer = await peerCon.createAnswer()
+                            await peerCon.setLocalDescription(answerOffer)
+                            socketConnection.emit("userCall", callerId, loggedUserInfo.id, {"answer": answerOffer})
+                        }
+                    })
+                }
+                peerCon.onicecandidate = e => {
+                    if(e.candidate) {
+                        console.log("Sent Can from B")
+                        socketConnection.emit("userCall", callerId, loggedUserInfo.id, {"newCandidate": e.candidate})
+                    }
+                }
+                
+                const player = document.querySelector('#demo-video')
+                peerCon.ontrack = track => {
+                    console.log(track)
+                    player.srcObject = track.streams[0]
+                }
+
+                // Connection status
+                peerCon.onconnectionstatechange = e => {
+                    console.log('State B', peerCon.connectionState)
+                    if(peerCon.connectionState === "connected") {
+                        console.log("Peers connection established!")
+                    }
+                }
             })
         })
     }
@@ -101,6 +145,10 @@ export class ChatBar extends React.Component {
         }) 
     }
 
+    openCallPop = () => {
+        this.setState({callPop: !this.state.callPop})
+    }
+
     render() {
         return(
             <div className={`chat-bar${this.state.openedChat.length ? ' active-chat' : ''}${this.state.chatList ? ' show' : ''}`}>
@@ -122,6 +170,7 @@ export class ChatBar extends React.Component {
                 {screenSize('width') < 560 && (
                     <span className="chat-menu" onClick={() => this.chatMenu()} ref={r => this.chatMenuRef = r}><i className="icon-bubbles"></i></span>
                 )}
+                {this.state.callPop && <CallPopup userId={this.state.userId} onClose={this.closePopup} popClass="calling-popup" />}
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React from "react"
-import { apiBaseUrl } from "../../services/commonService"
-import { getUserSummary } from "../../services/userService"
+//import { apiBaseUrl } from "../../services/commonService"
+//import { getUserSummary } from "../../services/userService"
 export class PostComment extends React.Component {
     constructor(props) {
         super(props)
@@ -27,7 +27,6 @@ export class PostComment extends React.Component {
     }
 
     render() {
-        console.log(this.state.comments)
         if (this.state.comments.length) {
             return (
                 <div className="comment-reply">

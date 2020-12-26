@@ -91,3 +91,14 @@ export const screenSize = size => {
     // }
     return getSize(size)
 }
+
+// Access media devices
+export const getMediaStream = (mediaType, callback, ...rest) => {
+    const mediaConfig = mediaType === "camera" ? {"audio": true, "video": true} : {"audio": true}
+    const mediaPromise = navigator.mediaDevices.getUserMedia(mediaConfig)
+    mediaPromise.then((res, rej) => {
+        callback({status: true, data: res})
+    }).catch(err => {
+        callback({status: false, data: err})
+    })
+}

@@ -129,6 +129,7 @@
 .chat-box .box-head {
   border-bottom: 1px solid #f1f1f1;
   padding: 5px 10px;
+  transition: all 0.25s ease;
 }
 .chat-box .box-form {
   border-top: 1px solid #f1f1f1;
@@ -165,9 +166,27 @@
 .chat-box .display-name a:hover {
   color: #000;
 }
+.call-section {
+  display: inline-flex;
+  flex: none;
+  margin-left: 10px;
+}
+.call-section .call {
+  min-width: 25px;
+  min-height: 10px;
+  color: #999;
+  cursor: pointer;
+  padding: 2px 5px;
+  margin: 0 3px;
+  border-radius: 3px;
+}
+.call-section .call.active,
+.call-section .call:hover {
+  color: #6ebd52;
+}
 .chat-box .box-head .action {
   flex: none;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 .chat-box .box-head .action .close {
   width: 18px;

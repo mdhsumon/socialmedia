@@ -2,7 +2,8 @@ import React from "react"
 import { apiBaseUrl, loggedUserInfo } from "../../services/commonService"
 import { getUserMessages, sendUserMessage, deleteUserMessage } from "../../services/chatService"
 import { socketConnection } from "../../sockets/socket"
-import { showTime } from "../../commonActions"
+import { getMediaStream, showTime } from "../../commonActions"
+import CallPopup from "../common/CallPopup"
 
 export class ChatBox extends React.Component {
     constructor(props) {
@@ -14,8 +15,9 @@ export class ChatBox extends React.Component {
             inputRow: 1,
             userInput: '',
             messageList: [],
-            userTyping: []
+            userTyping: [],
             //newMessage: false
+            callPop: false
         }
     }
 
@@ -69,9 +71,8 @@ export class ChatBox extends React.Component {
                 const sendBtn = this.state.userInput.trim().length ? true : false
                 this.setState({ sendButton: sendBtn }, () => {
                     // Send typing status
-                    sendBtn ?
-                    socketConnection.emit('sendTyping', loggedUserInfo.id, this.props.userInfo.userId) :
-                    socketConnection.emit('stopTyping', loggedUserInfo.id, this.props.userInfo.userId)
+                    const eventName = sendBtn ? 'sendTyping' : 'stopTyping'
+                    socketConnection.emit(eventName, loggedUserInfo.id, this.props.userInfo.userId)
                 })
             })
         }
@@ -163,6 +164,10 @@ export class ChatBox extends React.Component {
         socketConnection.emit('stopTyping', loggedUserInfo.id, userId)
     }
 
+    openCallPop = () => {
+        this.setState({callPop: !this.state.callPop})
+    }
+
     render() {
         const [userInfo] = [this.props.userInfo]
         const [typerCount, typerList] = [this.state.userTyping.length, this.state.userTyping]
@@ -171,6 +176,10 @@ export class ChatBox extends React.Component {
                 <div className="box-head">
                     <div className="user-photo"><img src={ apiBaseUrl + userInfo.profilePhoto } alt={ userInfo.displayName } /></div>
                     <div className="display-name"><a href={ apiBaseUrl + '/user/' + userInfo.username }>{ userInfo.displayName }</a></div>
+                    <div className="call-section">
+                        <span className="call audio active" onClick={() => this.openCallPop()}><i className="icon-phone"></i></span>
+                        <span className="call video"><i className="icon-video-camera"></i></span>
+                    </div>
                     <div className="action">
                         <span className="close" onClick={ () => this.onCloseChat(userInfo.userId) }>
                             <i className="icon-close"></i>
@@ -215,6 +224,7 @@ export class ChatBox extends React.Component {
                         <i className="icon-send"></i>
                     </span>
                 </div>
+                {this.state.callPop && <CallPopup userId={userInfo.userId} onClose={this.closePopup} popClass="calling-popup" />}
             </div>
         )
     }

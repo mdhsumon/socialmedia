@@ -2,4 +2,4 @@
 export const loggedUserInfo = localStorage.getItem("data") !== null ? JSON.parse(localStorage.getItem("data")) : false
 
 // Api base url
-export const apiBaseUrl = "http://localhost:8888";
+export const apiBaseUrl = "http://192.168.0.100:8888";
