@@ -1,8 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { apiBaseUrl } from "../services/commonService"
-import { getFriendRequests, acceptFriendRequest, declineFriendRequest, getUserSummary } from "../services/userService"
-import { socketConnection } from "../sockets/socket"
+import { getSentRequests, cancelFriendRequest, getUserSummary } from "../services/userService"
 
 export default class SentRequests extends React.Component {
     constructor(props) {
@@ -15,9 +14,9 @@ export default class SentRequests extends React.Component {
     }
 
     loadrequests = () => {
-        getFriendRequests(response => {
+        getSentRequests(response => {
             if(response.status) {
-                const reqSenderIds = response.requests.map(sender => sender.senderId)
+                const reqSenderIds = response.requests.map(sender => sender.userId)
                 getUserSummary(reqSenderIds, userSummary => {
                     if(userSummary.status)
                     this.setState({requests: userSummary.users})
@@ -34,26 +33,16 @@ export default class SentRequests extends React.Component {
         })
     }
 
-    handleRequest = (requestItem, requstType, event) => {
-        if(requstType === 'accept') {
-            acceptFriendRequest(requestItem._id, response => {
-                if(response.status) {
-                    this.removeRequestItem(requestItem)
-                    // Broadcast acceptance signal
-                    socketConnection.emit('friendAccepted', requestItem.userId)
-                }
-            })
-        }
-        else if(requstType === 'decline') {
-            declineFriendRequest(requestItem._id, response => {
-                if(response.status) {
-                    this.removeRequestItem(requestItem)
-                }
-            })
-        }
+    handleRequest = requestItem => {
+        cancelFriendRequest(requestItem._id, response => {
+            console.log(response)
+            if(response.status) {
+                this.removeRequestItem(requestItem)
+            }
+        })
     }
 
-    renderFriednRequst = () => {
+    renderSentRequst = () => {
         if(this.state.requests.length) {
             return (
                 this.state.requests.map(requestItem => {
@@ -66,8 +55,7 @@ export default class SentRequests extends React.Component {
                                 <Link className="author-name" to={requestItem.username}>{requestItem.displayName}</Link>
                                 <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
                                 <div className="rq-buttons">
-                                    <button className="accept" onClick={this.handleRequest.bind(this, requestItem, 'accept')}>Accept</button>
-                                    <button className="decline" onClick={this.handleRequest.bind(this, requestItem, 'decline')}>Decline</button>
+                                    <span className="decline" onClick={() => this.handleRequest(requestItem)}>Cancel request</span>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +77,7 @@ export default class SentRequests extends React.Component {
             <div className="common-block friend-request-section">
                 <h4 className="block-header">Sent friend requests</h4>
                 <div className="block-body friend-rq-items">
-                    { this.renderFriednRequst() }
+                    { this.renderSentRequst() }
                 </div>
             </div>
         )

@@ -16,7 +16,7 @@ export default class FriendLists extends React.Component {
     loadFriendLists = () => {
         getFriendLists(this.props.userId, data => {
             if(data.status) {
-                const friendIds = data.friends.map(friend => friend.friendId)
+                const friendIds = data.friends.map(friend => friend.userId)
                 getUserSummary(friendIds, data => {
                     if(data.status) {
                         this.setState({friendLists: data.users})

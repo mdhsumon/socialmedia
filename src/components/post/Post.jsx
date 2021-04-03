@@ -1,11 +1,11 @@
-import React from 'react'
-import { getUserFeeds, getUserPosts } from '../../services/postService'
+import React from "react"
+import { getFeeds, getPosts } from "../../services/postService"
 import { PostCreate } from "./PostCreate"
 import PostAuthor from "./PostAuthor"
 import { PostContent } from "./PostContent"
 import { PostReactions } from "./PostReactions"
 import { PostComment } from "./PostComment"
-import { isUrl } from '../../commonActions'
+import { isUrl } from "../../commonActions"
 
 export class Post extends React.Component {
     constructor(props) {
@@ -18,8 +18,8 @@ export class Post extends React.Component {
     }
 
     loadPosts = () => {
-        const getPost = isUrl('/feeds') ? getUserFeeds : getUserPosts
-        getPost(this.props.userId, data => {
+        const getPost = isUrl("/feeds") ? getFeeds : getPosts
+        getPost(data => {
             data.status && this.setState({ postData: data.posts })
         })
     }
@@ -47,9 +47,10 @@ export class Post extends React.Component {
             return this.state.postData.map(post => {
                 return (
                     <div className={`post ${post.visibility}`} key={post._id}>
+                        {post.visibility === "private" && <i className="private-flag icon-eye-blocked"></i>}
                         <PostAuthor postInfo={{ id: post._id, author: post.userInfo, createdAt: post.createdAt }} deletePostFlag={this.deletePostFlag} />
                         <PostContent postContent={post.content} />
-                        {post.visibility !== 'private' &&
+                        {post.visibility !== "private" &&
                             <PostReactions
                                 reactions={post.reactions}
                                 postInfo={{ id: post._id, userId: post.userId }}
@@ -76,7 +77,7 @@ export class Post extends React.Component {
     render() {
         return (
             <div className="post-section">
-                {isUrl(['/feeds', '/profile']) && <PostCreate postCreateFlag={this.postCreateFlag} removeEmpty={this.removeEmpty} />}
+                {isUrl(["/feeds", "/profile"]) && <PostCreate postCreateFlag={this.postCreateFlag} removeEmpty={this.removeEmpty} />}
                 {this.renderPost()}
             </div>
         )

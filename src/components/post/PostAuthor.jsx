@@ -68,7 +68,7 @@ export default class PostAuthor extends React.Component {
                         </Menu>
                         <Menu>
                             <i className="icon-eye-blocked"></i>
-                            <span className="menu-text">Hide</span>
+                            <span className="menu-text">Make private</span>
                         </Menu>
                         <Menu onAction={() => this.openPopup(post.id)}>
                             <i className="icon-remove"></i>

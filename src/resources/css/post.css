@@ -134,15 +134,15 @@
     margin-bottom: 10px;
     border: 1px solid #e3e3e3;
     border-radius: 5px;
+    position: relative;
 }
-.post.private .action-menu:before {
-    content: '\E9D1';
-    font-family: 'Social';
+.post.private .private-flag {
     margin-right: 10px;
     color: #666;
     font-size: 14px;
-    position: relative;
-    top: -2px;
+    position: absolute;
+    right: 35px;
+    top: 8px;
 }
 .post-author{
     position: relative;

@@ -13,7 +13,7 @@ export class ChatBox extends React.Component {
             sendButton: false,
             isGroupChat: false,
             inputRow: 1,
-            userInput: '',
+            userInput: "",
             messageList: [],
             userTyping: [],
             //newMessage: false
@@ -24,19 +24,21 @@ export class ChatBox extends React.Component {
     scrollToTarget = target => { target.scrollIntoView({ behavior: "smooth" }) }
 
     componentDidMount() {
-        this.updateMessages()
+        this.loadMessages()
         // Update after getting signal
-        socketConnection.on('receiveMessage', senderId => {
-            this.updateMessages(() => {
-                this.setState({
-                    senderId: senderId,
-                    userTyping: []
-                })
-                this.state.isActive ? this.scrollToTarget(this.bottomFlag) : this.setState({newMessage: true})
+        socketConnection.on("receiveMessage", (senderId, messageData) => {
+            const currentList = [...this.state.messageList]
+            messageData.origin = "other"
+            currentList.push(messageData)
+            this.setState({
+                messageList: currentList,
+                senderId: senderId,
+                userTyping: []
             })
+            this.state.isActive ? this.scrollToTarget(this.bottomFlag) : this.setState({newMessage: true})
         })
         // Get user typing status
-        socketConnection.on('getTyping', userId => {
+        socketConnection.on("getTyping", userId => {
             let typerList = [...this.state.userTyping]
             typerList.push(userId)
             if(this.state.isActive) {
@@ -45,7 +47,7 @@ export class ChatBox extends React.Component {
             }
         })
         // Get user stop typing status
-        socketConnection.on('getStopTyping', userId => {
+        socketConnection.on("getStopTyping", userId => {
             let typerList = [...this.state.userTyping]
             typerList = typerList.filter(typer => typer !== userId)
             this.setState({userTyping: typerList})
@@ -58,7 +60,7 @@ export class ChatBox extends React.Component {
     }
 
     handleInput = event => {
-        if(event.key === 'Enter' && !event.shiftKey) {
+        if(event.key === "Enter" && !event.shiftKey) {
             event.preventDefault()
             this.sendMessage()
         }
@@ -71,7 +73,7 @@ export class ChatBox extends React.Component {
                 const sendBtn = this.state.userInput.trim().length ? true : false
                 this.setState({ sendButton: sendBtn }, () => {
                     // Send typing status
-                    const eventName = sendBtn ? 'sendTyping' : 'stopTyping'
+                    const eventName = sendBtn ? "sendTyping" : "stopTyping"
                     socketConnection.emit(eventName, loggedUserInfo.id, this.props.userInfo.userId)
                 })
             })
@@ -79,17 +81,18 @@ export class ChatBox extends React.Component {
     }
 
     handleFocus = () => {
-        this.setState({ isActive: true, senderId: '' })
+        this.setState({ isActive: true, senderId: "" })
     }
 
     handleBlur = () => {
         this.setState({ isActive: false })
     }
 
-    updateMessages = callback => {
+    loadMessages = () => {
         getUserMessages(this.props.userInfo.userId, messages => {
+            console.log(messages)
+            if(messages.status)
             this.setState({ messageList: messages.messageList })
-            callback && callback()
         })
     }
 
@@ -97,12 +100,14 @@ export class ChatBox extends React.Component {
          if(this.state.userInput.trim().length) {
             sendUserMessage(this.props.userInfo.userId, this.state.userInput, response => {
                 if(response.status) {
-                    this.updateMessages()
+                    const currentList = [...this.state.messageList]
+                    currentList.push(response.messageData)
+                    this.setState({ messageList: currentList })
                     // Send message notification
-                    socketConnection.emit('sendMessage', loggedUserInfo.id, this.props.userInfo.userId)
+                    socketConnection.emit("sendMessage", loggedUserInfo.id, this.props.userInfo.userId, response.messageData)
                 }
                 this.setState({
-                    userInput: '',
+                    userInput: "",
                     sendButton: false
                 })
             })
@@ -115,25 +120,25 @@ export class ChatBox extends React.Component {
         })
     }
 
-    editMessage = (message, messageId) => {
+    editMessage = (messageId, message) => {
         this.setState({ userInput: message })
     }
 
     deleteMessage = (friendId, messageId) => {
         deleteUserMessage(friendId, messageId, response => {
             if(response.status) {
-                this.updateMessages()
+                
             }
         })
     }
 
     renderMessage = () => (
-        this.state.messageList.length ? this.state.messageList.map((data, index) => (
+        this.state.messageList.length > 0 ? this.state.messageList.map((data, index) => (
         <div className={ `message-cell ${ data.origin === "self" ? "self" : "other" }` } key={ data._id }>
             <div className="message-item">
                 <span className="message">{ data.message }</span>
                 <span className="time" title={ showTime(data.time, "auto") }><i className="icon-time"></i></span>
-                <span className={`action${this.state.activeIndex === index ? ' active' : ''}`} onClick={() => this.managePopMenu(index)}>
+                <span className={`action${this.state.activeIndex === index ? " active" : ""}`} onClick={() => this.managePopMenu(index)}>
                     {data.origin === "self" ? (
                         <React.Fragment>
                             <i className="icon-ellips-v"></i>
@@ -161,7 +166,7 @@ export class ChatBox extends React.Component {
     onCloseChat = userId => {
         this.props.closeChatBox(userId)
         // Send typing status
-        socketConnection.emit('stopTyping', loggedUserInfo.id, userId)
+        socketConnection.emit("stopTyping", loggedUserInfo.id, userId)
     }
 
     openCallPop = () => {
@@ -172,10 +177,10 @@ export class ChatBox extends React.Component {
         const [userInfo] = [this.props.userInfo]
         const [typerCount, typerList] = [this.state.userTyping.length, this.state.userTyping]
         return (
-            <div className={`chat-box${this.state.isActive ? ' active' : this.state.senderId === userInfo.userId ? ' new' : '' }`} key={ userInfo.userId }>
+            <div className={`chat-box${this.state.isActive ? " active" : this.state.senderId === userInfo.userId ? " new" : "" }`} key={ userInfo.userId }>
                 <div className="box-head">
                     <div className="user-photo"><img src={ apiBaseUrl + userInfo.profilePhoto } alt={ userInfo.displayName } /></div>
-                    <div className="display-name"><a href={ apiBaseUrl + '/user/' + userInfo.username }>{ userInfo.displayName }</a></div>
+                    <div className="display-name"><a href={ apiBaseUrl + "/user/" + userInfo.username }>{ userInfo.displayName }</a></div>
                     <div className="call-section">
                         <span className="call audio active" onClick={() => this.openCallPop()}><i className="icon-phone"></i></span>
                         <span className="call video"><i className="icon-video-camera"></i></span>
@@ -210,7 +215,7 @@ export class ChatBox extends React.Component {
                     </div>
                     <div className="message-input">
                         <textarea
-                            style={ { minHeight: '33px', maxHeight: '120px', lineHeight: '14px' } }
+                            style={ { minHeight: "33px", maxHeight: "120px", lineHeight: "14px" } }
                             rows={ this.state.inputRow }
                             onChange={ this.handleInput }
                             onKeyDown={ this.handleInput }
@@ -220,7 +225,7 @@ export class ChatBox extends React.Component {
                             placeholder="Write message..."
                         />
                     </div>
-                    <span className={`send${!this.state.sendButton ? ' disabled' : ''}`} onClick={ this.sendMessage }>
+                    <span className={`send${!this.state.sendButton ? " disabled" : ""}`} onClick={ this.sendMessage }>
                         <i className="icon-send"></i>
                     </span>
                 </div>

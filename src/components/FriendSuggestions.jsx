@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { apiBaseUrl, loggedUserInfo } from "../services/commonService"
-import { getFriendSuggestions, sendFriendRequest } from "../services/userService"
+import { getFriendSuggestions, getUserSummary, sendFriendRequest } from "../services/userService"
 import { socketConnection } from "../sockets/socket"
 
 export default class FriendSuggestions extends React.Component {
@@ -22,7 +22,7 @@ export default class FriendSuggestions extends React.Component {
     }
 
     sendRequest = userInfo => {
-        sendFriendRequest(userInfo.username, response => {
+        sendFriendRequest(userInfo._id, response => {
             const currentList = [...this.state.suggestions]
             const findItem = currentList.indexOf(userInfo)
             if(response.status) {
@@ -31,7 +31,7 @@ export default class FriendSuggestions extends React.Component {
                     suggestions: currentList
                 })
                 // Broadcast request message
-                socketConnection.emit('sendFriendRequest', loggedUserInfo.id, userInfo._id)
+                socketConnection.emit("sendFriendRequest", loggedUserInfo.id, userInfo._id)
             }
         })
     }
@@ -47,6 +47,12 @@ export default class FriendSuggestions extends React.Component {
         }
     }
 
+    showMutual = users => {
+        getUserSummary(users, response => {
+            console.log(response)
+        })
+    }
+
     renderSuggestion = () => {
         if(this.state.suggestions.length){
             return (
@@ -58,10 +64,16 @@ export default class FriendSuggestions extends React.Component {
                             </div>
                             <div className="friend-rq-item-content">
                                 <Link className="author-name" to={userInfo.username}>{userInfo.displayName}</Link>
-                                <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
+                                {userInfo.mutualFriends.length > 0 &&
+                                    <div className="mutual-f">
+                                        <span className="mutual-count" onClick={() => {this.showMutual(userInfo.mutualFriends)}}>
+                                            {userInfo.mutualFriends.length} mutual friend(s)
+                                        </span>
+                                    </div>
+                                }
                                 <div className="rq-buttons">
                                     <span className="accept" onClick={() => this.sendRequest(userInfo)}>Send Request</span>
-                                    <span className="decline" onClick={() => this.removeSuggestion(userInfo)}>x</span>
+                                    <span className="decline" onClick={() => this.removeSuggestion(userInfo)} title="Not interested">x</span>
                                 </div>
                             </div>
                         </div>

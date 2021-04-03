@@ -33,6 +33,14 @@
 .mutual-f{
   font-size: 12px;
   color: #999999;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.mutual-f .mutual-count {
+  cursor: pointer;
+}
+.mutual-f .mutual-count:hover {
+  color: #000;
 }
 .rq-buttons{
   padding-top: 5px;
@@ -53,7 +61,7 @@
   border-color: #6ebd52;
   color: #fff;
 }
-.rq-buttons .decline{
+.rq-buttons span ~ span {
   margin-left: 10px;
 }
 .rq-buttons .decline:hover {

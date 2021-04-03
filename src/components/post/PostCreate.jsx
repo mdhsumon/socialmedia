@@ -59,6 +59,7 @@ export class PostCreate extends React.Component {
             // Remove empty block form paren
             this.props.removeEmpty()
             createPost(postData, response => {
+                console.log(response)
                 if(response.status) {
                     this.setState({
                         message: '',
@@ -147,7 +148,7 @@ export class PostCreate extends React.Component {
                                 <span className="post-visibility">
                                     <select name="visibility" defaultValue="public" onChange={this.handleChange} title="Post visibility" disabled={!this.state.postButton && 'disabled'}>
                                         <option value="public">Public</option>
-                                        <option value="friends">For Friends</option>
+                                        <option value="friends">Friends only</option>
                                         <option value="private">Private</option>
                                     </select>
                                 </span>

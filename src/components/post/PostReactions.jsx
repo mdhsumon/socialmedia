@@ -24,7 +24,6 @@ export class PostReactions extends React.Component {
     manageReaction = code => {
         const submitData = { area: "react", data: code }
         updatePost(this.props.postInfo.id, submitData, response => {
-            console.log(response)
             if(response.status) {
                 this.setState({
                     reactData: this.state.reactData !== code ? code : null,
@@ -34,14 +33,14 @@ export class PostReactions extends React.Component {
         })
     }
     handleComment = event => {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             if (this.state.userComment.trim().length) {
                 updatePost(
                     this.props.postInfo.id,
                     { area: "comment", action: "add", data: this.state.userComment },
                     comRes => {
                         if (comRes.status) {
-                            alert('Your comment has been added on the post')
+                            alert("Your comment has been added on the post")
                         }
                     }
                 )
@@ -55,16 +54,16 @@ export class PostReactions extends React.Component {
     }
     render() {
         const reaction = this.state.reactData
-        const emojis = ['128150', '128525', '128516', '128578', '128545']
+        const emojis = ["128150", "128525", "128516", "128578", "128545"]
         return (
             <div className="lcs-section">
                 <div className="like-dislike">
-                    <span className={`react like${reaction && reaction === 'like' ? ' done' : ''}`} onClick={() => this.manageReaction('like')}>
+                    <span className={`react like${reaction && reaction === "like" ? " done" : ""}`} onClick={() => this.manageReaction("like")}>
                         <i className="icon-like"></i>
                     </span>
-                    <div className={`react emoji${reaction && reaction !== 'like' ? ' done' : ''}`}>
+                    <div className={`react emoji${reaction && reaction !== "like" ? " done" : ""}`}>
                         <ActionMenu
-                        menuIcon={reaction && reaction !== 'like' ? String.fromCodePoint(reaction) : <i className="icon-smile-fill"></i>}
+                        menuIcon={reaction && reaction !== "like" ? String.fromCodePoint(reaction) : <i className="icon-smile-fill"></i>}
                         menuClass="emojis"
                         itemClass="emo"
                         >

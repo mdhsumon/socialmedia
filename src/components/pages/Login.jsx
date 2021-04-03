@@ -6,10 +6,10 @@ export class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: '',
-            password: '',
+            username: "",
+            password: "",
             loginStatus: false,
-            formValidation: '',
+            formValidation: "",
             buttonLoading: false
         }
     }
@@ -29,13 +29,13 @@ export class Login extends React.Component {
             if(token) {
                 if(token.status) {
                     // Set local storage data
-                    localStorage.setItem('data', JSON.stringify({ id: token._id, accessToken: token.accessToken }))
-                    window.location.href = '/feeds'
+                    localStorage.setItem("data", JSON.stringify({ id: token._id, accessToken: token.accessToken }))
+                    window.location.href = "/feeds"
                 }
                 else {
                     this.setState({
                         buttonLoading: false,
-                        formValidation: "Username or password"
+                        formValidation: "Wrong username or password"
                     })
                 }
             }
@@ -58,7 +58,7 @@ export class Login extends React.Component {
                         </div>
                         <button className={this.state.buttonLoading ? "button-loading" : ""}>Login</button>
                     </form>
-                    <div className="new-account">Don't have account? Simply <Link to="/signup">signup</Link> here.</div>
+                    <div className="new-account">Don"t have account? Simply <Link to="/register">register</Link> here.</div>
                 </div>
             </div>
         )

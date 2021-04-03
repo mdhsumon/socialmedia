@@ -88,7 +88,7 @@ export class ChatBar extends React.Component {
     loadFriendLists = callback => {
         getFriendLists(loggedUserInfo.id, data => {
             if(data.status) {
-                const friendIds = data.friends.map(friend => friend.friendId)
+                const friendIds = data.friends.map(friend => friend.userId)
                 getUserSummary(friendIds, data => {
                     if(data.status) {
                         const userList = data.users.map(user => (

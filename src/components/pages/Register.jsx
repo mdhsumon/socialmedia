@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { isUserExist, userSignup } from "../../services/userService"
+import { isUserExist, userRegister } from "../../services/userService"
 
-export class Signup extends React.Component {
+export class Register extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -239,7 +239,8 @@ export class Signup extends React.Component {
             }
         }
         if(this.formValidation || true) {
-            userSignup(formData, response => {
+            userRegister(formData, response => {
+                console.log(response)
                 if(response.status) {
                     this.setState({ isWelcomeScreen: true })
                     let count = this.state.counter

@@ -17,7 +17,7 @@ export default class FriendRquests extends React.Component {
     loadrequests = () => {
         getFriendRequests(response => {
             if(response.status) {
-                const reqSenderIds = response.requests.map(sender => sender.senderId)
+                const reqSenderIds = response.requests.map(sender => sender.userId)
                 getUserSummary(reqSenderIds, userSummary => {
                     if(userSummary.status)
                     this.setState({requests: userSummary.users})
@@ -35,16 +35,16 @@ export default class FriendRquests extends React.Component {
     }
 
     handleRequest = (requestItem, requstType) => {
-        if(requstType === 'accept') {
+        if(requstType === "accept") {
             acceptFriendRequest(requestItem._id, response => {
                 if(response.status) {
                     this.removeRequestItem(requestItem)
                     // Broadcast acceptance signal
-                    socketConnection.emit('acceptFriend', requestItem._id)
+                    socketConnection.emit("acceptFriend", requestItem._id)
                 }
             })
         }
-        else if(requstType === 'decline') {
+        else if(requstType === "decline") {
             declineFriendRequest(requestItem._id, response => {
                 if(response.status) {
                     this.removeRequestItem(requestItem)
@@ -66,8 +66,8 @@ export default class FriendRquests extends React.Component {
                                 <Link className="author-name" to={requestItem.username}>{requestItem.displayName}</Link>
                                 <p className="mutual-f"><span className="mutual-amount">5</span> mutual friends</p>
                                 <div className="rq-buttons">
-                                    <span className="accept" onClick={() => this.handleRequest(requestItem, 'accept')}>Accept</span>
-                                    <span className="decline" onClick={() => this.handleRequest(requestItem, 'decline')}>Decline</span>
+                                    <span className="accept" onClick={() => this.handleRequest(requestItem, "accept")}>Accept</span>
+                                    <span className="decline" onClick={() => this.handleRequest(requestItem, "decline")}>Decline</span>
                                 </div>
                             </div>
                         </div>

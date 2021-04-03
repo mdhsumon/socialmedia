@@ -6,11 +6,11 @@ const loggedUserId = loggedUserInfo.id
 // Load messages
 export const getUserMessages = (friendId, callback) => {
     fetch(`${apiBaseUrl}/messages/${friendId}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            "Authorization": `Bearer ${loggedUserToken}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         }
     })
     .then(res => res.json())
@@ -20,14 +20,14 @@ export const getUserMessages = (friendId, callback) => {
 
 // Send message
 export const sendUserMessage = (friendId, messageData, callback) => {
-    fetch(`${apiBaseUrl}/message/send`, {
-        method: 'POST',
+    fetch(`${apiBaseUrl}/message`, {
+        method: "POST",
         headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            "Authorization": `Bearer ${loggedUserToken}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify({ senderId: loggedUserId, friendId: friendId, messageData: messageData })
+        body: JSON.stringify({ friendId: friendId, message: messageData })
     })
     .then(res => res.json())
     .then(sendStatus => { callback(sendStatus) })
@@ -37,11 +37,11 @@ export const sendUserMessage = (friendId, messageData, callback) => {
 // Send message
 export const deleteUserMessage = (friendId, messageId, callback) => {
     fetch(`${apiBaseUrl}/message/delete`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-            'Authorization': `Bearer ${loggedUserToken}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            "Authorization": `Bearer ${loggedUserToken}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({ friendId: friendId, messageId: messageId })
     })
