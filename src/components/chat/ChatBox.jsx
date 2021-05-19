@@ -16,7 +16,6 @@ export class ChatBox extends React.Component {
             userInput: "",
             messageList: [],
             userTyping: [],
-            //newMessage: false
             callPop: false
         }
     }
@@ -41,8 +40,8 @@ export class ChatBox extends React.Component {
         socketConnection.on("getTyping", userId => {
             let typerList = [...this.state.userTyping]
             typerList.push(userId)
+            this.setState({userTyping: typerList})
             if(this.state.isActive) {
-                this.setState({userTyping: typerList})
                 this.scrollToTarget(this.bottomFlag)
             }
         })
@@ -90,7 +89,6 @@ export class ChatBox extends React.Component {
 
     loadMessages = () => {
         getUserMessages(this.props.userInfo.userId, messages => {
-            console.log(messages)
             if(messages.status)
             this.setState({ messageList: messages.messageList })
         })
@@ -205,9 +203,9 @@ export class ChatBox extends React.Component {
                     )}
                     <div className="bottom-flag" ref={ r => { this.bottomFlag = r } }></div>
                 </div>
-                {/* {this.state.newMessage && this.state.senderId === userInfo.userId && (
+                {this.state.newMessage && this.state.senderId === userInfo.userId && (
                     <span className="new-message" onClick={this.newMessage}>New Message &darr;</span>
-                )} */}
+                )}
                 <div className="box-form">
                     <div className="attach">
                         <div className="emoji"><i className="icon-smile-o"></i></div>

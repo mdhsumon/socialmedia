@@ -11,18 +11,19 @@ export const MainApp = () => {
 
   return (
     <div className="body">
-        <Header />
-        <div className="main-body">
-          <Navigator />
-          <div className="content-body">
-            <Router>
-              <Route path="/user/:username" component={PublicProfile} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/feeds" component={PostFeed} />
-            </Router>
-          </div> 
-          <ChatBar />
+      <div style={{textAlign: "center", padding: "5px", background: "#ff4040", color: "white", fontSize: "12px"}}>Under Construction...</div>
+      <Header />
+      <div className="main-body">
+        <Navigator />
+        <div className="content-body">
+          <Router>
+            <Route path="/user/:username" component={PublicProfile} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/feeds" component={PostFeed} />
+          </Router>
         </div>
+        <ChatBar />
+      </div>
     </div>
   )
 }
