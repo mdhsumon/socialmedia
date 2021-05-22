@@ -11,8 +11,8 @@
 }
 .nav-item-container {
   text-align: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .nav-item {
   display: block;
@@ -24,7 +24,7 @@
   text-decoration: none;
 }
 .nav-item ~ .nav-item {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .nav-item.active,
 .nav-item:hover {

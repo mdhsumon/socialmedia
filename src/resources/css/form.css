@@ -38,7 +38,7 @@
 .login-form .input-field {
   background-color: #f0f0f0;
   border: 1px solid transparent;
-  padding: 15px 20px;
+  padding: 10px 20px;
   border-radius: 3px;
   margin: 5px 0;
 }
@@ -78,7 +78,7 @@ input:-webkit-autofill:active {
 .login-form button {
   cursor: pointer;
   border: none;
-  padding: 15px 20px;
+  padding: 10px 20px;
   border-radius: 3px;
   background-color: #6ebd52;
   width: 100%;

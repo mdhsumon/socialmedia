@@ -100,18 +100,18 @@ button:disabled,
   flex: 1;
 }
 .input-box-inline .input-box + .input-box {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 .input-box-inline .input-box.checkbox,
 .input-box-inline .input-box.radio,
 .input-box-inline .input-box.switch {
-  padding-right: 15px;
+  padding-right: 10px;
 }
 .input-box.checkbox,
 .input-box.radio,
 .input-box.switch {
-  padding-top: 7.5px;
-  padding-bottom: 7.5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .input-box-inline .input-box.checkbox input,
 .input-box-inline .input-box.radio input,
@@ -199,7 +199,7 @@ button:disabled,
   text-align: center;
   color: #ccc;
   font-size: 14px;
-  padding: 10px 15px;
+  padding: 10px;
   border: 1px dashed #CBD4DF;
   border-radius: 3px;
 }
@@ -268,7 +268,7 @@ button:disabled,
   background-color: #f0f0f0;
 }
 .dropdown-options .empty-option {
-  padding: 15px;
+  padding: 10px;
   color: #ccc;
   font-size: 14px;
   text-align: center;
@@ -282,7 +282,7 @@ img {
 
 img:after {
   color: #333;
-  background-color: #ccc;
+  background-color: #eee;
   border-radius: inherit;
   content: '\E90D';
   font-family: 'Social';
@@ -363,13 +363,13 @@ img:after {
   color: #666666;
   font-size: 14px;
   font-weight: 500;
-  padding: 10px 15px;
+  padding: 10px;
 }
 
 .common-block .block-body{
   font-size: 14px;
   color: #666666;
-  padding: 15px;
+  padding: 10px;
 }
 
 .common-block .author-name {

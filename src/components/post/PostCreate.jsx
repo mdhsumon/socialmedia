@@ -59,7 +59,6 @@ export class PostCreate extends React.Component {
             // Remove empty block form paren
             this.props.removeEmpty()
             createPost(postData, response => {
-                console.log(response)
                 if(response.status) {
                     this.setState({
                         message: '',

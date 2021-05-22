@@ -35,7 +35,6 @@ export default class SentRequests extends React.Component {
 
     handleRequest = requestItem => {
         cancelFriendRequest(requestItem._id, response => {
-            console.log(response)
             if(response.status) {
                 this.removeRequestItem(requestItem)
             }

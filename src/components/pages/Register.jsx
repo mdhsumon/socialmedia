@@ -240,7 +240,6 @@ export class Register extends React.Component {
         }
         if(this.formValidation || true) {
             userRegister(formData, response => {
-                console.log(response)
                 if(response.status) {
                     this.setState({ isWelcomeScreen: true })
                     let count = this.state.counter

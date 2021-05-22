@@ -18,24 +18,25 @@ export class PostContent extends React.Component {
     }
 
     render() {
-        let [message, attachment] = [this.props.postContent.message, this.props.postContent.attachment]
+        const [message, attachment] = [this.props.postContent.message, this.props.postContent.attachment]
+        const photoCount = attachment.photos.length, videoCount = attachment.videos.length
         return (
             <div className="post-body">
                 {message.length > 0 && <div className="post-text">
                     {message}
                 </div>}
-                {(attachment.photos.length || attachment.videos.length) > 0 &&
-                    <div className={`post-atachment ${(attachment.photos.length || attachment.videos.length) > 1 ? 'multiple': 'single'}`}>
-                        {attachment.photos.map( photo => {
+                {(photoCount || videoCount) > 0 &&
+                    <div className={`post-atachment ${(photoCount || videoCount) > 1 ? "multiple": "single"}`}>
+                        {attachment.photos.map((photo , key) => {
                             return(
-                                <div className="post-image" key={ photo._id }>
+                                <div className={`post-image${photoCount > 2 && key === 0 && photoCount % 2 ? " full-width" : ''}`} key={ photo._id }>
                                     <img src={apiBaseUrl + photo.path} alt="Post Avatar" onClick={(e) => this.openMedia(e)} />
                                 </div>
                             )
                         })}
-                        {attachment.videos.map( video => {
+                        {attachment.videos.map((video, key) => {
                             return(
-                                <div className="post-video" key={ video._id }>
+                                <div className={`post-image${videoCount > 2 && key === 0 && videoCount % 2 && " full-width"}`} key={ video._id }>
                                     <video width="100%" controls>
                                         <source src={apiBaseUrl + video.path} />
                                     </video>

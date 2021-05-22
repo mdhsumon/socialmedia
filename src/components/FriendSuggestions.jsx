@@ -49,7 +49,6 @@ export default class FriendSuggestions extends React.Component {
 
     showMutual = users => {
         getUserSummary(users, response => {
-            console.log(response)
         })
     }
 
