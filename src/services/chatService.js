@@ -36,7 +36,7 @@ export const sendUserMessage = (friendId, messageData, callback) => {
 
 // Send message
 export const deleteUserMessage = (friendId, messageId, callback) => {
-    fetch(`${apiBaseUrl}/message/delete`, {
+    fetch(`${apiBaseUrl}/message`, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${loggedUserToken}`,

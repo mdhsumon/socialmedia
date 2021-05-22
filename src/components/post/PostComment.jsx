@@ -46,8 +46,8 @@ export class PostComment extends React.Component {
                                     <span className="reply" onClick={() => this.toggleReply(comment._id)}>Reply</span>
                                 </div>
                             </div>
-                            {comment.replies.length > 0 || true && [1,2].map(reply => (
-                                <div className="reply-section">
+                            {comment.replies.length > 0 || true && [1,2].map((reply, key) => (
+                                <div className="reply-section" key={key}>
                                     <div className="replyar">
                                         <img src={apiBaseUrl + comment.profilePhoto} alt={comment.displayName} />
                                     </div>

@@ -36,7 +36,12 @@ export const getAccessToken = (loginData, callback) => {
 // Logout and destroy token
 export const userLogout = callback => {
     fetch(`${apiBaseUrl}/logout`, {
-        method: "GET"
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${loggedUserToken}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
     })
     .then(res => res.json())
     .then(data => { callback(data) })
