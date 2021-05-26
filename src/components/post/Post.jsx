@@ -57,7 +57,7 @@ export class Post extends React.Component {
                                 likeDislike={this.updateLikeDislike}
                             />
                         }
-                        <PostComment postComments={post.comments} />
+                        <PostComment postId={post._id} postComments={post.comments} />
                     </div>
                 )
             })

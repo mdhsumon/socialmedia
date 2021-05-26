@@ -1,39 +1,39 @@
 import React from "react"
 import { apiBaseUrl } from "../../services/commonService"
+import { updatePost } from "../../services/postService"
 export class PostComment extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             comments: this.props.postComments,
             replyMsg: '',
-            replyForm: []
+            replyForm: false
         }
     }
-
-    ReplyFormComp = () => {
-        return(
-            <div className="reply-form">
-                <img src="dsf" alt="sdf"/>
-                <input type="text" placeholder="Write a reply..." />
-            </div>
-        )
+    
+    handleReply = (event, comId) => {
+        if(event.key === "Enter") {
+            if(this.state.replyMsg.trim().length) {
+                updatePost(
+                    this.props.postId,
+                    { area: "comment", action: "addreply", commentId: comId, data: this.state.replyMsg },
+                    comRes => {
+                        console.log("RR", comRes)
+                        if(comRes.status) {
+                            // Comment signal goes here
+                        }
+                    }
+                )
+            }
+        }
+        else this.setState({replyMsg: event.target.value})
     }
 
-    toggleReply = comId => {
-        this.setState({
-            replyForm: [
-                <div key={comId} className="reply-form">
-                    <img src="dsf" alt="sdf"/>
-                    <input type="text" placeholder="Write a reply..." />
-                </div>,
-                ...this.state.replyForm
-            ]
-        })
-    }
+    toggleReply = comId => this.setState({replyForm: !this.state.replyForm})
 
     render() {
-        if (this.state.comments.length) {
-            return (
+        if(this.state.comments.length) {
+            return(
                 <div className="comment-reply">
                     {this.state.comments.map(comment => (
                         <div className="comment" key={comment._id}>
@@ -46,15 +46,20 @@ export class PostComment extends React.Component {
                                     <span className="reply" onClick={() => this.toggleReply(comment._id)}>Reply</span>
                                 </div>
                             </div>
-                            {comment.replies.length > 0 || true && [1,2].map((reply, key) => (
+                            {comment.replies.length > 0 && comment.replies.map((reply, key) => (
                                 <div className="reply-section" key={key}>
                                     <div className="replyar">
-                                        <img src={apiBaseUrl + comment.profilePhoto} alt={comment.displayName} />
+                                        <img src={apiBaseUrl + reply.profilePhoto} alt={reply.displayName} />
                                     </div>
-                                    <div className="reply-message">Reply message</div>
+                                    <div className="reply-message">{reply.message}</div>
                                 </div>
                             ))}
-                            {this.state.replyForm}
+                            {this.state.replyForm && (
+                                <div className="reply-form">
+                                    <img src="dsf" alt="sdf"/>
+                                    <input type="text" placeholder="Write a reply..." onChange={(event) => this.handleReply(event, comment._id)} onKeyDown={(event) => this.handleReply(event, comment._id)} />
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

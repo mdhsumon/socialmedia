@@ -8,7 +8,8 @@ export class PostReactions extends React.Component {
         super(props)
         this.state = {
             reactCount: this.props.reactions.count,
-            reactedUsers: [...this.props.reactions.likes, ...this.props.reactions.emojis]
+            reactedUsers: [...this.props.reactions.likes, ...this.props.reactions.emojis],
+            userComment: ''
         }
     }
     componentDidMount() {
@@ -40,17 +41,13 @@ export class PostReactions extends React.Component {
                     { area: "comment", action: "add", data: this.state.userComment },
                     comRes => {
                         if (comRes.status) {
-                            alert("Your comment has been added on the post")
+                            // Comment signal goes here
                         }
                     }
                 )
             }
         }
-        else {
-            this.setState({
-                userComment: event.target.value
-            })
-        }
+        else this.setState({userComment: event.target.value})
     }
     render() {
         const reaction = this.state.reactData
