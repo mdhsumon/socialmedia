@@ -7,9 +7,9 @@ const connectSocket = url => {
         {
             forceNew: false,
             transports: ['websocket'],
-            upgrade: false
+            upgrade: true
         }
     )
 }
 
-export const socketConnection = loggedUserInfo ? connectSocket(`${process.env.REACT_APP_SOCKET_URL}?userId=${loggedUserInfo.id}`) : false
+export const socketConnection = loggedUserInfo ? connectSocket(`${process.env.REACT_APP_SOCKET_URL}?UID=${loggedUserInfo.id}`) : false
