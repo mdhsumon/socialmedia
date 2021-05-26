@@ -108,11 +108,7 @@ export class ChatBar extends React.Component {
         })
     }
 
-    updateUsers = users => {
-        this.setState({
-            chatUsers: users
-        })
-    }
+    updateUsers = users => this.setState({chatUsers: users})
 
     openChat = (event, user) => {
         const isOpen = this.state.openedChat.filter(item => item.key === user.userId).length
@@ -145,9 +141,7 @@ export class ChatBar extends React.Component {
         }) 
     }
 
-    openCallPop = () => {
-        this.setState({callPop: !this.state.callPop})
-    }
+    openCallPop = () => this.setState({callPop: !this.state.callPop})
 
     render() {
         return(
